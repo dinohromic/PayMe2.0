@@ -1,4 +1,4 @@
 package com.example.payme20;
 
-public class PayDetail {
+public class PayDetail implements IPaymentCalculation {
 }
