@@ -16,7 +16,6 @@ public class Member {
         return debt;
     }
 
-
     public void setDebt(Debt debt) {
         this.debt = debt;
     }
@@ -36,5 +35,6 @@ public class Member {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
 }
 
