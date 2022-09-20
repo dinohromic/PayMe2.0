@@ -1,6 +1,6 @@
 package com.example.payme20;
 
-public class Member {
+public class Member implements IMember {
     private String userName;
     private String phoneNumber;
     private Debt debt;
