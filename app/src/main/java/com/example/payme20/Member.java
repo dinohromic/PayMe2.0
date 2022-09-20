@@ -1,24 +1,22 @@
 package com.example.payme20;
 
+import java.util.HashMap;
+
 public class Member implements IMember {
     private String userName;
     private String phoneNumber;
     private Debt debt;
 
 
-    public Member(String userName, String phoneNumber, Debt debt){
+    public Member(String userName, String phoneNumber){
         this.userName = userName;
         this.phoneNumber = phoneNumber;
-        this.debt = debt;
+        // Ändra konstruktorn för debt också
+        this.debt = new Debt(this, new HashMap<>());
     }
 
     public Debt getDebt() {
         return debt;
-    }
-
-
-    public void setDebt(Debt debt) {
-        this.debt = debt;
     }
 
     public String getUserName() {
