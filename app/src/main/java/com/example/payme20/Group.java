@@ -13,4 +13,7 @@ public class Group {
         this.groupEvents = new ArrayList<>();
         this.groupMembers = new ArrayList<>();
     }
+    public String getGroupName() {
+        return groupName;
+    }
 }
