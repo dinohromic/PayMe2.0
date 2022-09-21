@@ -1,16 +1,18 @@
 package com.example.payme20;
 
-import java.util.Map;
-
 public class Debt {
-    private IMember debtTo;
+    private IDebtHolder debtTo;
     private double debtAmount;
 
-    public Debt(IMember member){
-        this.debtTo = member;
+    public Debt(IDebtHolder debtHolder){
+        this.debtTo = debtHolder;
         this.debtAmount = 0.0;
     }
     private void updateDebt(Member main, Double amount, Member reciver){
       //  main
+    }
+
+    public double getDebtAmount(){
+        return this.debtAmount;
     }
 }

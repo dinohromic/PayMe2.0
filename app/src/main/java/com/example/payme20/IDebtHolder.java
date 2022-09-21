@@ -1,4 +1,5 @@
 package com.example.payme20;
 
-public interface IMember {
+public interface IDebtHolder {
+
 }

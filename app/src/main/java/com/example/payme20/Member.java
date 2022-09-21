@@ -3,7 +3,7 @@ package com.example.payme20;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Member implements IMember {
+public class Member implements IDebtHolder {
     private String userName;
     private String phoneNumber;
     private List<Debt> debtList;
@@ -17,7 +17,7 @@ public class Member implements IMember {
         //this.debt = new Debt(this, new HashMap<>());
     }
 
-    public void addMemberToDebtList(IMember member) {
+    public void addMemberToDebtList(IDebtHolder member) {
         debtList.add(new Debt(member));
     }
 
