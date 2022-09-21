@@ -6,14 +6,19 @@ import java.util.List;
 public class Member implements IMember {
     private String userName;
     private String phoneNumber;
-    private List<Debt> debtList = new ArrayList<>();
+    private List<Debt> debtList;
 
 
     public Member(String userName, String phoneNumber){
         this.userName = userName;
         this.phoneNumber = phoneNumber;
+        this.debtList = new ArrayList<>();
         // Ändra konstruktorn för debt också
         //this.debt = new Debt(this, new HashMap<>());
+    }
+
+    public void addMemberToDebtList(IMember member) {
+        debtList.add(new Debt(member));
     }
 
     public List<Debt> getDebtList() {

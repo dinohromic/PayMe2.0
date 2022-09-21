@@ -16,4 +16,12 @@ public class Group {
     public String getGroupName() {
         return groupName;
     }
+    public void addNewGroupMember(String userName, String phoneNumber) {
+        Member member = new Member(userName, phoneNumber);
+        for(Member m : groupMembers) {
+            m.addMemberToDebtList(member);
+            member.addMemberToDebtList(m);
+        }
+        groupMembers.add(member);
+    }
 }

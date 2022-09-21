@@ -6,9 +6,9 @@ public class Debt {
     private IMember debtTo;
     private double debtAmount;
 
-    public Debt(IMember member, double debtAmount){
+    public Debt(IMember member){
         this.debtTo = member;
-        this.debtAmount = debtAmount;
+        this.debtAmount = 0.0;
     }
     private void updateDebt(Member main, Double amount, Member reciver){
       //  main
