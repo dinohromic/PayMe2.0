@@ -1,5 +1,8 @@
 package com.example.payme20;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 
 public class Event {
@@ -17,6 +20,14 @@ public class Event {
         this.payer = payer;
         this.activeStatus = true;
         this.debtUpdater = debtUpdater;
+        this.date = getDate();
+    }
+
+    private String getDate(){
+        Date currentDate = Calendar.getInstance().getTime();
+        SimpleDateFormat wantedDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String currentDateString = wantedDateFormat.format(currentDate);
+        return currentDateString;
     }
 
     public Map<Member, Double> getEventPaymentDetails() {
