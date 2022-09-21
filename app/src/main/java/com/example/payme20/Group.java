@@ -18,9 +18,11 @@ public class Group {
     }
     public void addNewGroupMember(String userName, String phoneNumber) {
         Member member = new Member(userName, phoneNumber);
-        for(Member m : groupMembers) {
-            m.addMemberToDebtList(member);
-            member.addMemberToDebtList(m);
+        if(groupMembers.size() != 0) {
+            for (Member m : groupMembers) {
+                m.addMemberToDebtList(member);
+                member.addMemberToDebtList(m);
+            }
         }
         groupMembers.add(member);
     }
