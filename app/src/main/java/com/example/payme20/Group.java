@@ -2,6 +2,7 @@ package com.example.payme20;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Group {
     private String groupName;
@@ -16,8 +17,7 @@ public class Group {
     public String getGroupName() {
         return groupName;
     }
-    public void addNewGroupMember(String userName, String phoneNumber) {
-        Member member = new Member(userName, phoneNumber);
+    public void addNewGroupMember(Member member) {
         if(groupMembers.size() != 0) {
             for (Member m : groupMembers) {
                 m.addMemberToDebtList(member);
