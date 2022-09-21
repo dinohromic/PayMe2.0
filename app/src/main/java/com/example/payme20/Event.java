@@ -17,5 +17,4 @@ public class Event {
         this.payer = payer;
         this.eventIsActive = true;
     }
-    
 }
