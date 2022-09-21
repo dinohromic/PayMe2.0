@@ -8,11 +8,13 @@ public class Group {
     private String groupName;
     private List<Member> groupMembers;
     private List<Event> groupEvents;
+    private List<Debt> debts;
 
     public Group(String groupName) {
         this.groupName = groupName;
         this.groupEvents = new ArrayList<>();
         this.groupMembers = new ArrayList<>();
+        this.debts = new ArrayList<>();
     }
     public String getGroupName() {
         return groupName;
@@ -27,12 +29,6 @@ public class Group {
     }
 
     public void addNewGroupMember(Member member) {
-        if(groupMembers.size() != 0) {
-            for (Member m : groupMembers) {
-                m.addMemberToDebtList(member);
-                member.addMemberToDebtList(m);
-            }
-        }
         groupMembers.add(member);
     }
 

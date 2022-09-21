@@ -27,13 +27,13 @@ public class SplitDebtUpdater implements IDebtUpdater {
 
     private void updateEventMemberDebts(Map<Member, Double> eventMemberPaidAmount, Member memberToGetPaid, double amount){
 
-        for (Map.Entry<Member, Double> debtMap: eventMemberPaidAmount.entrySet()) {
+        /*for (Map.Entry<Member, Double> debtMap: eventMemberPaidAmount.entrySet()) {
             Member memberToPay = debtMap.getKey();
             if(!(memberToPay.equals(memberToGetPaid))){
                 memberToGetPaid.updateDebt(amount, memberToPay);
                 memberToPay.updateDebt(-amount, memberToGetPaid);
             }
 
-        }
+        }*/
     }
 }

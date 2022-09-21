@@ -1,25 +1,24 @@
 package com.example.payme20;
 
 public class Debt {
-    private IDebtHolder debtTo;
-    private double debtAmount;
+    private Member debtTo;
+    private Member debtFrom;
+    private double debtAmount;;
 
-    public Debt(IDebtHolder debtHolder){
-        this.debtTo = debtHolder;
-        this.debtAmount = 0.0;
-    }
-    public void updateDebt(double debtAdd) {
-        debtAmount += debtAdd;
-    }
-    public void resetDebt() {
-        debtAmount = 0;
+    public Debt(Member debtTo, Member debtFrom, double debtAmount){
+        this.debtTo = debtTo;
+        this.debtFrom = debtFrom;
+        this.debtAmount = debtAmount;
     }
 
     public double getDebtAmount(){
         return this.debtAmount;
     }
 
-    public IDebtHolder getDebtHolder() {
+    public Member getDebtTo() {
         return debtTo;
+    }
+    public Member getDebtFrom() {
+        return debtFrom;
     }
 }

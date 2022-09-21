@@ -37,13 +37,6 @@ public class GroupTest {
         assertTrue(group.getGroupMembers().contains(member));
     }
     @Test
-    public void testAddedMemberGetsAddedToDebtsList() {
-        Member member = Factory.createMember("member", "07");
-        group.addNewGroupMember(member);
-        List<Debt> debtList = group.getGroupMembers().get(0).getDebtList();
-        assertEquals(debtList.get(debtList.size() - 1).getDebtHolder(), member);
-    }
-    @Test
     public void testRemoveMemberWhoIsInActiveEvent() {
         Map<Member, Double> eventPaymentMap = new HashMap<>();
         eventPaymentMap.put(user1, 20.0);

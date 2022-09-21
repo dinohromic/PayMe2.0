@@ -34,15 +34,4 @@ public class MemberTest {
         event.updateEventMemberDebts();
         assertEquals(60, user1.getTotalDebt(), 0.0001);
     }
-    @Test
-    public void testResetDebts() {
-        Map<Member, Double> eventPaymentMap = new HashMap<>();
-        eventPaymentMap.put(user1, 20.0);
-        eventPaymentMap.put(user2, 30.0);
-        eventPaymentMap.put(user3, 40.0);
-        Event event = Factory.createEvent("event", eventPaymentMap, user1, new SplitDebtUpdater());
-        event.updateEventMemberDebts();
-        user1.resetDebts();
-        assertEquals(0, user1.getTotalDebt(), 0.0001);
-    }
 }

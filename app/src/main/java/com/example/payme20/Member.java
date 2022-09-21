@@ -17,17 +17,13 @@ public class Member implements IDebtHolder {
         // Ändra konstruktorn för debt också
         //this.debt = new Debt(this, new HashMap<>());
     }
-
-    public void addMemberToDebtList(IDebtHolder member) {
-        debtList.add(new Debt(member));
-    }
     public void removeMemberFromDebtList(IDebtHolder member) {
-        for(int i = 0; i < debtList.size() - 1; i ++) {
+        /*for(int i = 0; i < debtList.size() - 1; i ++) {
             if(debtList.get(i).getDebtHolder().equals(member)) {
                 debtList.remove(i);
                 break;
             }
-        }
+        }*/
     }
     public double getTotalDebt() {
         double debt = 0;
@@ -38,7 +34,7 @@ public class Member implements IDebtHolder {
         }
         return debt;
     }
-    public void updateDebt(double debtAdd, Member member) {
+    /*public void updateDebt(double debtAdd, Member member) {
         for(Debt d : debtList) {
             if(d.getDebtHolder().equals(member)) {
                 d.updateDebt(debtAdd);
@@ -49,7 +45,7 @@ public class Member implements IDebtHolder {
         for(Debt d : debtList) {
             d.resetDebt();
         }
-    }
+    }*/
 
     public List<Debt> getDebtList() {
         return debtList;
