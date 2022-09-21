@@ -9,19 +9,25 @@ public class Member implements IDebtHolder {
     private String userName;
     private String phoneNumber;
     private List<Debt> debtList;
-    private Map<Member, Double> debtMap;
 
     public Member(String userName, String phoneNumber){
         this.userName = userName;
         this.phoneNumber = phoneNumber;
         this.debtList = new ArrayList<>();
-        this.debtMap = new HashMap<>();
         // Ändra konstruktorn för debt också
         //this.debt = new Debt(this, new HashMap<>());
     }
 
     public void addMemberToDebtList(IDebtHolder member) {
         debtList.add(new Debt(member));
+    }
+    public void removeMemberFromDebtList(IDebtHolder member) {
+        for(int i = 0; i < debtList.size() - 1; i ++) {
+            if(debtList.get(i).getDebtHolder().equals(member)) {
+                debtList.remove(i);
+                break;
+            }
+        }
     }
     public double getTotalDebt() {
         double debt = 0;

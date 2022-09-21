@@ -5,7 +5,7 @@ import java.util.Map;
 public class Event {
     private Map<Member, Double> eventPaymentDetails;
     private IDebtUpdater debtUpdater;
-    private boolean eventIsActive;
+    private boolean activeStatus;
     private String eventName;
     private Member payer;
     private String date;
@@ -15,20 +15,24 @@ public class Event {
         this.eventName=eventName;
         this.eventPaymentDetails = eventPaymentDetails;
         this.payer = payer;
-        this.eventIsActive = true;
+        this.activeStatus = true;
         this.debtUpdater = debtUpdater;
     }
 
-    public boolean isEventIsActive() {
-        return eventIsActive;
+    public Map<Member, Double> getEventPaymentDetails() {
+        return eventPaymentDetails;
+    }
+
+    public boolean getActiveStatus() {
+        return activeStatus;
     }
 
     public void setEventInactive(){
-        this.eventIsActive = false;
+        this.activeStatus = false;
     }
 
     public void setEventActive(){
-        this.eventIsActive = true;
+        this.activeStatus = true;
     }
 
     public String getEventName() {

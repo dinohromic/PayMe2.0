@@ -8,10 +8,6 @@ public class Debt {
         this.debtTo = debtHolder;
         this.debtAmount = 0.0;
     }
-    private void updateDebt(Member main, Double amount, Member reciver){
-      //  main
-
-    }
     public void updateDebt(double debtAdd) {
         debtAmount += debtAdd;
     }

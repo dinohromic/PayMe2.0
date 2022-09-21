@@ -28,11 +28,27 @@ public class Group {
     }
 
     public void removeGroupMember(Member member){
-        this.groupMembers.remove(member);
-        for (Member m : groupMembers) {
-            m.addMemberToDebtList(member);
-            member.addMemberToDebtList(m);
+        boolean allEventsWithMemberInactive = true;
+        List<Event> eventsWithThisMember = new ArrayList<>();
+        for(Event e : groupEvents) {
+            if (e.getEventPaymentDetails().containsKey(member))
+                eventsWithThisMember.add(e);
         }
+        for(Event e : eventsWithThisMember) {
+            if(e.getActiveStatus()) {
+                allEventsWithMemberInactive = false;
+                break;
+            }
+            allEventsWithMemberInactive = !e.getActiveStatus();
+        }
+        if(allEventsWithMemberInactive) {
+            this.groupMembers.remove(member);
+            for (Member m : groupMembers) {
+                m.removeMemberFromDebtList(member);
+            }
+        }
+//        else
+//            ge förklaring att event måste markeras som klara först
     }
 
     public void setAllEventsInactive(){
