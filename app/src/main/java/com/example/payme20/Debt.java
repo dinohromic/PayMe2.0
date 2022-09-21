@@ -12,5 +12,6 @@ public class Debt {
     }
     private void updateDebt(Member main, Double amount, Member reciver){
       //  main
+
     }
 }
