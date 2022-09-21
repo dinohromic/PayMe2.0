@@ -3,12 +3,11 @@ package com.example.payme20;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TestDebtUpdater {
+public class SplitDebtUpdaterTest {
 
     Member user1;
     Member user2;
@@ -33,7 +32,6 @@ public class TestDebtUpdater {
         group.addEvent(testEvent);
         testEvent.updateEventMemberDebts();
     }
-
     @Test
     public void testPayerPositiveDebt(){
         List<Debt> user1List = user1.getDebtList();
@@ -42,13 +40,27 @@ public class TestDebtUpdater {
             assertEquals(debt.getDebtAmount(), 110.0, 1);
         }
     }
-
     @Test
     public void testUser2NegativeDebt(){
-        List<Debt> user2List = user2.getDebtList();
-        for (Debt debt: user2List) {
+        List<Debt> user2DebtList = user2.getDebtList();
+        for (Debt debt: user2DebtList) {
             if(debt.getDebtHolder().equals(user1)){
                 assertEquals(debt.getDebtAmount(), -110.0, 1);
+            }
+            else{
+                assertEquals(debt.getDebtAmount(), 0, 1);
+            }
+        }
+    }
+    @Test
+    public void testUser3NegativeDebt(){
+        List<Debt> user3DebtList = user3.getDebtList();
+        for (Debt debt: user3DebtList) {
+            if(debt.getDebtHolder().equals(user1)){
+                assertEquals(debt.getDebtAmount(), -110.0, 1);
+            }
+            else{
+                assertEquals(debt.getDebtAmount(), 0, 1);
             }
         }
     }
