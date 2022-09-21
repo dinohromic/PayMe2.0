@@ -26,4 +26,18 @@ public class Group {
         }
         groupMembers.add(member);
     }
+
+    public void removeGroupMember(Member member){
+        this.groupMembers.remove(member);
+        for (Member m : groupMembers) {
+            m.addMemberToDebtList(member);
+            member.addMemberToDebtList(m);
+        }
+    }
+
+    public void setAllEventsInactive(){
+        for (Event event: this.groupEvents) {
+            event.setEventInactive();
+        }
+    }
 }

@@ -23,6 +23,14 @@ public class Event {
         return eventIsActive;
     }
 
+    public void setEventInactive(){
+        this.eventIsActive = false;
+    }
+
+    public void setEventActive(){
+        this.eventIsActive = true;
+    }
+
     public String getEventName() {
         return eventName;
     }
