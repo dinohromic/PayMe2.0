@@ -40,8 +40,9 @@ public class Member implements IDebtHolder {
     }
     public void updateDebt(double debtAdd, Member member) {
         for(Debt d : debtList) {
-            if(d.getDebtHolder().equals(member));
+            if(d.getDebtHolder().equals(member)) {
                 d.updateDebt(debtAdd);
+            }
         }
     }
     public void resetDebts() {
