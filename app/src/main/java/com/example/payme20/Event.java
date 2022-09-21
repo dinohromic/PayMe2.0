@@ -35,16 +35,8 @@ public class Event {
         this.activeStatus = true;
     }
 
-    public String getEventName() {
-        return eventName;
-    }
-
     public Member getPayer() {
         return payer;
-    }
-
-    public String getDate() {
-        return date;
     }
 
     public void updateEventMemberDebts() {
