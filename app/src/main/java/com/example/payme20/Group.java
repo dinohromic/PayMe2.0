@@ -69,4 +69,8 @@ public class Group {
             event.setEventInactive();
         }
     }
+
+    public void setEventInactive(Event event) {
+        event.setEventInactive();
+    }
 }
