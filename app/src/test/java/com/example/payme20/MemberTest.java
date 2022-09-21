@@ -40,7 +40,7 @@ public class MemberTest {
         eventPaymentMap.put(user1, 20.0);
         eventPaymentMap.put(user2, 30.0);
         eventPaymentMap.put(user3, 40.0);
-        Event event = new Event("event", eventPaymentMap, user1, new SplitDebtUpdater());
+        Event event = Factory.createEvent("event", eventPaymentMap, user1, new SplitDebtUpdater());
         event.updateEventMemberDebts();
         user1.resetDebts();
         assertEquals(0, user1.getTotalDebt(), 0.0001);
