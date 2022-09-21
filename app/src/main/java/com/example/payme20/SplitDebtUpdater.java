@@ -7,7 +7,7 @@ public class SplitDebtUpdater implements IDebtUpdater {
     public void updateDebts(Map<Member, Double> eventMemberPaidAmount, Member payer) {
         double totalGroupCost = calcTotalGroupCost(eventMemberPaidAmount);
         double splitCost = calcDividedCost(totalGroupCost, eventMemberPaidAmount.size());
-        updateDebt(eventMemberPaidAmount, payer, splitCost);
+        updateEventMemberDebts(eventMemberPaidAmount, payer, splitCost);
     }
 
     private double calcTotalGroupCost(Map<Member, Double> eventMemberPaidAmount) {
@@ -25,7 +25,7 @@ public class SplitDebtUpdater implements IDebtUpdater {
         return dividedCost;
     }
 
-    private void updateDebt(Map<Member, Double> eventMemberPaidAmount, Member memberToGetPaid, double amount){
+    private void updateEventMemberDebts(Map<Member, Double> eventMemberPaidAmount, Member memberToGetPaid, double amount){
 
         for (Map.Entry<Member, Double> debtMap: eventMemberPaidAmount.entrySet()) {
             Member memberToPay = debtMap.getKey();

@@ -4,19 +4,19 @@ import java.util.Map;
 
 public class Event {
     private Map<Member, Double> eventPaymentDetails;
-    private IDebtUpdater paymentCalculation;
+    private IDebtUpdater debtUpdater;
     private boolean eventIsActive;
     private String eventName;
     private Member payer;
     private String date;
 
 
-    public Event(String eventName, Map eventPaymentDetails, Member payer, IDebtUpdater paymentCalculation){
+    public Event(String eventName, Map eventPaymentDetails, Member payer, IDebtUpdater debtUpdater){
         this.eventName=eventName;
         this.eventPaymentDetails = eventPaymentDetails;
         this.payer = payer;
         this.eventIsActive = true;
-        this.paymentCalculation = paymentCalculation;
+        this.debtUpdater = debtUpdater;
     }
 
     public boolean isEventIsActive() {
@@ -35,9 +35,7 @@ public class Event {
         return date;
     }
 
-    public void calculateEventExpenditures() {
-        paymentCalculation.calculateEventExpenditures(eventPaymentDetails, payer);
+    public void updateEventMemberDebts() {
+        debtUpdater.updateDebts(eventPaymentDetails, payer);
     }
-
-
 }
