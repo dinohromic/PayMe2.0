@@ -12,8 +12,18 @@ public class Debt {
       //  main
 
     }
+    public void updateDebt(double debtAdd) {
+        debtAmount += debtAdd;
+    }
+    public void resetDebt() {
+        debtAmount = 0;
+    }
 
     public double getDebtAmount(){
         return this.debtAmount;
+    }
+
+    public IDebtHolder getDebtHolder() {
+        return debtTo;
     }
 }
