@@ -17,6 +17,15 @@ public class Group {
     public String getGroupName() {
         return groupName;
     }
+
+    public List<Member> getGroupMembers() {
+        return groupMembers;
+    }
+
+    public List<Event> getGroupEvents() {
+        return groupEvents;
+    }
+
     public void addNewGroupMember(Member member) {
         if(groupMembers.size() != 0) {
             for (Member m : groupMembers) {
