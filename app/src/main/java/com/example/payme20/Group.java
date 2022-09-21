@@ -51,6 +51,10 @@ public class Group {
 //            ge förklaring att event måste markeras som klara först
     }
 
+    public void addEvent(Event event) {
+        groupEvents.add(event);
+    }
+
     public void setAllEventsInactive(){
         for (Event event: this.groupEvents) {
             event.setEventInactive();
