@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class SplitDebtUpdater implements IDebtUpdater {
     @Override
-    public void calculateEventExpenditures(Map<Member, Double> eventMemberPaidAmount, Member payer) {
+    public void updateDebts(Map<Member, Double> eventMemberPaidAmount, Member payer) {
         double totalGroupCost = calcTotalGroupCost(eventMemberPaidAmount);
         double splitCost = calcDividedCost(totalGroupCost, eventMemberPaidAmount.size());
         updateDebt(eventMemberPaidAmount, payer, splitCost);

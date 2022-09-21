@@ -4,5 +4,5 @@ import java.util.HashMap;
 import java.util.Map;
 
 public interface IDebtUpdater {
-    void calculateEventExpenditures(Map<Member, Double> map, Member Payer);
+    void updateDebts(Map<Member, Double> map, Member Payer);
 }

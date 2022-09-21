@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class DetailedDebtUpdater implements IDebtUpdater {
     @Override
-    public void calculateEventExpenditures(Map<Member, Double> map, Member Payer) {
+    public void updateDebts(Map<Member, Double> map, Member Payer) {
 
     }
 }
