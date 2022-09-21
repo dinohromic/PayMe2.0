@@ -19,6 +19,7 @@ public class Member implements IMember {
 
     public List<Debt> getDebtList() {
         return debtList;
+
     }
 
     public String getUserName() {
@@ -36,5 +37,6 @@ public class Member implements IMember {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
 }
 
