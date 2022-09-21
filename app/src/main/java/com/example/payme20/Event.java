@@ -4,14 +4,14 @@ import java.util.Map;
 
 public class Event {
     private Map<Member, Double> eventPaymentDetails;
-    private IPaymentCalculation paymentCalculation;
+    private IDebtUpdater paymentCalculation;
     private boolean eventIsActive;
     private String eventName;
     private Member payer;
     private String date;
 
 
-    public Event(String eventName, Map eventPaymentDetails, Member payer, IPaymentCalculation paymentCalculation){
+    public Event(String eventName, Map eventPaymentDetails, Member payer, IDebtUpdater paymentCalculation){
         this.eventName=eventName;
         this.eventPaymentDetails = eventPaymentDetails;
         this.payer = payer;
