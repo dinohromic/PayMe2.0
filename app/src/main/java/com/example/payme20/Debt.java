@@ -3,10 +3,13 @@ package com.example.payme20;
 import java.util.Map;
 
 public class Debt {
-    public Debt(Member member, Map<String, Double> balanceMap){
+    private IMember debtTo;
+    private double debtAmount;
 
+    public Debt(IMember member, double debtAmount){
+        this.debtTo = member;
+        this.debtAmount = debtAmount;
     }
-
     private void updateDebt(Member main, Double amount, Member reciver){
       //  main
     }
