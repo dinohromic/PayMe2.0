@@ -28,7 +28,7 @@ public class GroupTest {
     public void testRemoveMember() {
         group.removeGroupMember(user1);
         assertFalse(group.getGroupMembers().contains(user1));
-        //assertEquals(2, group.getGroupMembers().size());
+        assertEquals(2, group.getGroupMembers().size());
     }
     @Test
     public void testAddMember() {
