@@ -59,6 +59,7 @@ public class Group {
 
     public void addEvent(Event event) {
         groupEvents.add(event);
+        debts.addAll(event.getDebtList());
     }
 
     public void setAllEventsInactive(){

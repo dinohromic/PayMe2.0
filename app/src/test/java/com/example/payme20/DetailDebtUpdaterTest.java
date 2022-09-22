@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -30,7 +29,7 @@ public class DetailDebtUpdaterTest {
         debtMap.put(user1, 150.0);
         debtMap.put(user2, 300.0);
         debtMap.put(user3, 120.0);
-        model.createEvent(group, debtMap, "Test", user3, new DetailedDebtUpdater());
+        model.createNewGroupEvent(group, debtMap, "Test", user3, new DetailedDebtUpdater());
     }
 
     /*
