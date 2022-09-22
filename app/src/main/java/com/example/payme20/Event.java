@@ -3,12 +3,14 @@ package com.example.payme20;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 public class Event {
     private Map<Member, Double> eventPaymentDetails;
     private IDebtUpdater debtUpdater;
     private boolean activeStatus;
+    private List<Debt> eventDebtList;
     private String eventName;
     private Member payer;
     private String date;
@@ -21,6 +23,8 @@ public class Event {
         this.activeStatus = true;
         this.debtUpdater = debtUpdater;
         this.date = getDate();
+        this.eventDebtList = createEventDebts();
+
     }
 
     private String getDate(){
@@ -50,7 +54,12 @@ public class Event {
         return payer;
     }
 
-    public void updateEventMemberDebts() {
-        debtUpdater.updateDebts(eventPaymentDetails, payer);
+    public List<Debt> getDebtList(){
+        return this.eventDebtList;
+    }
+
+    private List<Debt> createEventDebts() {
+        return debtUpdater.updateDebts(eventPaymentDetails, payer);
+
     }
 }

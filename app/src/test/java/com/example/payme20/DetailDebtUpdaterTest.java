@@ -31,7 +31,7 @@ public class DetailDebtUpdaterTest {
         debtMap.put(user3, 120.0);
         this.testEvent= new Event("TestEvent", debtMap, user3, new DetailedDebtUpdater());
         group.addEvent(testEvent);
-        testEvent.updateEventMemberDebts();
+
     }
 
     /*

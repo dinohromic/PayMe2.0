@@ -56,6 +56,12 @@ public class Group {
 //            ge förklaring att event måste markeras som klara först
     }
 
+    public void addEventDebtToGroup(List<Debt> eventDebts){
+        for (Debt eventDebt: eventDebts) {
+            this.debts.add(eventDebt);
+        }
+    }
+
     public void addEvent(Event event) {
         groupEvents.add(event);
     }

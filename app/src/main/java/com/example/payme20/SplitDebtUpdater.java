@@ -1,13 +1,15 @@
 package com.example.payme20;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class SplitDebtUpdater implements IDebtUpdater {
     @Override
-    public void updateDebts(Map<Member, Double> eventMemberPaidAmount, Member payer) {
+    public List<Debt> updateDebts(Map<Member, Double> eventMemberPaidAmount, Member payer) {
         double totalGroupCost = calcTotalGroupCost(eventMemberPaidAmount);
         double splitCost = calcDividedCost(totalGroupCost, eventMemberPaidAmount.size());
-        updateEventMemberDebts(eventMemberPaidAmount, payer, splitCost);
+        return createEventDebtList(eventMemberPaidAmount, payer, splitCost);
     }
 
     private double calcTotalGroupCost(Map<Member, Double> eventMemberPaidAmount) {
@@ -25,15 +27,14 @@ public class SplitDebtUpdater implements IDebtUpdater {
         return dividedCost;
     }
 
-    private void updateEventMemberDebts(Map<Member, Double> eventMemberPaidAmount, Member memberToGetPaid, double amount){
-
-        /*for (Map.Entry<Member, Double> debtMap: eventMemberPaidAmount.entrySet()) {
+    private List<Debt> createEventDebtList(Map<Member, Double> eventMemberPaidAmount, Member memberToGetPaid, double debtAmount){
+        List<Debt> eventDebtList = new ArrayList<>();
+        for (Map.Entry<Member, Double> debtMap: eventMemberPaidAmount.entrySet()) {
             Member memberToPay = debtMap.getKey();
             if(!(memberToPay.equals(memberToGetPaid))){
-                memberToGetPaid.updateDebt(amount, memberToPay);
-                memberToPay.updateDebt(-amount, memberToGetPaid);
+                eventDebtList.add(new Debt(memberToGetPaid, memberToPay, debtAmount));
             }
-
-        }*/
+        }
+        return eventDebtList;
     }
 }
