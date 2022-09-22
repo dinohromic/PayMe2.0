@@ -57,9 +57,7 @@ public class Group {
     }
 
     public void addEventDebtToGroup(List<Debt> eventDebts){
-        for (Debt eventDebt: eventDebts) {
-            this.debts.add(eventDebt);
-        }
+        this.debts.addAll(eventDebts);
     }
 
     public void addEvent(Event event) {
@@ -74,5 +72,9 @@ public class Group {
 
     public void setEventInactive(Event event) {
         event.setEventInactive();
+    }
+
+    public List<Debt> getDebts() {
+        return debts;
     }
 }
