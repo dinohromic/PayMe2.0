@@ -27,9 +27,9 @@ public class DebtCalculator {
                 specificDebtsMap.put(debtTo, newDebt);
             }
             else if(debtTo.equals(member)) {
-                double previousDebt = specificDebtsMap.get(debtTo);
+                double previousDebt = specificDebtsMap.get(debtFrom);
                 double newDebt = previousDebt += d.getDebtAmount();
-                specificDebtsMap.put(debtTo, newDebt);
+                specificDebtsMap.put(debtFrom, newDebt);
             }
         }
         return specificDebtsMap;

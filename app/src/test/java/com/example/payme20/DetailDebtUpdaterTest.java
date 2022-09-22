@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -30,32 +29,51 @@ public class DetailDebtUpdaterTest {
         debtMap.put(user1, 150.0);
         debtMap.put(user2, 300.0);
         debtMap.put(user3, 120.0);
-        model.createEvent(group, debtMap, "Test", user3, new DetailedDebtUpdater());
+        model.createNewGroupEvent(group, debtMap, "Test", user3, new DetailedDebtUpdater());
     }
 
     /*
-    * User3's debt is positive to both User1 and User2*/
+    * User3's debt is positive to User1 */
     @Test
-    public void testUser3GotPositiveDebt(){
+    public void testUser3GotPositiveToUser1(){
         Map<Member, Double> debtMapUser3 = model.getSpecificDebts(group, user3);
-            double user3DebtToUser1 = debtMapUser3.get(user3);
-            assertEquals(150.0, user3DebtToUser1,0.1);
-    }
-
-    /*
-    * User2 owes 0 to User1
-    * User2 owes 300:- to User3 since User3 payed for the event.*/
-    @Test
-    public void testUser2GotNegativeDebt(){
-
+        double user3DebtToUser1 = debtMapUser3.get(user1);
+        assertEquals(150.0, user3DebtToUser1,0.1);
     }
 
     /**
-    * User1 owes o to User2
-    * User1 owes 120 to user3 since user3 payed
+     *user3's debt is positive to user2 */
+    @Test
+    public void testUser3GotPositiveToUser2(){
+        Map<Member, Double> debtMapUser3 = model.getSpecificDebts(group, user3);
+        double user3DebtToUser1 = debtMapUser3.get(user2);
+        assertEquals(300.0, user3DebtToUser1, 0.1);
+    }
+
+    /*
+    * User2 got negative debt to user3*/
+    @Test
+    public void testUser2GotNegativeDebtToUser3(){
+        Map<Member, Double> debtMapuser2 = model.getSpecificDebts(group, user2);
+        double user2DebtToUser3 = debtMapuser2.get(user3);
+        assertEquals(-300.0, user2DebtToUser3, 0.1);
+    }
+
+    /**
     */
     @Test
-    public void testUser1GotNegativeDebt(){
+    public void testUser1GotNegativeDebtToUser3(){
+        Map<Member, Double> debtMapUser1 = model.getSpecificDebts(group, user1);
+        double user2DebtToUser3 = debtMapUser1.get(user3);
+        assertEquals(-150.0, user2DebtToUser3, 0.1);
+    }
 
+    /*
+    * */
+    @Test
+    public void testTotalDebtOfUsers(){
+        assertEquals(-150.0, model.getTotalDebt(group, user1), 0.1);
+        assertEquals(-300.0, model.getTotalDebt(group, user2), 0.1);
+        assertEquals(450.0, model.getTotalDebt(group, user3), 0.1);
     }
 }
