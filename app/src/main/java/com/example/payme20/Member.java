@@ -1,12 +1,8 @@
 package com.example.payme20;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
-public class Member implements IDebtHolder {
+public class Member {
     private String userName;
     private String phoneNumber;
 
@@ -16,7 +12,7 @@ public class Member implements IDebtHolder {
         // Ändra konstruktorn för debt också
         //this.debt = new Debt(this, new HashMap<>());
     }
-    public void removeMemberFromDebtList(IDebtHolder member) {
+    public void removeMemberFromDebtList(Member member) {
         /*for(int i = 0; i < debtList.size() - 1; i ++) {
             if(debtList.get(i).getDebtHolder().equals(member)) {
                 debtList.remove(i);
