@@ -23,15 +23,4 @@ public class MemberTest {
         group.addNewGroupMember(user2);
         group.addNewGroupMember(user3);
     }
-
-    @Test
-    public void testGetTotalDebt() {
-        Map<Member, Double> eventPaymentMap = new HashMap<>();
-        eventPaymentMap.put(user1, 20.0);
-        eventPaymentMap.put(user2, 30.0);
-        eventPaymentMap.put(user3, 40.0);
-        Event event = new Event("event", eventPaymentMap, user1, new SplitDebtUpdater());
-        event.updateEventMemberDebts();
-        assertEquals(60, user1.getTotalDebt(), 0.0001);
-    }
 }

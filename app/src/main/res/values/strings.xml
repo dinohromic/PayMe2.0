@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">PayMe2.0</string>
+    <string name="paymelogo">
+
+PayMe
+</string>
+
+
 </resources>
