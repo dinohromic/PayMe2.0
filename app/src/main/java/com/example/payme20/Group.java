@@ -32,11 +32,11 @@ public class Group {
         groupMembers.add(member);
     }
 
-    public void removeGroupMember(Member member){
+    public boolean removeGroupMember(Member member){
         boolean allEventsWithMemberInactive = true;
         List<Event> eventsWithThisMember = new ArrayList<>();
         for(Event e : groupEvents) {
-            if (e.getEventPaymentDetails().containsKey(member))
+            if(e.getEventPaymentDetails().containsKey(member))
                 eventsWithThisMember.add(e);
         }
         for(Event e : eventsWithThisMember) {
@@ -44,16 +44,13 @@ public class Group {
                 allEventsWithMemberInactive = false;
                 break;
             }
-            allEventsWithMemberInactive = !e.getActiveStatus();
         }
         if(allEventsWithMemberInactive) {
             this.groupMembers.remove(member);
-            for (Member m : groupMembers) {
-                m.removeMemberFromDebtList(member);
-            }
+            return true;
         }
-//        else
-//            ge förklaring att event måste markeras som klara först
+        else
+            return false;
     }
 
     public void addEventDebtToGroup(List<Debt> eventDebts){
@@ -76,5 +73,9 @@ public class Group {
 
     public List<Debt> getDebts() {
         return debts;
+    }
+
+    public void removeEventDebts(Event event) {
+        debts.removeAll(event.getDebtList());
     }
 }

@@ -53,9 +53,10 @@ public class DetailDebtUpdaterTest {
         assertEquals(user2DebtList.get(1).getDebtAmount(), -300.0, 0.1);
     }
 
-    /*
+    /**
     * User1 owes o to User2
-    * User1 owes 120 to user3 since user3 payed*/
+    * User1 owes 120 to user3 since user3 payed
+    */
     @Test
     public void testUser1GotNegativeDebt(){
         List<Debt> user1DebtList = user1.getDebtList();

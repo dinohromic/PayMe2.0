@@ -20,4 +20,19 @@ public class Model {
         DebtCalculator dc = new DebtCalculator();
         return dc.calcMemberSpecificDebt(group.getDebts(), group.getGroupMembers(), member);
     }
+    public void inactivateEvent(Event event, Group group) {
+        event.setEventInactive();
+        group.removeEventDebts(event);
+    }
+    public void inactivateAllEvents(Group group) {
+        for(Event e : group.getGroupEvents()) {
+            if(e.getActiveStatus()) {
+                e.setEventInactive();
+                group.removeEventDebts(e);
+            }
+        }
+    }
+    public boolean removeMember(Group group, Member member) {
+        return group.removeGroupMember(member); //Vad ska den returna?
+    }
 }
