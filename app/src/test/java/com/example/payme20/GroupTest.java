@@ -89,7 +89,7 @@ public class GroupTest {
         Map<Member, Double> eventPaymentMap = new HashMap<>();
         eventPaymentMap.put(user1, 20.0);
         eventPaymentMap.put(user2, 30.0);
-        eventPaymentMap.put(user3, 50.0);
+        eventPaymentMap.put(user3, 40.0);
 
         model.createNewGroupEvent(group, eventPaymentMap, "event", user1, new SplitDebtUpdater());
         model.createNewGroupEvent(group, eventPaymentMap, "event", user2, new DetailedDebtUpdater());

@@ -31,8 +31,6 @@ public class SplitDebtUpdaterTest {
         debtMap.put(user3, 0.0);
         this.testEvent= new Event("TestEvent", debtMap, user1, new SplitDebtUpdater());
         group.addEvent(testEvent);
-        group.addEventDebtToGroup(testEvent.getDebtList());
-
     }
     @Test
     public void testPayerPositiveDebt(){
