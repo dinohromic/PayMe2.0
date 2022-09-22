@@ -39,6 +39,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/eventNameInput"
         android:layout_width="288dp"
         android:layout_height="48dp"
         android:layout_marginTop="42dp"
@@ -72,7 +73,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <EditText
-        android:id="@+id/editTextDate"
+        android:id="@+id/editEventDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
@@ -102,11 +103,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDate"
+        app:layout_constraintTop_toBottomOf="@+id/editEventDate"
         app:layout_constraintVertical_bias="0.0" />
 
     <RadioGroup
-        android:id="@+id/radioGroup"
+        android:id="@+id/payemtnType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="9dp"
@@ -117,7 +118,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDate">
+        app:layout_constraintTop_toBottomOf="@+id/editEventDate">
 
         <RadioButton
             android:id="@+id/radioButton2"
@@ -142,12 +143,12 @@
         android:layout_marginBottom="340dp"
         android:text="Who paid ?"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textInputLayout"
+        app:layout_constraintEnd_toStartOf="@+id/Payer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
+        android:id="@+id/Payer"
         android:layout_width="327dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="43dp"
@@ -156,7 +157,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup">
+        app:layout_constraintTop_toBottomOf="@+id/payemtnType">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
