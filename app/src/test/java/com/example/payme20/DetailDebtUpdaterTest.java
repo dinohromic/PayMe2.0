@@ -14,8 +14,9 @@ public class DetailDebtUpdaterTest {
     Member user2;
     Member user3;
     Group group;
-    Map<Member, Double> debtMap = new HashMap<Member, Double>();
+    HashMap<Member, Double> debtMap = new HashMap<Member, Double>();
     Event testEvent;
+    Model model = new Model();
 
     @Before
     public void init(){
@@ -29,18 +30,16 @@ public class DetailDebtUpdaterTest {
         debtMap.put(user1, 150.0);
         debtMap.put(user2, 300.0);
         debtMap.put(user3, 120.0);
-        this.testEvent= new Event("TestEvent", debtMap, user3, new DetailedDebtUpdater());
-        group.addEvent(testEvent);
-
+        model.createEvent(group, debtMap, "Test", user3, new DetailedDebtUpdater());
     }
 
     /*
     * User3's debt is positive to both User1 and User2*/
     @Test
-    public void testPayerGotPositiveDebt(){
-        List<Debt> user3DebtList = user3.getDebtList();
-        assertEquals(user3DebtList.get(0).getDebtAmount(), 150.0, 0.1);
-        assertEquals(user3DebtList.get(1).getDebtAmount(), 300.0, 0.1);
+    public void testUser3GotPositiveDebt(){
+        Map<Member, Double> debtMapUser3 = model.getSpecificDebts(group, user3);
+            double user3DebtToUser1 = debtMapUser3.get(user3);
+            assertEquals(150.0, user3DebtToUser1,0.1);
     }
 
     /*
@@ -48,9 +47,7 @@ public class DetailDebtUpdaterTest {
     * User2 owes 300:- to User3 since User3 payed for the event.*/
     @Test
     public void testUser2GotNegativeDebt(){
-        List<Debt> user2DebtList = user2.getDebtList();
-        assertEquals(user2DebtList.get(0).getDebtAmount(), 0.0, 0.1);
-        assertEquals(user2DebtList.get(1).getDebtAmount(), -300.0, 0.1);
+
     }
 
     /**
@@ -59,8 +56,6 @@ public class DetailDebtUpdaterTest {
     */
     @Test
     public void testUser1GotNegativeDebt(){
-        List<Debt> user1DebtList = user1.getDebtList();
-        assertEquals(user1DebtList.get(0).getDebtAmount(), 0.0, 0.1);
-        assertEquals(user1DebtList.get(1).getDebtAmount(), -150, 0.1);
+
     }
 }

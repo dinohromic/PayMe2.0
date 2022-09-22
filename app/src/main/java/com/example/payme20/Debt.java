@@ -19,6 +19,6 @@ public class Debt {
         return new Member(debtTo.getUserName(), debtTo.getPhoneNumber());
     }
     public Member getDebtFrom() {
-        return debtFrom;
+        return new Member(debtFrom.getUserName(), debtFrom.getPhoneNumber());
     }
 }

@@ -15,6 +15,7 @@ public class SplitDebtUpdaterTest {
     Group group;
     Map<Member, Double> debtMap = new HashMap<Member, Double>();
     Event testEvent;
+    Model model = new Model();
 
     @Before
     public void init(){
@@ -30,38 +31,19 @@ public class SplitDebtUpdaterTest {
         debtMap.put(user3, 0.0);
         this.testEvent= new Event("TestEvent", debtMap, user1, new SplitDebtUpdater());
         group.addEvent(testEvent);
-        testEvent.updateEventMemberDebts();
+        group.addEventDebtToGroup(testEvent.getDebtList());
+
     }
     @Test
     public void testPayerPositiveDebt(){
-        List<Debt> user1List = user1.getDebtList();
-
-        for (Debt debt: user1List) {
-            assertEquals(debt.getDebtAmount(), 110.0, 1);
-        }
+        assertEquals(220.0,model.getTotalDebt(group,user1), 0.1 );
     }
     @Test
     public void testUser2NegativeDebt(){
-        List<Debt> user2DebtList = user2.getDebtList();
-        for (Debt debt: user2DebtList) {
-            /*if(debt.getDebtHolder().equals(user1)){
-                assertEquals(debt.getDebtAmount(), -110.0, 1);
-            }
-            else{
-                assertEquals(debt.getDebtAmount(), 0, 1);
-            }*/
-        }
+        assertEquals(-110.0, model.getTotalDebt(group, user2), 0.1);
     }
     @Test
     public void testUser3NegativeDebt(){
-        List<Debt> user3DebtList = user3.getDebtList();
-        for (Debt debt: user3DebtList) {
-            /*if(debt.getDebtHolder().equals(user1)){
-                assertEquals(debt.getDebtAmount(), -110.0, 1);
-            }
-            else{
-                assertEquals(debt.getDebtAmount(), 0, 1);
-            }*/
-        }
+        assertEquals(-110.0, model.getTotalDebt(group, user3), 0.1);
     }
 }
