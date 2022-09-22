@@ -5,10 +5,9 @@ import java.util.Map;
 
 public class Model {
 
-    public void createEvent(Group group, HashMap<Member, Double> debtMap, String eventName, Member payer, IDebtUpdater iDebtUpdater) {
+    public void createNewGroupEvent(Group group, Map<Member, Double> debtMap, String eventName, Member payer, IDebtUpdater iDebtUpdater) {
         Event event = Factory.createEvent(eventName, debtMap, payer, iDebtUpdater);
         group.addEvent(event);
-        group.addEventDebtToGroup(event.getDebtList());
     }
 
     public double getTotalDebt(Group group, Member member) {

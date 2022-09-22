@@ -4,7 +4,6 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -13,6 +12,7 @@ public class GroupTest {
     Member user1;
     Member user2;
     Member user3;
+    Model model;
     @Before
     public void init() {
         group = Factory.createGroup("gruppTest");
@@ -22,6 +22,7 @@ public class GroupTest {
         group.addNewGroupMember(user1);
         group.addNewGroupMember(user2);
         group.addNewGroupMember(user3);
+        model = new Model();
     }
 
     @Test
@@ -82,5 +83,20 @@ public class GroupTest {
     @Test
     public void testGetGroupName() {
         assertEquals("gruppTest", group.getGroupName());
+    }
+    @Test
+    public void testRemoveEventDebts() {
+        Map<Member, Double> eventPaymentMap = new HashMap<>();
+        eventPaymentMap.put(user1, 20.0);
+        eventPaymentMap.put(user2, 30.0);
+        eventPaymentMap.put(user3, 40.0);
+
+        model.createNewGroupEvent(group, eventPaymentMap, "event", user1, new SplitDebtUpdater());
+        model.createNewGroupEvent(group, eventPaymentMap, "event", user2, new DetailedDebtUpdater());
+        model.createNewGroupEvent(group, eventPaymentMap, "event", user3, new SplitDebtUpdater());
+
+        model.inactivateEvent(group.getGroupEvents().get(0), group);
+        assertEquals(-50.0, model.getTotalDebt(group, user1), 0.00001);
+
     }
 }

@@ -1,9 +1,9 @@
 package com.example.payme20;
 
 public class Debt {
-    private Member debtTo;
-    private Member debtFrom;
-    private double debtAmount;;
+    private final Member debtTo;
+    private final Member debtFrom;
+    private final double debtAmount;;
 
     public Debt(Member debtTo, Member debtFrom, double debtAmount){
         this.debtTo = debtTo;
