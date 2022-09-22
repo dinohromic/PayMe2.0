@@ -21,7 +21,14 @@ public class Member {
     public String getPhoneNumber() {
         return phoneNumber;
     }
-    
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
     @Override
     public boolean equals(Object o) {
