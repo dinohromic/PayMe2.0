@@ -4,16 +4,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class Member implements IDebtHolder {
     private String userName;
     private String phoneNumber;
-    private List<Debt> debtList;
 
     public Member(String userName, String phoneNumber){
         this.userName = userName;
         this.phoneNumber = phoneNumber;
-        this.debtList = new ArrayList<>();
         // Ändra konstruktorn för debt också
         //this.debt = new Debt(this, new HashMap<>());
     }
@@ -25,7 +24,7 @@ public class Member implements IDebtHolder {
             }
         }*/
     }
-    public double getTotalDebt() {
+    /*public double getTotalDebt() {
         double debt = 0;
         if(debtList.size() != 0) {
             for (Debt d : debtList) {
@@ -34,7 +33,7 @@ public class Member implements IDebtHolder {
         }
         return debt;
     }
-    /*public void updateDebt(double debtAdd, Member member) {
+    public void updateDebt(double debtAdd, Member member) {
         for(Debt d : debtList) {
             if(d.getDebtHolder().equals(member)) {
                 d.updateDebt(debtAdd);
@@ -45,12 +44,12 @@ public class Member implements IDebtHolder {
         for(Debt d : debtList) {
             d.resetDebt();
         }
-    }*/
+    }
 
     public List<Debt> getDebtList() {
         return debtList;
 
-    }
+    }*/
 
     public String getUserName() {
         return userName;
@@ -68,5 +67,17 @@ public class Member implements IDebtHolder {
         this.phoneNumber = phoneNumber;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Member member = (Member) o;
+        return Objects.equals(userName, member.userName) && Objects.equals(phoneNumber, member.phoneNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userName, phoneNumber);
+    }
 }
 
