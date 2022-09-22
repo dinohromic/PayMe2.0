@@ -32,13 +32,13 @@
             android:id="@+id/tabItemEvents"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Events" />
+            android:text="@string/tab_txt_1" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItemsMembers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Members" />
+            android:text="@string/tab_txt_2" />
 
     </com.google.android.material.tabs.TabLayout>
 
