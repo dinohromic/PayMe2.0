@@ -1,36 +1,45 @@
 package com.example.payme20;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
-import android.view.View;
-
-import com.google.android.material.tabs.TabItem;
-import com.google.android.material.tabs.TabLayout;
-
 import View.EventFragmentGroupPage;
 import View.MemberFragmentGroupPage;
+import helpers.GroupPageAdapter;
+
+
+import com.google.android.material.tabs.TabLayout;
+
 
 public class MainActivity extends AppCompatActivity {
 
-    TabItem eventTabButton;
+    private TabLayout groupPageTabs;
+    private ViewPager groupPageViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.group_page2);
 
-        eventTabButton = findViewById(R.id.tabItemEventsButton);
+        groupPageTabs = findViewById(R.id.groupPageTabLayout);
+        groupPageViewPager= findViewById(R.id.groupPageViewPager);
 
-        getSupportFragmentManager().beginTransaction().add(R.id.FrameLayoutFragment, new EventFragmentGroupPage()).commit();
+        groupPageTabs.setupWithViewPager(groupPageViewPager);
+
+        GroupPageAdapter gpAdapter = new GroupPageAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+
+        gpAdapter.addGroupPageFragments(new EventFragmentGroupPage(),"Events" );
+        gpAdapter.addGroupPageFragments(new MemberFragmentGroupPage(), "Members");
+
+        groupPageViewPager.setAdapter(gpAdapter);
+
+
+
+
 
     }
 
-    /*@Override
-    public void onClick(View v){
-        if(v.getId()==R.id.tabItemEventsButton){
-            getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayoutFragment, new EventFragmentGroupPage()).commit();
-        }
 
-    }*/
 }
