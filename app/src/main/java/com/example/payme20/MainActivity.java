@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.group_page2);
+        setContentView(R.layout.group_page);
 
         groupPageTabs = findViewById(R.id.groupPageTabLayout);
         groupPageViewPager= findViewById(R.id.groupPageViewPager);
@@ -34,12 +34,5 @@ public class MainActivity extends AppCompatActivity {
         gpAdapter.addGroupPageFragments(new MemberFragmentGroupPage(), "Members");
 
         groupPageViewPager.setAdapter(gpAdapter);
-
-
-
-
-
     }
-
-
 }
