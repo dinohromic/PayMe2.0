@@ -1,38 +1,34 @@
 package com.example.payme20;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
-import com.example.payme20.views.EventFragmentGroupPage;
-import com.example.payme20.views.MemberFragmentGroupPage;
-import com.example.payme20.helpers.GroupPageAdapter;
+import android.view.View;
+import android.widget.Button;
 
-
-import com.google.android.material.tabs.TabLayout;
+import com.example.payme20.views.GroupPageView;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    private TabLayout groupPageTabs;
-    private ViewPager groupPageViewPager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.group_page);
+        setContentView(R.layout.activity_main);
 
-        groupPageTabs = findViewById(R.id.groupPageTabLayout);
-        groupPageViewPager= findViewById(R.id.groupPageViewPager);
 
-        groupPageTabs.setupWithViewPager(groupPageViewPager);
+        /*
+        * You probably shouldn't open a new page like this, but this works for now*/
+        Button button = findViewById(R.id.groupPageButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        GroupPageAdapter gpAdapter = new GroupPageAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+                Intent myIntent = new Intent(MainActivity.this, GroupPageView.class);
+                MainActivity.this.startActivity(myIntent);
+            }
+        });
 
-        gpAdapter.addGroupPageFragments(new EventFragmentGroupPage(),"Events" );
-        gpAdapter.addGroupPageFragments(new MemberFragmentGroupPage(), "Members");
-
-        groupPageViewPager.setAdapter(gpAdapter);
     }
 }
