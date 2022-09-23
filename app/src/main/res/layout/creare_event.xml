@@ -159,10 +159,11 @@
         app:layout_constraintStart_toEndOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/payemtnType">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Person that paid" />
+        <Spinner
+            android:id="@+id/chooseMemberSpinner"
+            android:layout_width="274dp"
+            android:layout_height="48dp"
+            android:contentDescription="User" />
     </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
