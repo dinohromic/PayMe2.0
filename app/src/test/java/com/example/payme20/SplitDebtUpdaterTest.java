@@ -3,8 +3,14 @@ package com.example.payme20;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+
+import com.example.payme20.model.Event;
+import com.example.payme20.model.Group;
+import com.example.payme20.model.Member;
+import com.example.payme20.model.Model;
+import com.example.payme20.model.SplitDebtUpdater;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class SplitDebtUpdaterTest {

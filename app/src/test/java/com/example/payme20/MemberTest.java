@@ -2,11 +2,11 @@ package com.example.payme20;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import com.example.payme20.model.Factory;
+import com.example.payme20.model.Group;
+import com.example.payme20.model.Member;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.junit.Before;
 
 public class MemberTest {
     Group group;

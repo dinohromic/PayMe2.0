@@ -1,4 +1,4 @@
-package com.example.payme20;
+package com.example.payme20.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

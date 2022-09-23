@@ -1,6 +1,5 @@
-package com.example.payme20;
+package com.example.payme20.model;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class Model {

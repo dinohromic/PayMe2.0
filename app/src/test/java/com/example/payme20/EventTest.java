@@ -3,6 +3,13 @@ package com.example.payme20;
 import org.junit.*;
 import static org.junit.Assert.*;
 
+import com.example.payme20.model.DetailedDebtUpdater;
+import com.example.payme20.model.Event;
+import com.example.payme20.model.Factory;
+import com.example.payme20.model.Group;
+import com.example.payme20.model.IDebtUpdater;
+import com.example.payme20.model.Member;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

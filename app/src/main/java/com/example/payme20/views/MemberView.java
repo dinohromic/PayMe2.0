@@ -1,14 +1,12 @@
-package View;
+package com.example.payme20.views;
 
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
-
-import com.example.payme20.Group;
-import com.example.payme20.Member;
+import com.example.payme20.model.Group;
+import com.example.payme20.model.Member;
 import com.example.payme20.R;
 
 public class MemberView extends AppCompatActivity{

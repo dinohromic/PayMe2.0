@@ -5,9 +5,9 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
-import View.EventFragmentGroupPage;
-import View.MemberFragmentGroupPage;
-import helpers.GroupPageAdapter;
+import com.example.payme20.views.EventFragmentGroupPage;
+import com.example.payme20.views.MemberFragmentGroupPage;
+import com.example.payme20.helpers.GroupPageAdapter;
 
 
 import com.google.android.material.tabs.TabLayout;

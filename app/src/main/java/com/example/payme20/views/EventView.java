@@ -1,11 +1,10 @@
-package View;
+package com.example.payme20.views;
 
 import android.widget.EditText;
 import android.widget.RadioGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.payme20.Event;
 import com.example.payme20.R;
 import com.google.android.material.textfield.TextInputLayout;
 

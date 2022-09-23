@@ -1,4 +1,4 @@
-package com.example.payme20;
+package com.example.payme20.model;
 
 public class Debt {
     private final Member debtTo;

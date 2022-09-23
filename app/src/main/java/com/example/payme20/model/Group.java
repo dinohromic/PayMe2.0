@@ -1,8 +1,7 @@
-package com.example.payme20;
+package com.example.payme20.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class Group {
     private String groupName;

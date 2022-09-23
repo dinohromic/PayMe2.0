@@ -1,4 +1,4 @@
-package View;
+package com.example.payme20.views;
 
 import android.os.Bundle;
 

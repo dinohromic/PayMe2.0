@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="View.EventFragmentGroupPage">
+    tools:context="com.example.payme20.views.EventFragmentGroupPage">
 
     <TextView
         android:id="@+id/fragmentEventText"
