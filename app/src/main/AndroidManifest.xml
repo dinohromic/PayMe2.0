@@ -16,6 +16,7 @@
         <activity android:name="com.example.payme20.views.GroupPageView" />
         <activity android:name="com.example.payme20.views.GroupListView"/>
         <activity android:name="com.example.payme20.views.GroupCreateView"/>
+        <activity android:name="com.example.payme20.views.MemberView"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">
