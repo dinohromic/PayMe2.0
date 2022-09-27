@@ -2,5 +2,7 @@
     <string name="app_name">PayMe2.0</string>
     <string name="tab_txt_1">Events</string>
     <string name="tab_txt_2">Members</string>
+    <string name="addMembersName">Anton</string>
+    <string name="addMembersPhone">112</string>
 
 </resources>

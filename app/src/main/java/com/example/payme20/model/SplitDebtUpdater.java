@@ -23,7 +23,7 @@ public class SplitDebtUpdater implements IDebtUpdater {
     private double calcDividedCost(double totalGroupCost, int memberSize){
         double dividedCost = 0;
         try{dividedCost = totalGroupCost / memberSize;}
-        catch (ArithmeticException e){System.out.println("Division by zero");}
+        catch (ArithmeticException e){System.out.println("Division by zero in SplitDebtUpdater.Class");}
         return dividedCost;
     }
 

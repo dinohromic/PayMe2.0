@@ -7,28 +7,38 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.payme20.views.GroupPageView;
+import com.example.payme20.views.GroupCreateView;
+import com.example.payme20.views.GroupListView;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    Button openGroupListButton;
+    Button createGroupButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initiateClickable();
+        setOpenViewListener(this.openGroupListButton, GroupListView.class);
+        setOpenViewListener(this.createGroupButton, GroupCreateView.class);
+    }
 
+    private void initiateClickable(){
+        this.openGroupListButton = findViewById(R.id.groupPageButton);
+        this.createGroupButton = findViewById(R.id.mainActCreateGroupButton);
+    }
 
-        /*
-        * You probably shouldn't open a new page like this, but this works for now*/
-        Button button = findViewById(R.id.groupPageButton);
-        button.setOnClickListener(new View.OnClickListener() {
+    private void setOpenViewListener(Button openButton, Class<?> viewToOpen){
+        openButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent myIntent = new Intent(MainActivity.this, GroupPageView.class);
+                Intent myIntent = new Intent(MainActivity.this, viewToOpen);
                 MainActivity.this.startActivity(myIntent);
             }
         });
-
     }
+
+
 }
