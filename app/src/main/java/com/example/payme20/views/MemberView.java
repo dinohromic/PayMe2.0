@@ -24,6 +24,12 @@ public class MemberView extends AppCompatActivity{
     private EditText edtName, edtPhoneNumber;
     private CheckBox agreementCheck;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.add_members);
+    }
+
     private void initViews(){
 
     }
