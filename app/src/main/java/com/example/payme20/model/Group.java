@@ -8,12 +8,14 @@ public class Group {
     private List<Member> groupMembers;
     private List<Event> groupEvents;
     private List<Debt> debts;
+    private DebtHandler debtHandler;
 
     public Group(String groupName) {
         this.groupName = groupName;
         this.groupEvents = new ArrayList<>();
         this.groupMembers = new ArrayList<>();
-        this.debts = new ArrayList<>();
+        //this.debts = new ArrayList<>();
+        this.debtHandler = new DebtHandler();
     }
     public String getGroupName() {
         return groupName;
@@ -25,6 +27,10 @@ public class Group {
 
     public List<Event> getGroupEvents() {
         return groupEvents;
+    }
+
+    public DebtHandler getDebtHandler() {
+        return debtHandler;
     }
 
     public void addNewGroupMember(Member member) {
@@ -52,13 +58,14 @@ public class Group {
             return false;
     }
 
-    public void addEventDebtToGroup(List<Debt> eventDebts){
-        this.debts.addAll(eventDebts);
+    private void addEventDebtToGroup(List<Debt> eventDebts){
+        for(Debt d : eventDebts)
+            debtHandler.addDebt(d);
     }
 
     public void addEvent(Event event) {
         groupEvents.add(event);
-        debts.addAll(event.getDebtList());
+        addEventDebtToGroup(event.getDebtList());
     }
 
     public void setAllEventsInactive(){
@@ -76,6 +83,7 @@ public class Group {
     }
 
     public void removeEventDebts(Event event) {
-        debts.removeAll(event.getDebtList());
+        for(Debt d : event.getDebtList())
+            debtHandler.removeDebt(d);
     }
 }

@@ -4,19 +4,20 @@ import java.util.Map;
 
 public class Model {
 
+
     public void createNewGroupEvent(Group group, Map<Member, Double> debtMap, String eventName, Member payer, IDebtUpdater iDebtUpdater) {
         Event event = Factory.createEvent(eventName, debtMap, payer, iDebtUpdater);
         group.addEvent(event);
     }
 
-    public double getTotalDebt(Group group, Member member) {
+    public int getTotalDebt(Group group, Member member) {
         DebtCalculator dc = new DebtCalculator();
-        return dc.calcMemberTotalDebt(group.getDebts(), member);
+        return dc.calcMemberTotalDebt(member, group.getDebtHandler());
     }
 
-    public Map<Member, Double> getSpecificDebts(Group group, Member member) {
+    public Map<Member, Integer> getSpecificDebts(Group group, Member member) {
         DebtCalculator dc = new DebtCalculator();
-        return dc.calcMemberSpecificDebt(group.getDebts(), group.getGroupMembers(), member);
+        return dc.calcMemberSpecificDebt(group.getGroupMembers(), member, group.getDebtHandler());
     }
     public void inactivateEvent(Event event, Group group) {
         event.setEventInactive();
