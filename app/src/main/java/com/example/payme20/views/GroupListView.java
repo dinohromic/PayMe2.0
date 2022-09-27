@@ -35,6 +35,8 @@ public class GroupListView extends AppCompatActivity {
         createGroupFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //#TODO send user to create_group.xml --> add_members. When user is done go back here.
+
                 addCard("Test");
             }
         });
