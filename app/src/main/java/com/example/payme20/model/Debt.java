@@ -3,7 +3,7 @@ package com.example.payme20.model;
 public class Debt {
     private final Member debtTo;
     private final Member debtFrom;
-    private final double debtAmount;;
+    private final double debtAmount; // FÖRBJUDET MED DOUBLE, använda long eller int
 
     public Debt(Member debtTo, Member debtFrom, double debtAmount){
         this.debtTo = debtTo;
