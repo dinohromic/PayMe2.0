@@ -23,6 +23,9 @@ public class GroupListView extends AppCompatActivity {
         setContentView(R.layout.list_of_groups);
         initiateClickable();
         setOpenViewListener(this.currentGroupsReturnButton, MainActivity.class);
+
+
+
     }
 
     private void initiateClickable() {
