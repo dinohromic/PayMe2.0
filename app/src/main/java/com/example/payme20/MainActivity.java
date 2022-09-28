@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initiateClickable(){
         this.openGroupListButton = findViewById(R.id.groupPageButton);
-        this.createGroupButton = findViewById(R.id.mainActCreateGroupButton);
+        this.createGroupButton = findViewById(R.id.addMemberButton);
     }
 
     private void setOpenViewListener(Button openButton, Class<?> viewToOpen){
