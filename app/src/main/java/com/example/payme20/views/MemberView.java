@@ -55,9 +55,7 @@ public class MemberView extends AppCompatActivity{
         membersContainer.addView(view);
     }
 
-    private void initViews(){
 
-    }
 
 
     private void initMember(){
