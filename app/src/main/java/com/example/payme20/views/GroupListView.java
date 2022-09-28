@@ -12,9 +12,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.payme20.MainActivity;
 import com.example.payme20.R;
+import com.example.payme20.ViewModels.GroupListViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class GroupListView extends AppCompatActivity {
+
+    GroupListViewModel groupListViewModel;
 
     ImageButton currentGroupsReturnButton;
     LinearLayout groupCardHolder;
@@ -25,6 +28,7 @@ public class GroupListView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_of_groups);
+        this.groupListViewModel = new GroupListViewModel();
         initWidgets();
         setOpenViewListener(this.currentGroupsReturnButton, MainActivity.class);
         FABonClickListener(createGroupFAB);
@@ -32,8 +36,8 @@ public class GroupListView extends AppCompatActivity {
     }
     private void initWidgets() {
         this.currentGroupsReturnButton = findViewById(R.id.currentGorupsReturnButton);
-        createGroupFAB = findViewById(R.id.createGroupFAB);
-        container = findViewById(R.id.groupListContainer);
+        this.createGroupFAB = findViewById(R.id.createGroupFAB);
+        this.container = findViewById(R.id.groupListContainer);
     }
 
     private void addCard(String name) {

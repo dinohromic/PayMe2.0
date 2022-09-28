@@ -7,14 +7,12 @@ public class Group {
     private String groupName;
     private List<Member> groupMembers;
     private List<Event> groupEvents;
-    private List<Debt> debts;
     private DebtHandler debtHandler;
 
     public Group(String groupName) {
         this.groupName = groupName;
         this.groupEvents = new ArrayList<>();
         this.groupMembers = new ArrayList<>();
-        //this.debts = new ArrayList<>();
         this.debtHandler = new DebtHandler();
     }
     public String getGroupName() {
@@ -78,9 +76,6 @@ public class Group {
         event.setEventInactive();
     }
 
-    public List<Debt> getDebts() {
-        return debts;
-    }
 
     public void removeEventDebts(Event event) {
         for(Debt d : event.getDebtList())

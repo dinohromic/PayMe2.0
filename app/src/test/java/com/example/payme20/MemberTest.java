@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import com.example.payme20.model.Factory;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,6 +26,13 @@ public class MemberTest {
 
     @Test
     public void sadTestOfTestingSetter(){
+        user1.setUserName("user_xyz");
+        assertEquals("user_xyz", user1.getUserName());
+    }
 
+    @Test
+    public void sadTestOfTestingSetter2(){
+        user1.setPhoneNumber("112");
+        assertEquals("112", user1.getPhoneNumber() );
     }
 }
