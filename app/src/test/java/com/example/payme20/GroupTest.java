@@ -25,8 +25,8 @@ public class GroupTest {
     public void init() {
         group = Factory.createGroup("gruppTest");
         user1 = Factory.createMember("user1", "07");
-        user2 = Factory.createMember("user3", "07");
-        user3 = Factory.createMember("user2", "07");
+        user2 = Factory.createMember("user2", "07");
+        user3 = Factory.createMember("user3", "07");
         group.addNewGroupMember(user1);
         group.addNewGroupMember(user2);
         group.addNewGroupMember(user3);
@@ -104,7 +104,7 @@ public class GroupTest {
         model.createNewGroupEvent(group, eventPaymentMap, "event", user3, new SplitDebtUpdater());
 
         model.inactivateEvent(group.getGroupEvents().get(0), group);
-        assertEquals(-50.0, model.getTotalDebt(group, user1), 0.00001);
+        assertEquals(-50.0, model.getTotalDebt(group, user1), 1);
 
     }
 }
