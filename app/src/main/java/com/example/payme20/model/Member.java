@@ -9,8 +9,6 @@ public class Member {
     public Member(String userName, String phoneNumber){
         this.userName = userName;
         this.phoneNumber = phoneNumber;
-        // Ändra konstruktorn för debt också
-        //this.debt = new Debt(this, new HashMap<>());
     }
 
     public String getUserName() {
