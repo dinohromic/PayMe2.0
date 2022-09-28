@@ -1,4 +1,4 @@
-package com.example.payme20.viewmodels;
+package com.example.payme20.ViewModels;
 
 import com.example.payme20.model.Group;
 
