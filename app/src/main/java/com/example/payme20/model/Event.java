@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Event {
-    private Map<Member, Double> eventPaymentDetails;
+    private Map<Member, Integer> eventPaymentDetails;
     private IDebtUpdater debtUpdater;
     private boolean activeStatus;
     private List<Debt> eventDebtList;
@@ -34,7 +34,7 @@ public class Event {
         return currentDateString;
     }
 
-    public Map<Member, Double> getEventPaymentDetails() {
+    public Map<Member, Integer> getEventPaymentDetails() {
         return eventPaymentDetails;
     }
 

@@ -11,7 +11,7 @@ public class Factory {
         return new Member(memberName, phoneNumber);
     }
 
-    public static Event createEvent(String eventName, Map<Member, Double> memberAndAmount,Member payer, IDebtUpdater debtUpdater ){
+    public static Event createEvent(String eventName, Map<Member, Integer> memberAndAmount,Member payer, IDebtUpdater debtUpdater ){
         return new Event(eventName, memberAndAmount, payer, debtUpdater);
     }
 }

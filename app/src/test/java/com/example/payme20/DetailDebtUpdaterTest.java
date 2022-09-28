@@ -20,8 +20,7 @@ public class DetailDebtUpdaterTest {
     Member user2;
     Member user3;
     Group group;
-    HashMap<Member, Double> debtMap = new HashMap<Member, Double>();
-    Event testEvent;
+    HashMap<Member, Integer> debtMap = new HashMap<Member, Integer>();
     Model model = new Model();
 
     @Before
@@ -33,9 +32,9 @@ public class DetailDebtUpdaterTest {
         group.addNewGroupMember(user1);
         group.addNewGroupMember(user2);
         group.addNewGroupMember(user3);
-        debtMap.put(user1, 150.0);
-        debtMap.put(user2, 300.0);
-        debtMap.put(user3, 120.0);
+        debtMap.put(user1, 150);
+        debtMap.put(user2, 300);
+        debtMap.put(user3, 120);
         model.createNewGroupEvent(group, debtMap, "Test", user3, new DetailedDebtUpdater());
     }
 
@@ -45,7 +44,7 @@ public class DetailDebtUpdaterTest {
     public void testUser3GotPositiveToUser1(){
         Map<Member, Integer> debtMapUser3 = model.getSpecificDebts(group, user3);
         double user3DebtToUser1 = debtMapUser3.get(user1);
-        assertEquals(150.0, user3DebtToUser1,0.1);
+        assertEquals(150, user3DebtToUser1,0.01);
     }
 
     /**
@@ -54,7 +53,7 @@ public class DetailDebtUpdaterTest {
     public void testUser3GotPositiveToUser2(){
         Map<Member, Integer> debtMapUser3 = model.getSpecificDebts(group, user3);
         double user3DebtToUser1 = debtMapUser3.get(user2);
-        assertEquals(300.0, user3DebtToUser1, 0.1);
+        assertEquals(300, user3DebtToUser1, 0.01);
     }
 
     /*
@@ -63,7 +62,7 @@ public class DetailDebtUpdaterTest {
     public void testUser2GotNegativeDebtToUser3(){
         Map<Member, Integer> debtMapuser2 = model.getSpecificDebts(group, user2);
         double user2DebtToUser3 = debtMapuser2.get(user3);
-        assertEquals(-300.0, user2DebtToUser3, 0.1);
+        assertEquals(-300.0, user2DebtToUser3, 0.01);
     }
 
     /**
@@ -72,15 +71,15 @@ public class DetailDebtUpdaterTest {
     public void testUser1GotNegativeDebtToUser3(){
         Map<Member, Integer> debtMapUser1 = model.getSpecificDebts(group, user1);
         double user2DebtToUser3 = debtMapUser1.get(user3);
-        assertEquals(-150.0, user2DebtToUser3, 0.1);
+        assertEquals(-150.0, user2DebtToUser3, 0.01);
     }
 
     /*
     * */
     @Test
     public void testTotalDebtOfUsers(){
-        assertEquals(-150.0, model.getTotalDebt(group, user1), 0.1);
-        assertEquals(-300.0, model.getTotalDebt(group, user2), 0.1);
-        assertEquals(450.0, model.getTotalDebt(group, user3), 0.1);
+        assertEquals(-150.0, model.getTotalDebt(group, user1), 0.01);
+        assertEquals(-300.0, model.getTotalDebt(group, user2), 0.01);
+        assertEquals(450.0, model.getTotalDebt(group, user3), 0.01);
     }
 }

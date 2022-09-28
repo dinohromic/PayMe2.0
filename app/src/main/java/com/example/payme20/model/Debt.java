@@ -1,19 +1,21 @@
 package com.example.payme20.model;
 
+import android.content.Intent;
+
 import java.util.Objects;
 
 public class Debt {
     private final Member debtTo;
     private final Member debtFrom;
-    private final double debtAmount; // FÖRBJUDET MED DOUBLE, använda long eller int
+    private final int debtAmount;
 
-    public Debt(Member debtTo, Member debtFrom, double debtAmount){
+    public Debt(Member debtTo, Member debtFrom, Integer debtAmount){
         this.debtTo = Objects.requireNonNull(debtTo);
         this.debtFrom = debtFrom;
         this.debtAmount = debtAmount;
     }
 
-    public double getDebtAmount(){
+    public int getDebtAmount(){
         return this.debtAmount;
     }
 

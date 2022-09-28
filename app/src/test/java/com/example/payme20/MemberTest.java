@@ -7,6 +7,7 @@ import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
 
 import org.junit.Before;
+import org.junit.Test;
 
 public class MemberTest {
     Group group;
@@ -22,5 +23,10 @@ public class MemberTest {
         group.addNewGroupMember(user1);
         group.addNewGroupMember(user2);
         group.addNewGroupMember(user3);
+    }
+
+    @Test
+    public void sadTestOfTestingSetter(){
+
     }
 }

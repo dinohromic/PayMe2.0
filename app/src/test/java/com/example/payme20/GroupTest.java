@@ -47,10 +47,10 @@ public class GroupTest {
     }
     @Test
     public void testRemoveMemberWhoIsInActiveEvent() {
-        Map<Member, Double> eventPaymentMap = new HashMap<>();
-        eventPaymentMap.put(user1, 20.0);
-        eventPaymentMap.put(user2, 30.0);
-        eventPaymentMap.put(user3, 50.0);
+        Map<Member, Integer> eventPaymentMap = new HashMap<>();
+        eventPaymentMap.put(user1, 20);
+        eventPaymentMap.put(user2, 30);
+        eventPaymentMap.put(user3, 50);
 
         Event event = new Event("event", eventPaymentMap, user1, new SplitDebtUpdater());
         group.addEvent(event);
@@ -59,10 +59,10 @@ public class GroupTest {
     }
     @Test
     public void testRemoveMemberWhoIsInInactiveEvent() {
-        Map<Member, Double> eventPaymentMap = new HashMap<>();
-        eventPaymentMap.put(user1, 20.0);
-        eventPaymentMap.put(user2, 30.0);
-        eventPaymentMap.put(user3, 50.0);
+        Map<Member, Integer> eventPaymentMap = new HashMap<>();
+        eventPaymentMap.put(user1, 20);
+        eventPaymentMap.put(user2, 30);
+        eventPaymentMap.put(user3, 50);
 
         Event event = new Event("event", eventPaymentMap, user1, new SplitDebtUpdater());
         group.addEvent(event);
@@ -72,10 +72,10 @@ public class GroupTest {
     }
     @Test
     public void testSetAllEventsInactive() {
-        Map<Member, Double> eventPaymentMap = new HashMap<>();
-        eventPaymentMap.put(user1, 20.0);
-        eventPaymentMap.put(user2, 30.0);
-        eventPaymentMap.put(user3, 50.0);
+        Map<Member, Integer> eventPaymentMap = new HashMap<>();
+        eventPaymentMap.put(user1, 20);
+        eventPaymentMap.put(user2, 30);
+        eventPaymentMap.put(user3, 50);
 
         Event event = new Event("event", eventPaymentMap, user1, new SplitDebtUpdater());
         Event event1 = new Event("event", eventPaymentMap, user2, new DetailedDebtUpdater());
@@ -94,10 +94,10 @@ public class GroupTest {
     }
     @Test
     public void testRemoveEventDebts() {
-        Map<Member, Double> eventPaymentMap = new HashMap<>();
-        eventPaymentMap.put(user1, 20.0);
-        eventPaymentMap.put(user2, 30.0);
-        eventPaymentMap.put(user3, 40.0);
+        Map<Member, Integer> eventPaymentMap = new HashMap<>();
+        eventPaymentMap.put(user1, 20);
+        eventPaymentMap.put(user2, 30);
+        eventPaymentMap.put(user3, 40);
 
         model.createNewGroupEvent(group, eventPaymentMap, "event", user1, new SplitDebtUpdater());
         model.createNewGroupEvent(group, eventPaymentMap, "event", user2, new DetailedDebtUpdater());

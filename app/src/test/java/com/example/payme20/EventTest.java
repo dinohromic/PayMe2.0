@@ -17,7 +17,7 @@ import java.util.Map;
 public class EventTest {
 
     Group testGroup;
-    Map<Member, Double> debtMap;
+    Map<Member, Integer> debtMap;
     Member payer;
     IDebtUpdater debtUpdater;
     Event testEvent;

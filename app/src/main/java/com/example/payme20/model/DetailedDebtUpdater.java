@@ -6,12 +6,12 @@ import java.util.Map;
 
 public class DetailedDebtUpdater implements IDebtUpdater {
     @Override
-    public List<Debt> updateDebts(Map<Member, Double> eventMemberPaidAmount, Member memberToGetPaid) {
+    public List<Debt> updateDebts(Map<Member, Integer> eventMemberPaidAmount, Member memberToGetPaid) {
         List<Debt> eventDebtList = new ArrayList<>();
 
-        for (Map.Entry<Member, Double> debtMap: eventMemberPaidAmount.entrySet()) {
+        for (Map.Entry<Member, Integer> debtMap: eventMemberPaidAmount.entrySet()) {
             Member memberToPay = debtMap.getKey();
-            double amount = debtMap.getValue();
+            int amount = debtMap.getValue();
             if (!(memberToPay.equals(memberToGetPaid))) {
                 eventDebtList.add(new Debt(memberToGetPaid, memberToPay, amount));
             }
