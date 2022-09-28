@@ -1,12 +1,12 @@
 package com.example.payme20.views;
 
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,8 +23,11 @@ public class MemberView extends AppCompatActivity{
     private Group group;
     private TextView txtWarningName, txtWarningPhoneNumber;
     private EditText edtName, edtPhoneNumber;
+    private TextView    membersPhone, membersName;
     private CheckBox agreementCheck;
     private Button addMemberbutton;
+    private LinearLayout membersContainer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,18 +35,24 @@ public class MemberView extends AppCompatActivity{
         setContentView(R.layout.add_members);
         addMemberbutton = findViewById(R.id.mainActCreateGroupButton);
         edtName = findViewById(R.id.edtTxtName);
+
         edtPhoneNumber = findViewById(R.id.editTextPhone);
+        membersContainer = findViewById(R.id.membersConatiner);
         addMemberbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addMembers(edtName.toString(),edtPhoneNumber.toString());
+                addMembers(edtName.getText().toString(),edtPhoneNumber.getText().toString());
             }
         });
     }
 
-    private void addMembers(String name, String numbber) {
-        View view = getLayoutInflater().inflate(R.layout.add_members, null);
-
+    private void addMembers(String name, String  numbber) {
+        View view = getLayoutInflater().inflate(R.layout.members_card, null);
+        membersName= view.findViewById(R.id.addMembersNameText);
+        membersPhone = view.findViewById(R.id.addMembersPhoneText);
+        membersName.setText(name);
+        membersPhone.setText(numbber);
+        membersContainer.addView(view);
     }
 
     private void initViews(){
