@@ -11,10 +11,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
 import com.example.payme20.R;
+import com.google.android.material.snackbar.Snackbar;
 
 public class MemberView extends AppCompatActivity{
 
@@ -24,9 +26,9 @@ public class MemberView extends AppCompatActivity{
     private TextView txtWarningName, txtWarningPhoneNumber;
     private EditText edtName, edtPhoneNumber;
     private TextView    membersPhone, membersName;
-    private CheckBox agreementCheck;
     private Button addMemberbutton;
     private LinearLayout membersContainer;
+//    private ConstraintLayout parent;
 
 
     @Override
@@ -53,26 +55,39 @@ public class MemberView extends AppCompatActivity{
         membersName.setText(name);
         membersPhone.setText(numbber);
         membersContainer.addView(view);
+//        txtWarningName.setVisibility(View.INVISIBLE);
+//        txtWarningPhoneNumber.setVisibility(View.INVISIBLE);
     }
 
 
 
 
-    private void initMember(){
-        Log.d(TAG, "initMember: started");
-        if (validateData()) {
-            if (agreementCheck.isChecked()){
-                showSnackBar();
-            }
-            else{
-                Toast.makeText(this, "You need to fill in the fields to register", Toast.LENGTH_SHORT).show();
-            }
-        }
+//    private void initMember(){
+//        Log.d(TAG, "initMember: started");
+//        if (validateData()) {
+//                showSnackBar();
+//            }
+//            else{
+//                Toast.makeText(this, "You need to fill in the fields to register", Toast.LENGTH_SHORT).show();
+//            }
+//        }
 
-    }
 
-    private void showSnackBar() {
-    }
+
+//    private void showSnackBar() {
+//        Log.d(TAG, "showSnackBar: started");
+//        txtWarningName.setVisibility(View.INVISIBLE);
+//        txtWarningPhoneNumber.setVisibility(View.INVISIBLE);
+//
+//        Snackbar.make(parent, "Member added", Snackbar.LENGTH_SHORT)
+//                .setAction("Dismiss", new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//
+//                    }
+//                }).show();
+//
+//    }
 
     /* This function is checking whether or not a username or phone number is valid or not*/
     private boolean validateData(){
