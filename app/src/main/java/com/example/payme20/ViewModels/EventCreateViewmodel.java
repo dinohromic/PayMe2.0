@@ -1,4 +1,6 @@
-package com.example.payme20.viewmodels;
+package com.example.payme20.ViewModels;
+
+import androidx.lifecycle.ViewModel;
 
 import com.example.payme20.model.Factory;
 import com.example.payme20.model.IDebtUpdater;
@@ -7,7 +9,7 @@ import com.example.payme20.model.Member;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EventCreateViewmodel {
+public class EventCreateViewmodel extends ViewModel {
     Map<Member, Integer> memberAndAmount = new HashMap<>();
     public void createEvent(String eventName, Member payer, IDebtUpdater debtUpdater) {
         Factory.createEvent(eventName, memberAndAmount, payer, debtUpdater);
