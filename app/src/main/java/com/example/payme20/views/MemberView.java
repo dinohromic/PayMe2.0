@@ -1,5 +1,6 @@
 package com.example.payme20.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,7 +27,7 @@ public class MemberView extends AppCompatActivity{
     private TextView txtWarningName, txtWarningPhoneNumber;
     private EditText edtName, edtPhoneNumber;
     private TextView    membersPhone, membersName;
-    private Button addMemberbutton;
+    private Button addMemberbutton,addMembersFinishButton;
     private LinearLayout membersContainer;
 //    private ConstraintLayout parent;
 
@@ -37,7 +38,13 @@ public class MemberView extends AppCompatActivity{
         setContentView(R.layout.add_members);
         addMemberbutton = findViewById(R.id.mainActCreateGroupButton);
         edtName = findViewById(R.id.edtTxtName);
-
+        addMembersFinishButton = findViewById(R.id.addMembersFinishButton);
+        addMembersFinishButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openCurrenGroups();
+            }
+        });
         edtPhoneNumber = findViewById(R.id.editTextPhone);
         membersContainer = findViewById(R.id.membersConatiner);
         addMemberbutton.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +53,11 @@ public class MemberView extends AppCompatActivity{
                 addMembers(edtName.getText().toString(),edtPhoneNumber.getText().toString());
             }
         });
+    }
+
+    private void openCurrenGroups() {
+        Intent intent = new Intent(MemberView.this, GroupListView.class);
+        MemberView.this.startActivity(intent);
     }
 
     private void addMembers(String name, String  numbber) {

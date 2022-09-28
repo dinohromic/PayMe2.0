@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.views.GroupCreateView;
 import com.example.payme20.views.GroupListView;
 
 
 public class MainActivity extends AppCompatActivity {
 
+    OpenViewHelper openViewHelper = new OpenViewHelper();
     Button openGroupListButton;
     Button createGroupButton;
 
@@ -34,8 +36,7 @@ public class MainActivity extends AppCompatActivity {
         openButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(MainActivity.this, viewToOpen);
-                MainActivity.this.startActivity(myIntent);
+                openViewHelper.openView(viewToOpen, MainActivity.this);
             }
         });
     }

@@ -32,6 +32,7 @@ public class Group {
     }
 
     public void addNewGroupMember(Member member) {
+
         groupMembers.add(member);
     }
 
