@@ -6,31 +6,53 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 import com.example.payme20.MainActivity;
 import com.example.payme20.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class GroupListView extends AppCompatActivity {
 
     ImageButton currentGroupsReturnButton;
     LinearLayout groupCardHolder;
+    FloatingActionButton createGroupFAB;
+    LinearLayout container;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_of_groups);
-        initiateClickable();
+        initWidgets();
         setOpenViewListener(this.currentGroupsReturnButton, MainActivity.class);
-
-
+        FABonClickListener(createGroupFAB);
 
     }
-
-    private void initiateClickable() {
+    private void initWidgets() {
         this.currentGroupsReturnButton = findViewById(R.id.currentGorupsReturnButton);
-        this.groupCardHolder = findViewById(R.id.groupListLinearLayout);
+        createGroupFAB = findViewById(R.id.createGroupFAB);
+        container = findViewById(R.id.groupListContainer);
+    }
+
+    private void addCard(String name) {
+        View view = getLayoutInflater().inflate(R.layout.group_card_view, null);
+        TextView groupName = view.findViewById(R.id.activeGroupsName);
+
+        groupName.setText(name);
+        container.addView(view);
+    }
+
+    private void FABonClickListener(FloatingActionButton FAB){
+        FAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //#TODO send user to create group steps that is: create_group.xml --> add_members.xml --> back HERE?
+
+                addCard("Test"); //Group.getGroupName() här???
+            }
+        });
     }
 
     private void setOpenViewListener(ImageView openButton, Class<?> viewToOpen){
