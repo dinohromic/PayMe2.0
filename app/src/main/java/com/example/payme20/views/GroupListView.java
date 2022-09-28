@@ -13,7 +13,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.payme20.MainActivity;
 import com.example.payme20.R;
 import com.example.payme20.ViewModels.GroupListViewModel;
+import com.example.payme20.model.Group;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
 
 public class GroupListView extends AppCompatActivity {
 
@@ -30,10 +33,20 @@ public class GroupListView extends AppCompatActivity {
         setContentView(R.layout.list_of_groups);
         this.groupListViewModel = new GroupListViewModel();
         initWidgets();
+        populateGroupList(groupListViewModel.getGroupList());
         setOpenViewListener(this.currentGroupsReturnButton, MainActivity.class);
         FABonClickListener(createGroupFAB);
 
     }
+
+    private void populateGroupList(ArrayList<Group> groups) {
+
+        for(Group group : groups){
+            addCard(groupListViewModel.getGroupName(group));
+        }
+
+    }
+
     private void initWidgets() {
         this.currentGroupsReturnButton = findViewById(R.id.currentGorupsReturnButton);
         this.createGroupFAB = findViewById(R.id.createGroupFAB);
