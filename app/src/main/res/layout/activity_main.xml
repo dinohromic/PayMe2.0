@@ -7,7 +7,7 @@
     tools:context="com.example.payme20.MainActivity">
 
     <Button
-        android:id="@+id/mainActCreateGroupButton"
+        android:id="@+id/addMemberButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -26,7 +26,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:text="Current Groups"
-        app:layout_constraintBottom_toTopOf="@+id/mainActCreateGroupButton"
+        app:layout_constraintBottom_toTopOf="@+id/addMemberButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
