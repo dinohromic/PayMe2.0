@@ -8,7 +8,7 @@ import com.example.payme20.model.Event;
 import com.example.payme20.model.Factory;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
-import com.example.payme20.model.Model;
+import com.example.payme20.model.PayMeModel;
 import com.example.payme20.model.SplitDebtUpdater;
 
 import java.util.HashMap;
@@ -20,7 +20,7 @@ public class GroupTest {
     Member user1;
     Member user2;
     Member user3;
-    Model model;
+    PayMeModel payMeModel;
     @Before
     public void init() {
         group = Factory.createGroup("gruppTest");
@@ -30,7 +30,7 @@ public class GroupTest {
         group.addNewGroupMember(user1);
         group.addNewGroupMember(user2);
         group.addNewGroupMember(user3);
-        model = new Model();
+        payMeModel = new PayMeModel();
     }
 
     @Test
@@ -99,12 +99,12 @@ public class GroupTest {
         eventPaymentMap.put(user2, 30);
         eventPaymentMap.put(user3, 40);
 
-        model.createNewGroupEvent(group, eventPaymentMap, "event", user1, new SplitDebtUpdater());
-        model.createNewGroupEvent(group, eventPaymentMap, "event", user2, new DetailedDebtUpdater());
-        model.createNewGroupEvent(group, eventPaymentMap, "event", user3, new SplitDebtUpdater());
+        payMeModel.createNewGroupEvent(group, eventPaymentMap, "event", user1, new SplitDebtUpdater());
+        payMeModel.createNewGroupEvent(group, eventPaymentMap, "event", user2, new DetailedDebtUpdater());
+        payMeModel.createNewGroupEvent(group, eventPaymentMap, "event", user3, new SplitDebtUpdater());
 
-        model.inactivateEvent(group.getGroupEvents().get(0), group);
-        assertEquals(-50.0, model.getTotalDebt(group, user1), 1);
+        payMeModel.inactivateEvent(group.getGroupEvents().get(0), group);
+        assertEquals(-50.0, payMeModel.getTotalDebt(group, user1), 1);
 
     }
 }

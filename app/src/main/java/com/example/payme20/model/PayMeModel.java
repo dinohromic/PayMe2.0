@@ -2,7 +2,7 @@ package com.example.payme20.model;
 
 import java.util.Map;
 
-public class Model {
+public class PayMeModel {
 
 
     public void createNewGroupEvent(Group group, Map<Member, Integer> debtMap, String eventName, Member payer, IDebtUpdater iDebtUpdater) {

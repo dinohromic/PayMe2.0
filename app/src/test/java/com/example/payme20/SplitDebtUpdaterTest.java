@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 import com.example.payme20.model.Event;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
-import com.example.payme20.model.Model;
+import com.example.payme20.model.PayMeModel;
 import com.example.payme20.model.SplitDebtUpdater;
 
 import java.util.HashMap;
@@ -21,7 +21,7 @@ public class SplitDebtUpdaterTest {
     Group group;
     Map<Member, Integer> debtMap = new HashMap<Member, Integer>();
     Event testEvent;
-    Model model = new Model();
+    PayMeModel payMeModel = new PayMeModel();
 
     @Before
     public void init(){
@@ -40,18 +40,18 @@ public class SplitDebtUpdaterTest {
     }
     @Test
     public void testPayerPositiveDebt(){
-        System.out.println(model.getTotalDebt(group, user1));
-        System.out.println(model.getTotalDebt(group, user2));
-        System.out.println(model.getTotalDebt(group, user3));
-        int user1TotalDebt = -(model.getTotalDebt(group, user2) + model.getTotalDebt(group, user2));
-        assertEquals(user1TotalDebt,model.getTotalDebt(group,user1), 1); // Hur testa detta?
+        System.out.println(payMeModel.getTotalDebt(group, user1));
+        System.out.println(payMeModel.getTotalDebt(group, user2));
+        System.out.println(payMeModel.getTotalDebt(group, user3));
+        int user1TotalDebt = -(payMeModel.getTotalDebt(group, user2) + payMeModel.getTotalDebt(group, user2));
+        assertEquals(user1TotalDebt, payMeModel.getTotalDebt(group,user1), 1); // Hur testa detta?
     }
     @Test
     public void testUser2NegativeDebt(){
-        assertEquals(-110, model.getTotalDebt(group, user2), 1);
+        assertEquals(-110, payMeModel.getTotalDebt(group, user2), 1);
     }
     @Test
     public void testUser3NegativeDebt(){
-        assertEquals(-110, model.getTotalDebt(group, user3), 1);
+        assertEquals(-110, payMeModel.getTotalDebt(group, user3), 1);
     }
 }
