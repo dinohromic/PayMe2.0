@@ -16,7 +16,9 @@
         <activity android:name="com.example.payme20.views.GroupPageView" />
         <activity android:name="com.example.payme20.views.GroupListView"/>
         <activity android:name="com.example.payme20.views.GroupCreateView"/>
-        <activity android:name="com.example.payme20.views.MemberView"/>
+        <activity android:name="com.example.payme20.views.MemberView"
+            android:windowSoftInputMode="adjustPan"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -24,6 +26,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
         </activity>
     </application>
