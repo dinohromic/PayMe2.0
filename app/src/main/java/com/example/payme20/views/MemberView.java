@@ -4,6 +4,7 @@ import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -23,21 +24,32 @@ public class MemberView extends AppCompatActivity{
     private TextView txtWarningName, txtWarningPhoneNumber;
     private EditText edtName, edtPhoneNumber;
     private CheckBox agreementCheck;
+    private Button addMemberbutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_members);
+        addMemberbutton = findViewById(R.id.mainActCreateGroupButton);
+        edtName = findViewById(R.id.edtTxtName);
+        edtPhoneNumber = findViewById(R.id.editTextPhone);
+        addMemberbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addMembers(edtName.toString(),edtPhoneNumber.toString());
+            }
+        });
+    }
+
+    private void addMembers(String name, String numbber) {
+        View view = getLayoutInflater().inflate(R.layout.add_members, null);
+
     }
 
     private void initViews(){
 
     }
 
-    public void onAddMemberBtnClick(View view){
-        edtName = findViewById(R.id.edtTxtName);
-        edtPhoneNumber = findViewById(R.id.editTextPhone);
-    }
 
     private void initMember(){
         Log.d(TAG, "initMember: started");
