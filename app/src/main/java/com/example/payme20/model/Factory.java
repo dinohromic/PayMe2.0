@@ -2,7 +2,7 @@ package com.example.payme20.model;
 
 import java.util.Map;
 
-public class Factory {
+public final class Factory {
     public static Group createGroup(String groupName){
         return new Group(groupName);
     }
