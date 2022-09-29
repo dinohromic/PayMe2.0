@@ -2,9 +2,10 @@ package com.example.payme20.model;
 
 import android.content.Intent;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Debt {
+public class Debt implements Serializable {
     private final Member debtTo;
     private final Member debtFrom;
     private final int debtAmount;

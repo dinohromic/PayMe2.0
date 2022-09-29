@@ -1,8 +1,9 @@
 package com.example.payme20.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Member {
+public class Member implements Serializable {
     private String userName;
     private String phoneNumber;
 

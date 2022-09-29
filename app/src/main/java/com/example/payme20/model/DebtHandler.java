@@ -1,11 +1,12 @@
 package com.example.payme20.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DebtHandler {
+public class DebtHandler implements Serializable {
     private Map<Member, List<Debt>> toMap = new HashMap<>();
     private Map<Member, List<Debt>> fromMap = new HashMap<>();
 

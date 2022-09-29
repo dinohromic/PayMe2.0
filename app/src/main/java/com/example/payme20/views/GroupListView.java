@@ -2,7 +2,6 @@ package com.example.payme20.views;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -10,13 +9,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.payme20.MainActivity;
 import com.example.payme20.R;
 import com.example.payme20.ViewModels.GroupListViewModel;
-import com.example.payme20.helpers.CardAdapter;
 import com.example.payme20.model.Group;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -36,31 +32,6 @@ public class GroupListView extends AppCompatActivity {
         setContentView(R.layout.list_of_groups);
         this.groupListViewModel = new GroupListViewModel();
         initWidgets();
-
-        /*
-        RecyclerView groupRecyclerVIew = findViewById(R.id.idRVCourse);
-        CardAdapter cardAdapter = new CardAdapter(this,groupListViewModel.getGroupList());
-
-        // below line is for setting a layout manager for our recycler view.
-        // here we are creating vertical list so we will provide orientation as vertical
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-
-        // in below two lines we are setting layoutmanager and adapter to our recycler view.
-        groupRecyclerVIew.setLayoutManager(linearLayoutManager);
-        groupRecyclerVIew.setAdapter(cardAdapter);
-
-
-        View view = groupRecyclerVIew.getChildAt(0);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(GroupListView.this, GroupPageView.class);
-                intent.putExtra("group", (Parcelable) groupListViewModel.getGroupList().get(0));
-                GroupListView.this.startActivity(intent);
-            }
-        });
-
-         */
 
         populateGroupList(groupListViewModel.getGroupList());
         setOpenViewListener(this.currentGroupsReturnButton, MainActivity.class);
@@ -92,7 +63,7 @@ public class GroupListView extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(GroupListView.this, GroupPageView.class);
-                intent.putExtra("GROUP_LIST", groupListViewModel.getGroupList().get(0));
+                intent.putExtra("GROUP_KEY", groupListViewModel.getGroupList().get(0));
                 GroupListView.this.startActivity(intent);
             }
         });

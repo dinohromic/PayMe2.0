@@ -1,10 +1,11 @@
 package com.example.payme20.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class DetailedDebtUpdater implements IDebtUpdater {
+public class DetailedDebtUpdater implements IDebtUpdater, Serializable {
     @Override
     public List<Debt> updateDebts(Map<Member, Integer> eventMemberPaidAmount, Member memberToGetPaid) {
         List<Debt> eventDebtList = new ArrayList<>();

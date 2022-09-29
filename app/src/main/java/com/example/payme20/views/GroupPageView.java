@@ -1,6 +1,7 @@
 package com.example.payme20.views;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -16,14 +17,15 @@ public class GroupPageView extends AppCompatActivity {
 
     private TabLayout groupPageTabs;
     private ViewPager groupPageViewPager;
+    private TextView groupPageGroupName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.group_page);
-
+        groupPageGroupName = findViewById(R.id.groupPageGroupName);
         Group myObject = (Group) getIntent().getSerializableExtra("GROUP_KEY");
-
+        groupPageGroupName.setText(myObject.getGroupName());
         groupPageTabs = findViewById(R.id.groupPageTabLayout);
         groupPageViewPager= findViewById(R.id.groupPageViewPager);
 

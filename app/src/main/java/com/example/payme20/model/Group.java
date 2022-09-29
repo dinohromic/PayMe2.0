@@ -1,5 +1,8 @@
 package com.example.payme20.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +13,7 @@ public class Group implements Serializable {
     private List<Event> groupEvents;
     private DebtHandler debtHandler;
 
-    public Group(String groupName, ArrayList<Member> membersList) {
+    public Group(String groupName, List<Member> membersList) {
         this.groupName = groupName;
         this.groupEvents = new ArrayList<>();
         this.groupMembers = membersList;
@@ -83,4 +86,5 @@ public class Group implements Serializable {
         for(Debt d : event.getDebtList())
             debtHandler.removeDebt(d);
     }
+
 }
