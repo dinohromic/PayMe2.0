@@ -8,6 +8,7 @@ import android.widget.Button;
 
 import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.views.GroupListView;
+import com.example.payme20.views.GroupPageView;
 import com.example.payme20.views.MemberView;
 
 
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initiateClickable();
-        setOpenViewListener(this.openGroupListButton, GroupListView.class);
+        setOpenViewListener(this.openGroupListButton, GroupPageView.class);
         setOpenViewListener(this.createGroupButton, MemberView.class);
     }
 
