@@ -4,10 +4,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.payme20.R;
+import com.example.payme20.model.Group;
+import com.example.payme20.model.Member;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +31,9 @@ public class MemberFragmentGroupPage extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private Button createNewMembers;
+    private LinearLayout fragmentContainer;
 
     public MemberFragmentGroupPage() {
         // Required empty public constructor
@@ -59,7 +69,47 @@ public class MemberFragmentGroupPage extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_member_group_page, container, false);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_member_group_page, container, false);
+        initWidgets(view);
+        //createNewMembers = view.findViewById(R.id.addMemberButtonFragment);
+        createNewMembers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //this is temp
+                addMemberCards("Oscar", "12355");
+            }
+        });
+
+        //populateMembersList( Get members list from VM );
+
+
+        return view;
+    }
+
+    private void initWidgets(View view){
+        this.createNewMembers =view.findViewById(R.id.addMemberButtonFragment);
+        this.fragmentContainer = view.findViewById(R.id.memberFragmentContainer);
+    }
+
+    private void populateMembersList(ArrayList<Member> members) {
+        for(Member member: members){
+            addMemberCards(member.getUserName(), member.getPhoneNumber());
+        }
+
+
+    }
+
+    private void addMemberCards(String userName, String phoneNumber) {
+        View view = getLayoutInflater().inflate(R.layout.members_card, fragmentContainer, false);
+        TextView VphoneNumber = view.findViewById(R.id.addMembersPhoneText);
+        TextView Vname = view.findViewById(R.id.addMembersNameText);
+
+        Vname.setText(userName);
+        VphoneNumber.setText(phoneNumber);
+
+        fragmentContainer.addView(view);
+
     }
 }
