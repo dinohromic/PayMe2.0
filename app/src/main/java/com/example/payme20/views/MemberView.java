@@ -27,8 +27,6 @@ import java.util.ArrayList;
 public class MemberView extends AppCompatActivity{
 
     private static final String TAG = "MemberView";
-    private Member member;
-    private Group group;
     private TextView txtWarningName, txtWarningPhoneNumber;
     private EditText edtName, edtPhoneNumber;
     private TextView    membersPhone, membersName;
@@ -53,7 +51,12 @@ public class MemberView extends AppCompatActivity{
         addMembersFinishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openCurrenGroups();
+                if(TextUtils.isEmpty(groupName.getText().toString())){
+                    Toast.makeText(MemberView.this,"Group name needed", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    openCurrenGroups();
+                }
             }
         });
         edtPhoneNumber = findViewById(R.id.editTextPhone);
@@ -116,20 +119,8 @@ public class MemberView extends AppCompatActivity{
 
 
 
-//    private void showSnackBar() {
-//        Log.d(TAG, "showSnackBar: started");
-//        txtWarningName.setVisibility(View.INVISIBLE);
-//        txtWarningPhoneNumber.setVisibility(View.INVISIBLE);
-//
-//        Snackbar.make(parent, "Member added", Snackbar.LENGTH_SHORT)
-//                .setAction("Dismiss", new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//
-//                    }
-//                }).show();
-//
-//    }
+
+
 
     /* This function is checking whether or not a username or phone number is valid or not*/
     private boolean validateData(){

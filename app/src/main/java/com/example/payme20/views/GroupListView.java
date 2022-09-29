@@ -22,7 +22,6 @@ import java.util.ArrayList;
 public class GroupListView extends AppCompatActivity {
 
     GroupListViewModel groupListViewModel;
-    OpenViewHelper openViewHelper = new OpenViewHelper();
     ImageButton currentGroupsReturnButton;
     FloatingActionButton createGroupFAB;
     LinearLayout container;
@@ -33,17 +32,14 @@ public class GroupListView extends AppCompatActivity {
         setContentView(R.layout.list_of_groups);
         this.groupListViewModel = new GroupListViewModel();
         initWidgets();
-
         populateGroupList(groupListViewModel.getGroupList());
         setOpenViewListener(this.currentGroupsReturnButton, MainActivity.class);
         FABonClickListener(createGroupFAB);
-
-
     }
 
     private void populateGroupList(ArrayList<Group> groups) {
         for(int i = 0; i < groups.size(); i++){
-            addCard(groups.get(i), i);
+            addCard(groups.get(i));
         }
     }
 
@@ -53,26 +49,22 @@ public class GroupListView extends AppCompatActivity {
         this.container = findViewById(R.id.groupListContainer);
     }
 
-    private void addCard(Group group, int index) {
+    private void addCard(Group group) {
         View view = getLayoutInflater().inflate(R.layout.group_card_view, null);
         TextView groupName = view.findViewById(R.id.activeGroupsName);
         groupName.setText(groupListViewModel.getGroupName(group));
-
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-                Intent intent = new Intent(GroupListView.this, GroupPageView.class);
-                intent.putExtra("GROUP_KEY", groupListViewModel.getGroupList().get(index));
-                GroupListView.this.startActivity(intent);
-            }
-        });
-
+        setListenerOnGroupCard(view, group);
         container.addView(view);
-
     }
 
+    private void setListenerOnGroupCard(View viewToGetListener, Group group){
+        viewToGetListener.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OpenViewHelper.openViewPutExtra(GroupPageView.class, GroupListView.this, group);
+            }
+        });
+    }
 
     private void FABonClickListener(FloatingActionButton FAB){
         FAB.setOnClickListener(new View.OnClickListener() {
