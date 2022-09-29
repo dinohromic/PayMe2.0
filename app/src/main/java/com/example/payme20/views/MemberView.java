@@ -46,6 +46,7 @@ public class MemberView extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_members);
         membersList = new ArrayList<Member>();
+        groupName=findViewById(R.id.groupNameTextView);
         addMemberbutton = findViewById(R.id.mainActCreateGroupButton);
         edtName = findViewById(R.id.edtTxtName);
         addMembersFinishButton = findViewById(R.id.addMembersFinishButton);
@@ -61,13 +62,19 @@ public class MemberView extends AppCompatActivity{
         addMemberbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if(TextUtils.isEmpty(groupName.getText().toString())){
-//                    Toast.makeText(MemberView.this,"Group name needed", Toast.LENGTH_SHORT);
-//                }
-//                else {
+                if(TextUtils.isEmpty(groupName.getText().toString())){
+                    Toast.makeText(MemberView.this,"Group name needed", Toast.LENGTH_SHORT).show();
+                }
+                else if(TextUtils.isEmpty(edtName.getText().toString())){
+                    Toast.makeText(MemberView.this,"Members name needed", Toast.LENGTH_SHORT).show();
+                }
+                else if(TextUtils.isEmpty(edtPhoneNumber.getText().toString())){
+                    Toast.makeText(MemberView.this,"Members phone needed", Toast.LENGTH_SHORT).show();
+                }
+                else {
                      addMembers(edtName.getText().toString(),edtPhoneNumber.getText().toString());
-//                }
-//
+                }
+
             }
         });
 
