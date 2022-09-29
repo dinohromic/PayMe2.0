@@ -51,7 +51,12 @@ public class MemberView extends AppCompatActivity{
         addMembersFinishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openCurrenGroups();
+                if(TextUtils.isEmpty(groupName.getText().toString())){
+                    Toast.makeText(MemberView.this,"Group name needed", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    openCurrenGroups();
+                }
             }
         });
         edtPhoneNumber = findViewById(R.id.editTextPhone);
