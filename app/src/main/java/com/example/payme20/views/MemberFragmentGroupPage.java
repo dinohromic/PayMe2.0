@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.example.payme20.R;
+import com.example.payme20.model.Group;
 
 /**
  * A simple {@link Fragment} subclass.
