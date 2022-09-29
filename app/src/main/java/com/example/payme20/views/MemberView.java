@@ -27,8 +27,6 @@ import java.util.ArrayList;
 public class MemberView extends AppCompatActivity{
 
     private static final String TAG = "MemberView";
-    private Member member;
-    private Group group;
     private TextView txtWarningName, txtWarningPhoneNumber;
     private EditText edtName, edtPhoneNumber;
     private TextView    membersPhone, membersName;
