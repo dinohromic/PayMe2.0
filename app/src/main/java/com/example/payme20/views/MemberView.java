@@ -131,6 +131,7 @@ public class MemberView extends AppCompatActivity{
 //
 //    }
 
+
     /* This function is checking whether or not a username or phone number is valid or not*/
     private boolean validateData(){
         Log.d(TAG, "validateData: started" );
