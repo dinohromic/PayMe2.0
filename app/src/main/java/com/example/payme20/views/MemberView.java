@@ -116,20 +116,7 @@ public class MemberView extends AppCompatActivity{
 
 
 
-//    private void showSnackBar() {
-//        Log.d(TAG, "showSnackBar: started");
-//        txtWarningName.setVisibility(View.INVISIBLE);
-//        txtWarningPhoneNumber.setVisibility(View.INVISIBLE);
-//
-//        Snackbar.make(parent, "Member added", Snackbar.LENGTH_SHORT)
-//                .setAction("Dismiss", new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//
-//                    }
-//                }).show();
-//
-//    }
+
 
 
     /* This function is checking whether or not a username or phone number is valid or not*/
