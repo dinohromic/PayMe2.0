@@ -7,8 +7,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.example.payme20.MainActivity;
 import com.example.payme20.R;
+import com.example.payme20.helpers.OpenViewHelper;
+import com.example.payme20.model.Group;
 
 /**
  * A simple {@link Fragment} subclass.

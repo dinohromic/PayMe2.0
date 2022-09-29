@@ -10,7 +10,7 @@ public class Group implements Serializable {
     private List<Event> groupEvents;
     private DebtHandler debtHandler;
 
-    public Group(String groupName, ArrayList<Member> membersList) {
+    public Group(String groupName, List<Member> membersList) {
         this.groupName = groupName;
         this.groupEvents = new ArrayList<>();
         this.groupMembers = membersList;

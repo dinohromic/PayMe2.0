@@ -1,12 +1,13 @@
 package com.example.payme20.model;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-public class Event {
+public class Event implements Serializable {
     private Map<Member, Integer> eventPaymentDetails;
     private IDebtUpdater debtUpdater;
     private boolean activeStatus;

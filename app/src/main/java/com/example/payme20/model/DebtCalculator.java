@@ -1,10 +1,11 @@
 package com.example.payme20.model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DebtCalculator {
+public class DebtCalculator implements Serializable {
     public int calcMemberTotalDebt(Member member, DebtHandler dh) {
         int totalDebt = 0;
         if(dh.getToMap().containsKey(member)) {

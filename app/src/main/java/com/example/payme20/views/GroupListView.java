@@ -92,7 +92,7 @@ public class GroupListView extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(GroupListView.this, GroupPageView.class);
-                intent.putExtra("GROUP_LIST", groupListViewModel.getGroupList().get(0));
+                intent.putExtra("GROUP_KEY", groupListViewModel.getGroupList().get(0));
                 GroupListView.this.startActivity(intent);
             }
         });

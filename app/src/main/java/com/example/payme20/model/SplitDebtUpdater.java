@@ -1,12 +1,13 @@
 package com.example.payme20.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class SplitDebtUpdater implements IDebtUpdater {
+public class SplitDebtUpdater implements IDebtUpdater, Serializable {
     @Override
     public List<Debt> updateDebts(Map<Member, Integer> eventMemberPaidAmount, Member payer) {
         int totalGroupCost = calcTotalGroupCost(eventMemberPaidAmount);
