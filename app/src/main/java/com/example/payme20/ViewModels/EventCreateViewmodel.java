@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.payme20.model.Factory;
 import com.example.payme20.model.IDebtUpdater;
 import com.example.payme20.model.Member;
+import com.example.payme20.model.PayMeModel;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,15 +26,11 @@ public class EventCreateViewmodel extends ViewModel {
     public MutableLiveData<List<Member>> getSpinnerMembers() {
         return mSpinnerMembers;
     }
-    public void addNewSpinnerMember(final Member member) {
-    }
 
     public void createEvent() {
         Factory.createEvent(eventName, memberAndAmount, payer, debtUpdater);
     }
-    public void addMemberAndAmountMap(Member member, int amount) {
-        memberAndAmount.put(member, amount);
-    }
+
     public void setDebtUpdater(IDebtUpdater IDebtUpdater) {
         debtUpdater = IDebtUpdater;
     }

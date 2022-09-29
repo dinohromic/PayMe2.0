@@ -29,6 +29,7 @@ import java.util.List;
 public class EventCreateView extends AppCompatActivity {
 
     TextInputLayout eventName;
+
     Spinner memberSpinner;
     EditText eventDate;
     RadioGroup paymentType;
@@ -56,7 +57,10 @@ public class EventCreateView extends AppCompatActivity {
         memberSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
+                /*for(Member m : ListaAvMembers) {
+                    if(m.getUserName().equals(arrayAdapter.getItem(i)))
+                        ecViewmodel.setPayer(m);
+                }*/
             }
 
             @Override
