@@ -1,5 +1,6 @@
 package com.example.payme20.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,12 +15,16 @@ import com.example.payme20.R;
 import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.model.Group;
 
+import java.util.ArrayList;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link EventFragmentGroupPage#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class EventFragmentGroupPage extends Fragment {
+    Button createNewEvent;
+    private Group group;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,12 +64,26 @@ public class EventFragmentGroupPage extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_event_group_page, container, false);
+        View view = inflater.inflate(R.layout.fragment_event_group_page, null);
+        createNewEvent = (Button) view.findViewById(R.id.addEventButton);
+        createNewEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), EventCreateView.class);
+                intent.putExtra("GROUP", group);
+                startActivity(intent);
+            }
+        });
+        return view;
+    }
+    public void setGroup(Group group) {
+        this.group = group;
     }
 }

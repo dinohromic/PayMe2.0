@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.payme20.R;
 import com.example.payme20.ViewModels.EventCreateViewmodel;
 import com.example.payme20.model.DetailedDebtUpdater;
+import com.example.payme20.model.Group;
 import com.example.payme20.model.IDebtUpdater;
 import com.example.payme20.model.Member;
 import com.example.payme20.model.SplitDebtUpdater;
@@ -40,6 +41,7 @@ public class EventCreateView extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.creare_event);
+        Group group = ((Group) getIntent().getSerializableExtra("GROUP"));
         initiate();
         ecViewmodel = new ViewModelProvider(this).get(EventCreateViewmodel.class);
         initPaymentType();

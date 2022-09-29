@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.payme20.model.Factory;
+import com.example.payme20.model.Group;
 import com.example.payme20.model.IDebtUpdater;
 import com.example.payme20.model.Member;
 import com.example.payme20.model.PayMeModel;
@@ -20,11 +21,11 @@ public class EventCreateViewmodel extends ViewModel {
     private String eventName;
     private IDebtUpdater debtUpdater;
     private Member payer;
+    private Group group;
+    private List<Member> groupMembers;
 
-    private MutableLiveData<List<Member>> mSpinnerMembers;
+    public EventCreateViewmodel(Group group) {
 
-    public MutableLiveData<List<Member>> getSpinnerMembers() {
-        return mSpinnerMembers;
     }
 
     public void createEvent() {
