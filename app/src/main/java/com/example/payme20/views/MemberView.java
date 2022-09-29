@@ -2,6 +2,7 @@ package com.example.payme20.views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,10 +15,14 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.example.payme20.ViewModels.createGroupViewModel;
+import com.example.payme20.model.Factory;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
 import com.example.payme20.R;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.ArrayList;
 
 public class MemberView extends AppCompatActivity{
 
@@ -29,6 +34,10 @@ public class MemberView extends AppCompatActivity{
     private TextView    membersPhone, membersName;
     private Button addMemberbutton,addMembersFinishButton;
     private LinearLayout membersContainer;
+    ArrayList<Member> membersList;
+    private EditText groupName;
+    createGroupViewModel createGroup;
+
 //    private ConstraintLayout parent;
 
 
@@ -36,6 +45,7 @@ public class MemberView extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_members);
+        membersList = new ArrayList<Member>();
         addMemberbutton = findViewById(R.id.mainActCreateGroupButton);
         edtName = findViewById(R.id.edtTxtName);
         addMembersFinishButton = findViewById(R.id.addMembersFinishButton);
@@ -47,15 +57,25 @@ public class MemberView extends AppCompatActivity{
         });
         edtPhoneNumber = findViewById(R.id.editTextPhone);
         membersContainer = findViewById(R.id.membersConatiner);
+
         addMemberbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addMembers(edtName.getText().toString(),edtPhoneNumber.getText().toString());
+//                if(TextUtils.isEmpty(groupName.getText().toString())){
+//                    Toast.makeText(MemberView.this,"Group name needed", Toast.LENGTH_SHORT);
+//                }
+//                else {
+                     addMembers(edtName.getText().toString(),edtPhoneNumber.getText().toString());
+//                }
+//
             }
         });
+
+
     }
 
     private void openCurrenGroups() {
+        createGroup = new createGroupViewModel(groupName.getText().toString(),membersList);
         Intent intent = new Intent(MemberView.this, GroupListView.class);
         MemberView.this.startActivity(intent);
     }
@@ -66,7 +86,10 @@ public class MemberView extends AppCompatActivity{
         membersPhone = view.findViewById(R.id.addMembersPhoneText);
         membersName.setText(name);
         membersPhone.setText(numbber);
+        membersList.add(Factory.createMember(name,numbber));
         membersContainer.addView(view);
+        edtName.getText().clear();
+        edtPhoneNumber.getText().clear();
 //        txtWarningName.setVisibility(View.INVISIBLE);
 //        txtWarningPhoneNumber.setVisibility(View.INVISIBLE);
     }

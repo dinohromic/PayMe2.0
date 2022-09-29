@@ -66,7 +66,7 @@ public class GroupListView extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //#TODO send user to create group steps that is: create_group.xml --> add_members.xml --> back HERE?
-                Intent intent = new Intent(GroupListView.this, GroupCreateView.class);
+                Intent intent = new Intent(GroupListView.this, MemberView.class);
                 GroupListView.this.startActivity(intent);
                 //addCard("Test"); //Group.getGroupName() här???
             }

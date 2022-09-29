@@ -2,14 +2,13 @@ package com.example.payme20;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.payme20.helpers.OpenViewHelper;
-import com.example.payme20.views.GroupCreateView;
 import com.example.payme20.views.GroupListView;
+import com.example.payme20.views.MemberView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -24,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initiateClickable();
         setOpenViewListener(this.openGroupListButton, GroupListView.class);
-        setOpenViewListener(this.createGroupButton, GroupCreateView.class);
+        setOpenViewListener(this.createGroupButton, MemberView.class);
     }
 
     private void initiateClickable(){

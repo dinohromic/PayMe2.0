@@ -1,10 +1,11 @@
 package com.example.payme20.model;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public final class Factory {
-    public static Group createGroup(String groupName){
-        return new Group(groupName);
+    public static Group createGroup(String groupName, ArrayList<Member> membersList){
+        return new Group(groupName, membersList);
     }
 
     public static Member createMember(String memberName, String phoneNumber){

@@ -9,10 +9,10 @@ public class Group {
     private List<Event> groupEvents;
     private DebtHandler debtHandler;
 
-    public Group(String groupName) {
+    public Group(String groupName, ArrayList<Member> membersList) {
         this.groupName = groupName;
         this.groupEvents = new ArrayList<>();
-        this.groupMembers = new ArrayList<>();
+        this.groupMembers = membersList;
         this.debtHandler = new DebtHandler();
     }
     public String getGroupName() {
