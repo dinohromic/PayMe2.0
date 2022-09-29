@@ -1,9 +1,10 @@
 package com.example.payme20.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Group {
+public class Group implements Serializable {
     private String groupName;
     private List<Member> groupMembers;
     private List<Event> groupEvents;

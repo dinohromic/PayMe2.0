@@ -8,6 +8,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.payme20.R;
 import com.example.payme20.helpers.GroupPageAdapter;
+import com.example.payme20.model.Group;
 import com.google.android.material.tabs.TabLayout;
 
 
@@ -20,6 +21,8 @@ public class GroupPageView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.group_page);
+
+        Group myObject = (Group) getIntent().getSerializableExtra("GROUP_KEY");
 
         groupPageTabs = findViewById(R.id.groupPageTabLayout);
         groupPageViewPager= findViewById(R.id.groupPageViewPager);

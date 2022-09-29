@@ -12,8 +12,8 @@ public class GroupListViewModel {
 
     public ArrayList<Group> getGroupList(){
         ArrayList<Group> test = new ArrayList<Group>();
-    //    test.add(new Group("Grekland"));
-      //  test.add(new Group("Middag"));
+        //test.add(new Group("Grekland"));
+        //test.add(new Group("Middag"));
         return test;
     }
 }

@@ -5,8 +5,13 @@
     android:layout_height="match_parent"
     >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"></LinearLayout>
+
     <androidx.cardview.widget.CardView
-        android:id="@+id/testId"
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="24dp"
@@ -17,16 +22,19 @@
         app:cardElevation="10dp">
 
         <TextView
-            android:id="@+id/activeGroupsName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/currentMemberNameAndDebt"
+            android:layout_width="423dp"
+            android:layout_height="113dp"
             android:layout_margin="16dp"
             android:fontFamily="@font/roboto_medium"
-            android:text="Group 2"
+            android:text="Member XYZ has total debt"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="34sp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="290dp"
+            android:layout_height="161dp"
+            android:text="TextView" />
     </androidx.cardview.widget.CardView>
-
-
-
 </RelativeLayout>
