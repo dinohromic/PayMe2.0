@@ -107,7 +107,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <RadioGroup
-        android:id="@+id/payemtnType"
+        android:id="@+id/paymentType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="9dp"
@@ -121,16 +121,18 @@
         app:layout_constraintTop_toBottomOf="@+id/editEventDate">
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/radioButton1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:checked="true"
             android:text="split" />
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/radioButton2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:checked="false"
             android:text="detailed" />
     </RadioGroup>
 
@@ -157,7 +159,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/payemtnType">
+        app:layout_constraintTop_toBottomOf="@+id/paymentType">
 
         <Spinner
             android:id="@+id/chooseMemberSpinner"
