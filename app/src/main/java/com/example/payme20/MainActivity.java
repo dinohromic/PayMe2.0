@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initiateClickable();
-        setOpenViewListener(this.openGroupListButton, GroupPageView.class);
+        setOpenViewListener(this.openGroupListButton, GroupListView.class);
         setOpenViewListener(this.createGroupButton, MemberView.class);
     }
 
