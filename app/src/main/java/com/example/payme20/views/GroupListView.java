@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.payme20.MainActivity;
 import com.example.payme20.R;
 import com.example.payme20.ViewModels.GroupListViewModel;
+import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.model.Group;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 public class GroupListView extends AppCompatActivity {
 
     GroupListViewModel groupListViewModel;
-
+    OpenViewHelper openViewHelper = new OpenViewHelper();
     ImageButton currentGroupsReturnButton;
     FloatingActionButton createGroupFAB;
     LinearLayout container;
@@ -41,11 +42,9 @@ public class GroupListView extends AppCompatActivity {
     }
 
     private void populateGroupList(ArrayList<Group> groups) {
-
-        for(Group group : groups){
-            addCard(groupListViewModel.getGroupName(group));
+        for(int i = 0; i < groups.size(); i++){
+            addCard(groups.get(i), i);
         }
-
     }
 
     private void initWidgets() {
@@ -54,16 +53,18 @@ public class GroupListView extends AppCompatActivity {
         this.container = findViewById(R.id.groupListContainer);
     }
 
-    private void addCard(String name) {
+    private void addCard(Group group, int index) {
         View view = getLayoutInflater().inflate(R.layout.group_card_view, null);
         TextView groupName = view.findViewById(R.id.activeGroupsName);
-        groupName.setText(name);
+        groupName.setText(groupListViewModel.getGroupName(group));
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 Intent intent = new Intent(GroupListView.this, GroupPageView.class);
-                intent.putExtra("GROUP_KEY", groupListViewModel.getGroupList().get(0));
+                intent.putExtra("GROUP_KEY", groupListViewModel.getGroupList().get(index));
                 GroupListView.this.startActivity(intent);
             }
         });
@@ -72,18 +73,14 @@ public class GroupListView extends AppCompatActivity {
 
     }
 
-    private void listener(){
-
-    }
 
     private void FABonClickListener(FloatingActionButton FAB){
         FAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //#TODO send user to create group steps that is: create_group.xml --> add_members.xml --> back HERE?
                 Intent intent = new Intent(GroupListView.this, MemberView.class);
                 GroupListView.this.startActivity(intent);
-                //addCard("Test"); //Group.getGroupName() här???
+
             }
         });
     }
