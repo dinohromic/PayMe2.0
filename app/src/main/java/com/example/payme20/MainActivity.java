@@ -8,6 +8,7 @@ import android.widget.Button;
 
 import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.views.GroupListView;
+import com.example.payme20.views.GroupPageView;
 import com.example.payme20.views.MemberView;
 
 
