@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.payme20.R;
 import com.example.payme20.ViewModels.EventCreateViewmodel;
+import com.example.payme20.ViewModels.ViewModelFactory;
 import com.example.payme20.model.DetailedDebtUpdater;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.IDebtUpdater;
@@ -36,17 +37,19 @@ public class EventCreateView extends AppCompatActivity {
     RadioGroup paymentType;
 
     EventCreateViewmodel ecViewmodel;
+    Group group;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.creare_event);
-        Group group = ((Group) getIntent().getSerializableExtra("GROUP"));
+        group = ((Group) getIntent().getSerializableExtra("GROUP"));
         initiate();
-        ecViewmodel = new ViewModelProvider(this).get(EventCreateViewmodel.class);
+        ViewModelFactory vmFactory = new ViewModelFactory();
+        vmFactory.add(new EventCreateViewmodel(group));
+        ecViewmodel = new ViewModelProvider(this, vmFactory).get(EventCreateViewmodel.class);
         initPaymentType();
         initMemberSpinner();
-
     }
 
     private void initMemberSpinner() {
@@ -73,7 +76,6 @@ public class EventCreateView extends AppCompatActivity {
     }
 
     private void initPaymentType() {
-        ecViewmodel.setDebtUpdater(new SplitDebtUpdater());
         paymentType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -81,16 +83,7 @@ public class EventCreateView extends AppCompatActivity {
                 boolean isChecked = checkedButton.isChecked();
                 if(isChecked) {
                     String text = (String) checkedButton.getText();
-                    IDebtUpdater debtUpdater = new SplitDebtUpdater();
-                    switch (text) {
-                        case "split":
-                            debtUpdater = new SplitDebtUpdater();
-                            break;
-                        case "detailed":
-                            debtUpdater = new DetailedDebtUpdater();
-                            break;
-                    }
-                    ecViewmodel.setDebtUpdater(debtUpdater);
+                    ecViewmodel.setDebtUpdater(text);
                 }
             }
         });

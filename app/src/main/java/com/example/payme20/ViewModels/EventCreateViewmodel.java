@@ -6,11 +6,13 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.payme20.model.DetailedDebtUpdater;
 import com.example.payme20.model.Factory;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.IDebtUpdater;
 import com.example.payme20.model.Member;
 import com.example.payme20.model.PayMeModel;
+import com.example.payme20.model.SplitDebtUpdater;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,17 +25,28 @@ public class EventCreateViewmodel extends ViewModel {
     private Member payer;
     private Group group;
     private List<Member> groupMembers;
+    private List<Member> eventMembers;
 
     public EventCreateViewmodel(Group group) {
-
+        this.group = group;
+        initMemberList();
     }
 
-    public void createEvent() {
-        Factory.createEvent(eventName, memberAndAmount, payer, debtUpdater);
+    private void initMemberList() {
+        if(group.getGroupMembers().size() != 0)
+            groupMembers.addAll(group.getGroupMembers());
     }
 
-    public void setDebtUpdater(IDebtUpdater IDebtUpdater) {
-        debtUpdater = IDebtUpdater;
+
+    public void setDebtUpdater(String str) {
+        switch (str) {
+            case "split":
+                debtUpdater = new SplitDebtUpdater();
+                break;
+            case "detailed":
+                debtUpdater = new DetailedDebtUpdater();
+                break;
+        }
     }
     public void setPayer(Member member) {
         payer = member;
