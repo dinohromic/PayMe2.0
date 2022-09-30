@@ -4,6 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <androidx.cardview.widget.CardView
         android:id="@+id/addMembersCardView"
         android:layout_width="match_parent"
@@ -15,31 +16,31 @@
         android:background="#4F2E91"
         android:backgroundTint="#673AB7"
         app:cardBackgroundColor="#673AB7"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="10dp">
+        app:cardCornerRadius="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#9C27B0"
-            android:backgroundTint="#d9d9d9"
+            android:backgroundTint="#FFFFFF"
             android:orientation="vertical">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="66dp"
+                android:layout_height="48dp"
                 android:orientation="horizontal">
 
                 <CheckBox
                     android:id="@+id/eventMemberIncluded"
-                    android:layout_width="74dp"
-                    android:layout_height="38dp"
-                    android:checked="true" />
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:checked="true"
+                    android:paddingBottom="10dp" />
 
                 <TextView
                     android:id="@+id/eventMemberName"
-                    android:layout_width="168dp"
+                    android:layout_width="155dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="8dp"
@@ -55,10 +56,12 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/eventMemberAmount"
-                        android:layout_width="122dp"
-                        android:layout_height="56dp"
+                        android:layout_width="133dp"
+                        android:layout_height="match_parent"
+                        android:backgroundTint="#FFFFFF"
                         android:hint="Amount (kr)" />
                 </com.google.android.material.textfield.TextInputLayout>
+
             </LinearLayout>
 
         </LinearLayout>
