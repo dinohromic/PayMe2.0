@@ -10,6 +10,7 @@ import com.example.payme20.model.Group;
 import com.example.payme20.model.IDebtUpdater;
 import com.example.payme20.model.Member;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +25,7 @@ public class EventTest {
 
     @Before
     public void init(){
-        this.testGroup = new Group("TestGroup");
+        this.testGroup = new Group("TestGroup", new ArrayList<>());
         this.debtMap = new HashMap<>();
         this.debtUpdater = new DetailedDebtUpdater();
         this.testEvent = Factory.createEvent("TestEvent", this.debtMap, this.payer, this.debtUpdater);

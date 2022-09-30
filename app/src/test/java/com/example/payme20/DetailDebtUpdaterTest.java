@@ -9,6 +9,7 @@ import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
 import com.example.payme20.model.PayMeModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,7 +28,7 @@ public class DetailDebtUpdaterTest {
         user1 = new Member("User1", "100");
         user2 = new Member("User2", "200");
         user3 = new Member("User3", "300");
-        group = new Group("TestGroup");
+        group = new Group("TestGroup",new ArrayList<>());
         group.addNewGroupMember(user1);
         group.addNewGroupMember(user2);
         group.addNewGroupMember(user3);
