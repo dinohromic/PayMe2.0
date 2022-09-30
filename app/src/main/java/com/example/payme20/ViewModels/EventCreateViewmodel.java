@@ -25,7 +25,7 @@ public class EventCreateViewmodel extends ViewModel {
     private IDebtUpdater debtUpdater;
     private Member payer;
     private Group group;
-    private List<Member> groupMembers = new ArrayList<>();
+    private final List<Member> groupMembers = new ArrayList<>();
     private List<Member> eventMembers = new ArrayList<>();
 
     public EventCreateViewmodel(Group group) {
@@ -55,5 +55,11 @@ public class EventCreateViewmodel extends ViewModel {
     }
     public void setPayer(Member member) {
         payer = member;
+    }
+    public void removeEventMember(Member m) {
+        eventMembers.remove(m);
+    }
+    public void addEventMember(Member m) {
+        eventMembers.add(m);
     }
 }
