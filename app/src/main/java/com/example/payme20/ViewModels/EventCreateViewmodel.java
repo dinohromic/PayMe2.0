@@ -26,12 +26,21 @@ public class EventCreateViewmodel extends ViewModel {
     private Member payer;
     private Group group;
     private final List<Member> groupMembers = new ArrayList<>();
-    private List<Member> eventMembers = new ArrayList<>();
+    private List<String> eventMembers = new ArrayList<>();
 
     public EventCreateViewmodel(Group group) {
         this.group = group;
         this.debtUpdater = new SplitDebtUpdater();
         initMemberList();
+        initEventMemberList();
+    }
+
+    private void initEventMemberList() {
+        if(group.getGroupMembers().size() != 0) {
+            for(Member m : groupMembers) {
+                eventMembers.add(m.getUserName());
+            }
+        }
     }
 
     private void initMemberList() {
@@ -56,10 +65,17 @@ public class EventCreateViewmodel extends ViewModel {
     public void setPayer(Member member) {
         payer = member;
     }
-    public void removeEventMember(Member m) {
-        eventMembers.remove(m);
+    public void removeEventMember(String str) {
+        for(String s : eventMembers) {
+            if(s.equals(str))
+                eventMembers.remove(s);
+        }
     }
-    public void addEventMember(Member m) {
-        eventMembers.add(m);
+    public void addEventMember(String str) {
+        eventMembers.add(str);
+    }
+
+    public List<String> getEventMembers() {
+        return eventMembers;
     }
 }

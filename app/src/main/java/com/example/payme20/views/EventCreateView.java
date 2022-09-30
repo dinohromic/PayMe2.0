@@ -77,7 +77,13 @@ public class EventCreateView extends AppCompatActivity {
         checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(!b) {
+                    ecViewmodel.removeEventMember(view.findViewById(R.id.eventMemberName).toString());
 
+                }
+                if(b) {
+                    ecViewmodel.addEventMember(view.findViewById(R.id.eventMemberName).toString());
+                }
             }
         });
         TextInputEditText amount = view.findViewById(R.id.eventMemberAmount);
