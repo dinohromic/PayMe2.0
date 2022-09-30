@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.payme20.R;
 import com.example.payme20.ViewModels.GroupPageViewModel;
 import com.example.payme20.helpers.GroupPageAdapter;
+import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.model.Group;
 import com.google.android.material.tabs.TabLayout;
 
@@ -22,6 +24,7 @@ public class GroupPageView extends AppCompatActivity {
     private TabLayout groupPageTabs;
     private ViewPager groupPageViewPager;
     private TextView groupPageGroupName;
+    private ImageButton returnButton;
     EventFragmentGroupPage eventFragmentGroupPage;
     MemberFragmentGroupPage memberFragmentGroupPage;
 
@@ -46,5 +49,21 @@ public class GroupPageView extends AppCompatActivity {
         gpAdapter.addGroupPageFragments(memberFragmentGroupPage, "Members");
 
         groupPageViewPager.setAdapter(gpAdapter);
+
+        initializeView();
+        setListenerReturnButton(this.returnButton);
+    }
+
+    private void initializeView(){
+        this.returnButton =  findViewById(R.id.groupPageReturnButton);
+    }
+
+    private void setListenerReturnButton(ImageButton returnButton){
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OpenViewHelper.openView(GroupListView.class, getApplicationContext());
+            }
+        });
     }
 }
