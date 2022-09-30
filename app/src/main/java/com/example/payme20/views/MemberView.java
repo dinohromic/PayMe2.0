@@ -1,27 +1,22 @@
 package com.example.payme20.views;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.payme20.ViewModels.createGroupViewModel;
 import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.model.Factory;
-import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
 import com.example.payme20.R;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -92,7 +87,7 @@ public class MemberView extends AppCompatActivity{
 
     private void addMembers(String name, String  numbber) {
         View view = getLayoutInflater().inflate(R.layout.members_card, null);
-        membersName= view.findViewById(R.id.addMembersNameText);
+        membersName= view.findViewById(R.id.eventMemberNameText);
         membersPhone = view.findViewById(R.id.addMembersPhoneText);
         membersName.setText(name);
         membersPhone.setText(numbber);

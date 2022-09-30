@@ -11,7 +11,6 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.payme20.R;
-import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
 
 import java.util.ArrayList;
@@ -104,7 +103,7 @@ public class MemberFragmentGroupPage extends Fragment {
     private void addMemberCards(String userName, String phoneNumber) {
         View view = getLayoutInflater().inflate(R.layout.members_card, fragmentContainer, false);
         TextView VphoneNumber = view.findViewById(R.id.addMembersPhoneText);
-        TextView Vname = view.findViewById(R.id.addMembersNameText);
+        TextView Vname = view.findViewById(R.id.eventMemberNameText);
 
         Vname.setText(userName);
         VphoneNumber.setText(phoneNumber);

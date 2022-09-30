@@ -37,6 +37,9 @@ public class EventCreateViewmodel extends ViewModel {
             groupMembers.addAll(group.getGroupMembers());
     }
 
+    public List<Member> getGroupMembers() {
+        return groupMembers;
+    }
 
     public void setDebtUpdater(String str) {
         switch (str) {
