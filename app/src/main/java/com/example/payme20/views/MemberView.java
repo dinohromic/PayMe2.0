@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.payme20.ViewModels.createGroupViewModel;
+import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.model.Factory;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
@@ -86,8 +87,7 @@ public class MemberView extends AppCompatActivity{
 
     private void openCurrenGroups() {
         createGroup = new createGroupViewModel(groupName.getText().toString(),membersList);
-        Intent intent = new Intent(MemberView.this, GroupListView.class);
-        MemberView.this.startActivity(intent);
+        OpenViewHelper.openView(GroupListView.class, MemberView.this);
     }
 
     private void addMembers(String name, String  numbber) {
