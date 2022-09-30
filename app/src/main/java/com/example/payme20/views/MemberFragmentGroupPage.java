@@ -86,7 +86,7 @@ public class MemberFragmentGroupPage extends Fragment {
         for (Member member: group.getGroupMembers()) {
             View cardView = getLayoutInflater().inflate(R.layout.members_card, null);
             populateCard(cardView, member);
-            setMemberCardListener(member);
+            setMemberCardListener(member, cardView);
             cardContainerLayout.addView(cardView);
         }
     }
@@ -112,8 +112,14 @@ public class MemberFragmentGroupPage extends Fragment {
         });
     }
 
-    private void setMemberCardListener(Member member){
-        //OpenViewHelper.openViewPutExtra(); open the groups view with member debts
+    private void setMemberCardListener(Member member, View cardView){
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OpenViewHelper.openViewPutExtra(MemberPageView.class, getActivity(), member);
+            }
+        });
+
     }
 
 
