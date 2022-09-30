@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.Map;
 
 public class DebtHandler implements Serializable {
-    private Map<Member, List<Debt>> toMap = new HashMap<>();
-    private Map<Member, List<Debt>> fromMap = new HashMap<>();
+    private Map<Member, List<Debt>> incomingDebtsMaps = new HashMap<>();
+    private Map<Member, List<Debt>> outgoingDebtsMap = new HashMap<>();
 
     public void addDebt(Debt debt) {
-        List<Debt> toDebts = toMap.get(debt.getDebtTo());
-        List<Debt> fromDebts = fromMap.get(debt.getDebtFrom());
+        List<Debt> toDebts = incomingDebtsMaps.get(debt.getDebtTo());
+        List<Debt> fromDebts = outgoingDebtsMap.get(debt.getDebtFrom());
         if(toDebts == null) {
             toDebts = new ArrayList<>();
         }
@@ -21,24 +21,24 @@ public class DebtHandler implements Serializable {
         }
         toDebts.add(debt);
         fromDebts.add(debt);
-        toMap.put(debt.getDebtTo(), toDebts);
-        fromMap.put(debt.getDebtFrom(), fromDebts);
+        incomingDebtsMaps.put(debt.getDebtTo(), toDebts);
+        outgoingDebtsMap.put(debt.getDebtFrom(), fromDebts);
     }
 
-    public Map<Member, List<Debt>> getToMap() {
-        return toMap;
+    public Map<Member, List<Debt>> getIncomingDebtsMaps() {
+        return incomingDebtsMaps;
     }
 
-    public Map<Member, List<Debt>> getFromMap() {
-        return fromMap;
+    public Map<Member, List<Debt>> getOutgoingDebtsMap() {
+        return outgoingDebtsMap;
     }
 
     public void removeDebt(Debt debt) {
-        List<Debt> toDebts = toMap.get(debt.getDebtTo());
-        List<Debt> fromDebts = fromMap.get(debt.getDebtFrom());
+        List<Debt> toDebts = incomingDebtsMaps.get(debt.getDebtTo());
+        List<Debt> fromDebts = outgoingDebtsMap.get(debt.getDebtFrom());
         toDebts.remove(debt);
         fromDebts.remove(debt);
-        toMap.put(debt.getDebtTo(), toDebts);
-        fromMap.put(debt.getDebtFrom(), fromDebts);
+        incomingDebtsMaps.put(debt.getDebtTo(), toDebts);
+        outgoingDebtsMap.put(debt.getDebtFrom(), fromDebts);
     }
 }

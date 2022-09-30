@@ -20,11 +20,13 @@ public class GroupListViewModel {
         Member test2 = new Member("Anders", "114 14");
         Member test3 = new Member("ahmed","231");
         Member test4 = new Member("Jihad","231");
+        Member test5 = new Member("Ola", "2345");
 
         members.add(test1);
         members.add(test2);
         members.add(test3);
         members.add(test4);
+        members.add(test5);
 
         test.add(new Group("Grekland", members));
         test.add(new Group("Middag", members));

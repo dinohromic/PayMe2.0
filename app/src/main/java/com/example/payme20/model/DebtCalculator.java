@@ -8,13 +8,13 @@ import java.util.Map;
 public class DebtCalculator implements Serializable {
     public int calcMemberTotalDebt(Member member, DebtHandler dh) {
         int totalDebt = 0;
-        if(dh.getToMap().containsKey(member)) {
-            for(Debt d : dh.getToMap().get(member)) {
+        if(dh.getIncomingDebtsMaps().containsKey(member)) {
+            for(Debt d : dh.getIncomingDebtsMaps().get(member)) {
                 totalDebt += d.getDebtAmount();
             }
         }
-        if(dh.getFromMap().containsKey(member)) {
-            for (Debt d : dh.getFromMap().get(member)) {
+        if(dh.getOutgoingDebtsMap().containsKey(member)) {
+            for (Debt d : dh.getOutgoingDebtsMap().get(member)) {
                 totalDebt -= d.getDebtAmount();
             }
         }
@@ -23,15 +23,15 @@ public class DebtCalculator implements Serializable {
     public Map<Member, Integer> calcMemberSpecificDebt(List<Member> members, Member member, DebtHandler dh) {
         Map<Member, Integer> specificDebtsMap = new HashMap<>();
         initSpecificDebtsMap(specificDebtsMap, members, member);
-        if(dh.getToMap().containsKey(member)) {
-            for (Debt d : dh.getToMap().get(member)) {
+        if(dh.getIncomingDebtsMaps().containsKey(member)) {
+            for (Debt d : dh.getIncomingDebtsMaps().get(member)) {
                 int previousDebt = specificDebtsMap.get(d.getDebtFrom());
                 int newDebt = previousDebt + (int) d.getDebtAmount();
                 specificDebtsMap.put(d.getDebtFrom(), newDebt);
             }
         }
-        if(dh.getFromMap().containsKey(member)) {
-            for (Debt d : dh.getFromMap().get(member)) {
+        if(dh.getOutgoingDebtsMap().containsKey(member)) {
+            for (Debt d : dh.getOutgoingDebtsMap().get(member)) {
                 int previousDebt = specificDebtsMap.get(d.getDebtTo());
                 int newDebt = previousDebt - (int) d.getDebtAmount();
                 specificDebtsMap.put(d.getDebtTo(), newDebt);
