@@ -11,6 +11,7 @@ import com.example.payme20.model.Member;
 import com.example.payme20.model.PayMeModel;
 import com.example.payme20.model.SplitDebtUpdater;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -23,7 +24,7 @@ public class GroupTest {
     PayMeModel payMeModel;
     @Before
     public void init() {
-        group = Factory.createGroup("gruppTest");
+        group = Factory.createGroup("gruppTest",new ArrayList<>());
         user1 = Factory.createMember("user1", "07");
         user2 = Factory.createMember("user2", "07");
         user3 = Factory.createMember("user3", "07");

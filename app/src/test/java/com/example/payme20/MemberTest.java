@@ -8,6 +8,8 @@ import com.example.payme20.model.Member;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 public class MemberTest {
     Group group;
     Member user1;
@@ -15,7 +17,7 @@ public class MemberTest {
     Member user3;
     @Before
     public void init() {
-        group = Factory.createGroup("gruppTest");
+        group = Factory.createGroup("gruppTest", new ArrayList<>());
         user1 = Factory.createMember("user1", "07");
         user2 = Factory.createMember("user2", "07");
         user3 = Factory.createMember("user3", "07");
