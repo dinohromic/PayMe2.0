@@ -87,7 +87,7 @@ public class MemberView extends AppCompatActivity{
 
     private void addMembers(String name, String  numbber) {
         View view = getLayoutInflater().inflate(R.layout.members_card, null);
-        membersName= view.findViewById(R.id.eventMemberNameText);
+        membersName= view.findViewById(R.id.addMembersNameText);
         membersPhone = view.findViewById(R.id.addMembersPhoneText);
         membersName.setText(name);
         membersPhone.setText(numbber);

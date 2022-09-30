@@ -14,6 +14,7 @@ import com.example.payme20.model.Member;
 import com.example.payme20.model.PayMeModel;
 import com.example.payme20.model.SplitDebtUpdater;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,11 +25,12 @@ public class EventCreateViewmodel extends ViewModel {
     private IDebtUpdater debtUpdater;
     private Member payer;
     private Group group;
-    private List<Member> groupMembers;
-    private List<Member> eventMembers;
+    private List<Member> groupMembers = new ArrayList<>();
+    private List<Member> eventMembers = new ArrayList<>();
 
     public EventCreateViewmodel(Group group) {
         this.group = group;
+        this.debtUpdater = new SplitDebtUpdater();
         initMemberList();
     }
 

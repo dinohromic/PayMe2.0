@@ -38,7 +38,7 @@
                     android:checked="true" />
 
                 <TextView
-                    android:id="@+id/eventMemberNameText"
+                    android:id="@+id/eventMemberName"
                     android:layout_width="168dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

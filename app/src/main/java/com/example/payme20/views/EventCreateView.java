@@ -21,6 +21,7 @@ import com.example.payme20.ViewModels.EventCreateViewmodel;
 import com.example.payme20.ViewModels.ViewModelFactory;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
@@ -65,7 +66,7 @@ public class EventCreateView extends AppCompatActivity {
 
     private void addCard(Member m) {
         View view = getLayoutInflater().inflate(R.layout.event_member_card, null);
-        TextView name = view.findViewById(R.id.eventMemberNameText);
+        TextView name = view.findViewById(R.id.eventMemberName);
         name.setText(m.getUserName());
         setListenersOnEventMemberCard(view);
         container.addView(view);
@@ -79,7 +80,7 @@ public class EventCreateView extends AppCompatActivity {
 
             }
         });
-        TextInputLayout amount = view.findViewById(R.id.eventMemberAmount);
+        TextInputEditText amount = view.findViewById(R.id.eventMemberAmount);
         amount.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {

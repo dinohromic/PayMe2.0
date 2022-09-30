@@ -40,6 +40,7 @@ public class GroupPageView extends AppCompatActivity {
         eventFragmentGroupPage = new EventFragmentGroupPage();
         memberFragmentGroupPage = new MemberFragmentGroupPage();
         eventFragmentGroupPage.setGroup(myObject);
+        memberFragmentGroupPage.setGroup(myObject);
 
         gpAdapter.addGroupPageFragments(eventFragmentGroupPage,"Events");
         gpAdapter.addGroupPageFragments(memberFragmentGroupPage, "Members");

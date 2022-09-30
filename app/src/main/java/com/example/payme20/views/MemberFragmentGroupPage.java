@@ -11,9 +11,12 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.payme20.R;
+import com.example.payme20.helpers.OpenViewHelper;
+import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,9 +33,10 @@ public class MemberFragmentGroupPage extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private Group group;
 
-    private Button createNewMembers;
-    private LinearLayout fragmentContainer;
+    private Button createNewMemberButton;
+    private LinearLayout cardContainerLayout;
 
     public MemberFragmentGroupPage() {
         // Required empty public constructor
@@ -65,50 +69,52 @@ public class MemberFragmentGroupPage extends Fragment {
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public void setGroup(Group group){
+        this.group = group;
+    }
 
-        View view = inflater.inflate(R.layout.fragment_member_group_page, container, false);
-        // Inflate the layout for this fragment
-        initWidgets(view);
-        //createNewMembers = view.findViewById(R.id.addMemberButtonFragment);
-        createNewMembers.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View groupFragmentView = inflater.inflate(R.layout.fragment_member_group_page, container, false);
+        initializeFragmentMembers(groupFragmentView);
+        setAddNewMemberListener();
+        populateMemberContainer();
+        return groupFragmentView;
+    }
+
+    private void populateMemberContainer() {
+        for (Member member: group.getGroupMembers()) {
+            View cardView = getLayoutInflater().inflate(R.layout.members_card, null);
+            populateCard(cardView, member);
+            setMemberCardListener(member);
+            cardContainerLayout.addView(cardView);
+        }
+    }
+
+    private void populateCard(View cardView, Member memberData){
+        TextView nameText = cardView.findViewById(R.id.addMembersNameText);
+        nameText.setText(memberData.getUserName());
+        TextView phoneNumber = cardView.findViewById(R.id.addMembersPhoneText);
+        phoneNumber.setText(memberData.getPhoneNumber());
+    }
+
+    private void initializeFragmentMembers(View fragmentView) {
+        this.cardContainerLayout = fragmentView.findViewById(R.id.memberFragmentContainer);
+        this.createNewMemberButton = fragmentView.findViewById(R.id.addMemberButtonFragment);
+    }
+
+    private void setAddNewMemberListener(){
+        this.createNewMemberButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //this is temp
-                addMemberCards("Oscar", "12355");
+                //Do something to add a new member
             }
         });
-
-        //populateMembersList( Get members list from VM );
-
-
-        return view;
     }
 
-    private void initWidgets(View view){
-        this.createNewMembers =view.findViewById(R.id.addMemberButtonFragment);
-        this.fragmentContainer = view.findViewById(R.id.memberFragmentContainer);
+    private void setMemberCardListener(Member member){
+        //OpenViewHelper.openViewPutExtra(); open the groups view with member debts
     }
 
-    private void populateMembersList(ArrayList<Member> members) {
-        for(Member member: members){
-            addMemberCards(member.getUserName(), member.getPhoneNumber());
-        }
 
-
-    }
-
-    private void addMemberCards(String userName, String phoneNumber) {
-        View view = getLayoutInflater().inflate(R.layout.members_card, fragmentContainer, false);
-        TextView VphoneNumber = view.findViewById(R.id.addMembersPhoneText);
-        TextView Vname = view.findViewById(R.id.eventMemberNameText);
-
-        Vname.setText(userName);
-        VphoneNumber.setText(phoneNumber);
-
-        fragmentContainer.addView(view);
-
-    }
 }

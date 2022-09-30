@@ -6,6 +6,42 @@
     android:layout_height="match_parent"
     tools:context="com.example.payme20.MainActivity">
 
+    <RadioGroup
+        android:id="@+id/idRGgroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="148dp"
+        android:orientation="horizontal"
+        android:padding="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/mainActLogoTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.97"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.32999998">
+
+
+        <RadioButton
+            android:id="@+id/idRBLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:text="Light" />
+
+        <RadioButton
+            android:id="@+id/idRBDark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:text="Dark" />
+
+    </RadioGroup>
+
     <Button
         android:id="@+id/addMemberButton"
         android:layout_width="0dp"
