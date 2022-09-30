@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.payme20.ViewModels.createGroupViewModel;
 import com.example.payme20.helpers.OpenViewHelper;
+import com.example.payme20.model.DataBaseSaver;
 import com.example.payme20.model.Factory;
 import com.example.payme20.model.Member;
 import com.example.payme20.R;
@@ -50,8 +51,20 @@ public class MemberView extends AppCompatActivity{
                 if(TextUtils.isEmpty(groupName.getText().toString())){
                     Toast.makeText(MemberView.this,"Group name needed", Toast.LENGTH_SHORT).show();
                 }
+
                 else {
-                    openCurrenGroups();
+                    if(membersList.isEmpty()){
+                        openCurrenGroups();
+                    }
+                    else{
+                        DataBaseSaver dataBaseSaver = new DataBaseSaver(MemberView.this);
+                        for (Member member : membersList) {
+                          boolean success =   dataBaseSaver.addGroupMembers(member);
+                          Toast.makeText(MemberView.this, "Success = " + success, Toast.LENGTH_SHORT).show();
+
+                        }
+                        openCurrenGroups();
+                    }
                 }
             }
         });
@@ -61,6 +74,7 @@ public class MemberView extends AppCompatActivity{
         addMemberbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Factory.createMember()
                 if(TextUtils.isEmpty(groupName.getText().toString())){
                     Toast.makeText(MemberView.this,"Group name needed", Toast.LENGTH_SHORT).show();
                 }
@@ -73,6 +87,9 @@ public class MemberView extends AppCompatActivity{
                 else {
                      addMembers(edtName.getText().toString(),edtPhoneNumber.getText().toString());
                 }
+                //DataBaseSaver dataBaseSaver = new DataBaseSaver(MemberView.this);
+
+
 
             }
         });

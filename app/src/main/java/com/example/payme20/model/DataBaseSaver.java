@@ -24,24 +24,24 @@ public class DataBaseSaver extends SQLiteOpenHelper {
     private static final String KEY_ID = "id";
     private static final String SQLCON = "jdbc:sqlite:members.sqlite:sqlite";
 
-    public DataBaseSaver(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, DATABASE_NAME, factory, DATABASE_VERSION);
+    public DataBaseSaver(@Nullable Context context) {
+        super(context, "members.db", null, DATABASE_VERSION);
     }
 
-    public static Connection getConnection () throws SQLException {
-        try{
-            Class.forName("org.sqlite.JDBC");
-            return DriverManager.getConnection(SQLCON);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+//    public static Connection getConnection () throws SQLException {
+//        try{
+//            Class.forName("org.sqlite.JDBC");
+//            return DriverManager.getConnection(SQLCON);
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String CREATE_GROUP_TABLE = "CREATE TABLE " + TABLE_MEMBER + "(" + KEY_ID + "PRIMARY_KEY, " +
-                KEY_NAME + "TEXT, " + KEY_NUMBER + "TEXT" + ")";
+        String CREATE_GROUP_TABLE = "CREATE TABLE " + TABLE_MEMBER + "(" + KEY_ID + "INTEGER PRIMARY_KEY, " +
+                KEY_NAME + "TEXT, " + KEY_NUMBER + "INT)";
         sqLiteDatabase.execSQL(CREATE_GROUP_TABLE);
 
     }
@@ -53,45 +53,44 @@ public class DataBaseSaver extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public void addGroupMembers(Member member ){
+    public boolean addGroupMembers(Member member ){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         // for(int i = 0, i < members, i ++){
         //      if( GroupCreate == true) CREATE TABLE;
         values.put(KEY_NAME, member.getUserName());
         values.put(KEY_NUMBER, member.getPhoneNumber());
-        db.insert(TABLE_MEMBER, null, values);
-        db.close();
+        long insert = db.insert(TABLE_MEMBER, null, values);
+        return insert != -1;
+        //db.close();
 
     }
 
-    public void deleteMember(Member member){
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        sqLiteDatabase.delete(TABLE_MEMBER, KEY_NAME +" =?", new String[]{String.valueOf(member.getUserName())});
-
-    }
+//    public void deleteMember(Member member){
+//        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+//        sqLiteDatabase.delete(TABLE_MEMBER, KEY_NAME +" =?", new String[]{String.valueOf(member.getUserName())});
+//
+//    }
 
     //Return to this method, the parameters are wrong. They are only set there for "new Member()"s satisfaction
     // Another problem is that the if statement is wrong because this method needs the the list of the members from ViewModel
-    public List<Member> getAllMembers(String userName, String phoneNumber){
-        List<Member> memberList = new ArrayList<Member>();
-        String selectQuery = "SELECT *FROM " +  TABLE_MEMBER;
-
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery(selectQuery, null);
-
-        if (cursor.moveToFirst()){
-            do{
-                Member member = new Member(userName,phoneNumber);
-                member.setUserName(cursor.getString(0));
-                member.setPhoneNumber(cursor.getString(1));
-                memberList.add(member);
-            } while (cursor.moveToNext());
-        }
-        return memberList;
-    }
-
-
+//    public List<Member> getAllMembers(String userName, String phoneNumber){
+//        List<Member> memberList = new ArrayList<Member>();
+//        String selectQuery = "SELECT *FROM " +  TABLE_MEMBER;
+//        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+//        Cursor cursor = sqLiteDatabase.rawQuery(selectQuery, null);
+//
+//        if (cursor.moveToFirst()){
+//            do{
+//                Member member = new Member(userName,phoneNumber);
+//                member.setUserName(cursor.getString(0));
+//                member.setPhoneNumber(cursor.getString(1));
+//                memberList.add(member);
+//            } while (cursor.moveToNext());
+//        }
+//        return memberList;
+//
+//    }
 
 
 }
