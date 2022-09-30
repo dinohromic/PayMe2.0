@@ -41,7 +41,7 @@ public class DataBaseSaver extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String CREATE_GROUP_TABLE = "CREATE TABLE " + TABLE_MEMBER + "(" + KEY_ID + "INTEGER PRIMARY_KEY, " +
-                KEY_NAME + "TEXT, " + KEY_NUMBER + "INT)";
+                KEY_NAME + "TEXT, " + KEY_NUMBER + "TEXT)";
         sqLiteDatabase.execSQL(CREATE_GROUP_TABLE);
 
     }
@@ -58,10 +58,15 @@ public class DataBaseSaver extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         // for(int i = 0, i < members, i ++){
         //      if( GroupCreate == true) CREATE TABLE;
-        values.put(KEY_NAME, member.getUserName());
         values.put(KEY_NUMBER, member.getPhoneNumber());
+        values.put(KEY_NAME, member.getUserName());
         long insert = db.insert(TABLE_MEMBER, null, values);
-        return insert != -1;
+        if (insert == -1) {
+            return false;
+        }
+        else {
+            return true;
+        }
         //db.close();
 
     }

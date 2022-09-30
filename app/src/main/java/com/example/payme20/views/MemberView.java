@@ -53,18 +53,15 @@ public class MemberView extends AppCompatActivity{
                 }
 
                 else {
-                    if(membersList.isEmpty()){
-                        openCurrenGroups();
-                    }
-                    else{
+                    if (!membersList.isEmpty()) {
                         DataBaseSaver dataBaseSaver = new DataBaseSaver(MemberView.this);
                         for (Member member : membersList) {
-                          boolean success =   dataBaseSaver.addGroupMembers(member);
-                          Toast.makeText(MemberView.this, "Success = " + success, Toast.LENGTH_SHORT).show();
+                            boolean success = dataBaseSaver.addGroupMembers(member);
+                            Toast.makeText(MemberView.this, "Success = " + success, Toast.LENGTH_SHORT).show();
 
                         }
-                        openCurrenGroups();
                     }
+                    openCurrenGroups();
                 }
             }
         });
@@ -74,7 +71,6 @@ public class MemberView extends AppCompatActivity{
         addMemberbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Factory.createMember()
                 if(TextUtils.isEmpty(groupName.getText().toString())){
                     Toast.makeText(MemberView.this,"Group name needed", Toast.LENGTH_SHORT).show();
                 }
