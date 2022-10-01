@@ -18,8 +18,9 @@ public class OpenViewHelper  {
         Intent newIntent = new Intent(currentView, newView);
         currentView.startActivity(newIntent);
     }
-    public static void openViewPutExtra(Class<?> newView, FragmentActivity currentFragment, Member member){
+    public static void openViewPutExtra(Class<?> newView, FragmentActivity currentFragment, Member member, Group group){
         Intent newIntent = new Intent(currentFragment, newView);
+        newIntent.putExtra("GROUP_KEY", group);
         newIntent.putExtra("MEMBER_KEY", member);
         currentFragment.startActivity(newIntent);
     }
@@ -33,11 +34,4 @@ public class OpenViewHelper  {
         newIntent.putExtra("EVENT_KEY", event);
         currentView.startActivity(newIntent);
     }
-    public static void openViewPutExtra(Class<?> newView, Context currentView, Member member){
-        Intent newIntent = new Intent(currentView, newView);
-        newIntent.putExtra("MEMBER_KEY", member);
-        currentView.startActivity(newIntent);
-    }
-
-
 }

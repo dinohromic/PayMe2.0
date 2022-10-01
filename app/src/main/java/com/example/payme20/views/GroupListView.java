@@ -7,16 +7,13 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.payme20.MainActivity;
 import com.example.payme20.R;
 import com.example.payme20.ViewModels.GroupListViewModel;
 import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.model.Group;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.ArrayList;
 
 public class GroupListView extends AppCompatActivity {
