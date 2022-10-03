@@ -14,7 +14,7 @@ public class createGroupViewModel {
         membersList.add(Factory.createMember(memberName,memberNumbber));
     }
     public void createGroup(String groupName){
-
+        Factory.createGroup(groupName,membersList);
     }
 
 }
