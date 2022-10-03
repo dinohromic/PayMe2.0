@@ -67,8 +67,10 @@ public class EventCreateViewmodel extends ViewModel {
     }
     public void removeEventMember(String str) {
         for(String s : eventMembers) {
-            if(s.equals(str))
+            if(s.equals(str)) {
                 eventMembers.remove(s);
+                break;
+            }
         }
     }
     public void addEventMember(String str) {

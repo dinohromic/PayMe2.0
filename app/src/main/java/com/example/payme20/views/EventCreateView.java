@@ -25,6 +25,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class EventCreateView extends AppCompatActivity {
@@ -68,22 +69,24 @@ public class EventCreateView extends AppCompatActivity {
         View view = getLayoutInflater().inflate(R.layout.event_member_card, null);
         TextView name = view.findViewById(R.id.eventMemberName);
         name.setText(m.getUserName());
-        setListenersOnEventMemberCard(view);
+        System.out.println(name.getText());
+        setListenersOnEventMemberCard(view, name.getText());
         container.addView(view);
     }
 
-    private void setListenersOnEventMemberCard(View view) {
+    private void setListenersOnEventMemberCard(View view, CharSequence text) {
         CheckBox checkbox = view.findViewById(R.id.eventMemberIncluded);
         checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(!b) {
-                    ecViewmodel.removeEventMember(view.findViewById(R.id.eventMemberName).toString());
+                    ecViewmodel.removeEventMember((String) text);
 
                 }
                 if(b) {
-                    ecViewmodel.addEventMember(view.findViewById(R.id.eventMemberName).toString());
+                    ecViewmodel.addEventMember((String) text);
                 }
+                updateMemberSpinner();
             }
         });
         TextInputEditText amount = view.findViewById(R.id.eventMemberAmount);
@@ -96,12 +99,7 @@ public class EventCreateView extends AppCompatActivity {
     }
 
     private void initMemberSpinner() {
-        ArrayList<String> memberUserNames = new ArrayList<>();
-        memberUserNames.add("Anton");
-        memberUserNames.add("Oscar");
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, memberUserNames);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        memberSpinner.setAdapter(arrayAdapter);
+        updateMemberSpinner();
         memberSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -116,6 +114,13 @@ public class EventCreateView extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void updateMemberSpinner() {
+        List<String> memberUserNames = ecViewmodel.getEventMembers();
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, memberUserNames);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        memberSpinner.setAdapter(arrayAdapter);
     }
 
     private void initPaymentType() {
