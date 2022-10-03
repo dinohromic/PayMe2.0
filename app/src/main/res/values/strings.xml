@@ -4,6 +4,6 @@
     <string name="tab_txt_2">Members</string>
     <string name="addMembersName">Anton</string>
     <string name="addMembersPhone">112</string>
-    <string name="text">Light mode</string>
+    <string name="text">Dark mode</string>
 
 </resources>
