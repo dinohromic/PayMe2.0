@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.payme20.R;
-import com.example.payme20.ViewModels.MemberPageViewModel;
+import com.example.payme20.view_models.MemberPageViewModel;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
 

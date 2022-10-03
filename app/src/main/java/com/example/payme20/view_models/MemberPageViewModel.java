@@ -1,4 +1,4 @@
-package com.example.payme20.ViewModels;
+package com.example.payme20.view_models;
 
 import androidx.lifecycle.ViewModel;
 import com.example.payme20.model.Group;

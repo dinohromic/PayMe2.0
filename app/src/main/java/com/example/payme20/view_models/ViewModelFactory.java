@@ -1,12 +1,8 @@
-package com.example.payme20.ViewModels;
-
-import android.app.Application;
+package com.example.payme20.view_models;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-
-import com.example.payme20.model.Event;
 
 import java.util.HashMap;
 import java.util.Map;

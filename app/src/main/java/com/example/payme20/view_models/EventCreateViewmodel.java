@@ -1,17 +1,11 @@
-package com.example.payme20.ViewModels;
+package com.example.payme20.view_models;
 
-import android.nfc.tech.IsoDep;
-
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.payme20.model.DetailedDebtUpdater;
-import com.example.payme20.model.Factory;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.IDebtUpdater;
 import com.example.payme20.model.Member;
-import com.example.payme20.model.PayMeModel;
 import com.example.payme20.model.SplitDebtUpdater;
 
 import java.util.ArrayList;

@@ -12,14 +12,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.payme20.ViewModels.createGroupViewModel;
+import com.example.payme20.view_models.createGroupViewModel;
 import com.example.payme20.helpers.OpenViewHelper;
-import com.example.payme20.model.DataBaseSaver;
-import com.example.payme20.model.Factory;
-import com.example.payme20.model.Member;
 import com.example.payme20.R;
-
-import java.util.ArrayList;
 
 public class MemberView extends AppCompatActivity{
 
