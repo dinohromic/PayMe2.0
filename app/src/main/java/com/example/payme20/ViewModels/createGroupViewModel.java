@@ -7,11 +7,14 @@ import com.example.payme20.model.Member;
 import java.util.ArrayList;
 
 public class createGroupViewModel {
-    Group group;
-    String string;
-    public createGroupViewModel(String groupName, ArrayList<Member> membersList){
-        this.group= Factory.createGroup(groupName, membersList);
+    ArrayList<Member> membersList;
+    public createGroupViewModel(){
     }
+    public void addMembers(String memberName, String memberNumbber){
+        membersList.add(Factory.createMember(memberName,memberNumbber));
+    }
+    public void createGroup(String groupName){
 
+    }
 
 }

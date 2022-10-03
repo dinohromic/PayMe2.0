@@ -40,7 +40,7 @@ public class MemberView extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_members);
-        membersList = new ArrayList<Member>();
+        createGroup = new createGroupViewModel();
         groupName=findViewById(R.id.groupNameTextView);
         addMemberbutton = findViewById(R.id.mainActCreateGroupButton);
         edtName = findViewById(R.id.edtTxtName);
@@ -81,6 +81,7 @@ public class MemberView extends AppCompatActivity{
                     Toast.makeText(MemberView.this,"Members phone needed", Toast.LENGTH_SHORT).show();
                 }
                 else {
+
                      addMembers(edtName.getText().toString(),edtPhoneNumber.getText().toString());
                 }
                 //DataBaseSaver dataBaseSaver = new DataBaseSaver(MemberView.this);
@@ -94,7 +95,7 @@ public class MemberView extends AppCompatActivity{
     }
 
     private void openCurrenGroups() {
-        createGroup = new createGroupViewModel(groupName.getText().toString(),membersList);
+       createGroup.createGroup(groupName.getText().toString());
         OpenViewHelper.openView(GroupListView.class, MemberView.this);
     }
 
@@ -104,7 +105,7 @@ public class MemberView extends AppCompatActivity{
         membersPhone = view.findViewById(R.id.addMembersPhoneText);
         membersName.setText(name);
         membersPhone.setText(numbber);
-        membersList.add(Factory.createMember(name,numbber));
+        createGroup.addMembers(name,numbber);
         membersContainer.addView(view);
         edtName.getText().clear();
         edtPhoneNumber.getText().clear();
