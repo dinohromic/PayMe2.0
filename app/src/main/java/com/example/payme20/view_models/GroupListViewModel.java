@@ -1,10 +1,9 @@
-package com.example.payme20.ViewModels;
+package com.example.payme20.view_models;
 
 import com.example.payme20.model.DetailedDebtUpdater;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
 import com.example.payme20.model.PayMeModel;
-import com.google.android.material.shape.MarkerEdgeTreatment;
 
 import java.util.ArrayList;
 import java.util.HashMap;

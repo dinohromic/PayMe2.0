@@ -5,13 +5,11 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.payme20.R;
-import com.example.payme20.ViewModels.MemberPageViewModel;
-import com.example.payme20.helpers.OpenViewHelper;
+import com.example.payme20.view_models.MemberPageViewModel;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
 
@@ -21,7 +19,6 @@ public class MemberPageView extends AppCompatActivity {
     private TextView userName, totalDebt;
     private MemberPageViewModel memberPageViewModel;
     private LinearLayout cardContainer;
-    private ImageButton returnButton;
 
 
     @Override
@@ -55,7 +52,6 @@ public class MemberPageView extends AppCompatActivity {
         this.newUserName = findViewById(R.id.memberPageEditName);
         this.totalDebt = findViewById(R.id.memberPageTotalDebt);
         this.cardContainer = findViewById(R.id.memberPageCardCointainer);
-        this.returnButton = findViewById(R.id.memberPageReturnButton);
     }
     private void populateCardContainer(){
         for (Member groupMember: memberPageViewModel.getExcludeCurrentMemberList()) {
@@ -82,11 +78,10 @@ public class MemberPageView extends AppCompatActivity {
     private void setListenerOnWidgets(){
         userNameListener();
         phoneNumberListener();
-        setReturnButton();
     }
 
     private void userNameListener(){
-        this.newUserName.addTextChangedListener(new TextWatcher() {
+        newUserName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
@@ -101,20 +96,11 @@ public class MemberPageView extends AppCompatActivity {
     }
 
     private void phoneNumberListener(){
-        this.newPhoneNumber.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        newPhoneNumber.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
                 memberPageViewModel.setNewPhoneNumber(newPhoneNumber.getText().toString());
                 newPhoneNumber.setText(memberPageViewModel.getPhoneNumber());
-            }
-        });
-    }
-
-    private void setReturnButton(){
-        this.returnButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                OpenViewHelper.openViewPutExtra(GroupPageView.class, getApplicationContext(), memberPageViewModel.getGroup());
             }
         });
     }
