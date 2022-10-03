@@ -12,14 +12,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.payme20.ViewModels.createGroupViewModel;
+import com.example.payme20.view_models.createGroupViewModel;
 import com.example.payme20.helpers.OpenViewHelper;
-import com.example.payme20.model.DataBaseSaver;
-import com.example.payme20.model.Factory;
-import com.example.payme20.model.Member;
 import com.example.payme20.R;
-
-import java.util.ArrayList;
 
 public class MemberView extends AppCompatActivity{
 
@@ -29,7 +24,6 @@ public class MemberView extends AppCompatActivity{
     private TextView    membersPhone, membersName;
     private Button addMemberbutton,addMembersFinishButton;
     private LinearLayout membersContainer;
-    ArrayList<Member> membersList;
     private EditText groupName;
     createGroupViewModel createGroup;
 
@@ -40,7 +34,7 @@ public class MemberView extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_members);
-        membersList = new ArrayList<Member>();
+        createGroup = new createGroupViewModel();
         groupName=findViewById(R.id.groupNameTextView);
         addMemberbutton = findViewById(R.id.mainActCreateGroupButton);
         edtName = findViewById(R.id.edtTxtName);
@@ -53,14 +47,6 @@ public class MemberView extends AppCompatActivity{
                 }
 
                 else {
-                    if (!membersList.isEmpty()) {
-                        DataBaseSaver dataBaseSaver = new DataBaseSaver(MemberView.this);
-                        for (Member member : membersList) {
-                            boolean success = dataBaseSaver.addGroupMembers(member);
-                            Toast.makeText(MemberView.this, "Success = " + success, Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
                     openCurrenGroups();
                 }
             }
@@ -81,6 +67,7 @@ public class MemberView extends AppCompatActivity{
                     Toast.makeText(MemberView.this,"Members phone needed", Toast.LENGTH_SHORT).show();
                 }
                 else {
+
                      addMembers(edtName.getText().toString(),edtPhoneNumber.getText().toString());
                 }
                 //DataBaseSaver dataBaseSaver = new DataBaseSaver(MemberView.this);
@@ -94,7 +81,7 @@ public class MemberView extends AppCompatActivity{
     }
 
     private void openCurrenGroups() {
-        createGroup = new createGroupViewModel(groupName.getText().toString(),membersList);
+       createGroup.createGroup(groupName.getText().toString());
         OpenViewHelper.openView(GroupListView.class, MemberView.this);
     }
 
@@ -104,7 +91,7 @@ public class MemberView extends AppCompatActivity{
         membersPhone = view.findViewById(R.id.addMembersPhoneText);
         membersName.setText(name);
         membersPhone.setText(numbber);
-        membersList.add(Factory.createMember(name,numbber));
+        createGroup.addMembers(name,numbber);
         membersContainer.addView(view);
         edtName.getText().clear();
         edtPhoneNumber.getText().clear();
