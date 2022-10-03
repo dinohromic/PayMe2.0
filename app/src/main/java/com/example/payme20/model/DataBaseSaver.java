@@ -39,8 +39,6 @@ public class DataBaseSaver extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String createTableStatement = "CREATE TABLE " + MEMBER_TABLE + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_MEMBER_NAME + " TEXT, " + COLUMN_MEMBER_PHONE_NUMBER + " TEXT )";
-
-
         sqLiteDatabase.execSQL(createTableStatement);
 
     }
@@ -76,6 +74,14 @@ public class DataBaseSaver extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         sqLiteDatabase.delete(MEMBER_TABLE, COLUMN_MEMBER_NAME +" =?", new String[]{String.valueOf(member.getUserName())});
 
+    }
+    //This method is a read only, where we count the amount of members in the table
+    public int countAmountOfMembers(){
+        String count = "SELECT * FROM " + MEMBER_TABLE;
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery(count, null);
+        cursor.close();
+        return cursor.getCount();
     }
 
     //Return to this method, the parameters are wrong. They are only set there for "new Member()"s satisfaction
