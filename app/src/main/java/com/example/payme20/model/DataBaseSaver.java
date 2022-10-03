@@ -16,16 +16,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataBaseSaver extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "GroupManager";
-    private static final String TABLE_MEMBER = "Members";
-    private static final String KEY_NAME = "Name";
-    private static final String KEY_NUMBER = "Phone number";
-    private static final String KEY_ID = "id";
-    private static final String SQLCON = "jdbc:sqlite:members.sqlite:sqlite";
+    private static final String MEMBER_TABLE = "MEMBER_TABLE";
+    private static final String COLUMN_MEMBER_NAME = "MEMBER_NAME";
+    private static final String COLUMN_MEMBER_PHONE_NUMBER = "MEMBER_PHONE_NUMBER";
+    private static final String COLUMN_ID = "ID";
+
 
     public DataBaseSaver(@Nullable Context context) {
-        super(context, "members.db", null, DATABASE_VERSION);
+        super(context, "members.db", null, 1);
     }
 
 //    public static Connection getConnection () throws SQLException {
@@ -40,42 +38,45 @@ public class DataBaseSaver extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String CREATE_GROUP_TABLE = "CREATE TABLE " + TABLE_MEMBER + "(" + KEY_ID + "INTEGER PRIMARY_KEY, " +
-                KEY_NAME + "TEXT, " + KEY_NUMBER + "TEXT)";
-        sqLiteDatabase.execSQL(CREATE_GROUP_TABLE);
+        String createTableStatement = "CREATE TABLE " + MEMBER_TABLE + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_MEMBER_NAME + " TEXT, " + COLUMN_MEMBER_PHONE_NUMBER + " TEXT )";
+
+
+        sqLiteDatabase.execSQL(createTableStatement);
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_MEMBER);
+       sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + MEMBER_TABLE);
 
         onCreate(sqLiteDatabase);
     }
 
-    public boolean addGroupMembers(Member member ){
+    public void addGroupMembers(Member member ){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        // for(int i = 0, i < members, i ++){
-        //      if( GroupCreate == true) CREATE TABLE;
-        values.put(KEY_NUMBER, member.getPhoneNumber());
-        values.put(KEY_NAME, member.getUserName());
-        long insert = db.insert(TABLE_MEMBER, null, values);
-        if (insert == -1) {
-            return false;
-        }
-        else {
-            return true;
-        }
-        //db.close();
+        values.put(COLUMN_MEMBER_NAME, member.getUserName());
+        values.put(COLUMN_MEMBER_PHONE_NUMBER, member.getPhoneNumber());
+        db.insert(MEMBER_TABLE, null, values);
+
+        db.close();
 
     }
+    //This method is to extract a member from the database
+    public Member getMemberFromDB(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(MEMBER_TABLE, new String []{COLUMN_ID, COLUMN_MEMBER_NAME, COLUMN_MEMBER_PHONE_NUMBER},
+                COLUMN_ID + "=?", new String[]{String.valueOf(id)},null, null, null, null);
+        if(cursor != null)
+            cursor.moveToFirst();
+        return new Member(cursor.getString(0), cursor.getString(1), Integer.parseInt(cursor.getString(2)));
+    }
 
-//    public void deleteMember(Member member){
-//        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-//        sqLiteDatabase.delete(TABLE_MEMBER, KEY_NAME +" =?", new String[]{String.valueOf(member.getUserName())});
-//
-//    }
+    public void deleteMember(Member member){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        sqLiteDatabase.delete(MEMBER_TABLE, COLUMN_MEMBER_NAME +" =?", new String[]{String.valueOf(member.getUserName())});
+
+    }
 
     //Return to this method, the parameters are wrong. They are only set there for "new Member()"s satisfaction
     // Another problem is that the if statement is wrong because this method needs the the list of the members from ViewModel
