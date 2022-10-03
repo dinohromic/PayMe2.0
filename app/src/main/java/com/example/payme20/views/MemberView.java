@@ -29,7 +29,6 @@ public class MemberView extends AppCompatActivity{
     private TextView    membersPhone, membersName;
     private Button addMemberbutton,addMembersFinishButton;
     private LinearLayout membersContainer;
-    ArrayList<Member> membersList;
     private EditText groupName;
     createGroupViewModel createGroup;
 
@@ -53,14 +52,6 @@ public class MemberView extends AppCompatActivity{
                 }
 
                 else {
-                    if (!membersList.isEmpty()) {
-                        DataBaseSaver dataBaseSaver = new DataBaseSaver(MemberView.this);
-                        for (Member member : membersList) {
-                            boolean success = dataBaseSaver.addGroupMembers(member);
-                            Toast.makeText(MemberView.this, "Success = " + success, Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
                     openCurrenGroups();
                 }
             }
