@@ -1,15 +1,9 @@
 package com.example.payme20.ViewModels;
 
-import android.graphics.ColorSpace;
-
 import androidx.lifecycle.ViewModel;
-
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
 import com.example.payme20.model.PayMeModel;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +20,11 @@ public class MemberPageViewModel extends ViewModel {
         this.debtMap = getDebtMap();
     }
 
-    public String getMemberName(){
+    public String getMemberName(Member member){
+        return member.getUserName();
+    }
+
+    public String getCurrentUserProfileName(){
         return this.currentMember.getUserName();
     }
     public String getPhoneNumber(){
@@ -34,10 +32,14 @@ public class MemberPageViewModel extends ViewModel {
     }
 
     public void setNewName(String newName){
-        this.currentMember.setUserName(newName);
+        if(newName != null){
+            this.currentMember.setUserName(newName);
+        }
     }
     public void setNewPhoneNumber(String newPhoneNumber){
-        this.currentMember.setPhoneNumber(newPhoneNumber);
+        if(newPhoneNumber != null){
+            this.currentMember.setPhoneNumber(newPhoneNumber);
+        }
     }
 
     public List<Member> getExcludeCurrentMemberList(){
