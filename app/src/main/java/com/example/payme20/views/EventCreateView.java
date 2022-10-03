@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -19,23 +20,25 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.payme20.R;
 import com.example.payme20.ViewModels.EventCreateViewmodel;
 import com.example.payme20.ViewModels.ViewModelFactory;
+import com.example.payme20.model.Factory;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 public class EventCreateView extends AppCompatActivity {
 
-    TextInputLayout eventName;
+    TextInputEditText eventName;
 
     Spinner memberSpinner;
     EditText eventDate;
     RadioGroup paymentType;
     LinearLayout container;
+    Button createEvent;
 
     EventCreateViewmodel ecViewmodel;
     Group group;
@@ -51,17 +54,39 @@ public class EventCreateView extends AppCompatActivity {
         ecViewmodel = new ViewModelProvider(this, vmFactory).get(EventCreateViewmodel.class);
         initPaymentType();
         initMemberSpinner();
-        initEventMembersList();
+        initEventMembersCards();
+        initCreateButton();
+        initEventName();
     }
 
-    private void initEventMembersList() {
-        populateList();
+    private void initEventName() {
+        eventName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if(!hasFocus) {
+                    ecViewmodel.setEventName(eventName.getText().toString());
+                }
+            }
+        });
+    }
 
+    private void initCreateButton() {
+        createEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ecViewmodel.createEvent();
+            }
+        });
+    }
+
+    private void initEventMembersCards() {
+        populateList();
     }
 
     private void populateList() {
-        for(Member m : ecViewmodel.getGroupMembers()) {
-            addCard(m);
+        for (Map.Entry<String, Member> memberMap: ecViewmodel.getGroupMembers().entrySet()) {
+            Member member = memberMap.getValue();
+            addCard(member);
         }
     }
 
@@ -69,31 +94,32 @@ public class EventCreateView extends AppCompatActivity {
         View view = getLayoutInflater().inflate(R.layout.event_member_card, null);
         TextView name = view.findViewById(R.id.eventMemberName);
         name.setText(m.getUserName());
-        System.out.println(name.getText());
         setListenersOnEventMemberCard(view, name.getText());
         container.addView(view);
     }
 
-    private void setListenersOnEventMemberCard(View view, CharSequence text) {
+    private void setListenersOnEventMemberCard(View view, CharSequence name) {
         CheckBox checkbox = view.findViewById(R.id.eventMemberIncluded);
         checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(!b) {
-                    ecViewmodel.removeEventMember((String) text);
-
+                    ecViewmodel.removeEventMember((String) name);
                 }
                 if(b) {
-                    ecViewmodel.addEventMember((String) text);
+                    ecViewmodel.addEventMember((String) name);
                 }
                 updateMemberSpinner();
             }
         });
-        TextInputEditText amount = view.findViewById(R.id.eventMemberAmount);
+
+        EditText amount = view.findViewById(R.id.eventMemberAmount);
         amount.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onFocusChange(View view, boolean b) {
-
+            public void onFocusChange(View view, boolean hasFocus) {
+                if(!hasFocus) {
+                    ecViewmodel.setMemberPayment(Integer.parseInt(amount.getText().toString()), (String) name);
+                }
             }
         });
     }
@@ -103,10 +129,9 @@ public class EventCreateView extends AppCompatActivity {
         memberSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                /*for(Member m : ListaAvMembers) {
-                    if(m.getUserName().equals(arrayAdapter.getItem(i)))
-                        ecViewmodel.setPayer(m);
-                }*/
+                String memberName = memberSpinner.getSelectedItem().toString();
+                Member member = ecViewmodel.getGroupMembers().get(memberName);
+                ecViewmodel.setPayer(member);
             }
 
             @Override
@@ -138,10 +163,11 @@ public class EventCreateView extends AppCompatActivity {
     }
 
     private void initiate(){
-        this.eventName = findViewById(R.id.eventNameInput);
+        this.eventName = findViewById(R.id.eventName);
         this.eventDate = findViewById(R.id.editEventDate);
         this.paymentType = findViewById(R.id.paymentType);
         this.memberSpinner = findViewById(R.id.chooseMemberSpinner);
         this.container = findViewById(R.id.eventMembersContainer);
+        this.createEvent = findViewById(R.id.buttonCreateEvent);
     }
 }
