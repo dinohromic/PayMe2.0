@@ -1,5 +1,7 @@
 package com.example.payme20.views;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -7,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -25,6 +28,7 @@ import com.example.payme20.model.Member;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -38,6 +42,8 @@ public class EventCreateView extends AppCompatActivity {
     RadioGroup paymentType;
     LinearLayout container;
     Button createEvent;
+    Button dateButton;
+    DatePickerDialog datePickerDialog;
 
     EventCreateViewmodel ecViewmodel;
     Group group;
@@ -56,6 +62,47 @@ public class EventCreateView extends AppCompatActivity {
         initEventMembersCards();
         initCreateButton();
         initEventName();
+        initDatePicker();
+    }
+
+    private void initDatePicker() {
+        DatePickerDialog.OnDateSetListener dataSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+                String date = makeDateString(day, month, year);
+                dateButton.setText(date);
+            }
+        };
+
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        int style = AlertDialog.THEME_HOLO_LIGHT;
+
+        datePickerDialog = new DatePickerDialog(this, style, dataSetListener, year, month, day);
+        dateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                datePickerDialog.show();
+            }
+        });
+        dateButton.setText(getTodaysDate());
+    }
+
+    private String getTodaysDate() {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        month = month + 1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        return makeDateString(day, month, year);
+    }
+
+    private String makeDateString(int day, int month, int year) {
+        return day + "-" + month + "-" + year;
     }
 
     private void initEventName() {
@@ -163,7 +210,7 @@ public class EventCreateView extends AppCompatActivity {
 
     private void initiate(){
         this.eventName = findViewById(R.id.eventName);
-        this.eventDate = findViewById(R.id.editEventDate);
+        this.dateButton = findViewById(R.id.datePickerButton);
         this.paymentType = findViewById(R.id.paymentType);
         this.memberSpinner = findViewById(R.id.chooseMemberSpinner);
         this.container = findViewById(R.id.eventMembersContainer);

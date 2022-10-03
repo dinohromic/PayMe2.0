@@ -28,11 +28,9 @@
         android:layout_height="31dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="26dp"
-        android:layout_marginBottom="20dp"
         android:background="@color/white"
         android:text="Event Name:"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toTopOf="@+id/editEventDate"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -71,21 +69,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-    <EditText
-        android:id="@+id/editEventDate"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/datePickerButton"
+        style="?android:spinnerStyle"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
         android:layout_marginTop="13dp"
-        android:layout_marginEnd="136dp"
-        android:ems="10"
-        android:inputType="date"
-        android:minHeight="48dp"
-        android:text="Events date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:text="Choose Date"
+        android:textColor="@color/black"
+        android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/eventNameInput" />
+        app:layout_constraintTop_toBottomOf="@+id/eventNameInput"
+        android:onClick="openDatePicker"/>
 
     <TextView
         android:id="@+id/textView6"
@@ -163,12 +159,10 @@
         android:id="@+id/scrollView4"
         android:layout_width="408dp"
         android:layout_height="353dp"
-        android:layout_marginTop="36dp"
         android:layout_marginBottom="12dp"
         app:layout_constraintBottom_toTopOf="@+id/paymentType"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editEventDate">
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:id="@+id/eventMembersContainer"
