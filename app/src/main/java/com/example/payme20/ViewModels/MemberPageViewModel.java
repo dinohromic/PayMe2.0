@@ -20,6 +20,10 @@ public class MemberPageViewModel extends ViewModel {
         this.debtMap = getDebtMap();
     }
 
+    public Group getGroup(){
+        return new Group(belongsToGroup.getGroupName(), belongsToGroup.getGroupMembers());
+    }
+
     public String getMemberName(Member member){
         return member.getUserName();
     }
