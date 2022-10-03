@@ -21,9 +21,9 @@ public class Debt implements Serializable {
     }
 
     public Member getDebtTo() {
-        return new Member(debtTo.getUserName(), debtTo.getPhoneNumber());
+        return new Member(debtTo.getUserName(), debtTo.getPhoneNumber(), debtTo.getId());
     }
     public Member getDebtFrom() {
-        return new Member(debtFrom.getUserName(), debtFrom.getPhoneNumber());
+        return new Member(debtFrom.getUserName(), debtFrom.getPhoneNumber(),debtTo.getId());
     }
 }

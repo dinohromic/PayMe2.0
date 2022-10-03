@@ -39,44 +39,38 @@ public class MemberView extends AppCompatActivity{
         addMemberbutton = findViewById(R.id.mainActCreateGroupButton);
         edtName = findViewById(R.id.edtTxtName);
         addMembersFinishButton = findViewById(R.id.addMembersFinishButton);
-        addMembersFinishButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(TextUtils.isEmpty(groupName.getText().toString())){
-                    Toast.makeText(MemberView.this,"Group name needed", Toast.LENGTH_SHORT).show();
-                }
+        addMembersFinishButton.setOnClickListener(view -> {
+            if(TextUtils.isEmpty(groupName.getText().toString())){
+                Toast.makeText(MemberView.this,"Group name needed", Toast.LENGTH_SHORT).show();
+            }
 
-                else {
-                    openCurrenGroups();
-                }
+            else {
+                openCurrenGroups();
             }
         });
         edtPhoneNumber = findViewById(R.id.editTextPhone);
         membersContainer = findViewById(R.id.membersConatiner);
 
-        addMemberbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(TextUtils.isEmpty(groupName.getText().toString())){
-                    Toast.makeText(MemberView.this,"Group name needed", Toast.LENGTH_SHORT).show();
+        addMemberbutton.setOnClickListener(view -> {
+            if(TextUtils.isEmpty(groupName.getText().toString())){
+                Toast.makeText(MemberView.this,"Group name needed", Toast.LENGTH_SHORT).show();
+            }
+            else if(TextUtils.isEmpty(edtName.getText().toString())){
+                Toast.makeText(MemberView.this,"Members name needed", Toast.LENGTH_SHORT).show();
+            }
+            else if(TextUtils.isEmpty(edtPhoneNumber.getText().toString())){
+                Toast.makeText(MemberView.this,"Members phone needed", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                try {
+                    addMembers(edtName.getText().toString(),edtPhoneNumber.getText().toString());
+                } catch (Exception e){
+                    addMembers("None", "0");
                 }
-                else if(TextUtils.isEmpty(edtName.getText().toString())){
-                    Toast.makeText(MemberView.this,"Members name needed", Toast.LENGTH_SHORT).show();
-                }
-                else if(TextUtils.isEmpty(edtPhoneNumber.getText().toString())){
-                    Toast.makeText(MemberView.this,"Members phone needed", Toast.LENGTH_SHORT).show();
-                }
-                else {
-
-                     addMembers(edtName.getText().toString(),edtPhoneNumber.getText().toString());
-                }
-                //DataBaseSaver dataBaseSaver = new DataBaseSaver(MemberView.this);
-
-
 
             }
-        });
 
+        });
 
     }
 
@@ -85,13 +79,13 @@ public class MemberView extends AppCompatActivity{
         OpenViewHelper.openView(GroupListView.class, MemberView.this);
     }
 
-    private void addMembers(String name, String  numbber) {
+    private void addMembers(String name, String numbber) {
         View view = getLayoutInflater().inflate(R.layout.members_card, null);
         membersName= view.findViewById(R.id.addMembersNameText);
         membersPhone = view.findViewById(R.id.addMembersPhoneText);
         membersName.setText(name);
         membersPhone.setText(numbber);
-        createGroup.addMembers(name,numbber);
+        createGroup.addMembers(name,numbber, -1);
         membersContainer.addView(view);
         edtName.getText().clear();
         edtPhoneNumber.getText().clear();

@@ -19,11 +19,11 @@ public class GroupListViewModel {
     public ArrayList<Group> getGroupList(){
         ArrayList<Group> test = new ArrayList<Group>();
         List<Member> members = new ArrayList<>();
-        Member test1 = new Member("Arne", "112");
-        Member test2 = new Member("Anders", "114 14");
-        Member test3 = new Member("ahmed","231");
-        Member test4 = new Member("Jihad","231");
-        Member test5 = new Member("Ola", "2345");
+        Member test1 = new Member("Arne", "112", -1);
+        Member test2 = new Member("Anders", "114 14", -1);
+        Member test3 = new Member("ahmed","231", -1);
+        Member test4 = new Member("Jihad","231", -1);
+        Member test5 = new Member("Ola", "2345",-1);
 
         Map<Member, Integer> costMap = new HashMap<>();
         costMap.put(test1, 100);
