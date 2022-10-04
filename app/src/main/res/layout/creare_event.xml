@@ -76,12 +76,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
         android:layout_marginTop="13dp"
+        android:layout_marginEnd="136dp"
+        android:layout_marginBottom="36dp"
+        android:onClick="openDatePicker"
         android:text="Choose Date"
         android:textColor="@color/black"
-        android:textSize="15sp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView4"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/eventNameInput"
-        android:onClick="openDatePicker"/>
+        app:layout_constraintTop_toBottomOf="@+id/eventNameInput" />
 
     <TextView
         android:id="@+id/textView6"

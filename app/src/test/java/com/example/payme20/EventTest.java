@@ -28,7 +28,7 @@ public class EventTest {
         this.testGroup = new Group("TestGroup", new ArrayList<>());
         this.debtMap = new HashMap<>();
         this.debtUpdater = new DetailedDebtUpdater();
-        this.testEvent = Factory.createEvent("TestEvent", this.debtMap, this.payer, this.debtUpdater);
+        this.testEvent = Factory.createEvent("TestEvent", this.debtMap, this.payer, this.debtUpdater, "");
         this.testGroup.addEvent(testEvent);
     }
 

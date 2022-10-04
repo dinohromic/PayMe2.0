@@ -7,6 +7,7 @@ import com.example.payme20.model.DetailedDebtUpdater;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.IDebtUpdater;
 import com.example.payme20.model.Member;
+import com.example.payme20.model.PayMeModel;
 import com.example.payme20.model.SplitDebtUpdater;
 
 import java.util.ArrayList;
@@ -22,6 +23,8 @@ public class EventCreateViewmodel extends ViewModel {
     private Group group;
     private final Map<String, Member> groupMembers = new HashMap<>();
     private List<String> eventMembers = new ArrayList<>();
+    private String date;
+    PayMeModel model;
 
     public EventCreateViewmodel(Group group) {
         this.group = group;
@@ -81,7 +84,7 @@ public class EventCreateViewmodel extends ViewModel {
     }
 
     public void createEvent() {
-
+        model.createNewGroupEvent(group, memberAndAmount, eventName, payer, debtUpdater, date);
     }
 
     public void setEventName(String eventName) {
@@ -92,4 +95,9 @@ public class EventCreateViewmodel extends ViewModel {
         memberAndAmount.put(groupMembers.get(name), amount);
         System.out.println(memberAndAmount);
     }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
 }

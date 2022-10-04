@@ -66,13 +66,12 @@ public class EventCreateView extends AppCompatActivity {
     }
 
     private void initDatePicker() {
-        DatePickerDialog.OnDateSetListener dataSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month = month + 1;
-                String date = makeDateString(day, month, year);
-                dateButton.setText(date);
-            }
+        DatePickerDialog.OnDateSetListener dataSetListener = (datePicker, year, month, day) -> {
+            month = month + 1;
+            String date = makeDateString(day, month, year);
+            dateButton.setText(date);
+            ecViewmodel.setDate(date);
+            System.out.println(date);
         };
 
         Calendar calendar = Calendar.getInstance();
@@ -83,6 +82,7 @@ public class EventCreateView extends AppCompatActivity {
         int style = AlertDialog.THEME_HOLO_LIGHT;
 
         datePickerDialog = new DatePickerDialog(this, style, dataSetListener, year, month, day);
+        datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,6 +90,8 @@ public class EventCreateView extends AppCompatActivity {
             }
         });
         dateButton.setText(getTodaysDate());
+        ecViewmodel.setDate(getTodaysDate());
+        System.out.println(getTodaysDate());
     }
 
     private String getTodaysDate() {

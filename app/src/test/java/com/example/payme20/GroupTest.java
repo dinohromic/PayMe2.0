@@ -31,7 +31,7 @@ public class GroupTest {
         group.addNewGroupMember(user1);
         group.addNewGroupMember(user2);
         group.addNewGroupMember(user3);
-        payMeModel = new PayMeModel();
+        payMeModel = PayMeModel.INSTANCE;
     }
 
     @Test
@@ -53,7 +53,7 @@ public class GroupTest {
         eventPaymentMap.put(user2, 30);
         eventPaymentMap.put(user3, 50);
 
-        Event event = new Event("event", eventPaymentMap, user1, new SplitDebtUpdater());
+        Event event = new Event("event", eventPaymentMap, user1, new SplitDebtUpdater(), "");
         group.addEvent(event);
         group.removeGroupMember(user2);
         assertTrue(group.getGroupMembers().contains(user2));
@@ -65,7 +65,7 @@ public class GroupTest {
         eventPaymentMap.put(user2, 30);
         eventPaymentMap.put(user3, 50);
 
-        Event event = new Event("event", eventPaymentMap, user1, new SplitDebtUpdater());
+        Event event = new Event("event", eventPaymentMap, user1, new SplitDebtUpdater(), "");
         group.addEvent(event);
         group.setEventInactive(event);
         group.removeGroupMember(user2);
@@ -78,9 +78,9 @@ public class GroupTest {
         eventPaymentMap.put(user2, 30);
         eventPaymentMap.put(user3, 50);
 
-        Event event = new Event("event", eventPaymentMap, user1, new SplitDebtUpdater());
-        Event event1 = new Event("event", eventPaymentMap, user2, new DetailedDebtUpdater());
-        Event event2 = new Event("event", eventPaymentMap, user3, new SplitDebtUpdater());
+        Event event = new Event("event", eventPaymentMap, user1, new SplitDebtUpdater(), "");
+        Event event1 = new Event("event", eventPaymentMap, user2, new DetailedDebtUpdater(), "");
+        Event event2 = new Event("event", eventPaymentMap, user3, new SplitDebtUpdater(), "");
         group.addEvent(event);
         group.addEvent(event1);
         group.addEvent(event2);
@@ -100,9 +100,9 @@ public class GroupTest {
         eventPaymentMap.put(user2, 30);
         eventPaymentMap.put(user3, 40);
 
-        payMeModel.createNewGroupEvent(group, eventPaymentMap, "event", user1, new SplitDebtUpdater());
-        payMeModel.createNewGroupEvent(group, eventPaymentMap, "event", user2, new DetailedDebtUpdater());
-        payMeModel.createNewGroupEvent(group, eventPaymentMap, "event", user3, new SplitDebtUpdater());
+        payMeModel.createNewGroupEvent(group, eventPaymentMap, "event", user1, new SplitDebtUpdater(), "");
+        payMeModel.createNewGroupEvent(group, eventPaymentMap, "event", user2, new DetailedDebtUpdater(), "");
+        payMeModel.createNewGroupEvent(group, eventPaymentMap, "event", user3, new SplitDebtUpdater(), "");
 
         payMeModel.inactivateEvent(group.getGroupEvents().get(0), group);
         assertEquals(-50.0, payMeModel.getTotalDebt(group, user1), 1);

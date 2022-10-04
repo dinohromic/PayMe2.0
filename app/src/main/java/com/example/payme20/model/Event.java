@@ -17,22 +17,15 @@ public class Event implements Serializable {
     private String date;
 
 
-    public Event(String eventName, Map eventPaymentDetails, Member payer, IDebtUpdater debtUpdater){
+    public Event(String eventName, Map eventPaymentDetails, Member payer, IDebtUpdater debtUpdater, String date){
         this.eventName=eventName;
         this.eventPaymentDetails = eventPaymentDetails;
         this.payer = payer;
         this.activeStatus = true;
         this.debtUpdater = debtUpdater;
-        this.date = getDate();
+        this.date = date;
         this.eventDebtList = createEventDebts();
 
-    }
-
-    private String getDate(){
-        Date currentDate = Calendar.getInstance().getTime();
-        SimpleDateFormat wantedDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String currentDateString = wantedDateFormat.format(currentDate);
-        return currentDateString;
     }
 
     public Map<Member, Integer> getEventPaymentDetails() {
