@@ -2,6 +2,7 @@ package com.example.payme20.view_models;
 
 import androidx.lifecycle.ViewModel;
 
+import com.example.payme20.model.Debt;
 import com.example.payme20.model.DetailedDebtUpdater;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.IDebtUpdater;
@@ -19,30 +20,34 @@ public class EventCreateViewmodel extends ViewModel {
     private IDebtUpdater debtUpdater;
     private Member payer;
     private Group group;
-    private final List<Member> groupMembers = new ArrayList<>();
+    private final Map<String, Member> groupMembers = new HashMap<>();
     private List<String> eventMembers = new ArrayList<>();
 
     public EventCreateViewmodel(Group group) {
         this.group = group;
         this.debtUpdater = new SplitDebtUpdater();
-        initMemberList();
+        initMemberMap();
         initEventMemberList();
     }
 
     private void initEventMemberList() {
         if(group.getGroupMembers().size() != 0) {
-            for(Member m : groupMembers) {
-                eventMembers.add(m.getUserName());
+            for (Map.Entry<String, Member> memberMap: groupMembers.entrySet()) {
+                String memberName = memberMap.getKey();
+                eventMembers.add(memberName);
             }
         }
     }
 
-    private void initMemberList() {
-        if(group.getGroupMembers().size() != 0)
-            groupMembers.addAll(group.getGroupMembers());
+    private void initMemberMap() {
+        if(group.getGroupMembers().size() != 0) {
+            for(Member m : group.getGroupMembers()) {
+                groupMembers.put(m.getUserName(), m);
+            }
+        }
     }
 
-    public List<Member> getGroupMembers() {
+    public Map<String, Member> getGroupMembers() {
         return groupMembers;
     }
 
@@ -73,5 +78,18 @@ public class EventCreateViewmodel extends ViewModel {
 
     public List<String> getEventMembers() {
         return eventMembers;
+    }
+
+    public void createEvent() {
+
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
+
+    public void setMemberPayment(int amount, String name) {
+        memberAndAmount.put(groupMembers.get(name), amount);
+        System.out.println(memberAndAmount);
     }
 }

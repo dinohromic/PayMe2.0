@@ -25,9 +25,9 @@ public class GroupTest {
     @Before
     public void init() {
         group = Factory.createGroup("gruppTest",new ArrayList<>());
-        user1 = Factory.createMember("user1", "07");
-        user2 = Factory.createMember("user2", "07");
-        user3 = Factory.createMember("user3", "07");
+        user1 = Factory.createMember("user1", "07", -1);
+        user2 = Factory.createMember("user2", "07", -1);
+        user3 = Factory.createMember("user3", "07", -1);
         group.addNewGroupMember(user1);
         group.addNewGroupMember(user2);
         group.addNewGroupMember(user3);
@@ -42,7 +42,7 @@ public class GroupTest {
     }
     @Test
     public void testAddMember() {
-        Member member = Factory.createMember("member", "07");
+        Member member = Factory.createMember("member", "07", -1);
         group.addNewGroupMember(member);
         assertTrue(group.getGroupMembers().contains(member));
     }

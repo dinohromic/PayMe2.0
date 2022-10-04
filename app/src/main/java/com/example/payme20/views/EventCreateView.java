@@ -1,11 +1,15 @@
 package com.example.payme20.views;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -24,17 +28,22 @@ import com.example.payme20.model.Member;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 
 public class EventCreateView extends AppCompatActivity {
 
-    TextInputLayout eventName;
+    TextInputEditText eventName;
 
     Spinner memberSpinner;
     EditText eventDate;
     RadioGroup paymentType;
     LinearLayout container;
+    Button createEvent;
+    Button dateButton;
+    DatePickerDialog datePickerDialog;
 
     EventCreateViewmodel ecViewmodel;
     Group group;
@@ -50,17 +59,80 @@ public class EventCreateView extends AppCompatActivity {
         ecViewmodel = new ViewModelProvider(this, vmFactory).get(EventCreateViewmodel.class);
         initPaymentType();
         initMemberSpinner();
-        initEventMembersList();
+        initEventMembersCards();
+        initCreateButton();
+        initEventName();
+        initDatePicker();
     }
 
-    private void initEventMembersList() {
-        populateList();
+    private void initDatePicker() {
+        DatePickerDialog.OnDateSetListener dataSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+                String date = makeDateString(day, month, year);
+                dateButton.setText(date);
+            }
+        };
 
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        int style = AlertDialog.THEME_HOLO_LIGHT;
+
+        datePickerDialog = new DatePickerDialog(this, style, dataSetListener, year, month, day);
+        dateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                datePickerDialog.show();
+            }
+        });
+        dateButton.setText(getTodaysDate());
+    }
+
+    private String getTodaysDate() {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        month = month + 1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        return makeDateString(day, month, year);
+    }
+
+    private String makeDateString(int day, int month, int year) {
+        return day + "-" + month + "-" + year;
+    }
+
+    private void initEventName() {
+        eventName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if(!hasFocus) {
+                    ecViewmodel.setEventName(eventName.getText().toString());
+                }
+            }
+        });
+    }
+
+    private void initCreateButton() {
+        createEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ecViewmodel.createEvent();
+            }
+        });
+    }
+
+    private void initEventMembersCards() {
+        populateList();
     }
 
     private void populateList() {
-        for(Member m : ecViewmodel.getGroupMembers()) {
-            addCard(m);
+        for (Map.Entry<String, Member> memberMap: ecViewmodel.getGroupMembers().entrySet()) {
+            Member member = memberMap.getValue();
+            addCard(member);
         }
     }
 
@@ -68,31 +140,32 @@ public class EventCreateView extends AppCompatActivity {
         View view = getLayoutInflater().inflate(R.layout.event_member_card, null);
         TextView name = view.findViewById(R.id.eventMemberName);
         name.setText(m.getUserName());
-        System.out.println(name.getText());
         setListenersOnEventMemberCard(view, name.getText());
         container.addView(view);
     }
 
-    private void setListenersOnEventMemberCard(View view, CharSequence text) {
+    private void setListenersOnEventMemberCard(View view, CharSequence name) {
         CheckBox checkbox = view.findViewById(R.id.eventMemberIncluded);
         checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(!b) {
-                    ecViewmodel.removeEventMember((String) text);
-
+                    ecViewmodel.removeEventMember((String) name);
                 }
                 if(b) {
-                    ecViewmodel.addEventMember((String) text);
+                    ecViewmodel.addEventMember((String) name);
                 }
                 updateMemberSpinner();
             }
         });
-        TextInputEditText amount = view.findViewById(R.id.eventMemberAmount);
+
+        EditText amount = view.findViewById(R.id.eventMemberAmount);
         amount.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onFocusChange(View view, boolean b) {
-
+            public void onFocusChange(View view, boolean hasFocus) {
+                if(!hasFocus) {
+                    ecViewmodel.setMemberPayment(Integer.parseInt(amount.getText().toString()), (String) name);
+                }
             }
         });
     }
@@ -102,10 +175,9 @@ public class EventCreateView extends AppCompatActivity {
         memberSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                /*for(Member m : ListaAvMembers) {
-                    if(m.getUserName().equals(arrayAdapter.getItem(i)))
-                        ecViewmodel.setPayer(m);
-                }*/
+                String memberName = memberSpinner.getSelectedItem().toString();
+                Member member = ecViewmodel.getGroupMembers().get(memberName);
+                ecViewmodel.setPayer(member);
             }
 
             @Override
@@ -137,10 +209,11 @@ public class EventCreateView extends AppCompatActivity {
     }
 
     private void initiate(){
-        this.eventName = findViewById(R.id.eventNameInput);
-        this.eventDate = findViewById(R.id.editEventDate);
+        this.eventName = findViewById(R.id.eventName);
+        this.dateButton = findViewById(R.id.datePickerButton);
         this.paymentType = findViewById(R.id.paymentType);
         this.memberSpinner = findViewById(R.id.chooseMemberSpinner);
         this.container = findViewById(R.id.eventMembersContainer);
+        this.createEvent = findViewById(R.id.buttonCreateEvent);
     }
 }

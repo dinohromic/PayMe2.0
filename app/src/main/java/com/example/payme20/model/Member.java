@@ -1,15 +1,21 @@
 package com.example.payme20.model;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 import java.util.Objects;
 
 public class Member implements Serializable {
+    private int id;
     private String userName;
     private String phoneNumber;
 
-    public Member(String userName, String phoneNumber){
+
+    public Member(String userName, String phoneNumber, int id){
+
         this.userName = userName;
         this.phoneNumber = phoneNumber;
+        this.id = id;
     }
 
     public String getUserName() {
@@ -29,10 +35,20 @@ public class Member implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @NonNull
     @Override
     public String toString() {
         return "Member{" +
-                "userName='" + userName + '\'' +
+                "id" + id +
+                ", userName='" + userName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
     }
