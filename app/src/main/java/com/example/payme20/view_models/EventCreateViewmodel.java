@@ -93,6 +93,8 @@ public class EventCreateViewmodel extends ViewModel {
     }
 
     public void setMemberPayment(int amount, String name) {
+        if(amount <= 0)
+            return;
         memberAndAmount.put(groupMembers.get(name), amount);
         System.out.println(memberAndAmount);
     }

@@ -22,44 +22,52 @@ public class GroupPageView extends AppCompatActivity {
     private ViewPager groupPageViewPager;
     private TextView groupPageGroupName;
     private ImageButton returnButton;
-    EventFragmentGroupPage eventFragmentGroupPage;
-    MemberFragmentGroupPage memberFragmentGroupPage;
+    private EventFragmentGroupPage eventFragmentGroupPage;
+    private MemberFragmentGroupPage memberFragmentGroupPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.group_page);
-        groupPageGroupName = findViewById(R.id.groupPageGroupName);
-        Group myObject = (Group) getIntent().getSerializableExtra("GROUP_KEY");
-        groupPageGroupName.setText(myObject.getGroupName());
-        groupPageTabs = findViewById(R.id.groupPageTabLayout);
-        groupPageViewPager= findViewById(R.id.groupPageViewPager);
-        groupPageTabs.setupWithViewPager(groupPageViewPager);
+        findViewForWidgets();
+        Group currentGroup = (Group) getIntent().getSerializableExtra("GROUP_KEY");
+        populateView(currentGroup);
+        createAdapterForFragments();
+        setGroupFragment(currentGroup);
+        setListenerReturnButton();
+    }
 
+    private void createAdapterForFragments(){
         GroupPageAdapter gpAdapter = new GroupPageAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        eventFragmentGroupPage = new EventFragmentGroupPage();
-        memberFragmentGroupPage = new MemberFragmentGroupPage();
-        eventFragmentGroupPage.setGroup(myObject);
-        memberFragmentGroupPage.setGroup(myObject);
-
+        this.eventFragmentGroupPage = new EventFragmentGroupPage();
+        this.memberFragmentGroupPage = new MemberFragmentGroupPage();
         gpAdapter.addGroupPageFragments(eventFragmentGroupPage,"Events");
         gpAdapter.addGroupPageFragments(memberFragmentGroupPage, "Members");
-
-        groupPageViewPager.setAdapter(gpAdapter);
-
-        initializeView();
-        setListenerReturnButton(this.returnButton);
+        this.groupPageTabs.setupWithViewPager(this.groupPageViewPager);
+        this.groupPageViewPager.setAdapter(gpAdapter);
     }
 
-    private void initializeView(){
+    private void setGroupFragment(Group currentGroup){
+        this.eventFragmentGroupPage.setGroup(currentGroup);
+        this.memberFragmentGroupPage.setGroup(currentGroup);
+    }
+
+    private void populateView(Group currentGroup){
+        this.groupPageGroupName.setText(currentGroup.getGroupName());
+    }
+
+    private void findViewForWidgets(){
+        this.groupPageGroupName = findViewById(R.id.groupPageGroupName);
         this.returnButton =  findViewById(R.id.groupPageReturnButton);
+        this.groupPageTabs = findViewById(R.id.groupPageTabLayout);
+        this.groupPageViewPager= findViewById(R.id.groupPageViewPager);
     }
 
-    private void setListenerReturnButton(ImageButton returnButton){
-        returnButton.setOnClickListener(new View.OnClickListener() {
+    private void setListenerReturnButton(){
+        this.returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                OpenViewHelper.openView(GroupListView.class, getApplicationContext());
+                OpenViewHelper.openView(GroupListView.class, GroupPageView.this);
             }
         });
     }

@@ -14,11 +14,10 @@ import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.view_models.MemberPageViewModel;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
-import java.util.Objects;
 
 public class MemberPageView extends AppCompatActivity {
 
-    private EditText newPhoneNumber, newUserName;
+    private EditText phoneNumberEditText, userNameEditText;
     private TextView userName, totalDebt;
     private MemberPageViewModel memberPageViewModel;
     private LinearLayout cardContainer;
@@ -37,34 +36,31 @@ public class MemberPageView extends AppCompatActivity {
     private void initializeViewModel(){
         Group belongsToGroup = (Group) getIntent().getSerializableExtra("GROUP_KEY");
         this.memberPageViewModel = new MemberPageViewModel(belongsToGroup);
-
         Member member = (Member) getIntent().getSerializableExtra("MEMBER_KEY");
-        Member profileMember = memberPageViewModel.findMemberReferenceInGroup(belongsToGroup, member);
+        Member profileMember = memberPageViewModel.findCorrectMemberReferenceInGroup(belongsToGroup, member);
         this.memberPageViewModel.addCurrentProfileMember(profileMember);
     }
 
-
-
     private void populateView() {
         String userProfile = "User profile: " + memberPageViewModel.getCurrentUserProfileName();
-        String userTotalDebt = "Total debt: " + memberPageViewModel.getMemberTotalDebt();
+        String userTotalDebt = "Total debt: " + memberPageViewModel.getProfileMemberTotalDebt();
         this.userName.setText(userProfile);
-        this.newPhoneNumber.setText(memberPageViewModel.getPhoneNumber());
+        this.phoneNumberEditText.setText(memberPageViewModel.getPhoneNumber());
         this.totalDebt.setText(userTotalDebt);
         populateCardContainer();
     }
 
     private void findViewIdForWidgets(){
         this.userName = findViewById(R.id.memberPageMemberName);
-        this.newPhoneNumber = findViewById(R.id.memberPageEditPhone);
-        this.newUserName = findViewById(R.id.memberPageEditName);
+        this.phoneNumberEditText = findViewById(R.id.memberPageEditPhone);
+        this.userNameEditText = findViewById(R.id.memberPageEditName);
         this.totalDebt = findViewById(R.id.memberPageTotalDebt);
         this.cardContainer = findViewById(R.id.memberPageCardCointainer);
         this.memberPageReturnButton = findViewById(R.id.memberPageReturnButton);
     }
     private void populateCardContainer(){
-        for (Member groupMember: memberPageViewModel.getGroupMembers()) {
-            if(!(groupMember.equals(memberPageViewModel.getCurrentMember()))){
+        for (Member groupMember: memberPageViewModel.getGroupMemberList()) {
+            if(!(groupMember.equals(memberPageViewModel.getProfileMember()))){
                 View card = createCard(groupMember);
                 this.cardContainer.addView(card);
             }
@@ -93,14 +89,14 @@ public class MemberPageView extends AppCompatActivity {
     }
 
     private void userNameListener(){
-        newUserName.addTextChangedListener(new TextWatcher() {
+        userNameEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
             public void afterTextChanged(Editable editable) {
-                memberPageViewModel.setNewName(newUserName.getText().toString());
+                memberPageViewModel.setNewName(userNameEditText.getText().toString());
                 String profileInformation = "User profile: " + memberPageViewModel.getCurrentUserProfileName();
                 userName.setText(profileInformation);
             }
@@ -108,14 +104,14 @@ public class MemberPageView extends AppCompatActivity {
     }
 
     private void phoneNumberListener(){
-        this.newPhoneNumber.addTextChangedListener(new TextWatcher() {
+        this.phoneNumberEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
             public void afterTextChanged(Editable editable) {
-                memberPageViewModel.setNewPhoneNumber(newPhoneNumber.getText().toString());
+                memberPageViewModel.setNewPhoneNumber(phoneNumberEditText.getText().toString());
             }
         });
     }
