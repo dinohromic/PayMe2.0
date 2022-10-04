@@ -22,6 +22,7 @@ public class EventCreateViewmodel extends ViewModel {
     private Group group;
     private final Map<String, Member> groupMembers = new HashMap<>();
     private List<String> eventMembers = new ArrayList<>();
+    private String date;
 
     public EventCreateViewmodel(Group group) {
         this.group = group;
@@ -91,5 +92,9 @@ public class EventCreateViewmodel extends ViewModel {
     public void setMemberPayment(int amount, String name) {
         memberAndAmount.put(groupMembers.get(name), amount);
         System.out.println(memberAndAmount);
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

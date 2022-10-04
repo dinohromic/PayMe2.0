@@ -11,8 +11,8 @@ public class PayMeModel {
         return instance;
     }
 
-    public void createNewGroupEvent(Group group, Map<Member, Integer> debtMap, String eventName, Member payer, IDebtUpdater iDebtUpdater) {
-        Event event = Factory.createEvent(eventName, debtMap, payer, iDebtUpdater);
+    public void createNewGroupEvent(Group group, Map<Member, Integer> debtMap, String eventName, Member payer, IDebtUpdater iDebtUpdater, String date) {
+        Event event = Factory.createEvent(eventName, debtMap, payer, iDebtUpdater, date);
         group.addEvent(event);
     }
 

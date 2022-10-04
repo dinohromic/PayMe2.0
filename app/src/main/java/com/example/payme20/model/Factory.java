@@ -12,7 +12,7 @@ public final class Factory {
         return new Member(memberName, phoneNumber, id);
     }
 
-    public static Event createEvent(String eventName, Map<Member, Integer> memberAndAmount,Member payer, IDebtUpdater debtUpdater ){
-        return new Event(eventName, memberAndAmount, payer, debtUpdater);
+    public static Event createEvent(String eventName, Map<Member, Integer> memberAndAmount,Member payer, IDebtUpdater debtUpdater, String date){
+        return new Event(eventName, memberAndAmount, payer, debtUpdater, date);
     }
 }
