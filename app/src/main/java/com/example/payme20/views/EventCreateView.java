@@ -2,9 +2,11 @@ package com.example.payme20.views;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,6 +21,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -130,7 +133,12 @@ public class EventCreateView extends AppCompatActivity {
         createEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ecViewmodel.createEvent();
+                if(TextUtils.isEmpty(eventName.getText().toString())){
+                    Toast.makeText(EventCreateView.this,"Event name needed", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    ecViewmodel.createEvent();
+                }
             }
         });
     }
@@ -156,20 +164,26 @@ public class EventCreateView extends AppCompatActivity {
 
     private void setListenersOnEventMemberCard(View view, CharSequence name) {
         CheckBox checkbox = view.findViewById(R.id.eventMemberIncluded);
+        EditText amount = view.findViewById(R.id.eventMemberAmount);
         checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(!b) {
                     ecViewmodel.removeEventMember((String) name);
+                    amount.setEnabled(false);
+                    //amount.setHintTextColor(F6F6F6);
                 }
                 if(b) {
                     ecViewmodel.addEventMember((String) name);
+                    amount.setEnabled(true);
                 }
                 updateMemberSpinner();
             }
         });
 
-        EditText amount = view.findViewById(R.id.eventMemberAmount);
+
+
+
 
         amount.addTextChangedListener(new TextWatcher() {
             @Override
@@ -180,10 +194,24 @@ public class EventCreateView extends AppCompatActivity {
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                ecViewmodel.setMemberPayment(Integer.parseInt(amount.getText().toString()), (String) name);
+                if(amount.getText().toString().equals(""))
+                    ecViewmodel.setMemberPayment(0, (String) name);
+                else
+                    ecViewmodel.setMemberPayment(Integer.parseInt(amount.getText().toString()), (String) name);
             }
         });
     }
+
+//    private void disableEditText(EditText editText) {
+//        editText.setEnabled(false);
+//        editText.setCursorVisible(false);
+//        editText.setBackgroundColor(Color.TRANSPARENT);
+//    }
+//    private void enableEditText(EditText editText) {
+//        editText.setFocusable(true);
+//        editText.setEnabled(true);
+//        editText.setCursorVisible(true);
+//    }
 
     private void initMemberSpinner() {
         updateMemberSpinner();
