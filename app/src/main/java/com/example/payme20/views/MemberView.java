@@ -25,7 +25,7 @@ public class MemberView extends AppCompatActivity{
     private Button addMemberbutton,addMembersFinishButton;
     private LinearLayout membersContainer;
     private EditText groupName;
-    createGroupViewModel createGroup;
+    createGroupViewModel createGroupVM;
 
 //    private ConstraintLayout parent;
 
@@ -34,7 +34,7 @@ public class MemberView extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_group);
-        createGroup = new createGroupViewModel();
+        createGroupVM = new createGroupViewModel();
         groupName=findViewById(R.id.groupNameTextView);
         addMemberbutton = findViewById(R.id.mainActCreateGroupButton);
         edtName = findViewById(R.id.edtTxtName);
@@ -45,7 +45,7 @@ public class MemberView extends AppCompatActivity{
             }
 
             else {
-                openCurrenGroups();
+                openCurrentGroups();
             }
         });
         edtPhoneNumber = findViewById(R.id.editTextPhone);
@@ -67,16 +67,14 @@ public class MemberView extends AppCompatActivity{
                 } catch (Exception e){
                     addMembers("None", "0");
                 }
-
             }
-
         });
 
     }
 
-    private void openCurrenGroups() {
-       createGroup.createGroup(groupName.getText().toString());
-        OpenViewHelper.openView(GroupListView.class, MemberView.this);
+    private void openCurrentGroups() {
+       createGroupVM.createGroup(groupName.getText().toString());
+       OpenViewHelper.openView(GroupListView.class, MemberView.this);
     }
 
     private void addMembers(String name, String numbber) {
@@ -85,7 +83,7 @@ public class MemberView extends AppCompatActivity{
         membersPhone = view.findViewById(R.id.addMembersPhoneText);
         membersName.setText(name);
         membersPhone.setText(numbber);
-        createGroup.addMembers(name,numbber, -1);
+        createGroupVM.addMembers(name,numbber, -1);
         membersContainer.addView(view);
         edtName.getText().clear();
         edtPhoneNumber.getText().clear();
