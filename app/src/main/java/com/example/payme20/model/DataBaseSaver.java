@@ -70,6 +70,28 @@ public class DataBaseSaver extends SQLiteOpenHelper {
         return new Member(cursor.getString(0), cursor.getString(1), Integer.parseInt(cursor.getString(2)));
     }
 
+    //Return to this method, the parameters are wrong. They are only set there for "new Member()"s satisfaction
+    // Another problem is that the if statement is wrong because this method needs the the list of the members from ViewModel
+    public List<Member> getAllMembers(String userName, String phoneNumber, int id){
+        List<Member> memberList = new ArrayList<Member>();
+        String selectQuery = "SELECT *FROM " +  MEMBER_TABLE;
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()){
+            do{
+                Member member = new Member(userName,phoneNumber, id);
+                member.setUserName(cursor.getString(0));
+                member.setPhoneNumber(cursor.getString(1));
+                member.setId(Integer.parseInt(cursor.getString(2)));
+                memberList.add(member);
+            } while (cursor.moveToNext());
+        }
+        return memberList;
+
+    }
+
+
     public void deleteMember(Member member){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         sqLiteDatabase.delete(MEMBER_TABLE, COLUMN_MEMBER_NAME +" =?", new String[]{String.valueOf(member.getUserName())});
@@ -84,25 +106,8 @@ public class DataBaseSaver extends SQLiteOpenHelper {
         return cursor.getCount();
     }
 
-    //Return to this method, the parameters are wrong. They are only set there for "new Member()"s satisfaction
-    // Another problem is that the if statement is wrong because this method needs the the list of the members from ViewModel
-//    public List<Member> getAllMembers(String userName, String phoneNumber){
-//        List<Member> memberList = new ArrayList<Member>();
-//        String selectQuery = "SELECT *FROM " +  TABLE_MEMBER;
-//        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-//        Cursor cursor = sqLiteDatabase.rawQuery(selectQuery, null);
-//
-//        if (cursor.moveToFirst()){
-//            do{
-//                Member member = new Member(userName,phoneNumber);
-//                member.setUserName(cursor.getString(0));
-//                member.setPhoneNumber(cursor.getString(1));
-//                memberList.add(member);
-//            } while (cursor.moveToNext());
-//        }
-//        return memberList;
-//
-//    }
+
+
 
 
 }
