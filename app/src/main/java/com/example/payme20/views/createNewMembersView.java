@@ -24,7 +24,7 @@ public class createNewMembersView extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.alert_dialog_view);
+        setContentView(R.layout.create_new_member);
         initWidgets();
         initViewModel();
         setOnClickListener(createNewMemberButton);
