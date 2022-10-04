@@ -1,16 +1,12 @@
 package com.example.payme20.views;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -108,7 +104,7 @@ public class MemberFragmentGroupPage extends Fragment {
         createNewMemberButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                OpenViewHelper.openViewPutExtra(createNewMembersView.class,getActivity(),group);
+                OpenViewHelper.openViewPutExtra(createNewMembersView.class,getActivity(), group);
             }
         });
     }

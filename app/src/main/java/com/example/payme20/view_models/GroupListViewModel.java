@@ -46,4 +46,5 @@ public class GroupListViewModel {
         test.add(new Group("Middag", members));
         return test;
     }
+
 }

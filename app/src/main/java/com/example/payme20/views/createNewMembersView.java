@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.payme20.R;
 import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.model.Group;
-import com.example.payme20.model.Member;
 import com.example.payme20.view_models.createNewMembersViewModel;
 
 public class createNewMembersView extends AppCompatActivity {
@@ -29,14 +28,12 @@ public class createNewMembersView extends AppCompatActivity {
         initWidgets();
         initViewModel();
         setOnClickListener(createNewMemberButton);
-
-
+        setOnClickListener(returnButton);
     }
 
     private void initViewModel() {
         Group belongsToGroup = (Group) getIntent().getSerializableExtra("GROUP_KEY");
-        createNewMembersViewModel viewModel = new createNewMembersViewModel(belongsToGroup);
-        this.viewModel = viewModel;
+        this.viewModel = new createNewMembersViewModel(belongsToGroup);
     }
 
     private void setOnClickListener(Button createNewMemberButton) {
@@ -45,6 +42,15 @@ public class createNewMembersView extends AppCompatActivity {
             public void onClick(View view) {
                 createNewMember(newMemberName, newMemberPhone);
 
+            }
+        });
+    }
+
+    private void setOnClickListener(ImageButton returnButton){
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                returnToHome();
             }
         });
     }
@@ -66,6 +72,4 @@ public class createNewMembersView extends AppCompatActivity {
         this.createNewMemberButton = findViewById(R.id.createNewMember);
         this.returnButton = findViewById(R.id.returnButton);
     }
-
-
 }
