@@ -14,7 +14,6 @@ import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.view_models.MemberPageViewModel;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
-
 import java.util.Objects;
 
 public class MemberPageView extends AppCompatActivity {
@@ -37,20 +36,14 @@ public class MemberPageView extends AppCompatActivity {
 
     private void initializeViewModel(){
         Group belongsToGroup = (Group) getIntent().getSerializableExtra("GROUP_KEY");
+        this.memberPageViewModel = new MemberPageViewModel(belongsToGroup);
+
         Member member = (Member) getIntent().getSerializableExtra("MEMBER_KEY");
-        Member profileMember = findMemberReferenceInGroup(belongsToGroup, member);
-        this.memberPageViewModel = new MemberPageViewModel(profileMember, belongsToGroup);
+        Member profileMember = memberPageViewModel.findMemberReferenceInGroup(belongsToGroup, member);
+        this.memberPageViewModel.addCurrentProfileMember(profileMember);
     }
 
-    private Member findMemberReferenceInGroup(Group group, Member memberToFind){
-        Member memberByReference = new Member("This doesn't feel like good code", "1337", 1337);
-        for (Member member :group.getGroupMembers()) {
-            if(Objects.equals(memberToFind.getUserName(), member.getUserName()) && Objects.equals(memberToFind.getPhoneNumber(), member.getPhoneNumber())){
-                memberByReference = member;
-            }
-        }
-        return memberByReference;
-    }
+
 
     private void populateView() {
         String userProfile = "User profile: " + memberPageViewModel.getCurrentUserProfileName();
@@ -115,11 +108,14 @@ public class MemberPageView extends AppCompatActivity {
     }
 
     private void phoneNumberListener(){
-        newPhoneNumber.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        this.newPhoneNumber.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View view, boolean b) {
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void afterTextChanged(Editable editable) {
                 memberPageViewModel.setNewPhoneNumber(newPhoneNumber.getText().toString());
-                newPhoneNumber.setText(memberPageViewModel.getPhoneNumber());
             }
         });
     }

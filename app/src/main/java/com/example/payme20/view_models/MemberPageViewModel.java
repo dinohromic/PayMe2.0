@@ -17,10 +17,24 @@ public class MemberPageViewModel extends ViewModel {
     Map<Member, Integer> debtMap;
     PayMeModel payMeModel = PayMeModel.INSTANCE;
 
-    public MemberPageViewModel(Member memberOnPage, Group group){
-        this.currentMember = memberOnPage;
+    public MemberPageViewModel(Group group){
         this.belongsToGroup = group;
         this.debtMap = getDebtMap();
+    }
+
+    public void addCurrentProfileMember(Member profileMember){
+        this.currentMember = profileMember;
+    }
+
+    //TODO Remove this and replace with finding the same ID when we got the functioning
+    public Member findMemberReferenceInGroup(Group group, Member memberToFind){
+        Member memberByReference = new Member("This doesn't feel like good code", "1337", 1337);
+        for (Member member :group.getGroupMembers()) {
+            if(Objects.equals(memberToFind.getUserName(), member.getUserName()) && Objects.equals(memberToFind.getPhoneNumber(), member.getPhoneNumber())){
+                memberByReference = member;
+            }
+        }
+        return memberByReference;
     }
 
     public Group getGroup(){
