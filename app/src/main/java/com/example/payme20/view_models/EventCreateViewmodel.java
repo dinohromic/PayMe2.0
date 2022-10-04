@@ -24,7 +24,7 @@ public class EventCreateViewmodel extends ViewModel {
     private final Map<String, Member> groupMembers = new HashMap<>();
     private List<String> eventMembers = new ArrayList<>();
     private String date;
-    PayMeModel model;
+    PayMeModel model = PayMeModel.INSTANCE;
 
     public EventCreateViewmodel(Group group) {
         this.group = group;
