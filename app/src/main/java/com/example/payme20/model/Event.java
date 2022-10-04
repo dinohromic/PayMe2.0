@@ -56,4 +56,17 @@ public class Event implements Serializable {
         return debtUpdater.updateDebts(eventPaymentDetails, payer);
 
     }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "eventPaymentDetails=" + eventPaymentDetails +
+                ", debtUpdater=" + debtUpdater +
+                ", activeStatus=" + activeStatus +
+                ", eventDebtList=" + eventDebtList +
+                ", eventName='" + eventName + '\'' +
+                ", payer=" + payer +
+                ", date='" + date + '\'' +
+                '}';
+    }
 }

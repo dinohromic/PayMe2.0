@@ -66,6 +66,7 @@ public class Group implements Serializable {
     public void addEvent(Event event) {
         groupEvents.add(event);
         addEventDebtToGroup(event.getDebtList());
+        System.out.println(this.groupEvents);
     }
 
     public void setAllEventsInactive(){

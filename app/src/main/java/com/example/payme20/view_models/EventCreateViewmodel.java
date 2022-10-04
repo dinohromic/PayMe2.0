@@ -71,6 +71,7 @@ public class EventCreateViewmodel extends ViewModel {
         for(String s : eventMembers) {
             if(s.equals(str)) {
                 eventMembers.remove(s);
+                memberAndAmount.remove(groupMembers.get(s));
                 break;
             }
         }

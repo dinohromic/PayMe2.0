@@ -3,6 +3,9 @@ package com.example.payme20.views;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.telephony.PhoneNumberFormattingTextWatcher;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -31,6 +34,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 
 public class EventCreateView extends AppCompatActivity {
@@ -38,7 +42,6 @@ public class EventCreateView extends AppCompatActivity {
     TextInputEditText eventName;
 
     Spinner memberSpinner;
-    EditText eventDate;
     RadioGroup paymentType;
     LinearLayout container;
     Button createEvent;
@@ -53,6 +56,7 @@ public class EventCreateView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.creare_event);
         group = ((Group) getIntent().getSerializableExtra("GROUP"));
+        System.out.println(group.getGroupEvents());
         initiate();
         ViewModelFactory vmFactory = new ViewModelFactory();
         vmFactory.add(new EventCreateViewmodel(group));
@@ -108,12 +112,16 @@ public class EventCreateView extends AppCompatActivity {
     }
 
     private void initEventName() {
-        eventName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        eventName.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if(!hasFocus) {
-                    ecViewmodel.setEventName(eventName.getText().toString());
-                }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+                ecViewmodel.setEventName(Objects.requireNonNull(eventName.getText()).toString());
             }
         });
     }
@@ -162,12 +170,17 @@ public class EventCreateView extends AppCompatActivity {
         });
 
         EditText amount = view.findViewById(R.id.eventMemberAmount);
-        amount.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+        amount.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if(!hasFocus) {
-                    ecViewmodel.setMemberPayment(Integer.parseInt(amount.getText().toString()), (String) name);
-                }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+                ecViewmodel.setMemberPayment(Integer.parseInt(amount.getText().toString()), (String) name);
             }
         });
     }
