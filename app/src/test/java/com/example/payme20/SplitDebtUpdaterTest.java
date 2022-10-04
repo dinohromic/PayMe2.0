@@ -26,9 +26,9 @@ public class SplitDebtUpdaterTest {
 
     @Before
     public void init(){
-        user1 = new Member("User1", "100");
-        user2 = new Member("User2", "200");
-        user3 = new Member("User3", "300");
+        user1 = new Member("User1", "100", -1);
+        user2 = new Member("User2", "200", -1);
+        user3 = new Member("User3", "300", -1);
         group = new Group("TestGroup", new ArrayList<>());
         group.addNewGroupMember(user1);
         group.addNewGroupMember(user2);
@@ -36,7 +36,7 @@ public class SplitDebtUpdaterTest {
         debtMap.put(user1, 332);
         debtMap.put(user2, 0);
         debtMap.put(user3, 0);
-        this.testEvent= new Event("TestEvent", debtMap, user1, new SplitDebtUpdater());
+        this.testEvent= new Event("TestEvent", debtMap, user1, new SplitDebtUpdater(), "");
         group.addEvent(testEvent);
     }
     @Test

@@ -25,9 +25,9 @@ public class DetailDebtUpdaterTest {
 
     @Before
     public void init(){
-        user1 = new Member("User1", "100");
-        user2 = new Member("User2", "200");
-        user3 = new Member("User3", "300");
+        user1 = new Member("User1", "100", -1);
+        user2 = new Member("User2", "200", -1);
+        user3 = new Member("User3", "300", -1);
         group = new Group("TestGroup",new ArrayList<>());
         group.addNewGroupMember(user1);
         group.addNewGroupMember(user2);
@@ -35,7 +35,7 @@ public class DetailDebtUpdaterTest {
         debtMap.put(user1, 150);
         debtMap.put(user2, 300);
         debtMap.put(user3, 120);
-        payMeModel.createNewGroupEvent(group, debtMap, "Test", user3, new DetailedDebtUpdater());
+        payMeModel.createNewGroupEvent(group, debtMap, "Test", user3, new DetailedDebtUpdater(), "");
     }
 
     /*
