@@ -78,7 +78,7 @@ public class MemberFragmentGroupPage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View groupFragmentView = inflater.inflate(R.layout.fragment_member_group_page, container, false);
         initializeWidgetsFragmentMembers(groupFragmentView);
-        setAddNewMemberListener();
+        setAddNewMemberListener(createNewMemberButton);
         populateMemberContainer();
         return groupFragmentView;
     }
@@ -104,39 +104,14 @@ public class MemberFragmentGroupPage extends Fragment {
         this.createNewMemberButton = fragmentView.findViewById(R.id.addMemberButtonFragment);
     }
 
-    private void setAddNewMemberListener(){
-        this.createNewMemberButton.setOnClickListener(new View.OnClickListener() {
+    private void setAddNewMemberListener(Button createNewMemberButton){
+        createNewMemberButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
-                View dialogView = getLayoutInflater().inflate(R.layout.alert_dialog_view, null);
-                EditText editMemberName = dialogView.findViewById(R.id.editTextTextPersonName);
-                EditText editPhoneNumber = dialogView.findViewById(R.id.editTextPhoneGP);
-                Button alertButton = dialogView.findViewById(R.id.createNewMember);
-                alertButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if(TextUtils.isEmpty(editMemberName.getText().toString()) && TextUtils.isEmpty(editPhoneNumber.getText().toString())){
-                            Toast.makeText(getActivity(), "Empty text fields not allowed",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                        else{
-                            // do something
-                        }
-
-                    }
-                });
-
-                dialogBuilder.setView(dialogView);
+                OpenViewHelper.openViewPutExtra(createNewMembersView.class,getActivity(),group);
             }
         });
     }
-
-    private void populateAddMemberDialog (){
-
-    }
-
-
 
     private void setMemberCardListener(Member member, View cardView){
         cardView.setOnClickListener(new View.OnClickListener() {
