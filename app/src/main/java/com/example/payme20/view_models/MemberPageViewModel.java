@@ -4,15 +4,18 @@ import androidx.lifecycle.ViewModel;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
 import com.example.payme20.model.PayMeModel;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class MemberPageViewModel extends ViewModel {
 
     Member currentMember;
     Group belongsToGroup;
     Map<Member, Integer> debtMap;
-    PayMeModel payMeModel = new PayMeModel();
+    PayMeModel payMeModel = PayMeModel.INSTANCE;
 
     public MemberPageViewModel(Member memberOnPage, Group group){
         this.currentMember = memberOnPage;
@@ -21,7 +24,15 @@ public class MemberPageViewModel extends ViewModel {
     }
 
     public Group getGroup(){
-        return new Group(belongsToGroup.getGroupName(), belongsToGroup.getGroupMembers());
+        return this.belongsToGroup;
+    }
+
+    public Member getCurrentMember(){
+        return this.currentMember;
+    }
+
+    public List<Member> getGroupMembers(){
+        return this.belongsToGroup.getGroupMembers();
     }
 
     public String getMemberName(Member member){
@@ -31,6 +42,7 @@ public class MemberPageViewModel extends ViewModel {
     public String getCurrentUserProfileName(){
         return this.currentMember.getUserName();
     }
+
     public String getPhoneNumber(){
         return this.currentMember.getPhoneNumber();
     }
@@ -40,16 +52,11 @@ public class MemberPageViewModel extends ViewModel {
             this.currentMember.setUserName(newName);
         }
     }
+
     public void setNewPhoneNumber(String newPhoneNumber){
         if(newPhoneNumber != null){
             this.currentMember.setPhoneNumber(newPhoneNumber);
         }
-    }
-
-    public List<Member> getExcludeCurrentMemberList(){
-        List<Member> groupMembers = this.belongsToGroup.getGroupMembers();
-        groupMembers.remove(this.currentMember);
-        return groupMembers;
     }
 
     public int getMemberTotalDebt(){

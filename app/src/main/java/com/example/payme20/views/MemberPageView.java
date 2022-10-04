@@ -5,13 +5,17 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.payme20.R;
+import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.view_models.MemberPageViewModel;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
+
+import java.util.Objects;
 
 public class MemberPageView extends AppCompatActivity {
 
@@ -19,7 +23,7 @@ public class MemberPageView extends AppCompatActivity {
     private TextView userName, totalDebt;
     private MemberPageViewModel memberPageViewModel;
     private LinearLayout cardContainer;
-
+    private ImageButton memberPageReturnButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -33,8 +37,19 @@ public class MemberPageView extends AppCompatActivity {
 
     private void initializeViewModel(){
         Group belongsToGroup = (Group) getIntent().getSerializableExtra("GROUP_KEY");
-        Member currentMember = (Member) getIntent().getSerializableExtra("MEMBER_KEY");
-        this.memberPageViewModel = new MemberPageViewModel(currentMember, belongsToGroup);
+        Member member = (Member) getIntent().getSerializableExtra("MEMBER_KEY");
+        Member profileMember = findMemberReferenceInGroup(belongsToGroup, member);
+        this.memberPageViewModel = new MemberPageViewModel(profileMember, belongsToGroup);
+    }
+
+    private Member findMemberReferenceInGroup(Group group, Member memberToFind){
+        Member memberByReference = new Member("This doesn't feel like good code", "1337", 1337);
+        for (Member member :group.getGroupMembers()) {
+            if(Objects.equals(memberToFind.getUserName(), member.getUserName()) && Objects.equals(memberToFind.getPhoneNumber(), member.getPhoneNumber())){
+                memberByReference = member;
+            }
+        }
+        return memberByReference;
     }
 
     private void populateView() {
@@ -52,11 +67,14 @@ public class MemberPageView extends AppCompatActivity {
         this.newUserName = findViewById(R.id.memberPageEditName);
         this.totalDebt = findViewById(R.id.memberPageTotalDebt);
         this.cardContainer = findViewById(R.id.memberPageCardCointainer);
+        this.memberPageReturnButton = findViewById(R.id.memberPageReturnButton);
     }
     private void populateCardContainer(){
-        for (Member groupMember: memberPageViewModel.getExcludeCurrentMemberList()) {
-            View card = createCard(groupMember);
-            this.cardContainer.addView(card);
+        for (Member groupMember: memberPageViewModel.getGroupMembers()) {
+            if(!(groupMember.equals(memberPageViewModel.getCurrentMember()))){
+                View card = createCard(groupMember);
+                this.cardContainer.addView(card);
+            }
         }
     }
 
@@ -78,6 +96,7 @@ public class MemberPageView extends AppCompatActivity {
     private void setListenerOnWidgets(){
         userNameListener();
         phoneNumberListener();
+        returnListener();
     }
 
     private void userNameListener(){
@@ -101,6 +120,14 @@ public class MemberPageView extends AppCompatActivity {
             public void onFocusChange(View view, boolean b) {
                 memberPageViewModel.setNewPhoneNumber(newPhoneNumber.getText().toString());
                 newPhoneNumber.setText(memberPageViewModel.getPhoneNumber());
+            }
+        });
+    }
+    private void returnListener(){
+        this.memberPageReturnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OpenViewHelper.openViewPutExtra(GroupPageView.class, getApplicationContext(), memberPageViewModel.getGroup());
             }
         });
     }
