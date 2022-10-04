@@ -29,12 +29,11 @@ public class GroupPageView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.group_page);
-        groupPageGroupName = findViewById(R.id.groupPageGroupName);
+        findViewForWidgets();
+
         Group myObject = (Group) getIntent().getSerializableExtra("GROUP_KEY");
         groupPageGroupName.setText(myObject.getGroupName());
-        groupPageTabs = findViewById(R.id.groupPageTabLayout);
-        groupPageViewPager= findViewById(R.id.groupPageViewPager);
-        groupPageTabs.setupWithViewPager(groupPageViewPager);
+
 
         GroupPageAdapter gpAdapter = new GroupPageAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         eventFragmentGroupPage = new EventFragmentGroupPage();
@@ -46,17 +45,23 @@ public class GroupPageView extends AppCompatActivity {
         gpAdapter.addGroupPageFragments(memberFragmentGroupPage, "Members");
 
         groupPageViewPager.setAdapter(gpAdapter);
+        this.groupPageTabs.setupWithViewPager(groupPageViewPager);
 
-        initializeView();
-        setListenerReturnButton(this.returnButton);
+        setListenerReturnButton();
     }
 
-    private void initializeView(){
+
+
+    private void findViewForWidgets(){
+        this.groupPageGroupName = findViewById(R.id.groupPageGroupName);
         this.returnButton =  findViewById(R.id.groupPageReturnButton);
+        this.groupPageTabs = findViewById(R.id.groupPageTabLayout);
+        this.groupPageViewPager= findViewById(R.id.groupPageViewPager);
+
     }
 
-    private void setListenerReturnButton(ImageButton returnButton){
-        returnButton.setOnClickListener(new View.OnClickListener() {
+    private void setListenerReturnButton(){
+        this.returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 OpenViewHelper.openView(GroupListView.class, getApplicationContext());
