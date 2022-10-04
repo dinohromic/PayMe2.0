@@ -31,7 +31,7 @@ public class GroupTest {
         group.addNewGroupMember(user1);
         group.addNewGroupMember(user2);
         group.addNewGroupMember(user3);
-        payMeModel = new PayMeModel();
+        payMeModel = PayMeModel.INSTANCE;
     }
 
     @Test

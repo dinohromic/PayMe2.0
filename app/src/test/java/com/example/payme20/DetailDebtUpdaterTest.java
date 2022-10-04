@@ -21,7 +21,7 @@ public class DetailDebtUpdaterTest {
     Member user3;
     Group group;
     HashMap<Member, Integer> debtMap = new HashMap<Member, Integer>();
-    PayMeModel payMeModel = new PayMeModel();
+    PayMeModel payMeModel = PayMeModel.INSTANCE;
 
     @Before
     public void init(){

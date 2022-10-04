@@ -22,7 +22,7 @@ public class SplitDebtUpdaterTest {
     Group group;
     Map<Member, Integer> debtMap = new HashMap<Member, Integer>();
     Event testEvent;
-    PayMeModel payMeModel = new PayMeModel();
+    PayMeModel payMeModel = PayMeModel.INSTANCE;
 
     @Before
     public void init(){

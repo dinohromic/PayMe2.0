@@ -2,13 +2,10 @@ package com.example.payme20.model;
 
 import java.util.Map;
 
-public class PayMeModel {
-    private static PayMeModel instance;
+public enum PayMeModel {
+    INSTANCE;
 
-    public static PayMeModel getInstance() {
-        if(instance == null)
-            instance = new PayMeModel();
-        return instance;
+    PayMeModel(){
     }
 
     public void createNewGroupEvent(Group group, Map<Member, Integer> debtMap, String eventName, Member payer, IDebtUpdater iDebtUpdater, String date) {

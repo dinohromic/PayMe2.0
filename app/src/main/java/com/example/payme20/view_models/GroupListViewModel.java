@@ -39,7 +39,7 @@ public class GroupListViewModel {
         members.add(test5);
 
         Group grekland = new Group("Grekland", members);
-        PayMeModel model = new PayMeModel();
+        PayMeModel model = PayMeModel.INSTANCE;
         model.createNewGroupEvent(grekland, costMap,"fun", test1, new DetailedDebtUpdater(), "");
 
         test.add(grekland);

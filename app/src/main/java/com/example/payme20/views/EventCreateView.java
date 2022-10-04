@@ -71,6 +71,7 @@ public class EventCreateView extends AppCompatActivity {
             String date = makeDateString(day, month, year);
             dateButton.setText(date);
             ecViewmodel.setDate(date);
+            System.out.println(date);
         };
 
         Calendar calendar = Calendar.getInstance();
@@ -89,6 +90,8 @@ public class EventCreateView extends AppCompatActivity {
             }
         });
         dateButton.setText(getTodaysDate());
+        ecViewmodel.setDate(getTodaysDate());
+        System.out.println(getTodaysDate());
     }
 
     private String getTodaysDate() {
