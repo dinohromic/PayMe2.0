@@ -76,4 +76,8 @@ public class Event implements Serializable {
     public String getEventDate() {
         return this.date;
     }
+
+    public IDebtUpdater getdebtUpdater() {
+        return this.debtUpdater;
+    }
 }

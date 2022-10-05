@@ -93,4 +93,9 @@ public class SplitDebtUpdater implements IDebtUpdater, Serializable {
         }
         return eventDebtList;
     }
+
+    @Override
+    public String toString() {
+        return "Split";
+    }
 }
