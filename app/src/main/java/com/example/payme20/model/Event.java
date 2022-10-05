@@ -5,8 +5,10 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+//TODO better description
 /**
- *
+ *  An event holds data about who participated, how much was paid, if the event is active, the
+ *  date the event took place ....
  */
 public class Event implements Serializable {
     private final Map<Member, Integer> eventPaymentDetails;

@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ *
+ */
 public class DebtCalculator implements Serializable {
     public int calcMemberTotalDebt(Member member, DebtHandler dh) {
         int totalDebt = 0;
