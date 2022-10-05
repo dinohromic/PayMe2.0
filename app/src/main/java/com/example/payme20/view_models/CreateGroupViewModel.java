@@ -6,10 +6,10 @@ import com.example.payme20.model.Member;
 
 import java.util.ArrayList;
 
-public class createGroupViewModel {
+public class CreateGroupViewModel {
     ArrayList<Member> membersList = new ArrayList<>();
     private Group group;
-    public createGroupViewModel(){
+    public CreateGroupViewModel(){
     }
     public void addMembers(String memberName, String memberNumbber, int id){
         membersList.add(Factory.createMember(memberName, memberNumbber, id));

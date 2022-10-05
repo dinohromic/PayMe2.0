@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ *
+ */
 public class SplitDebtUpdater implements IDebtUpdater, Serializable {
     @Override
     public List<Debt> updateDebts(Map<Member, Integer> eventMemberPaidAmount, Member payer) {
@@ -28,6 +31,12 @@ public class SplitDebtUpdater implements IDebtUpdater, Serializable {
         return total;
     }
 
+    /**
+     *
+     * @param totalGroupCost
+     * @param memberSize
+     * @return
+     */
     private int calcDividedCost(int totalGroupCost, int memberSize){
         int dividedCost = 0;
         try{dividedCost = totalGroupCost / memberSize;}
