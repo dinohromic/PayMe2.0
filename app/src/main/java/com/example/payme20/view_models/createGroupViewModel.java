@@ -18,7 +18,6 @@ public class CreateGroupViewModel {
         this.group = Factory.createGroup(groupName,membersList);
     }
     public Group getGroup(){
-        int a = 1;
         return group;
     }
 
