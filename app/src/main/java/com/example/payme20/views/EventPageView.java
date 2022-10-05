@@ -34,11 +34,13 @@ public class EventPageView extends AppCompatActivity {
         setContentView(R.layout.event_page);
         initWidgets();
         initViewModel();
+
     }
 
     private void initViewModel() {
         Group belongsToGroup = (Group) getIntent().getSerializableExtra("GROUP_KEY");
         Event event = (Event) getIntent().getSerializableExtra("EVENT_KEY");
+        this.epViewmodel = new EventPageViewModel(belongsToGroup, event);
     }
 
     private void initWidgets() {
