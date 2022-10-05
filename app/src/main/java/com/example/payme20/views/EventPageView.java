@@ -24,7 +24,7 @@ public class EventPageView extends AppCompatActivity {
     private TextView eventPayment;
     private ImageButton returnButton;
     private LinearLayout memberContainer;
-    private EventPageViewModel epViewmodel;
+    private EventPageViewModel eventPageViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -38,11 +38,11 @@ public class EventPageView extends AppCompatActivity {
     }
 
     private void initEventMembersCards() {
-        pouplateList();
+        populateList();
     }
 
-    private void pouplateList() {
-        for (Map.Entry<Member, Integer> memberMap: epViewmodel.getEventPaymentDetails().entrySet()) {
+    private void populateList() {
+        for (Map.Entry<Member, Integer> memberMap: eventPageViewModel.getEventPaymentDetails().entrySet()) {
             Member member = memberMap.getKey();
             int amount = memberMap.getValue();
             addCard(member, amount);
@@ -62,17 +62,17 @@ public class EventPageView extends AppCompatActivity {
         this.returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                OpenViewHelper.openViewPutExtra(GroupPageView.class, EventPageView.this, epViewmodel.getGroup());
+                OpenViewHelper.openViewPutExtra(GroupPageView.class, EventPageView.this, eventPageViewModel.getGroup());
             }
         });
     }
 
     private void populateView() {
-        String eventName = epViewmodel.getEventName();
-        String eventDate = "Date: " + epViewmodel.getEventDate();
-        int totalGroupAMount = epViewmodel.getEventTotalPrice();
-        String payer = String.format("%s paid a total of %d kr for this event", epViewmodel.getPayerName(), totalGroupAMount);
-        String paymentType = "Payment of this event was: " + epViewmodel.getEventPaymentType();
+        String eventName = eventPageViewModel.getEventName();
+        String eventDate = "Date: " + eventPageViewModel.getEventDate();
+        int totalGroupAMount = eventPageViewModel.getEventTotalPrice();
+        String payer = String.format("%s paid a total of %d kr for this event", eventPageViewModel.getPayerName(), totalGroupAMount);
+        String paymentType = "Payment of this event was: " + eventPageViewModel.getEventPaymentType();
         this.eventName.setText(eventName);
         this.eventDate.setText(eventDate);
         this.eventPayment.setText(paymentType);
@@ -83,7 +83,7 @@ public class EventPageView extends AppCompatActivity {
     private void initViewModel() {
         Group belongsToGroup = (Group) getIntent().getSerializableExtra("GROUP_KEY");
         Event event = (Event) getIntent().getSerializableExtra("EVENT_KEY");
-        this.epViewmodel = new EventPageViewModel(belongsToGroup, event);
+        this.eventPageViewModel = new EventPageViewModel(belongsToGroup, event);
     }
 
     private void initWidgets() {

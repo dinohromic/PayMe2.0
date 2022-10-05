@@ -3,28 +3,20 @@ package com.example.payme20.views;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.example.payme20.R;
 import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.model.Event;
 import com.example.payme20.model.Group;
 
-import org.w3c.dom.Text;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link EventFragmentGroupPage#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class EventFragmentGroupPage extends Fragment {
-    private Button createNewEvent;
+    private Button createNewEventButton;
     private Group group;
     private LinearLayout eventContainer;
 
@@ -66,18 +58,14 @@ public class EventFragmentGroupPage extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_event_group_page, null);
         initWidgetsEventFragment(view);
-        setAddNewEventListener(createNewEvent);
+        setAddNewEventListener(createNewEventButton);
         populateEventContainer();
-
         return view;
     }
 
@@ -110,9 +98,6 @@ public class EventFragmentGroupPage extends Fragment {
         createNewEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               /* Intent intent = new Intent(getActivity(), EventCreateView.class);
-                intent.putExtra("GROUP", group);
-                startActivity(intent);*/
                 OpenViewHelper.openViewPutExtra(EventCreateView.class, getActivity(), group);
             }
         });
@@ -120,7 +105,7 @@ public class EventFragmentGroupPage extends Fragment {
 
     private void initWidgetsEventFragment(View view) {
         this.eventContainer = view.findViewById(R.id.eventFragmentContainer);
-        this.createNewEvent = (Button) view.findViewById(R.id.addEventButton);
+        this.createNewEventButton = (Button) view.findViewById(R.id.addEventButton);
     }
 
     public void setGroup(Group group) {

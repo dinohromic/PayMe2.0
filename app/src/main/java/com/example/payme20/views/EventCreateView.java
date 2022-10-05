@@ -1,6 +1,5 @@
 package com.example.payme20.views;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.Editable;
@@ -24,13 +23,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.payme20.R;
+import com.example.payme20.helpers.DatePickerDialogHelper;
 import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.view_models.EventCreateViewmodel;
 import com.example.payme20.view_models.ViewModelFactory;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
 import com.google.android.material.textfield.TextInputEditText;
-import java.util.Calendar;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -46,6 +46,7 @@ public class EventCreateView extends AppCompatActivity {
     private Button dateButton;
     private DatePickerDialog datePickerDialog;
     private EventCreateViewmodel ecViewmodel;
+    private final DatePickerDialogHelper datePickerDialogHelper = new DatePickerDialogHelper();
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -58,9 +59,9 @@ public class EventCreateView extends AppCompatActivity {
         initEventMembersCards();
         initCreateButton();
         initEventName();
-        initDatePicker();
+        initDatePickerDialog();
+        setCurrentDateOnView();
     }
-
 
     private Group retrieveIntentGroup(){
         return (Group) getIntent().getSerializableExtra("GROUP_KEY");
@@ -72,41 +73,24 @@ public class EventCreateView extends AppCompatActivity {
         ecViewmodel = new ViewModelProvider(this, vmFactory).get(EventCreateViewmodel.class);
     }
 
-    private void initDatePicker() {
+    private void initDatePickerDialog() {
+        DatePickerDialog.OnDateSetListener dataSetListener = listenerForDateButton();
+        this.datePickerDialog = datePickerDialogHelper.initiateDatePickerDialog(dataSetListener, this);
+        this.dateButton.setOnClickListener(view -> this.datePickerDialog.show());
+    }
+
+    private DatePickerDialog.OnDateSetListener listenerForDateButton(){
         DatePickerDialog.OnDateSetListener dataSetListener = (datePicker, year, month, day) -> {
             month = month + 1;
-            String date = makeDateString(day, month, year);
-            dateButton.setText(date);
-            ecViewmodel.setDate(date);
-            System.out.println(date);
+            this.dateButton.setText(datePickerDialogHelper.makeDateString(day, month, year));
+            this.ecViewmodel.setDate(datePickerDialogHelper.makeDateString(day, month, year));
         };
-
-        Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-
-        int style = AlertDialog.THEME_HOLO_LIGHT;
-
-        datePickerDialog = new DatePickerDialog(this, style, dataSetListener, year, month, day);
-        datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
-        dateButton.setOnClickListener(view -> datePickerDialog.show());
-        dateButton.setText(getTodaysDate());
-        ecViewmodel.setDate(getTodaysDate());
-        System.out.println(getTodaysDate());
+        return dataSetListener;
     }
 
-    private String getTodaysDate() {
-        Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        month = month + 1;
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        return makeDateString(day, month, year);
-    }
-
-    private String makeDateString(int day, int month, int year) {
-        return day + "-" + month + "-" + year;
+    private void setCurrentDateOnView(){
+        this.dateButton.setText(datePickerDialogHelper.getCurrentDate());
+        this.ecViewmodel.setDate(datePickerDialogHelper.getCurrentDate());
     }
 
     private void initEventName() {
@@ -178,10 +162,6 @@ public class EventCreateView extends AppCompatActivity {
                 updateMemberSpinner();
             }
         });
-
-
-
-
 
         amount.addTextChangedListener(new TextWatcher() {
             @Override

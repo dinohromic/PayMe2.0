@@ -18,10 +18,10 @@ import java.util.ArrayList;
 
 public class GroupListView extends AppCompatActivity {
 
-    GroupListViewModel groupListViewModel;
-    ImageButton currentGroupsReturnButton;
-    FloatingActionButton createGroupFAB;
-    LinearLayout container;
+    private GroupListViewModel groupListViewModel;
+    private ImageButton currentGroupsReturnButton;
+    private FloatingActionButton createGroupFAB; //FAB = Floating Action Button
+    private LinearLayout groupCardContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -36,22 +36,27 @@ public class GroupListView extends AppCompatActivity {
 
     private void populateGroupList(ArrayList<Group> groups) {
         for(int i = 0; i < groups.size(); i++){
-            addCard(groups.get(i));
+            createCardForContainer(groups.get(i));
         }
     }
 
     private void initWidgets() {
         this.currentGroupsReturnButton = findViewById(R.id.currentGorupsReturnButton);
         this.createGroupFAB = findViewById(R.id.createGroupFAB);
-        this.container = findViewById(R.id.groupListContainer);
+        this.groupCardContainer = findViewById(R.id.groupListContainer);
     }
 
-    private void addCard(Group group) {
-        View view = getLayoutInflater().inflate(R.layout.group_card_view, null);
-        TextView groupName = view.findViewById(R.id.activeGroupsName);
+    private void createCardForContainer(Group group) {
+        View cardView = createCard(group);
+        groupCardContainer.addView(cardView);
+    }
+
+    private View createCard(Group group){
+        View cardView = getLayoutInflater().inflate(R.layout.group_card_view, null);
+        TextView groupName = cardView.findViewById(R.id.activeGroupsName);
         groupName.setText(groupListViewModel.getGroupName(group));
-        setListenerOnGroupCard(view, group);
-        container.addView(view);
+        setListenerOnGroupCard(cardView, group);
+        return cardView;
     }
 
     private void setListenerOnGroupCard(View viewToGetListener, Group group){
