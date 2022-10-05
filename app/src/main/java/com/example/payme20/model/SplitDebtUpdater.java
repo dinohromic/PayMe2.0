@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- *
+ * SplitDebtUpdater splits the events debts even and returns them in a list
  */
 public class SplitDebtUpdater implements IDebtUpdater, Serializable {
     @Override
@@ -23,6 +23,11 @@ public class SplitDebtUpdater implements IDebtUpdater, Serializable {
         return createEventDebtList(payer, updatedMap);
     }
 
+    /**
+     * calcTotalGroupCost adds all members expenditures into one whole
+     * @param eventMemberPaidAmount is a map that holds members and how much they paid in integers
+     * @return returns an integer of the total cost
+     */
     private int calcTotalGroupCost(Map<Member, Integer> eventMemberPaidAmount) {
         int total = 0;
         for (Map.Entry<Member, Integer> mapValue: eventMemberPaidAmount.entrySet()) {
@@ -32,10 +37,10 @@ public class SplitDebtUpdater implements IDebtUpdater, Serializable {
     }
 
     /**
-     *
-     * @param totalGroupCost
-     * @param memberSize
-     * @return
+     * calcDividedCost divides the total groups cost with the amount of members
+     * @param totalGroupCost the total amount the group paid for
+     * @param memberSize amount of members in the event
+     * @return returns a divided cost
      */
     private int calcDividedCost(int totalGroupCost, int memberSize){
         int dividedCost = 0;
@@ -43,6 +48,15 @@ public class SplitDebtUpdater implements IDebtUpdater, Serializable {
         catch (ArithmeticException e){System.out.println("Division by zero in SplitDebtUpdater.Class");}
         return dividedCost;
     }
+
+    /**
+     * distributeRest allocates the rest after dividing with integer
+     * @param totalGroupCost the total amount the group paid for
+     * @param dividedcost divided cost of the event
+     * @param map is a map that holds members and how much they paid in integers
+     * @param membersList members that is part of the event
+     * @return returns a map containing updated debts and members
+     */
     private Map<Member, Integer> distributeRest(int totalGroupCost, int dividedcost, Map<Member, Integer> map, List<Member> membersList) {
         int memberSize = map.size();
         int rest = totalGroupCost - dividedcost*memberSize;
@@ -63,6 +77,12 @@ public class SplitDebtUpdater implements IDebtUpdater, Serializable {
         return updatedMap;
     }
 
+    /**
+     * createEventDebtList creates debt-object and adds to a list
+     * @param memberToGetPaid the person that paid for the event
+     * @param updatedMap updated map that contains members and amount they paid in the event
+     * @return returns a list of debt-objects
+     */
     private List<Debt> createEventDebtList(Member memberToGetPaid, Map<Member, Integer> updatedMap){
         List<Debt> eventDebtList = new ArrayList<>();
         for (Map.Entry<Member, Integer> debtMap: updatedMap.entrySet()) {
