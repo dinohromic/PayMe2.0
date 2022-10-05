@@ -137,6 +137,9 @@ public class EventCreateView extends AppCompatActivity {
                 if(TextUtils.isEmpty(eventName.getText().toString())){
                     Toast.makeText(EventCreateView.this,"Event name needed", Toast.LENGTH_SHORT).show();
                 }
+                else if(ecViewmodel.getEventMembers().size()<2){
+                    Toast.makeText(EventCreateView.this,"At least 2 members required ", Toast.LENGTH_SHORT).show();
+                }
                 else{
                     ecViewmodel.createEvent();
                 }
@@ -172,7 +175,6 @@ public class EventCreateView extends AppCompatActivity {
                 if(!b) {
                     ecViewmodel.removeEventMember((String) name);
                     amount.setEnabled(false);
-                    //amount.setHintTextColor(F6F6F6);
                 }
                 if(b) {
                     ecViewmodel.addEventMember((String) name);
