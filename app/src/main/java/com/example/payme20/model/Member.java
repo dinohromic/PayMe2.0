@@ -11,7 +11,6 @@ public class Member implements Serializable {
     private int id;
     private String userName;
     private String phoneNumber;
-
     /**
      * Create a new member
      * @param userName Create the member with the given user name
