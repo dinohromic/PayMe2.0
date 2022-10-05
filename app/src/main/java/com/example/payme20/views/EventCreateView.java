@@ -2,9 +2,7 @@ package com.example.payme20.views;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -14,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -33,8 +30,6 @@ import com.example.payme20.view_models.ViewModelFactory;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
-
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -43,34 +38,38 @@ import java.util.Objects;
 
 public class EventCreateView extends AppCompatActivity {
 
-    TextInputEditText eventName;
-
-    Spinner memberSpinner;
-    RadioGroup paymentType;
-    LinearLayout container;
-    Button createEvent;
-    Button dateButton;
-    DatePickerDialog datePickerDialog;
-
-    EventCreateViewmodel ecViewmodel;
-    Group group;
+    private TextInputEditText eventNameInput;
+    private Spinner memberSpinner;
+    private RadioGroup paymentType;
+    private LinearLayout cardContainer;
+    private Button createEventButton;
+    private Button dateButton;
+    private DatePickerDialog datePickerDialog;
+    private EventCreateViewmodel ecViewmodel;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.creare_event);
-        group = ((Group) getIntent().getSerializableExtra("GROUP_KEY"));
-        System.out.println(group.getGroupEvents());
         initiate();
-        ViewModelFactory vmFactory = new ViewModelFactory();
-        vmFactory.add(new EventCreateViewmodel(group));
-        ecViewmodel = new ViewModelProvider(this, vmFactory).get(EventCreateViewmodel.class);
+        createViewModel();
         initPaymentType();
         initMemberSpinner();
         initEventMembersCards();
         initCreateButton();
         initEventName();
         initDatePicker();
+    }
+
+
+    private Group retrieveIntentGroup(){
+        return (Group) getIntent().getSerializableExtra("GROUP_KEY");
+    }
+
+    private void createViewModel(){
+        ViewModelFactory vmFactory = new ViewModelFactory();
+        vmFactory.add(new EventCreateViewmodel(retrieveIntentGroup()));
+        ecViewmodel = new ViewModelProvider(this, vmFactory).get(EventCreateViewmodel.class);
     }
 
     private void initDatePicker() {
@@ -91,12 +90,7 @@ public class EventCreateView extends AppCompatActivity {
 
         datePickerDialog = new DatePickerDialog(this, style, dataSetListener, year, month, day);
         datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
-        dateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                datePickerDialog.show();
-            }
-        });
+        dateButton.setOnClickListener(view -> datePickerDialog.show());
         dateButton.setText(getTodaysDate());
         ecViewmodel.setDate(getTodaysDate());
         System.out.println(getTodaysDate());
@@ -116,7 +110,7 @@ public class EventCreateView extends AppCompatActivity {
     }
 
     private void initEventName() {
-        eventName.addTextChangedListener(new TextWatcher() {
+        eventNameInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
@@ -125,16 +119,16 @@ public class EventCreateView extends AppCompatActivity {
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                ecViewmodel.setEventName(Objects.requireNonNull(eventName.getText()).toString());
+                ecViewmodel.setEventName(Objects.requireNonNull(eventNameInput.getText()).toString());
             }
         });
     }
 
     private void initCreateButton() {
-        createEvent.setOnClickListener(new View.OnClickListener() {
+        createEventButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(TextUtils.isEmpty(eventName.getText().toString())){
+                if(TextUtils.isEmpty(eventNameInput.getText().toString())){
                     Toast.makeText(EventCreateView.this,"Event name needed", Toast.LENGTH_SHORT).show();
                 }
                 else if(ecViewmodel.getEventMembers().size()<2){
@@ -164,7 +158,7 @@ public class EventCreateView extends AppCompatActivity {
         TextView name = view.findViewById(R.id.eventMemberName);
         name.setText(m.getUserName());
         setListenersOnEventMemberCard(view, name.getText());
-        container.addView(view);
+        cardContainer.addView(view);
     }
 
     private void setListenersOnEventMemberCard(View view, CharSequence name) {
@@ -206,17 +200,6 @@ public class EventCreateView extends AppCompatActivity {
         });
     }
 
-//    private void disableEditText(EditText editText) {
-//        editText.setEnabled(false);
-//        editText.setCursorVisible(false);
-//        editText.setBackgroundColor(Color.TRANSPARENT);
-//    }
-//    private void enableEditText(EditText editText) {
-//        editText.setFocusable(true);
-//        editText.setEnabled(true);
-//        editText.setCursorVisible(true);
-//    }
-
     private void initMemberSpinner() {
         updateMemberSpinner();
         memberSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -256,11 +239,11 @@ public class EventCreateView extends AppCompatActivity {
     }
 
     private void initiate(){
-        this.eventName = findViewById(R.id.eventName);
+        this.eventNameInput = findViewById(R.id.eventName);
         this.dateButton = findViewById(R.id.datePickerButton);
         this.paymentType = findViewById(R.id.paymentType);
         this.memberSpinner = findViewById(R.id.chooseMemberSpinner);
-        this.container = findViewById(R.id.eventMembersContainer);
-        this.createEvent = findViewById(R.id.buttonCreateEvent);
+        this.cardContainer = findViewById(R.id.eventMembersContainer);
+        this.createEventButton = findViewById(R.id.buttonCreateEvent);
     }
 }
