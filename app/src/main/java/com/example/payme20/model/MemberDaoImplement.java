@@ -60,12 +60,13 @@ public class MemberDaoImplement extends SQLiteOpenHelper implements MemberDAO {
 
     @Override
     public void addGroupMembers(Member member) {
+        System.out.println("Hejdå");
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put(COLUMN_ID, member.getId());
         values.put(COLUMN_MEMBER_NAME, member.getUserName());
         values.put(COLUMN_MEMBER_PHONE_NUMBER, member.getPhoneNumber());
         db.insert(MEMBER_TABLE, null, values);
-
         db.close();
 
     }
