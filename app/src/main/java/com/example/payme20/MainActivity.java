@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SwitchCompat;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -28,9 +29,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initiateClickable();
+        switchCompat = findViewById(R.id.switch1);
+        if ((getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES) {
+            switchCompat.setEnabled(true);
+        }
         setOpenViewListener(this.openGroupListButton, GroupListView.class);
         setOpenViewListener(this.createGroupButton, MemberView.class);
-        switchCompat = findViewById(R.id.switch1);
+
         switchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -49,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         this.openGroupListButton = findViewById(R.id.groupPageButton);
         this.createGroupButton = findViewById(R.id.addMemberButton);
     }
+
 
     private void setOpenViewListener(Button openButton, Class<?> viewToOpen){
         openButton.setOnClickListener(new View.OnClickListener() {
