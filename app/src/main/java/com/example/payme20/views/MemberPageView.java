@@ -35,10 +35,8 @@ public class MemberPageView extends AppCompatActivity {
 
     private void initializeViewModel(){
         Group belongsToGroup = (Group) getIntent().getSerializableExtra("GROUP_KEY");
-        this.memberPageViewModel = new MemberPageViewModel(belongsToGroup);
         Member member = (Member) getIntent().getSerializableExtra("MEMBER_KEY");
-        Member profileMember = memberPageViewModel.findCorrectMemberReferenceInGroup(belongsToGroup, member);
-        this.memberPageViewModel.addCurrentProfileMember(profileMember);
+        this.memberPageViewModel = new MemberPageViewModel(belongsToGroup, member);
     }
 
     private void populateView() {

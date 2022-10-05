@@ -15,13 +15,10 @@ public class MemberPageViewModel extends ViewModel {
     Map<Member, Integer> currentGroupDebtsMap;
     PayMeModel payMeModel = PayMeModel.INSTANCE;
 
-    public MemberPageViewModel(Group group){
+    public MemberPageViewModel(Group group, Member member){
         this.belongsToGroup = group;
+        this.currentProfileMember = findCorrectMemberReferenceInGroup(group, member);
         this.currentGroupDebtsMap = getCurrentGroupDebtsMap();
-    }
-
-    public void addCurrentProfileMember(Member profileMember){
-        this.currentProfileMember = Objects.requireNonNull(profileMember);
     }
 
     //TODO Remove this and replace with finding the same ID when we got the functioning
