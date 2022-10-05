@@ -8,10 +8,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.example.payme20.view_models.CreateGroupViewModel;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,8 @@ public class MemberDaoImplement extends SQLiteOpenHelper implements MemberDAO {
     private static final String COLUMN_MEMBER_PHONE_NUMBER = "MEMBER_PHONE_NUMBER";
     private static final String COLUMN_ID = "ID";
     private static final String DB_PATH = "members.db";
-    private CreateGroupViewModel createGroupViewModel;
+    private DataSource dataSource = new DataSource();
+
 
 
     public MemberDaoImplement(@Nullable Context context) {
@@ -60,14 +62,14 @@ public class MemberDaoImplement extends SQLiteOpenHelper implements MemberDAO {
 
     @Override
     public void addGroupMembers(Member member) {
-        System.out.println("Hejdå");
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_ID, member.getId());
-        values.put(COLUMN_MEMBER_NAME, member.getUserName());
-        values.put(COLUMN_MEMBER_PHONE_NUMBER, member.getPhoneNumber());
-        db.insert(MEMBER_TABLE, null, values);
-        db.close();
+
+            SQLiteDatabase db = this.getReadableDatabase();
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_MEMBER_NAME, member.getUserName());
+            values.put(COLUMN_MEMBER_PHONE_NUMBER, member.getPhoneNumber());
+            db.insert(MEMBER_TABLE, null, values);
+            db.close();
+
 
     }
 

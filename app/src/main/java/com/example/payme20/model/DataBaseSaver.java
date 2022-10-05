@@ -82,7 +82,7 @@ public class DataBaseSaver extends SQLiteOpenHelper {
     //Return to this method, the parameters are wrong. They are only set there for "new Member()"s satisfaction
     // Another problem is that the if statement is wrong because this method needs the the list of the members from ViewModel
     public List<Member> getAllMembers(String userName, String phoneNumber, int id){
-        List<Member> memberList = new ArrayList<Member>();
+        List<Member> memberList = new ArrayList<>();
         String selectQuery = "SELECT *FROM " +  MEMBER_TABLE;
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery(selectQuery, null);

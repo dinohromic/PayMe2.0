@@ -34,7 +34,7 @@ public class MemberView extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_group);
-        createGroupVM = new CreateGroupViewModel();
+        createGroupVM = new CreateGroupViewModel(this);
         groupName=findViewById(R.id.groupNameTextView);
         addMemberbutton = findViewById(R.id.mainActCreateGroupButton);
         edtName = findViewById(R.id.edtTxtName);
