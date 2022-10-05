@@ -1,7 +1,5 @@
 package com.example.payme20.model;
 
-import android.content.Intent;
-
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -12,7 +10,7 @@ public class Debt implements Serializable {
 
     public Debt(Member debtTo, Member debtFrom, Integer debtAmount){
         this.debtTo = Objects.requireNonNull(debtTo);
-        this.debtFrom = debtFrom;
+        this.debtFrom = Objects.requireNonNull(debtFrom);
         this.debtAmount = debtAmount;
     }
 
