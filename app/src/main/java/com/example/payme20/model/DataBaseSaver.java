@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.ContactsContract;
 
 
 import androidx.annotation.Nullable;
@@ -20,26 +21,35 @@ public class DataBaseSaver extends SQLiteOpenHelper {
     private static final String COLUMN_MEMBER_NAME = "MEMBER_NAME";
     private static final String COLUMN_MEMBER_PHONE_NUMBER = "MEMBER_PHONE_NUMBER";
     private static final String COLUMN_ID = "ID";
+    private static final String DB_PATH = "members.db";
+    private static final DataSource datasource = new DataSource();
 
 
     public DataBaseSaver(@Nullable Context context) {
         super(context, "members.db", null, 1);
     }
 
-//    public static Connection getConnection () throws SQLException {
-//        try{
-//            Class.forName("org.sqlite.JDBC");
-//            return DriverManager.getConnection(SQLCON);
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
+
+    public static Connection getConnection () throws SQLException {
+        try{
+            Class.forName("org.sqlite.JDBC");
+            return DriverManager.getConnection(DB_PATH);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String createTableStatement = "CREATE TABLE " + MEMBER_TABLE + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_MEMBER_NAME + " TEXT, " + COLUMN_MEMBER_PHONE_NUMBER + " TEXT )";
-        sqLiteDatabase.execSQL(createTableStatement);
+        try {
+            Connection connection = getConnection();
+            String createTableStatement = "CREATE TABLE " + MEMBER_TABLE + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_MEMBER_NAME + " TEXT, " + COLUMN_MEMBER_PHONE_NUMBER + " TEXT )";
+            sqLiteDatabase.execSQL(createTableStatement);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
     }
 
