@@ -19,7 +19,9 @@
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name="com.example.payme20.views.GroupListView"/>
         <activity android:name="com.example.payme20.views.EventCreateView"
-            android:windowSoftInputMode="adjustPan"/>
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="fullSensor" />
         <activity android:name="com.example.payme20.views.MemberView"
             android:windowSoftInputMode="adjustPan"/>
 
