@@ -62,11 +62,12 @@ public class MemberView extends AppCompatActivity{
                 Toast.makeText(MemberView.this,"Members phone needed", Toast.LENGTH_SHORT).show();
             }
             else {
-                try {
+           //     try {
                     addMembers(edtName.getText().toString(),edtPhoneNumber.getText().toString());
-                } catch (Exception e){
-                    addMembers("None", "0");
-                }
+         //       } catch (Exception e){
+                 //   addMembers("None", "0");
+
+                //}
             }
         });
 
