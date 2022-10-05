@@ -41,4 +41,8 @@ public enum PayMeModel {
     public void addMember(Group group, Member member){
          group.addNewGroupMember(member);
     }
+
+    public Member createNewMember(String name, String num, int id){
+        return Factory.createMember(name, num, -1);
+    }
 }

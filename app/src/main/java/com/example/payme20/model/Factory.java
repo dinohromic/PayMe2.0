@@ -9,7 +9,7 @@ public final class Factory {
     }
 
     public static Member createMember(String memberName, String phoneNumber, int id){
-        return new Member(memberName, phoneNumber, id);
+        return new Member(memberName, phoneNumber, -1);
     }
 
     public static Event createEvent(String eventName, Map<Member, Integer> memberAndAmount,Member payer, IDebtUpdater debtUpdater, String date){
