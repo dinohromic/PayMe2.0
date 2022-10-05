@@ -1,20 +1,18 @@
 package com.example.payme20.model;
 
+import androidx.annotation.NonNull;
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 public class Event implements Serializable {
-    private Map<Member, Integer> eventPaymentDetails;
-    private IDebtUpdater debtUpdater;
+    private final Map<Member, Integer> eventPaymentDetails;
+    private final IDebtUpdater debtUpdater;
     private boolean activeStatus;
     private List<Debt> eventDebtList;
-    private String eventName;
-    private Member payer;
-    private String date;
+    private final String eventName;
+    private final Member payer;
+    private final String date;
 
 
     public Event(String eventName, Map eventPaymentDetails, Member payer, IDebtUpdater debtUpdater, String date){
@@ -57,6 +55,7 @@ public class Event implements Serializable {
 
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Event{" +

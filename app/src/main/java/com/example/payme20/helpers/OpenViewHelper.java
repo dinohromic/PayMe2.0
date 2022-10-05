@@ -1,16 +1,11 @@
 package com.example.payme20.helpers;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-
 import androidx.fragment.app.FragmentActivity;
-
 import com.example.payme20.model.Event;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
-import com.example.payme20.views.MemberPageView;
-
 
 public class OpenViewHelper  {
 
