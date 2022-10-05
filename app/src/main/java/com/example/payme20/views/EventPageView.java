@@ -34,6 +34,28 @@ public class EventPageView extends AppCompatActivity {
         setContentView(R.layout.event_page);
         initWidgets();
         initViewModel();
+        populateView();
+        setReturnListener();
+    }
+
+    private void setReturnListener() {
+        this.returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OpenViewHelper.openViewPutExtra(GroupPageView.class, EventPageView.this, epViewmodel.getGroup());
+            }
+        });
+    }
+
+    private void populateView() {
+        String eventName = epViewmodel.getEventName();
+        String eventDate = "Date: " + epViewmodel.getEventDate();
+        String payer = epViewmodel.getPayerName() + " paid for this event";
+        String paymentType = "Payment of this event was: " + epViewmodel.getEventPaymentType();
+        this.eventName.setText(eventName);
+        this.eventDate.setText(eventDate);
+        this.eventPayment.setText(paymentType);
+        this.eventPayer.setText(payer);
 
     }
 

@@ -24,7 +24,7 @@
             android:screenOrientation="fullSensor" />
         <activity android:name="com.example.payme20.views.MemberView"
             android:windowSoftInputMode="adjustPan"/>
-
+        <activity android:name="com.example.payme20.views.EventPageView"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">

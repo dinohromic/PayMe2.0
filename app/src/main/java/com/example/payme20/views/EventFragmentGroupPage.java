@@ -94,7 +94,7 @@ public class EventFragmentGroupPage extends Fragment {
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                OpenViewHelper.openViewPutExtra(EventPageView.class, getActivity(), event, group);
             }
         });
     }
