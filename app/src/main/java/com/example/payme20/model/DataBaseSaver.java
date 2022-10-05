@@ -66,7 +66,6 @@ public class DataBaseSaver extends SQLiteOpenHelper {
         values.put(COLUMN_MEMBER_NAME, member.getUserName());
         values.put(COLUMN_MEMBER_PHONE_NUMBER, member.getPhoneNumber());
         db.insert(MEMBER_TABLE, null, values);
-
         db.close();
 
     }

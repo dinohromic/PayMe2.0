@@ -4,11 +4,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
 import com.example.payme20.R;
 import com.example.payme20.helpers.GroupPageAdapter;
 import com.example.payme20.helpers.OpenViewHelper;

@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.payme20.view_models.createGroupViewModel;
+import com.example.payme20.view_models.CreateGroupViewModel;
 import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.R;
 
@@ -25,7 +25,7 @@ public class MemberView extends AppCompatActivity{
     private Button addMemberbutton,addMembersFinishButton;
     private LinearLayout membersContainer;
     private EditText groupName;
-    createGroupViewModel createGroupVM;
+    CreateGroupViewModel createGroupVM;
 
 //    private ConstraintLayout parent;
 
@@ -34,7 +34,7 @@ public class MemberView extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_group);
-        createGroupVM = new createGroupViewModel();
+        createGroupVM = new CreateGroupViewModel();
         groupName=findViewById(R.id.groupNameTextView);
         addMemberbutton = findViewById(R.id.mainActCreateGroupButton);
         edtName = findViewById(R.id.edtTxtName);
