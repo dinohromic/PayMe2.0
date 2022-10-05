@@ -1,10 +1,7 @@
 package com.example.payme20.views;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -13,9 +10,10 @@ import com.example.payme20.R;
 import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.model.Event;
 import com.example.payme20.view_models.EventPageViewModel;
-import com.example.payme20.view_models.MemberPageViewModel;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
+
+import java.util.Map;
 
 public class EventPageView extends AppCompatActivity {
 
@@ -25,7 +23,7 @@ public class EventPageView extends AppCompatActivity {
     private TextView eventPayer;
     private TextView eventPayment;
     private ImageButton returnButton;
-
+    private LinearLayout memberContainer;
     private EventPageViewModel epViewmodel;
 
     @Override
@@ -36,6 +34,28 @@ public class EventPageView extends AppCompatActivity {
         initViewModel();
         populateView();
         setReturnListener();
+        initEventMembersCards();
+    }
+
+    private void initEventMembersCards() {
+        pouplateList();
+    }
+
+    private void pouplateList() {
+        for (Map.Entry<Member, Integer> memberMap: epViewmodel.getEventPaymentDetails().entrySet()) {
+            Member member = memberMap.getKey();
+            int amount = memberMap.getValue();
+            addCard(member, amount);
+        }
+    }
+
+    private void addCard(Member member, int amount) {
+        View view = getLayoutInflater().inflate(R.layout.event_page_member_card, null);
+        TextView memberName = view.findViewById(R.id.eventPageMemberName);
+        memberName.setText(member.getUserName());
+        TextView memberAmount = view.findViewById(R.id.eventPageMemberAmount);
+        memberAmount.setText(String.format("%d kr", amount));
+        memberContainer.addView(view);
     }
 
     private void setReturnListener() {
@@ -50,7 +70,8 @@ public class EventPageView extends AppCompatActivity {
     private void populateView() {
         String eventName = epViewmodel.getEventName();
         String eventDate = "Date: " + epViewmodel.getEventDate();
-        String payer = epViewmodel.getPayerName() + " paid for this event";
+        int totalGroupAMount = epViewmodel.getEventTotalPrice();
+        String payer = String.format("%s paid a total of %d kr for this event", epViewmodel.getPayerName(), totalGroupAMount);
         String paymentType = "Payment of this event was: " + epViewmodel.getEventPaymentType();
         this.eventName.setText(eventName);
         this.eventDate.setText(eventDate);
@@ -71,6 +92,7 @@ public class EventPageView extends AppCompatActivity {
         this.eventPayer = findViewById(R.id.textPayer);
         this.eventPayment = findViewById(R.id.textPayment);
         this.returnButton = findViewById(R.id.goBackButton);
+        this.memberContainer = findViewById(R.id.containerEventMembers);
     }
 
 }

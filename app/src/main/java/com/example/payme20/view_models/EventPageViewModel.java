@@ -2,6 +2,9 @@ package com.example.payme20.view_models;
 
 import com.example.payme20.model.Event;
 import com.example.payme20.model.Group;
+import com.example.payme20.model.Member;
+
+import java.util.Map;
 
 public class EventPageViewModel {
     private final Group group;
@@ -29,5 +32,17 @@ public class EventPageViewModel {
 
     public Group getGroup() {
         return this.group;
+    }
+
+    public Map<Member, Integer> getEventPaymentDetails() {
+        return event.getEventPaymentDetails();
+    }
+
+    public int getEventTotalPrice() {
+        int amount = 0;
+        for (Map.Entry<Member, Integer> memberMap: getEventPaymentDetails().entrySet()) {
+            amount += memberMap.getValue();
+        }
+        return amount;
     }
 }
