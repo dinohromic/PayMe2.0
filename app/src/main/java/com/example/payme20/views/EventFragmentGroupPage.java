@@ -9,10 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.example.payme20.MainActivity;
 import com.example.payme20.R;
 import com.example.payme20.helpers.OpenViewHelper;
+import com.example.payme20.model.Event;
 import com.example.payme20.model.Group;
 
 import java.util.ArrayList;
@@ -23,8 +25,9 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class EventFragmentGroupPage extends Fragment {
-    Button createNewEvent;
+    private Button createNewEvent;
     private Group group;
+    private LinearLayout eventContainer;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -72,17 +75,36 @@ public class EventFragmentGroupPage extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_event_group_page, null);
-        createNewEvent = (Button) view.findViewById(R.id.addEventButton);
+        initWidgetsEventFragment(view);
+        setAddNewEventListener(createNewEvent);
+        populateEventContainer();
+
+        return view;
+    }
+
+    private void populateEventContainer() {
+        for(Event event : group.getGroupEvents()) {
+            View cardView = getLayoutInflater().inflate(R.layout.event_card);
+        }
+    }
+
+    private void setAddNewEventListener(Button createNewEvent) {
         createNewEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), EventCreateView.class);
+               /* Intent intent = new Intent(getActivity(), EventCreateView.class);
                 intent.putExtra("GROUP", group);
-                startActivity(intent);
+                startActivity(intent);*/
+                OpenViewHelper.openViewPutExtra(EventCreateView.class, getActivity(), group);
             }
         });
-        return view;
     }
+
+    private void initWidgetsEventFragment(View view) {
+        this.eventContainer = view.findViewById(R.id.eventFragmentContainer);
+        this.createNewEvent = (Button) view.findViewById(R.id.addEventButton);
+    }
+
     public void setGroup(Group group) {
         this.group = group;
     }

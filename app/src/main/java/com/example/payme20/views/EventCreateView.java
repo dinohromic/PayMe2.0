@@ -58,7 +58,7 @@ public class EventCreateView extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.creare_event);
-        group = ((Group) getIntent().getSerializableExtra("GROUP"));
+        group = ((Group) getIntent().getSerializableExtra("GROUP_KEY"));
         System.out.println(group.getGroupEvents());
         initiate();
         ViewModelFactory vmFactory = new ViewModelFactory();
