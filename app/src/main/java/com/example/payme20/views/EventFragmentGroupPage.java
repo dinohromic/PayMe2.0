@@ -1,6 +1,5 @@
 package com.example.payme20.views;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,14 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import com.example.payme20.MainActivity;
 import com.example.payme20.R;
 import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.model.Event;
 import com.example.payme20.model.Group;
 
-import java.util.ArrayList;
+import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -84,8 +83,27 @@ public class EventFragmentGroupPage extends Fragment {
 
     private void populateEventContainer() {
         for(Event event : group.getGroupEvents()) {
-            View cardView = getLayoutInflater().inflate(R.layout.event_card);
+            View cardView = getLayoutInflater().inflate(R.layout.event_card, null);
+            populateCard(cardView, event);
+            setEventCardListener(cardView, event);
+            eventContainer.addView(cardView);
         }
+    }
+
+    private void setEventCardListener(View cardView, Event event) {
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+    }
+
+    private void populateCard(View cardView, Event event) {
+        TextView eventName = cardView.findViewById(R.id.eventName);
+        eventName.setText(event.getEventName());
+        TextView eventDate = cardView.findViewById(R.id.eventDate);
+        eventDate.setText(event.getEventDate());
     }
 
     private void setAddNewEventListener(Button createNewEvent) {

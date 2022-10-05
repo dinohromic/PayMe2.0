@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.payme20.model.Debt;
 import com.example.payme20.model.DetailedDebtUpdater;
+import com.example.payme20.model.Event;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.IDebtUpdater;
 import com.example.payme20.model.Member;
@@ -103,4 +104,7 @@ public class EventCreateViewmodel extends ViewModel {
         this.date = date;
     }
 
+    public Group getGroup() {
+        return group;
+    }
 }

@@ -69,4 +69,12 @@ public class Event implements Serializable {
                 ", date='" + date + '\'' +
                 '}';
     }
+
+    public String getEventName() {
+        return this.eventName;
+    }
+
+    public String getEventDate() {
+        return this.date;
+    }
 }

@@ -27,6 +27,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.payme20.R;
+import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.view_models.EventCreateViewmodel;
 import com.example.payme20.view_models.ViewModelFactory;
 import com.example.payme20.model.Group;
