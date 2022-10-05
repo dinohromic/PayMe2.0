@@ -37,4 +37,8 @@ public enum PayMeModel {
     public boolean removeMember(Group group, Member member) {
         return group.removeGroupMember(member); //Vad ska den returna?
     }
+
+    public void addMember(Group group, Member member){
+         group.addNewGroupMember(member);
+    }
 }
