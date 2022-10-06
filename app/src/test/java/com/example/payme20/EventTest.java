@@ -51,4 +51,14 @@ public class EventTest {
         testEvent.setEventActive();
         assertTrue(testEvent.getActiveStatus());
     }
+
+    @Test
+    public void totalEventCost(){
+        this.debtMap.put(new Member("u1", "3", 2), 39);
+        this.debtMap.put(new Member("u2", "2", 2), 41);
+        this.debtMap.put(new Member("u3", "1", 2), 20);
+        System.out.println(this.testEvent.totalEventCost());
+        assertEquals(100, this.testEvent.totalEventCost());
+
+    }
 }
