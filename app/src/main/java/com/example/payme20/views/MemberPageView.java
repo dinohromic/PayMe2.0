@@ -41,7 +41,7 @@ public class MemberPageView extends AppCompatActivity {
 
     private void populateView() {
         String userProfile = "User profile: " + memberPageViewModel.getCurrentUserProfileName();
-        String userTotalDebt = "Total debt: " + memberPageViewModel.getProfileMemberTotalDebt();
+        String userTotalDebt = "Total debt: " + memberPageViewModel.getProfileMemberTotalDebt() + " kr";
         this.userName.setText(userProfile);
         this.phoneNumberEditText.setText(memberPageViewModel.getPhoneNumber());
         this.totalDebt.setText(userTotalDebt);
