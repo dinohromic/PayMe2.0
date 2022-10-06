@@ -31,7 +31,7 @@ public class DatePickerDialogHelper {
     }
 
     public String makeDateString(int day, int month, int year) {
-        return day + "-" + month + "-" + year;
+        return year + "-" + month + "-" + day;
     }
 
 }
