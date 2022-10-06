@@ -24,7 +24,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/roboto_medium"
         android:text="Active Groups"
-        android:textColor="@color/purple_500"
+        android:textColor="?android:textColorPrimary"
         android:textSize="34sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/currentGorupsReturnButton" />
@@ -55,7 +55,7 @@
         android:layout_margin="16dp"
         android:contentDescription="floating action button for group creation"
         android:src="@drawable/ic_baseline_add_24"
-        app:backgroundTint="@color/purple_500"
+        android:textColor="?android:textColorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="@color/white" />
