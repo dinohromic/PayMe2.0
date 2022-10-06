@@ -75,7 +75,8 @@ public class MemberView extends AppCompatActivity{
 
     private void openCurrentGroups() {
        createGroupVM.createGroup(groupName.getText().toString());
-       OpenViewHelper.openView(GroupListView.class, MemberView.this);
+       //OpenViewHelper.openView(GroupListView.class, MemberView.this);
+       OpenViewHelper.openViewPutExtra(GroupPageView.class, MemberView.this, createGroupVM.getGroup());
     }
 
     private void addMembers(String name, String numbber) {
