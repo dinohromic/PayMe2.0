@@ -131,4 +131,16 @@ public class Event implements Serializable {
     public IDebtUpdater getdebtUpdater() {
         return this.debtUpdater;
     }
+
+    /**
+     * Calculates a total expenditure for all event participants
+     * @return returns an integer holding the total event cost
+     */
+    public int totalEventCost(){
+        int total = 0;
+        for (Map.Entry<Member, Integer> eventPaymentDetail: this.eventPaymentDetails.entrySet()) {
+            total += eventPaymentDetail.getValue();
+        }
+        return total;
+    }
 }

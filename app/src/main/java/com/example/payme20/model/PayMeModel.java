@@ -45,4 +45,12 @@ public enum PayMeModel {
     public Member createNewMember(String name, String num, int id){
         return Factory.createMember(name, num, -1);
     }
+
+    public int calcTotalExpenditureForGroup(Group group){
+        int total = 0;
+        for (Event eventInGroup: group.getGroupEvents()) {
+            total += eventInGroup.totalEventCost();
+        }
+        return total;
+    }
 }

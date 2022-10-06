@@ -19,11 +19,27 @@
         app:layout_constraintStart_toEndOf="@+id/groupPageReturnButton"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/groupPageTotExpenditure"
+        android:layout_width="256dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="23dp"
+        android:text="Total expenditure:"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/groupPageTabLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.149"
+        app:layout_constraintStart_toEndOf="@+id/groupPageReturnButton"
+        app:layout_constraintTop_toBottomOf="@+id/groupPageGroupName"
+        app:layout_constraintVertical_bias="0.0" />
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/groupPageTabLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,13 +49,13 @@
             android:id="@+id/GroupPageEventTab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tab_txt_1"/>
+            android:text="@string/tab_txt_1" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/GroupPageMemberTab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tab_txt_2"/>
+            android:text="@string/tab_txt_2" />
 
     </com.google.android.material.tabs.TabLayout>
 

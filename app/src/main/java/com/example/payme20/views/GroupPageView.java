@@ -11,6 +11,7 @@ import com.example.payme20.R;
 import com.example.payme20.helpers.GroupPageAdapter;
 import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.model.Group;
+import com.example.payme20.view_models.GroupPageViewModel;
 import com.google.android.material.tabs.TabLayout;
 
 
@@ -18,21 +19,27 @@ public class GroupPageView extends AppCompatActivity {
 
     private TabLayout groupPageTabs;
     private ViewPager groupPageViewPager;
-    private TextView groupPageGroupName;
+    private TextView groupPageGroupName, totalExpenditureText;
     private ImageButton returnButton;
     private EventFragmentGroupPage eventFragmentGroupPage;
     private MemberFragmentGroupPage memberFragmentGroupPage;
+    private GroupPageViewModel groupPageViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.group_page);
         findViewForWidgets();
-        Group currentGroup = (Group) getIntent().getSerializableExtra("GROUP_KEY");
-        populateView(currentGroup);
+        initializeViewModel();
+        populateView(groupPageViewModel.getGroup());
         createAdapterForFragments();
-        setGroupFragment(currentGroup);
+        setGroupFragment(groupPageViewModel.getGroup());
         setListenerReturnButton();
+    }
+
+    private void initializeViewModel(){
+        Group currentGroup = (Group) getIntent().getSerializableExtra("GROUP_KEY");
+        this.groupPageViewModel = new GroupPageViewModel(currentGroup);
     }
 
     private void createAdapterForFragments(){
@@ -52,6 +59,7 @@ public class GroupPageView extends AppCompatActivity {
 
     private void populateView(Group currentGroup){
         this.groupPageGroupName.setText(currentGroup.getGroupName());
+        this.totalExpenditureText.setText(groupPageViewModel.totalExpenditure());
     }
 
     private void findViewForWidgets(){
@@ -59,6 +67,7 @@ public class GroupPageView extends AppCompatActivity {
         this.returnButton =  findViewById(R.id.groupPageReturnButton);
         this.groupPageTabs = findViewById(R.id.groupPageTabLayout);
         this.groupPageViewPager= findViewById(R.id.groupPageViewPager);
+        this.totalExpenditureText = findViewById(R.id.groupPageTotExpenditure);
     }
 
     private void setListenerReturnButton(){
