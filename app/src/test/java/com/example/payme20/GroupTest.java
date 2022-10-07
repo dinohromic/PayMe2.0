@@ -79,7 +79,7 @@ public class GroupTest {
 
         Event event = new Event("event", eventPaymentMap, user1, new SplitDebtUpdater(), "");
         group.addEvent(event);
-        group.setEventInactive(event);
+        event.setEventInactive();
         group.removeGroupMember(user2);
         assertFalse(group.getGroupMembers().contains(user2));
     }
