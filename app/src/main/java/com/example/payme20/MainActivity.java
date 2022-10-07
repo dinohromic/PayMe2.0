@@ -3,6 +3,8 @@ package com.example.payme20;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SwitchCompat;
+
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     
     private Button openGroupListButton;
     private Button createGroupButton;
-    private SwitchCompat darkModeSwitch;
+    private Button darkModeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,16 +26,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         findViewsById();
         setPageNavigation();
-        setDarkModeListener();
-    }
+     //   setDarkModeListener();
 
+
+    }
     private void setPageNavigation(){
         setOpenViewListener(this.openGroupListButton, GroupListView.class);
         setOpenViewListener(this.createGroupButton, MemberView.class);
+        setDarkModeListener();
     }
 
     private void findViewsById(){
-        this.darkModeSwitch = findViewById(R.id.switch1);
+        this.darkModeButton = findViewById(R.id.darkModeButton);
         this.openGroupListButton = findViewById(R.id.groupPageButton);
         this.createGroupButton = findViewById(R.id.addMemberButton);
     }
@@ -48,16 +52,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setDarkModeListener(){
-        this.darkModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        this.darkModeButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b){
+            public void onClick(View view) {
+                if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                } else if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 }
                 else{
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 }
             }
         });
+
     }
 }

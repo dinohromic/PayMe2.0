@@ -1,5 +1,6 @@
 package com.example.payme20.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -87,7 +88,9 @@ public class GroupPageView extends AppCompatActivity {
         this.returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                OpenViewHelper.openView(GroupListView.class, GroupPageView.this);
+               // OpenViewHelper.openView(GroupListView.class, GroupPageView.this);
+                Intent myIntent = new Intent(GroupPageView.this, GroupListView.class);
+                GroupPageView.this.startActivity(myIntent);
             }
         });
     }
