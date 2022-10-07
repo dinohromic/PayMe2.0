@@ -1,10 +1,12 @@
 package com.example.payme20.views;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -40,8 +42,13 @@ public class createNewMembersView extends AppCompatActivity {
         createNewMemberButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createNewMember(newMemberName, newMemberPhone);
-
+                if(TextUtils.isEmpty(newMemberName.getText().toString())){
+                    Toast.makeText(createNewMembersView.this,"Member name needed!", Toast.LENGTH_SHORT).show();
+                }
+                else if(TextUtils.isEmpty(newMemberPhone.getText().toString())){
+                    Toast.makeText(createNewMembersView.this, "Phone number needed!", Toast.LENGTH_SHORT).show();
+                }
+                else createNewMember(newMemberName, newMemberPhone);
             }
         });
     }
