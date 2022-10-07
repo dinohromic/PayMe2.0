@@ -75,11 +75,6 @@ public class Group implements Serializable {
         }
     }
 
-    public void setEventInactive(Event event) {
-        event.setEventInactive();
-    }
-
-
     public void removeEventDebts(Event event) {
         for(Debt d : event.getDebtList())
             debtHandler.removeDebt(d);
