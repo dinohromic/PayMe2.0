@@ -3,12 +3,14 @@ package com.example.payme20.view_models;
 import com.example.payme20.model.Event;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
+import com.example.payme20.model.PayMeModel;
 
 import java.util.Map;
 
 public class EventPageViewModel {
     private final Group group;
     private final Event event;
+    private final PayMeModel model = PayMeModel.INSTANCE;
     public EventPageViewModel(Group belongsToGroup, Event event) {
         this.event = event;
         this.group = belongsToGroup;
@@ -44,5 +46,17 @@ public class EventPageViewModel {
             amount += memberMap.getValue();
         }
         return amount;
+    }
+
+    public void setEventInactive() {
+        model.inactivateEvent(event, group);
+    }
+
+    public void setEventActive() {
+        model.activateEvent(event, group);
+    }
+
+    public boolean getEventActiveStatus() {
+        return event.getActiveStatus();
     }
 }

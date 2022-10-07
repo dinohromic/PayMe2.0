@@ -58,7 +58,7 @@ public class Group implements Serializable {
             return false;
     }
 
-    private void addEventDebtToGroup(List<Debt> eventDebts){
+    public void addEventDebtToGroup(List<Debt> eventDebts){
         for(Debt d : eventDebts)
             debtHandler.addDebt(d);
     }
@@ -84,5 +84,4 @@ public class Group implements Serializable {
         for(Debt d : event.getDebtList())
             debtHandler.removeDebt(d);
     }
-
 }

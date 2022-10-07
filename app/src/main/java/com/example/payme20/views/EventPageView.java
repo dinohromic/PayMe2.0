@@ -2,6 +2,8 @@ package com.example.payme20.views;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,6 +26,7 @@ public class EventPageView extends AppCompatActivity {
     private TextView eventPayment;
     private ImageButton returnButton;
     private LinearLayout memberContainer;
+    private CheckBox evenDoneCheckBox;
     private EventPageViewModel eventPageViewModel;
 
     @Override
@@ -35,6 +38,23 @@ public class EventPageView extends AppCompatActivity {
         populateView();
         setReturnListener();
         initEventMembersCards();
+        initEventDoneCheckBox();
+    }
+
+    private void initEventDoneCheckBox() {
+        if(!eventPageViewModel.getEventActiveStatus())
+            evenDoneCheckBox.setChecked(true);
+        evenDoneCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(isChecked) {
+                    eventPageViewModel.setEventInactive();
+                }
+                if(!isChecked) {
+                    eventPageViewModel.setEventActive();
+                }
+            }
+        });
     }
 
     private void initEventMembersCards() {
@@ -93,6 +113,7 @@ public class EventPageView extends AppCompatActivity {
         this.eventPayment = findViewById(R.id.textPayment);
         this.returnButton = findViewById(R.id.goBackButton);
         this.memberContainer = findViewById(R.id.containerEventMembers);
+        this.evenDoneCheckBox = findViewById(R.id.checkBoxEventDone);
     }
 
 }

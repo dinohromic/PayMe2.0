@@ -49,4 +49,9 @@ public enum PayMeModel {
         }
         return total;
     }
+
+    public void activateEvent(Event event, Group group) {
+        event.setEventActive();
+        group.addEventDebtToGroup(event.getDebtList());
+    }
 }
