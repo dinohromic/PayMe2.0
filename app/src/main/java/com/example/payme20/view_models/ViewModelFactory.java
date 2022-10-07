@@ -7,10 +7,11 @@ import androidx.lifecycle.ViewModelProvider;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ViewModelFactory implements ViewModelProvider.Factory {
+public enum ViewModelFactory implements ViewModelProvider.Factory {
+    INSTANCE;
     private Map<String, ViewModel> viewModelMap;
 
-    public ViewModelFactory() {
+    ViewModelFactory() {
         this.viewModelMap = new HashMap<>();
     }
 

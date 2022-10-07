@@ -68,7 +68,7 @@ public class EventCreateView extends AppCompatActivity {
     }
 
     private void createViewModel(){
-        ViewModelFactory vmFactory = new ViewModelFactory();
+        ViewModelFactory vmFactory = ViewModelFactory.INSTANCE;
         vmFactory.add(new EventCreateViewmodel(retrieveIntentGroup()));
         ecViewmodel = new ViewModelProvider(this, vmFactory).get(EventCreateViewmodel.class);
     }

@@ -3,22 +3,30 @@ package com.example.payme20.views;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.payme20.R;
 import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.model.Event;
 import com.example.payme20.model.Group;
+import com.example.payme20.view_models.GroupPageViewModel;
+import com.example.payme20.view_models.ViewModelFactory;
 
 
 public class EventFragmentGroupPage extends Fragment {
     private Button createNewEventButton;
     private Group group;
     private LinearLayout eventContainer;
+    private CheckBox eventActiveCheckBox;
+    private GroupPageViewModel gpViewModel;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -65,8 +73,14 @@ public class EventFragmentGroupPage extends Fragment {
         View view = inflater.inflate(R.layout.fragment_event_group_page, null);
         initWidgetsEventFragment(view);
         setAddNewEventListener(createNewEventButton);
+        initViewModel();
         populateEventContainer();
         return view;
+    }
+
+    private void initViewModel() {
+        ViewModelFactory vmFactory = ViewModelFactory.INSTANCE;
+        this.gpViewModel = new ViewModelProvider(this, vmFactory).get(GroupPageViewModel.class);
     }
 
     private void populateEventContainer() {
@@ -83,6 +97,22 @@ public class EventFragmentGroupPage extends Fragment {
             @Override
             public void onClick(View view) {
                 OpenViewHelper.openViewPutExtra(EventPageView.class, getActivity(), event, group);
+            }
+        });
+        eventActiveCheckBox = cardView.findViewById(R.id.checkBoxEventActive);
+        if(event.getActiveStatus())
+            eventActiveCheckBox.setChecked(true);
+        eventActiveCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(isChecked) {
+                    gpViewModel.setEventActive(event);
+                    gpViewModel.setText();
+                }
+                if(!isChecked) {
+                    gpViewModel.setEventInactive(event);
+                    gpViewModel.setText();
+                }
             }
         });
     }

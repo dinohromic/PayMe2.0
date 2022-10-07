@@ -6,12 +6,15 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 import com.example.payme20.R;
 import com.example.payme20.helpers.GroupPageAdapter;
 import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.model.Group;
 import com.example.payme20.view_models.GroupPageViewModel;
+import com.example.payme20.view_models.ViewModelFactory;
 import com.google.android.material.tabs.TabLayout;
 
 
@@ -20,6 +23,7 @@ public class GroupPageView extends AppCompatActivity {
     private TabLayout groupPageTabs;
     private ViewPager groupPageViewPager;
     private TextView groupPageGroupName, totalExpenditureText;
+
     private ImageButton returnButton;
     private EventFragmentGroupPage eventFragmentGroupPage;
     private MemberFragmentGroupPage memberFragmentGroupPage;
@@ -35,11 +39,20 @@ public class GroupPageView extends AppCompatActivity {
         createAdapterForFragments();
         setGroupFragment(groupPageViewModel.getGroup());
         setListenerReturnButton();
+        groupPageViewModel.getText().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                totalExpenditureText.setText(s);
+            }
+        });
     }
 
+
     private void initializeViewModel(){
+        ViewModelFactory vmFactory = ViewModelFactory.INSTANCE;
         Group currentGroup = (Group) getIntent().getSerializableExtra("GROUP_KEY");
-        this.groupPageViewModel = new GroupPageViewModel(currentGroup);
+        vmFactory.add(new GroupPageViewModel(currentGroup));
+        this.groupPageViewModel = new ViewModelProvider(this, vmFactory).get(GroupPageViewModel.class);
     }
 
     private void createAdapterForFragments(){
