@@ -3,11 +3,11 @@ package com.example.payme20;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-import com.example.payme20.model.DetailedDebtUpdater;
+import com.example.payme20.model.DetailedCreateDebtList;
 import com.example.payme20.model.Event;
 import com.example.payme20.model.Factory;
 import com.example.payme20.model.Group;
-import com.example.payme20.model.IDebtUpdater;
+import com.example.payme20.model.ICreateDebtList;
 import com.example.payme20.model.Member;
 
 import java.util.ArrayList;
@@ -20,14 +20,14 @@ public class EventTest {
     Group testGroup;
     Map<Member, Integer> debtMap;
     Member payer;
-    IDebtUpdater debtUpdater;
+    ICreateDebtList debtUpdater;
     Event testEvent;
 
     @Before
     public void init(){
         this.testGroup = new Group("TestGroup", new ArrayList<>());
         this.debtMap = new HashMap<>();
-        this.debtUpdater = new DetailedDebtUpdater();
+        this.debtUpdater = new DetailedCreateDebtList();
         this.testEvent = Factory.createEvent("TestEvent", this.debtMap, this.payer, this.debtUpdater, "");
         this.testGroup.addEvent(testEvent);
     }

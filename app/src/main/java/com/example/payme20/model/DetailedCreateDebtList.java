@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * DetailedDebtUpdater returns a list of detailed debts
  */
-public class DetailedDebtUpdater implements IDebtUpdater, Serializable {
+public class DetailedCreateDebtList implements ICreateDebtList, Serializable {
 
     /**
      * Takes in data from the event and returns a list with debts in a list
@@ -17,7 +17,7 @@ public class DetailedDebtUpdater implements IDebtUpdater, Serializable {
      * @return returns list containing Debt-objects
      */
     @Override
-    public List<Debt> updateDebts(Map<Member, Integer> eventMemberPaidAmount, Member memberToGetPaid) {
+    public List<Debt> createDebtList(Map<Member, Integer> eventMemberPaidAmount, Member memberToGetPaid) {
         List<Debt> eventDebtList = new ArrayList<>();
 
         for (Map.Entry<Member, Integer> debtMap: eventMemberPaidAmount.entrySet()) {

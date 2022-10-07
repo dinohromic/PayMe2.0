@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import com.example.payme20.model.DetailedDebtUpdater;
+import com.example.payme20.model.DetailedCreateDebtList;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
 import com.example.payme20.model.PayMeModel;
@@ -35,7 +35,7 @@ public class DetailDebtUpdaterTest {
         debtMap.put(user1, 150);
         debtMap.put(user2, 300);
         debtMap.put(user3, 120);
-        payMeModel.createNewGroupEvent(group, debtMap, "Test", user3, new DetailedDebtUpdater(), "");
+        payMeModel.createNewGroupEvent(group, debtMap, "Test", user3, new DetailedCreateDebtList(), "");
     }
 
     /*

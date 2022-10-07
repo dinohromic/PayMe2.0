@@ -8,8 +8,8 @@ public enum PayMeModel {
     PayMeModel(){
     }
 
-    public void createNewGroupEvent(Group group, Map<Member, Integer> debtMap, String eventName, Member payer, IDebtUpdater iDebtUpdater, String date) {
-        Event event = Factory.createEvent(eventName, debtMap, payer, iDebtUpdater, date);
+    public void createNewGroupEvent(Group group, Map<Member, Integer> debtMap, String eventName, Member payer, ICreateDebtList iCreateDebtList, String date) {
+        Event event = Factory.createEvent(eventName, debtMap, payer, iCreateDebtList, date);
         group.addEvent(event);
     }
 

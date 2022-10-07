@@ -2,14 +2,12 @@ package com.example.payme20.view_models;
 
 import androidx.lifecycle.ViewModel;
 
-import com.example.payme20.model.Debt;
-import com.example.payme20.model.DetailedDebtUpdater;
-import com.example.payme20.model.Event;
+import com.example.payme20.model.DetailedCreateDebtList;
 import com.example.payme20.model.Group;
-import com.example.payme20.model.IDebtUpdater;
+import com.example.payme20.model.ICreateDebtList;
 import com.example.payme20.model.Member;
 import com.example.payme20.model.PayMeModel;
-import com.example.payme20.model.SplitDebtUpdater;
+import com.example.payme20.model.SplitCreateDebtList;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,7 +17,7 @@ import java.util.Map;
 public class EventCreateViewmodel extends ViewModel {
     private Map<Member, Integer> memberAndAmount = new HashMap<>();
     private String eventName;
-    private IDebtUpdater debtUpdater;
+    private ICreateDebtList debtUpdater;
     private Member payer;
     private Group group;
     private final Map<String, Member> groupMembers = new HashMap<>();
@@ -29,7 +27,7 @@ public class EventCreateViewmodel extends ViewModel {
 
     public EventCreateViewmodel(Group group) {
         this.group = group;
-        this.debtUpdater = new SplitDebtUpdater();
+        this.debtUpdater = new SplitCreateDebtList();
         initMemberMap();
         initEventMemberList();
     }
@@ -58,10 +56,10 @@ public class EventCreateViewmodel extends ViewModel {
     public void setDebtUpdater(String str) {
         switch (str) {
             case "split":
-                debtUpdater = new SplitDebtUpdater();
+                debtUpdater = new SplitCreateDebtList();
                 break;
             case "detailed":
-                debtUpdater = new DetailedDebtUpdater();
+                debtUpdater = new DetailedCreateDebtList();
                 break;
         }
     }

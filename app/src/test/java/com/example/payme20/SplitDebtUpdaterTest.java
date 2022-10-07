@@ -8,7 +8,7 @@ import com.example.payme20.model.Event;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
 import com.example.payme20.model.PayMeModel;
-import com.example.payme20.model.SplitDebtUpdater;
+import com.example.payme20.model.SplitCreateDebtList;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,7 +36,7 @@ public class SplitDebtUpdaterTest {
         debtMap.put(user1, 332);
         debtMap.put(user2, 0);
         debtMap.put(user3, 0);
-        this.testEvent= new Event("TestEvent", debtMap, user1, new SplitDebtUpdater(), "");
+        this.testEvent= new Event("TestEvent", debtMap, user1, new SplitCreateDebtList(), "");
         group.addEvent(testEvent);
     }
     @Test

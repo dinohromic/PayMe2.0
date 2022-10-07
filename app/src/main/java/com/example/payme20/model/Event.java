@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class Event implements Serializable {
     private final Map<Member, Integer> eventPaymentDetails;
-    private final IDebtUpdater debtUpdater;
+    private final ICreateDebtList debtUpdater;
     private boolean activeStatus;
     private List<Debt> eventDebtList;
     private final String eventName;
@@ -28,7 +28,7 @@ public class Event implements Serializable {
      * @param debtUpdater the method of paying for the event
      * @param date the date the event took place
      */
-    public Event(String eventName, Map eventPaymentDetails, Member payer, IDebtUpdater debtUpdater, String date){
+    public Event(String eventName, Map eventPaymentDetails, Member payer, ICreateDebtList debtUpdater, String date){
         this.eventName=eventName;
         this.eventPaymentDetails = eventPaymentDetails;
         this.payer = payer;
@@ -89,7 +89,7 @@ public class Event implements Serializable {
      * @return returns a created list of Debt-objects
      */
     private List<Debt> createEventDebts() {
-        return debtUpdater.updateDebts(eventPaymentDetails, payer);
+        return debtUpdater.createDebtList(eventPaymentDetails, payer);
 
     }
 
@@ -128,7 +128,7 @@ public class Event implements Serializable {
      * Get the debtUpdater this class used
      * @return returns an object that implements IDebtUpdater
      */
-    public IDebtUpdater getdebtUpdater() {
+    public ICreateDebtList getdebtUpdater() {
         return this.debtUpdater;
     }
 

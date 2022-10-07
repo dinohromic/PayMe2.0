@@ -1,6 +1,6 @@
 package com.example.payme20.view_models;
 
-import com.example.payme20.model.DetailedDebtUpdater;
+import com.example.payme20.model.DetailedCreateDebtList;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
 import com.example.payme20.model.PayMeModel;
@@ -40,7 +40,7 @@ public class GroupListViewModel {
 
         Group grekland = new Group("Grekland", members);
         PayMeModel model = PayMeModel.INSTANCE;
-        model.createNewGroupEvent(grekland, costMap,"Middag", test1, new DetailedDebtUpdater(), "2022-10-06");
+        model.createNewGroupEvent(grekland, costMap,"Middag", test1, new DetailedCreateDebtList(), "2022-10-06");
 
         test.add(grekland);
         test.add(new Group("Middag", members));

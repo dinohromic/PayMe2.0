@@ -10,9 +10,9 @@ import java.util.Random;
 /**
  * SplitDebtUpdater splits the events debts even and returns them in a list
  */
-public class SplitDebtUpdater implements IDebtUpdater, Serializable {
+public class SplitCreateDebtList implements ICreateDebtList, Serializable {
     @Override
-    public List<Debt> updateDebts(Map<Member, Integer> eventMemberPaidAmount, Member payer) {
+    public List<Debt> createDebtList(Map<Member, Integer> eventMemberPaidAmount, Member payer) {
         int totalGroupCost = calcTotalGroupCost(eventMemberPaidAmount);
         int splitCost = calcDividedCost(totalGroupCost, eventMemberPaidAmount.size());
         List<Member> membersList = new ArrayList<>();
