@@ -19,14 +19,9 @@ import java.util.Map;
 
 public class EventPageView extends AppCompatActivity {
 
-    private ImageButton memberPageReturnButton;
-    private TextView eventName;
-    private TextView eventDate;
-    private TextView eventPayer;
-    private TextView eventPayment;
+    private TextView eventName, eventDate, eventPayer, eventPayment, eventActiveStatus;
     private ImageButton returnButton;
     private LinearLayout memberContainer;
-    private CheckBox evenDoneCheckBox;
     private EventPageViewModel eventPageViewModel;
 
     @Override
@@ -38,23 +33,6 @@ public class EventPageView extends AppCompatActivity {
         populateView();
         setReturnListener();
         initEventMembersCards();
-        initEventDoneCheckBox();
-    }
-
-    private void initEventDoneCheckBox() {
-        if(!eventPageViewModel.getEventActiveStatus())
-            evenDoneCheckBox.setChecked(true);
-        evenDoneCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if(isChecked) {
-                    eventPageViewModel.setEventInactive();
-                }
-                if(!isChecked) {
-                    eventPageViewModel.setEventActive();
-                }
-            }
-        });
     }
 
     private void initEventMembersCards() {
@@ -93,10 +71,13 @@ public class EventPageView extends AppCompatActivity {
         int totalGroupAMount = eventPageViewModel.getEventTotalPrice();
         String payer = String.format("%s paid a total of %d kr for this event", eventPageViewModel.getPayerName(), totalGroupAMount);
         String paymentType = "Payment of this event was: " + eventPageViewModel.getEventPaymentType();
+        String activeStatus = eventPageViewModel.getEventActiveStatus() ? "active" : "inactive";
+        String eventActiveStatusText = "This event is " + activeStatus + ".";
         this.eventName.setText(eventName);
         this.eventDate.setText(eventDate);
         this.eventPayment.setText(paymentType);
         this.eventPayer.setText(payer);
+        this.eventActiveStatus.setText(eventActiveStatusText);
 
     }
 
@@ -113,7 +94,7 @@ public class EventPageView extends AppCompatActivity {
         this.eventPayment = findViewById(R.id.textPayment);
         this.returnButton = findViewById(R.id.goBackButton);
         this.memberContainer = findViewById(R.id.containerEventMembers);
-        this.evenDoneCheckBox = findViewById(R.id.checkBoxEventDone);
+        this.eventActiveStatus = findViewById(R.id.textEventDone);
     }
 
 }
