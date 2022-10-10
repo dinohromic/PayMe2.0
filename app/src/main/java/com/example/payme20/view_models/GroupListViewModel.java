@@ -1,10 +1,12 @@
 package com.example.payme20.view_models;
 
+import com.example.payme20.model.DataManager;
 import com.example.payme20.model.DetailedCreateDebtList;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
 import com.example.payme20.model.PayMeModel;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,6 +39,13 @@ public class GroupListViewModel {
         members.add(test3);
         members.add(test4);
         members.add(test5);
+
+        DataManager dataManager = new DataManager();
+        dataManager.writeData(test1);
+
+        Member member = new Member();
+        member = dataManager.readData();
+        System.out.println(member.toString());
 
         Group grekland = new Group("Grekland", members);
         PayMeModel model = PayMeModel.INSTANCE;
