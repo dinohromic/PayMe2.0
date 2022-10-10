@@ -72,7 +72,7 @@ public class GroupListView extends AppCompatActivity {
         FAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(GroupListView.this, MemberView.class);
+                Intent intent = new Intent(GroupListView.this, GroupCreateView.class);
                 GroupListView.this.startActivity(intent);
 
             }
