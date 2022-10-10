@@ -1,13 +1,20 @@
 package com.example.payme20.model;
 
+
 import androidx.annotation.NonNull;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.Objects;
+import org.json.JSONObject;
 
 /**
  * A member has a username, a phone number and is identified with a unique ID
  */
 public class Member implements Serializable {
+
     private int id;
     private String userName;
     private String phoneNumber;
@@ -22,6 +29,7 @@ public class Member implements Serializable {
         this.userName = userName;
         this.phoneNumber = phoneNumber;
         this.id = id;
+
     }
 
     /**
