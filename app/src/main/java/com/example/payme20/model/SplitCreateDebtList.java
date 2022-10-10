@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * SplitDebtUpdater splits the events debts even and returns them in a list
+ * SplitCreateDebtList splits the events expenditures evenly and returns them in a list
  */
 public class SplitCreateDebtList implements ICreateDebtList, Serializable {
     @Override
