@@ -22,7 +22,7 @@
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="fullSensor" />
-        <activity android:name="com.example.payme20.views.MemberView"
+        <activity android:name="com.example.payme20.views.GroupCreateView"
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name="com.example.payme20.views.EventPageView"/>
         <activity
