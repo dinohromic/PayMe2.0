@@ -31,6 +31,9 @@ public class Member implements Serializable {
         this.id = id;
 
     }
+    public Member() {
+
+    }
 
     /**
      * Get the user name of a member
