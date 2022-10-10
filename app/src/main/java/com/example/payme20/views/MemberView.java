@@ -63,7 +63,7 @@ public class MemberView extends AppCompatActivity{
             }
             else {
            //     try {
-                    addMembers(edtName.getText().toString(),edtPhoneNumber.getText().toString());
+                    addMembers(edtName.getText().toString(),edtPhoneNumber.getText().toString(), groupName.getText().toString());
          //       } catch (Exception e){
                  //   addMembers("None", "0");
 
@@ -79,13 +79,13 @@ public class MemberView extends AppCompatActivity{
        OpenViewHelper.openViewPutExtra(GroupPageView.class, MemberView.this, createGroupVM.getGroup());
     }
 
-    private void addMembers(String name, String numbber) {
+    private void addMembers(String name, String numbber, String groupName) {
         View view = getLayoutInflater().inflate(R.layout.members_card, null);
         membersName= view.findViewById(R.id.addMembersNameText);
         membersPhone = view.findViewById(R.id.addMembersPhoneText);
         membersName.setText(name);
         membersPhone.setText(numbber);
-        createGroupVM.addMembers(name,numbber, -1);
+        createGroupVM.addMembers(name,numbber, -1, groupName);
         membersContainer.addView(view);
         edtName.getText().clear();
         edtPhoneNumber.getText().clear();
