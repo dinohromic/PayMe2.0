@@ -79,14 +79,14 @@ public class GroupCreateView extends AppCompatActivity{
         edtPhoneNumber = findViewById(R.id.editTextPhone);
 
         membersContainer = findViewById(R.id.membersConatiner);
-        membersName= findViewById(R.id.addMembersNameText);
-        membersPhone = findViewById(R.id.addMembersPhoneText);
-        
-        
+
         addMemberButton = findViewById(R.id.mainActCreateGroupButton);
         finishButton = findViewById(R.id.addMembersFinishButton);
-        
-        
+    }
+
+    private void initCardWidgets(View view){
+        this.membersName = view.findViewById(R.id.addMembersNameText);
+        this.membersPhone = view.findViewById(R.id.addMembersPhoneText);
     }
 
     private void openCurrentGroups() {
@@ -94,11 +94,12 @@ public class GroupCreateView extends AppCompatActivity{
        OpenViewHelper.openViewPutExtra(GroupPageView.class, GroupCreateView.this, createGroupVM.getGroup());
     }
 
-    private void addMemberCards(String name, String numbber, String groupName) {
+    private void addMemberCards(String name, String number, String groupName) {
         View view = getLayoutInflater().inflate(R.layout.members_card, null);
+        initCardWidgets(view);
         membersName.setText(name);
-        membersPhone.setText(numbber);
-        createGroupVM.addMembers(name,numbber, -1, groupName);
+        membersPhone.setText(number);
+        createGroupVM.addMembers(name,number, -1, groupName);
         membersContainer.addView(view);
         edtName.getText().clear();
         edtPhoneNumber.getText().clear();
