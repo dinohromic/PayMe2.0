@@ -4,18 +4,27 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class handles data about the group, it adds and removes members or events and handles data about the group
+ */
 public class Group implements Serializable {
     private String groupName;
     private List<Member> groupMembers;
     private List<Event> groupEvents;
     private DebtHandler debtHandler;
 
+    /**
+     * Create a new Group
+     * @param groupName the name of the group
+     * @param membersList a list of members to be in the group
+     */
     public Group(String groupName, List<Member> membersList) {
         this.groupName = groupName;
         this.groupEvents = new ArrayList<>();
         this.groupMembers = membersList;
         this.debtHandler = new DebtHandler();
     }
+
     public String getGroupName() {
         return groupName;
     }
@@ -33,10 +42,14 @@ public class Group implements Serializable {
     }
 
     public void addNewGroupMember(Member member) {
-
         groupMembers.add(member);
     }
 
+    /**
+     * Removes a member from the group but only if the member isn't part of any active event
+     * @param member the member to remove from the group
+     * @return returns true if the member was removed (not in any active events) and false if member was not remove (in active event)
+     */
     public boolean removeGroupMember(Member member){
         boolean allEventsWithMemberInactive = true;
         List<Event> eventsWithThisMember = new ArrayList<>();
@@ -58,6 +71,10 @@ public class Group implements Serializable {
             return false;
     }
 
+    /**
+     * Adds all the debts from a event to the groups debtHandler
+     * @param eventDebts a list of debts from a event
+     */
     public void addEventDebtToGroup(List<Debt> eventDebts){
         for(Debt d : eventDebts)
             debtHandler.addDebt(d);
