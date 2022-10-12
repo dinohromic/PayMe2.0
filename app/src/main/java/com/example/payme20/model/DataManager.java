@@ -2,7 +2,10 @@ package com.example.payme20.model;
 
 import android.content.Context;
 
+import com.example.payme20.GlobalApplication;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,27 +14,30 @@ import java.util.List;
 
 public class DataManager {
 
-    ArrayList<Member> memberArrayList;
-    private Object List;
-    Context context;
+
+    private final Context context = GlobalApplication.getAppContext();
+    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final File groupFile;
 
     public DataManager(){
-
+        String GROUPS_FILE = context.getFilesDir().getPath() + "/groups.json";
+        groupFile = new File(GROUPS_FILE);
+        objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
     }
 
-    public Member readData()  {
-        Member members = new Member();
+    public List<Group> readGroups()  {
+        List<Group> groups = new ArrayList<>();
         try {
-            members = new ObjectMapper().readerFor(Member.class).readValue(new File("members.json"));
+            groups = objectMapper.readValue(groupFile, new TypeReference<List<Group>>() {});
+            System.out.println(groups);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return members;
+        return groups;
     }
-    public void writeData(Object o){
-        ObjectMapper objectMapper = new ObjectMapper();
+    public void writeGroups(List<Group> g){
         try {
-            objectMapper.writeValue(new File("members.json"),o);
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(groupFile, g);
         } catch (IOException e) {
             e.printStackTrace();
         }

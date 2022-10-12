@@ -18,8 +18,8 @@ public class GroupListViewModel {
         return currentGroup.getGroupName();
     }
 
-    public ArrayList<Group> getGroupList(){
-        ArrayList<Group> test = new ArrayList<Group>();
+    public List<Group> getGroupList(){
+        List<Group> test = new ArrayList<Group>();
         List<Member> members = new ArrayList<>();
         Member test1 = new Member("Arne", "112", -1);
         Member test2 = new Member("Anders", "114 14", -1);
@@ -40,19 +40,16 @@ public class GroupListViewModel {
         members.add(test4);
         members.add(test5);
 
-        DataManager dataManager = new DataManager();
-        dataManager.writeData(test1);
-
-        Member member = new Member();
-        member = dataManager.readData();
-        System.out.println(member.toString());
-
         Group grekland = new Group("Grekland", members);
         PayMeModel model = PayMeModel.INSTANCE;
         model.createNewGroupEvent(grekland, costMap,"Middag", test1, new DetailedCreateDebtList(), "2022-10-06");
 
         test.add(grekland);
         test.add(new Group("Middag", members));
+        DataManager dm = new DataManager();
+        dm.writeGroups(test);
+        List<Group > testGroups = dm.readGroups();
+
         return test;
     }
 

@@ -11,7 +11,7 @@ public class Group implements Serializable {
     private String groupName;
     private List<Member> groupMembers;
     private List<Event> groupEvents;
-    private DebtHandler debtHandler;
+    private transient DebtHandler debtHandler;
 
     /**
      * Create a new Group
