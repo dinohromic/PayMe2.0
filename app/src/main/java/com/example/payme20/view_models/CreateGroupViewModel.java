@@ -18,8 +18,8 @@ public class CreateGroupViewModel {
     }
 
 
-    public void addMembers(String memberName, String memberNumbber, int id, String groupName){
-        Member member = Factory.createMember(memberName, memberNumbber, id);
+    public void addMembers(String memberName, String memberNumbber, String groupName){
+        Member member = Factory.createMember(memberName, memberNumbber);
 
         membersList.add(member);
 

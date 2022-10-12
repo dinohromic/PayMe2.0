@@ -20,6 +20,10 @@ public class GroupSerializer extends StdSerializer<Group> {
     public void serialize(Group value, JsonGenerator gen, SerializerProvider provider) throws IOException {
         gen.writeStartObject();
         gen.writeStringField("group_name", value.getGroupName());
+        gen.writeObjectField("members", value.getGroupMembers());
+        gen.writeObjectField("event", value.getGroupEvents());
+        //gen.writeObjectField("debt_handler", value.getDebtHandler());
+
         gen.writeEndObject();
     }
 }

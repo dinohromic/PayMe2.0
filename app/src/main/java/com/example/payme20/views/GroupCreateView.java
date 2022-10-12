@@ -99,7 +99,7 @@ public class GroupCreateView extends AppCompatActivity{
         initCardWidgets(view);
         membersName.setText(name);
         membersPhone.setText(number);
-        createGroupVM.addMembers(name,number, -1, groupName);
+        createGroupVM.addMembers(name, number, groupName);
         membersContainer.addView(view);
         edtName.getText().clear();
         edtPhoneNumber.getText().clear();

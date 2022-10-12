@@ -15,20 +15,17 @@ import org.json.JSONObject;
  */
 public class Member implements Serializable {
 
-    private int id;
     private String userName;
     private String phoneNumber;
     /**
      * Create a new member
      * @param userName Create the member with the given user name
      * @param phoneNumber Create the member with the given phone number
-     * @param id Create the member with the given ID
      */
-    public Member(String userName, String phoneNumber, int id){
+    public Member(String userName, String phoneNumber){
 
         this.userName = userName;
         this.phoneNumber = phoneNumber;
-        this.id = id;
 
     }
     public Member() {
@@ -67,28 +64,11 @@ public class Member implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    /**
-     * Get the ID of a member
-     * @return returns the ID of the member called upon
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * Set the ID of a member
-     * @param id the new ID of the member
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-
     @NonNull
     @Override
     public String toString() {
         return "Member{" +
-                "id" + id +
-                ", userName='" + userName + '\'' +
+                "userName='" + userName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
     }

@@ -9,6 +9,7 @@ import java.util.Map;
  * DetailedDebtUpdater returns a list of detailed debts
  */
 public class DetailedCreateDebtList implements ICreateDebtList, Serializable {
+    private final String name = "Detailed";
 
     /**
      * Takes in data from the event and returns a list with debts in a list
@@ -31,7 +32,8 @@ public class DetailedCreateDebtList implements ICreateDebtList, Serializable {
     }
 
     @Override
-    public String toString() {
-        return "Detailed";
+    public String getName() {
+        return this.name;
     }
+
 }

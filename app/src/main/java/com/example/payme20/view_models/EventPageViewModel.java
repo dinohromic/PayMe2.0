@@ -29,7 +29,7 @@ public class EventPageViewModel {
     }
 
     public String getEventPaymentType() {
-        return event.getdebtUpdater().toString();
+        return event.getdebtUpdater().getName();
     }
 
     public Group getGroup() {

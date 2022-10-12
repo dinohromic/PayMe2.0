@@ -11,6 +11,7 @@ import java.util.Random;
  * SplitCreateDebtList splits the events expenditures evenly and returns them in a list
  */
 public class SplitCreateDebtList implements ICreateDebtList, Serializable {
+    private final String name = "Split";
     @Override
     public List<Debt> createDebtList(Map<Member, Integer> eventMemberPaidAmount, Member payer) {
         int totalGroupCost = calcTotalGroupCost(eventMemberPaidAmount);
@@ -21,6 +22,11 @@ public class SplitCreateDebtList implements ICreateDebtList, Serializable {
         }
         Map<Member, Integer> updatedMap = distributeRest(totalGroupCost, splitCost, eventMemberPaidAmount, membersList);
         return createEventDebtList(payer, updatedMap);
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
     }
 
     /**
@@ -92,10 +98,5 @@ public class SplitCreateDebtList implements ICreateDebtList, Serializable {
             }
         }
         return eventDebtList;
-    }
-
-    @Override
-    public String toString() {
-        return "Split";
     }
 }

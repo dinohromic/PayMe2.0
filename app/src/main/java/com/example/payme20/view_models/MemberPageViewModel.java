@@ -24,7 +24,7 @@ public class MemberPageViewModel extends ViewModel {
     //TODO Remove this and replace with finding the same ID when we got the functioning
     //This method is sadly necessary because serializing changes reference of objects
     public Member findCorrectMemberReferenceInGroup(Group group, Member memberToFind){
-        Member memberByReference = new Member("This doesn't feel like good code", "1337", 1337);
+        Member memberByReference = new Member("This doesn't feel like good code", "1337");
         for (Member member :group.getGroupMembers()) {
             if(Objects.equals(memberToFind.getUserName(), member.getUserName()) && Objects.equals(memberToFind.getPhoneNumber(), member.getPhoneNumber())){
                 memberByReference = member;

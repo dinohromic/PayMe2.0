@@ -5,5 +5,7 @@ import java.util.Map;
 
 public interface ICreateDebtList {
     List<Debt> createDebtList(Map<Member, Integer> map, Member Payer);
+
+    String getName();
 }
 
