@@ -28,6 +28,8 @@ public class GroupDeserializer extends StdDeserializer<Group> {
         ObjectCodec codec = parser.getCodec();
         JsonNode node = null;
         List<Member> groupMembers = new ArrayList<>();
+        List<Event> groupEvents = new ArrayList<>();
+        String name = "";
         try {
             node = codec.readTree(parser);
         } catch (IOException e) {
@@ -36,21 +38,20 @@ public class GroupDeserializer extends StdDeserializer<Group> {
 
         try{
             JsonNode nameNode = node.get("group_name");
-            String name = nameNode.asText();
+            name = nameNode.asText();
             JsonNode members = node.get("members");
-            while(members.elements().hasNext()) {
-                String userName = members.elements().next().get("userName").toString();
-                String phoneNumber = members.elements().next().get("phoneNumber").toString();
+            for(int i = 0; i < members.size(); i++) {
+                String userName = members.get(i).get("userName").asText();
+                String phoneNumber = members.get(i).get("phoneNumber").asText();
                 groupMembers.add(new Member(userName, phoneNumber));
             }
-            System.out.println(members.elements().next().get("phoneNumber"));
-            System.out.println(name);
-            System.out.println(nameNode);
+            //Gör för events också
+
 
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return new Group(name, groupMembers);
     }
 }
