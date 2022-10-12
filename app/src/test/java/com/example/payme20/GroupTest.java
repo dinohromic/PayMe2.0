@@ -28,9 +28,9 @@ public class GroupTest {
     @Before
     public void init() {
         group = Factory.createGroup("gruppTest",new ArrayList<>());
-        user1 = Factory.createMember("user1", "07", -1);
-        user2 = Factory.createMember("user2", "07", -1);
-        user3 = Factory.createMember("user3", "07", -1);
+        user1 = Factory.createMember("user1", "07");
+        user2 = Factory.createMember("user2", "07");
+        user3 = Factory.createMember("user3", "07");
 
         Map<Member, Integer> eventPaymentMap = new HashMap<>();
         eventPaymentMap.put(user1, 20);
@@ -55,7 +55,7 @@ public class GroupTest {
     }
     @Test
     public void testAddMember() {
-        Member member = Factory.createMember("member", "07", -1);
+        Member member = Factory.createMember("member", "07");
         payMeModel.addMember(this.group, member);
         assertTrue(group.getGroupMembers().contains(member));
     }
