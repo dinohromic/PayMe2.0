@@ -15,6 +15,7 @@ import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.model.Group;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
+import java.util.List;
 
 public class GroupListView extends AppCompatActivity {
 
@@ -34,7 +35,7 @@ public class GroupListView extends AppCompatActivity {
         FABonClickListener(createGroupFAB);
     }
 
-    private void populateGroupList(ArrayList<Group> groups) {
+    private void populateGroupList(List<Group> groups) {
         for(int i = 0; i < groups.size(); i++){
             createCardForContainer(groups.get(i));
         }
