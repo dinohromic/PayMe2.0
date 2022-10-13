@@ -51,8 +51,9 @@ public class GroupPageView extends AppCompatActivity {
 
     private void initializeViewModel(){
         ViewModelFactory vmFactory = ViewModelFactory.INSTANCE;
-        Group currentGroup = (Group) getIntent().getSerializableExtra("GROUP_KEY");
-        vmFactory.add(new GroupPageViewModel(currentGroup));
+        //Group currentGroup = (Group) getIntent().getSerializableExtra("GROUP_KEY");
+        //vmFactory.add(new GroupPageViewModel(currentGroup));
+        vmFactory.add(new GroupPageViewModel((String) getIntent().getSerializableExtra("GROUP_NAME_KEY")));
         this.groupPageViewModel = new ViewModelProvider(this, vmFactory).get(GroupPageViewModel.class);
     }
 

@@ -17,12 +17,12 @@ public enum PayMeModel {
         serializeGroups();
     }
 
-    public int getTotalDebt(Group group, Member member) {
+    public int getTotalDebt(String groupName, Member member) {
         DebtCalculator dc = new DebtCalculator();
-        return dc.calcMemberTotalDebt(member, group.getDebtHandler());
+        return dc.calcMemberTotalDebt(member, dataHandler.getGroups().get(groupName).getDebtHandler());
     }
 
-    public Map<Member, Integer> getSpecificDebts(Group group, Member member) {
+    public Map<String, Integer> getSpecificDebts(Group group, Member member) {
         DebtCalculator dc = new DebtCalculator();
         return dc.calcMemberSpecificDebt(group.getGroupMembers(), member, group.getDebtHandler());
     }

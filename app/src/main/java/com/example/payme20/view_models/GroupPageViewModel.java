@@ -14,8 +14,8 @@ public class GroupPageViewModel extends ViewModel {
     private PayMeModel payMeModel = PayMeModel.INSTANCE;
     private MutableLiveData<String> totalExpenditure = new MutableLiveData<>();
 
-    public GroupPageViewModel(Group group){
-        this.group = group;
+    public GroupPageViewModel(String groupKey){
+        this.group = payMeModel.getGroups().get(groupKey);
     }
 
     public Group getGroup(){

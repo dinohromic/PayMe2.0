@@ -50,7 +50,7 @@ public class EventPageView extends AppCompatActivity {
     private void addCard(Member member, int amount) {
         View view = getLayoutInflater().inflate(R.layout.event_page_member_card, null);
         TextView memberName = view.findViewById(R.id.eventPageMemberName);
-        memberName.setText(member.getUserName());
+        memberName.setText(member.getUserName().substring(1));
         TextView memberAmount = view.findViewById(R.id.eventPageMemberAmount);
         memberAmount.setText(String.format("%d kr", amount));
         memberContainer.addView(view);

@@ -39,8 +39,8 @@ public class GroupListView extends AppCompatActivity {
     }
 
     private void populateGroupList(Map<String,Group> groups) {
-        for (Map.Entry<String, Group> debtMap: groups.entrySet()) {
-            Group group = debtMap.getValue();
+        for (Map.Entry<String, Group> groupMap : groups.entrySet()) {
+            Group group = groupMap.getValue();
             createCardForContainer(group);
         }
     }
@@ -68,7 +68,7 @@ public class GroupListView extends AppCompatActivity {
         viewToGetListener.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                OpenViewHelper.openViewPutExtra(GroupPageView.class, GroupListView.this, group);
+                OpenViewHelper.openViewPutExtra(GroupPageView.class, GroupListView.this, group.getGroupName());
             }
         });
     }

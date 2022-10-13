@@ -12,7 +12,7 @@ public class MemberPageViewModel extends ViewModel {
 
     Member currentProfileMember;
     Group belongsToGroup;
-    Map<Member, Integer> currentGroupDebtsMap;
+    Map<String, Integer> currentGroupDebtsMap;
     PayMeModel payMeModel = PayMeModel.INSTANCE;
 
     public MemberPageViewModel(Group group, Member member){
@@ -25,8 +25,8 @@ public class MemberPageViewModel extends ViewModel {
     //This method is sadly necessary because serializing changes reference of objects
     public Member findCorrectMemberReferenceInGroup(Group group, Member memberToFind){
         Member memberByReference = new Member("This doesn't feel like good code", "1337");
-        for (Member member :group.getGroupMembers()) {
-            if(Objects.equals(memberToFind.getUserName(), member.getUserName()) && Objects.equals(memberToFind.getPhoneNumber(), member.getPhoneNumber())){
+        for (Member member : payMeModel.getGroups().get(group.getGroupName()).getGroupMembers()) {
+            if(Objects.equals(memberToFind, member)){
                 memberByReference = member;
             }
         }
@@ -70,16 +70,16 @@ public class MemberPageViewModel extends ViewModel {
     }
 
     public int getProfileMemberTotalDebt(){
-        return payMeModel.getTotalDebt(this.belongsToGroup, this.currentProfileMember);
+        return payMeModel.getTotalDebt(this.belongsToGroup.getGroupName(), this.currentProfileMember);
     }
 
-    private Map<Member, Integer> getCurrentGroupDebtsMap(){
+    private Map<String, Integer> getCurrentGroupDebtsMap(){
         return payMeModel.getSpecificDebts(this.belongsToGroup, this.currentProfileMember);
     }
 
     public int debtToMember(Member memberDebt){
         int debt = 0;
-        try{return currentGroupDebtsMap.get(memberDebt);}
+        try{return currentGroupDebtsMap.get(memberDebt.getUserName());}
         catch (NullPointerException e){System.out.println("Debt for specific member missing [MemberPageViewModel]");}
        return debt;
     }

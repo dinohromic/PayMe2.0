@@ -32,9 +32,9 @@ public class OpenViewHelper  {
         newIntent.putExtra("GROUP_KEY", group);
         currentFragment.startActivity(newIntent);
     }
-    public static void openViewPutExtra(Class<?> newView, Context currentView, Group group){
+    public static void openViewPutExtra(Class<?> newView, Context currentView, String groupName){
         Intent newIntent = new Intent(currentView, newView);
-        newIntent.putExtra("GROUP_KEY", group);
+        newIntent.putExtra("GROUP_NAME_KEY", groupName);
         currentView.startActivity(newIntent);
     }
     public static void openViewPutExtra(Class<?> newView, Context currentView, Event event){
