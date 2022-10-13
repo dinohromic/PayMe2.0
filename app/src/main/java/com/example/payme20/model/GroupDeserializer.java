@@ -69,6 +69,7 @@ public class GroupDeserializer extends StdDeserializer<Group> {
             } catch (Exception e){
             e.printStackTrace();
         }
+
         return new Group(name, groupMembers);
     }
 }
