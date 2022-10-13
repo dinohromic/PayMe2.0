@@ -1,9 +1,12 @@
 package com.example.payme20.model;
 
+import java.util.List;
 import java.util.Map;
 
 public enum PayMeModel {
     INSTANCE;
+    DataHandler dataHandler = DataHandler.INSTANCE;
+    DataManager dataManager = new DataManager();
 
     PayMeModel(){
     }
@@ -54,5 +57,20 @@ public enum PayMeModel {
     public void activateEvent(Event event, Group group) {
         event.setEventActive();
         group.addEventDebtToGroup(event.getDebtList());
+    }
+
+    public void createNewGroup(String groupName, List<Member> membersList) {
+        dataHandler.addGroup(Factory.createGroup(groupName, membersList));
+        serializeGroups();
+    }
+    public void serializeGroups() {
+        dataManager.writeGroups(dataHandler.getGroups());
+    }
+    public void deserializeGroups() {
+        dataHandler.refreshGroups(dataManager.readGroups());
+    }
+    public List<Group> getGroups() {
+        deserializeGroups();
+        return dataHandler.getGroups();
     }
 }

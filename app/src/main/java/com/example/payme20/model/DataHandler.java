@@ -15,4 +15,8 @@ public enum DataHandler {
     }
 
 
+    public void refreshGroups(List<Group> groups) {
+        this.groups.clear();
+        this.groups.addAll(groups);
+    }
 }

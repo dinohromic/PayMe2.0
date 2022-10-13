@@ -5,31 +5,25 @@ import android.content.Context;
 import com.example.payme20.model.Factory;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
+import com.example.payme20.model.PayMeModel;
 
 import java.util.ArrayList;
 
 public class CreateGroupViewModel {
     Context context;
+    PayMeModel payMeModel = PayMeModel.INSTANCE;
 
     ArrayList<Member> membersList = new ArrayList<>();
-    private Group group;
     public CreateGroupViewModel(Context context){
         this.context = context;
     }
 
 
-    public void addMembers(String memberName, String memberNumbber, String groupName){
-        Member member = Factory.createMember(memberName, memberNumbber);
-
+    public void addMembers(String memberName, String memberNumber){
+        Member member = Factory.createMember(memberName, memberNumber);
         membersList.add(member);
-
     }
     public void createGroup(String groupName){
-        this.group = Factory.createGroup(groupName,membersList);
+        payMeModel.createNewGroup(groupName, membersList);
     }
-
-    public Group getGroup(){
-        return group;
-    }
-
 }
