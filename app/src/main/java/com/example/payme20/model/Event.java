@@ -1,6 +1,9 @@
 package com.example.payme20.model;
 
 import androidx.annotation.NonNull;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -10,13 +13,14 @@ import java.util.Map;
  *  An event holds data and makes calculations with data about the event
  */
 public class Event implements Serializable {
-    private final Map<Member, Integer> eventPaymentDetails;
-    private final ICreateDebtList debtUpdater;
+    @JsonSerialize(keyUsing = MemberSerializer.class)
+    private  Map<Member, Integer> eventPaymentDetails;
+    private  ICreateDebtList debtUpdater;
     private boolean activeStatus;
     private List<Debt> eventDebtList;
-    private final String eventName;
-    private final Member payer;
-    private final String date;
+    private  String eventName;
+    private  Member payer;
+    private  String eventDate;
 
 
     /**
@@ -33,9 +37,10 @@ public class Event implements Serializable {
         this.payer = payer;
         this.activeStatus = true;
         this.debtUpdater = debtUpdater;
-        this.date = date;
+        this.eventDate = date;
         this.eventDebtList = createEventDebts();
     }
+    public Event() {}
 
     /**
      * Return the map with payment-details from the event
@@ -82,6 +87,9 @@ public class Event implements Serializable {
     public List<Debt> getDebtList(){
         return this.eventDebtList;
     }
+    private void setDebtList(List<Debt> l) {
+        this.eventDebtList = l;
+    }
 
     /**
      * Creates the list of debts
@@ -102,7 +110,7 @@ public class Event implements Serializable {
                 ", eventDebtList=" + eventDebtList +
                 ", eventName='" + eventName + '\'' +
                 ", payer=" + payer +
-                ", date='" + date + '\'' +
+                ", date='" + eventDate + '\'' +
                 '}';
     }
 
@@ -120,7 +128,7 @@ public class Event implements Serializable {
      * @return returns a string with the date
      */
     public String getEventDate() {
-        return this.date;
+        return this.eventDate;
     }
 
     /**

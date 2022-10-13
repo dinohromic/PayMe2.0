@@ -19,7 +19,7 @@ public class GroupListViewModel {
         return currentGroup.getGroupName();
     }
 
-    public List<Group> getGroupList(){
+    public Map<String,Group> getGroupList(){
         /*List<Group> test = new ArrayList<Group>();
         List<Member> members = new ArrayList<>();
         Member test1 = new Member("Arne", "112");
@@ -28,12 +28,12 @@ public class GroupListViewModel {
         Member test4 = new Member("Jihad","231");
         Member test5 = new Member("Ola", "2345");
 
-        Map<String, Integer> costMap = new HashMap<>();
-        costMap.put(test1.getUserName(), 100);
-        costMap.put(test2.getUserName(), 120);
-        costMap.put(test3.getUserName(), 140);
-        costMap.put(test4.getUserName(), 160);
-        costMap.put(test5.getUserName(), 180);
+        Map<Member, Integer> costMap = new HashMap<>();
+        costMap.put(test1, 100);
+        costMap.put(test2, 120);
+        costMap.put(test3, 140);
+        costMap.put(test4, 160);
+        costMap.put(test5, 180);
 
         members.add(test1);
         members.add(test2);
@@ -49,7 +49,8 @@ public class GroupListViewModel {
         test.add(new Group("Middag", members));
         DataManager dm = new DataManager();
         dm.writeGroups(test);
-        List<Group > testGroups = dm.readGroups();*/
+        List<Group > testGroups = dm.readGroups();
+        Member m = new Member("anton", "123");*/
 
         return payMeModel.getGroups();
     }

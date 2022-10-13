@@ -12,6 +12,7 @@ import java.util.Random;
  */
 public class SplitCreateDebtList implements ICreateDebtList, Serializable {
     private final String name = "Split";
+    public SplitCreateDebtList() {}
     @Override
     public List<Debt> createDebtList(Map<Member, Integer> eventMemberPaidAmount, Member payer) {
         int totalGroupCost = calcTotalGroupCost(eventMemberPaidAmount);

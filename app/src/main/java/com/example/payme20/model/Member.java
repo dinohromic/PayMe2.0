@@ -3,7 +3,9 @@ package com.example.payme20.model;
 
 import androidx.annotation.NonNull;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonParser;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -28,9 +30,12 @@ public class Member implements Serializable {
         this.phoneNumber = phoneNumber;
 
     }
-    public Member() {
-
+    public Member(String str) {
+        String[] keys = str.split("and");
+        this.userName = keys[0].trim();
+        this.phoneNumber = keys[1].trim();
     }
+    public Member() {}
 
     /**
      * Get the user name of a member
@@ -66,11 +71,9 @@ public class Member implements Serializable {
 
     @NonNull
     @Override
+    @JsonValue
     public String toString() {
-        return "Member{" +
-                "userName='" + userName + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                '}';
+        return this.userName + " and " + this.phoneNumber;
     }
 
     @Override

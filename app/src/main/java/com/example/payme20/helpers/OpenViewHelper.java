@@ -6,6 +6,8 @@ import androidx.fragment.app.FragmentActivity;
 import com.example.payme20.model.Event;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
+import com.example.payme20.views.GroupCreateView;
+import com.example.payme20.views.GroupListView;
 
 public class OpenViewHelper  {
 
@@ -38,6 +40,11 @@ public class OpenViewHelper  {
     public static void openViewPutExtra(Class<?> newView, Context currentView, Event event){
         Intent newIntent = new Intent(currentView, newView);
         newIntent.putExtra("EVENT_KEY", event);
+        currentView.startActivity(newIntent);
+    }
+
+    public static void openViewPutExtra(Class<?> newView, Context currentView) {
+        Intent newIntent = new Intent(currentView, newView);
         currentView.startActivity(newIntent);
     }
 }

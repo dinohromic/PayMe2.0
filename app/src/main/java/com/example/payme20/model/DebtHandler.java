@@ -1,5 +1,7 @@
 package com.example.payme20.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,7 +9,10 @@ import java.util.List;
 import java.util.Map;
 
 public class DebtHandler implements Serializable {
+    @JsonSerialize(keyUsing = MemberSerializer.class)
+
     private Map<Member, List<Debt>> incomingDebtsMaps = new HashMap<>();
+    @JsonSerialize(keyUsing = MemberSerializer.class)
     private Map<Member, List<Debt>> outgoingDebtsMap = new HashMap<>();
 
     /**

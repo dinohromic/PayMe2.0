@@ -120,7 +120,7 @@ public class EventCreateView extends AppCompatActivity {
                 }
                 else{
                     ecViewmodel.createEvent();
-                    OpenViewHelper.openViewPutExtra(GroupPageView.class, EventCreateView.this, ecViewmodel.getGroup());
+                    OpenViewHelper.openViewPutExtra(GroupListView.class, EventCreateView.this);
                 }
             }
         });

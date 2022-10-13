@@ -10,6 +10,7 @@ import java.util.Map;
  */
 public class DetailedCreateDebtList implements ICreateDebtList, Serializable {
     private final String name = "Detailed";
+    public DetailedCreateDebtList () {}
 
     /**
      * Takes in data from the event and returns a list with debts in a list

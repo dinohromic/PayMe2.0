@@ -24,6 +24,7 @@ public class Group implements Serializable {
         this.groupMembers = membersList;
         this.debtHandler = new DebtHandler();
     }
+    public Group() {}
 
     public String getGroupName() {
         return groupName;

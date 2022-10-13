@@ -11,9 +11,10 @@ public enum PayMeModel {
     PayMeModel(){
     }
 
-    public void createNewGroupEvent(Group group, Map<Member, Integer> debtMap, String eventName, Member payer, ICreateDebtList iCreateDebtList, String date) {
+    public void createNewGroupEvent(String groupName, Map<Member, Integer> debtMap, String eventName, Member payer, ICreateDebtList iCreateDebtList, String date) {
         Event event = Factory.createEvent(eventName, debtMap, payer, iCreateDebtList, date);
-        group.addEvent(event);
+        dataHandler.getGroups().get(groupName).addEvent(event);
+        serializeGroups();
     }
 
     public int getTotalDebt(Group group, Member member) {
@@ -69,7 +70,7 @@ public enum PayMeModel {
     public void deserializeGroups() {
         dataHandler.refreshGroups(dataManager.readGroups());
     }
-    public List<Group> getGroups() {
+    public Map<String,Group> getGroups() {
         deserializeGroups();
         return dataHandler.getGroups();
     }

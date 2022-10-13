@@ -1,22 +1,24 @@
 package com.example.payme20.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public enum DataHandler {
     INSTANCE;
-    private List<Group> groups = new ArrayList<>();
+    private Map<String,Group> groups = new HashMap<>();
 
     public void addGroup(Group g) {
-        groups.add(g);
+        groups.put(g.getGroupName(), g);
     }
-    public List<Group> getGroups() {
+    public Map<String,Group> getGroups() {
         return groups;
     }
 
 
-    public void refreshGroups(List<Group> groups) {
+    public void refreshGroups(Map<String, Group> map) {
         this.groups.clear();
-        this.groups.addAll(groups);
+        this.groups.putAll(map);
     }
 }

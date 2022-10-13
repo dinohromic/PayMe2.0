@@ -7,9 +7,9 @@ import java.util.Objects;
  * Debt holds data about a Member who owes another Member and how much that debt is of
  */
 public class Debt implements Serializable {
-    private final Member debtTo;
-    private final Member debtFrom;
-    private final int debtAmount;
+    private Member debtTo;
+    private Member debtFrom;
+    private int debtAmount;
 
     /**
      * Creates a debt
@@ -22,6 +22,7 @@ public class Debt implements Serializable {
         this.debtFrom = Objects.requireNonNull(debtFrom);
         this.debtAmount = debtAmount;
     }
+    public Debt() {}
 
     /**
      * Get the amount of debt between the Members

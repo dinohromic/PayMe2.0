@@ -10,12 +10,15 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.payme20.MainActivity;
 import com.example.payme20.R;
+import com.example.payme20.model.Debt;
+import com.example.payme20.model.Member;
 import com.example.payme20.view_models.GroupListViewModel;
 import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.model.Group;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class GroupListView extends AppCompatActivity {
 
@@ -35,9 +38,10 @@ public class GroupListView extends AppCompatActivity {
         FABonClickListener(createGroupFAB);
     }
 
-    private void populateGroupList(List<Group> groups) {
-        for(int i = 0; i < groups.size(); i++){
-            createCardForContainer(groups.get(i));
+    private void populateGroupList(Map<String,Group> groups) {
+        for (Map.Entry<String, Group> debtMap: groups.entrySet()) {
+            Group group = debtMap.getValue();
+            createCardForContainer(group);
         }
     }
 
