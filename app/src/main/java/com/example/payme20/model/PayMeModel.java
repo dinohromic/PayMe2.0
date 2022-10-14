@@ -28,7 +28,7 @@ public enum PayMeModel {
     }
     public void inactivateEvent(Event event, Group group) {
         event.setEventInactive();
-        //getGroups().get(group.getGroupName()).removeEventDebts(event);
+        dataHandler.getGroups().get(group.getGroupName()).removeEventDebts(event);
         serializeGroups();
     }
     public void inactivateAllEvents(Group group) {
@@ -58,7 +58,7 @@ public enum PayMeModel {
 
     public void activateEvent(Event event, Group group) {
         event.setEventActive();
-        //group.addEventDebtToGroup(event.getDebtList());
+        group.addEventDebtToGroup(event.getDebtList());
         serializeGroups();
     }
 
