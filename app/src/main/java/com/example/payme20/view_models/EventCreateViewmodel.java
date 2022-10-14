@@ -28,8 +28,8 @@ public class EventCreateViewmodel extends ViewModel {
     private String date;
     PayMeModel model = PayMeModel.INSTANCE;
 
-    public EventCreateViewmodel(Group group) {
-        this.group = group;
+    public EventCreateViewmodel(String groupName) {
+        this.group = model.getGroups().get(groupName);
         this.debtUpdater = new SplitCreateDebtList();
         initMemberMap();
         initEventMemberList();

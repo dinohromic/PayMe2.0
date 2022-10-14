@@ -24,6 +24,7 @@ public class CreateGroupViewModel {
         membersList.add(member);
     }
     public void createGroup(String groupName){
+        payMeModel.deserializeGroups();
         payMeModel.createNewGroup(groupName, membersList);
     }
 }

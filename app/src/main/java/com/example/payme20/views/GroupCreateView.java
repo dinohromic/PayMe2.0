@@ -69,7 +69,7 @@ public class GroupCreateView extends AppCompatActivity{
             Toast.makeText(GroupCreateView.this,"Members phone needed", Toast.LENGTH_SHORT).show();
         }
         else{
-            addMemberCards(edtName.getText().toString(),edtPhoneNumber.getText().toString(), edtGroupName.getText().toString());
+            addMemberCards(edtName.getText().toString(),edtPhoneNumber.getText().toString());
         }
     }
 
@@ -91,10 +91,10 @@ public class GroupCreateView extends AppCompatActivity{
 
     private void openCurrentGroups() {
        createGroupVM.createGroup(edtGroupName.getText().toString());
-       OpenViewHelper.openViewPutExtra(GroupListView.class, GroupCreateView.this);
+       OpenViewHelper.openViewPutExtra(GroupPageView.class, GroupCreateView.this, edtGroupName.getText().toString());
     }
 
-    private void addMemberCards(String name, String number, String groupName) {
+    private void addMemberCards(String name, String number) {
         View view = getLayoutInflater().inflate(R.layout.members_card, null);
         initCardWidgets(view);
         membersName.setText(name);

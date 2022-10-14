@@ -95,7 +95,7 @@ public class EventFragmentGroupPage extends Fragment {
         createNewEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                OpenViewHelper.openViewPutExtra(EventCreateView.class, getActivity(), group);
+                OpenViewHelper.openViewPutExtra(EventCreateView.class, getActivity(), group.getGroupName());
             }
         });
     }
