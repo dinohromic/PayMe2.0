@@ -78,7 +78,7 @@ public class Member implements Serializable {
     @Override
     @JsonValue
     public String toString() {
-        return this.userName + " and " + this.phoneNumber;
+        return userName + " and " + phoneNumber;
     }
 
     @Override

@@ -50,7 +50,7 @@ public class EventPageView extends AppCompatActivity {
     private void addCard(Member member, int amount) {
         View view = getLayoutInflater().inflate(R.layout.event_page_member_card, null);
         TextView memberName = view.findViewById(R.id.eventPageMemberName);
-        memberName.setText(member.getUserName().substring(1));
+        memberName.setText(member.getUserName());
         TextView memberAmount = view.findViewById(R.id.eventPageMemberAmount);
         memberAmount.setText(String.format("%d kr", amount));
         memberContainer.addView(view);
@@ -60,7 +60,7 @@ public class EventPageView extends AppCompatActivity {
         this.returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                OpenViewHelper.openViewPutExtra(GroupPageView.class, EventPageView.this, eventPageViewModel.getGroup());
+                OpenViewHelper.openViewPutExtra(GroupPageView.class, EventPageView.this, eventPageViewModel.getGroup().getGroupName());
             }
         });
     }
@@ -84,7 +84,7 @@ public class EventPageView extends AppCompatActivity {
     private void initViewModel() {
         Group belongsToGroup = (Group) getIntent().getSerializableExtra("GROUP_KEY");
         Event event = (Event) getIntent().getSerializableExtra("EVENT_KEY");
-        this.eventPageViewModel = new EventPageViewModel(belongsToGroup, event);
+        this.eventPageViewModel = new EventPageViewModel(belongsToGroup.getGroupName(), event);
     }
 
     private void initWidgets() {

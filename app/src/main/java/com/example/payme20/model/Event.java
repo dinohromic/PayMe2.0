@@ -2,6 +2,9 @@ package com.example.payme20.model;
 
 import androidx.annotation.NonNull;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.io.Serializable;
@@ -13,7 +16,7 @@ import java.util.Map;
  *  An event holds data and makes calculations with data about the event
  */
 public class Event implements Serializable {
-    @JsonSerialize(keyUsing = MemberSerializer.class)
+    @JsonDeserialize(keyUsing = MemberDeserializer.class)
     private  Map<Member, Integer> eventPaymentDetails;
     private  ICreateDebtList debtUpdater;
     private boolean activeStatus;
@@ -31,7 +34,8 @@ public class Event implements Serializable {
      * @param debtUpdater the method of paying for the event
      * @param date the date the event took place
      */
-    public Event(String eventName, Map eventPaymentDetails, Member payer, ICreateDebtList debtUpdater, String date){
+
+    public Event(String eventName, Map<Member, Integer> eventPaymentDetails, Member payer, ICreateDebtList debtUpdater, String date){
         this.eventName=eventName;
         this.eventPaymentDetails = eventPaymentDetails;
         this.payer = payer;

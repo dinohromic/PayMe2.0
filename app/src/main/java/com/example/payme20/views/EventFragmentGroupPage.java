@@ -86,6 +86,9 @@ public class EventFragmentGroupPage extends Fragment {
         eventName.setText(event.getEventName());
         TextView eventDate = cardView.findViewById(R.id.eventDate);
         eventDate.setText(event.getEventDate());
+        CheckBox checkBox = cardView.findViewById(R.id.checkBoxEventActive);
+        if(!event.getActiveStatus())
+            checkBox.setChecked(false);
     }
 
     private void setAddNewEventListener(Button createNewEvent) {

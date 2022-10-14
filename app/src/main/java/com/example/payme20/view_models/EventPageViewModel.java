@@ -11,9 +11,9 @@ public class EventPageViewModel {
     private final Group group;
     private final Event event;
     private final PayMeModel model = PayMeModel.INSTANCE;
-    public EventPageViewModel(Group belongsToGroup, Event event) {
+    public EventPageViewModel(String belongsToGroup, Event event) {
         this.event = event;
-        this.group = belongsToGroup;
+        this.group = model.getGroups().get(belongsToGroup);
     }
 
     public String getEventName() {
@@ -46,14 +46,6 @@ public class EventPageViewModel {
             amount += memberMap.getValue();
         }
         return amount;
-    }
-
-    public void setEventInactive() {
-        model.inactivateEvent(event, group);
-    }
-
-    public void setEventActive() {
-        model.activateEvent(event, group);
     }
 
     public boolean getEventActiveStatus() {

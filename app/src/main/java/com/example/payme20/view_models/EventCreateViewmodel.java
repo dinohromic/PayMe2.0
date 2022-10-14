@@ -6,8 +6,10 @@ import com.example.payme20.model.DetailedCreateDebtList;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.ICreateDebtList;
 import com.example.payme20.model.Member;
+import com.example.payme20.model.MemberSerializer;
 import com.example.payme20.model.PayMeModel;
 import com.example.payme20.model.SplitCreateDebtList;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 public class EventCreateViewmodel extends ViewModel {
+    @JsonSerialize(keyUsing = MemberSerializer.class)
     private Map<Member, Integer> memberAndAmount = new HashMap<>();
     private String eventName;
     private ICreateDebtList debtUpdater;

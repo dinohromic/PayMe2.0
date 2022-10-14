@@ -19,6 +19,7 @@ public class GroupPageViewModel extends ViewModel {
     }
 
     public Group getGroup(){
+        this.group = payMeModel.getGroups().get(group.getGroupName());
         return this.group;
     }
 

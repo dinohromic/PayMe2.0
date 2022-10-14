@@ -9,11 +9,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.payme20.R;
 import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
+import com.example.payme20.view_models.GroupPageViewModel;
+import com.example.payme20.view_models.ViewModelFactory;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +37,7 @@ public class MemberFragmentGroupPage extends Fragment {
 
     private Button createNewMemberButton;
     private LinearLayout cardContainerLayout;
+    private GroupPageViewModel gpViewModel;
 
     public MemberFragmentGroupPage() {
         // Required empty public constructor
@@ -46,10 +50,15 @@ public class MemberFragmentGroupPage extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View groupFragmentView = inflater.inflate(R.layout.fragment_member_group_page, container, false);
+        initViewModel();
         initializeWidgetsFragmentMembers(groupFragmentView);
         setAddNewMemberListener(createNewMemberButton);
         populateMemberContainer();
         return groupFragmentView;
+    }
+    private void initViewModel() {
+        ViewModelFactory vmFactory = ViewModelFactory.INSTANCE;
+        this.gpViewModel = new ViewModelProvider(this, vmFactory).get(GroupPageViewModel.class);
     }
 
     private void populateMemberContainer() {
@@ -86,6 +95,7 @@ public class MemberFragmentGroupPage extends Fragment {
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                group = gpViewModel.getGroup();
                 OpenViewHelper.openViewPutExtra(MemberPageView.class, getActivity(), member, group);
 
             }

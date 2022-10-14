@@ -28,7 +28,8 @@ public enum PayMeModel {
     }
     public void inactivateEvent(Event event, Group group) {
         event.setEventInactive();
-        group.removeEventDebts(event);
+        //getGroups().get(group.getGroupName()).removeEventDebts(event);
+        serializeGroups();
     }
     public void inactivateAllEvents(Group group) {
         for(Event e : group.getGroupEvents()) {
@@ -57,7 +58,8 @@ public enum PayMeModel {
 
     public void activateEvent(Event event, Group group) {
         event.setEventActive();
-        group.addEventDebtToGroup(event.getDebtList());
+        //group.addEventDebtToGroup(event.getDebtList());
+        serializeGroups();
     }
 
     public void createNewGroup(String groupName, List<Member> membersList) {
