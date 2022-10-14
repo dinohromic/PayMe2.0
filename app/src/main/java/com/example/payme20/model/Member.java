@@ -69,6 +69,7 @@ public class Member implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
+
     /**
      * Set the toString of the Member object to userName and phoneNumber
      * @return returns the toString of userName and phoneNumber
