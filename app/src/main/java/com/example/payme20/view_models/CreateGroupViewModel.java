@@ -8,20 +8,37 @@ import com.example.payme20.model.Member;
 import com.example.payme20.model.PayMeModel;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class CreateGroupViewModel {
     Context context;
     PayMeModel payMeModel = PayMeModel.INSTANCE;
 
-    ArrayList<Member> membersList = new ArrayList<>();
-    public CreateGroupViewModel(Context context){
+    ArrayList<Member> membersList;
+    public CreateGroupViewModel(Context context, ArrayList<Member> membersList){
         this.context = context;
+        this.membersList = membersList;
     }
 
 
-    public void addMembers(String memberName, String memberNumber){
-        Member member = Factory.createMember(memberName, memberNumber);
-        membersList.add(member);
+    public boolean addMembers(String memberName, String memberNumber){
+        if(this.membersList.size()>0){
+        for (Member member: this.membersList) {
+            if (!Objects.equals(member.getUserName(), memberName)) {
+                Member member1 = Factory.createMember(memberName, memberNumber);
+                this.membersList.add(member1);
+                return true;
+            }
+            return false;
+        }
+
+        }
+        else { Member member = Factory.createMember(memberName, memberNumber);
+            this.membersList.add(member);
+            return true;
+
+        }
+        return false;
     }
     public void createGroup(String groupName){
         payMeModel.createNewGroup(groupName, membersList);
