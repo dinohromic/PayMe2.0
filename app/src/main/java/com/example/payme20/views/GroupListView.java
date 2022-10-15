@@ -1,3 +1,5 @@
+/* The responsibility of this class is to list all groups in a view
+* */
 package com.example.payme20.views;
 
 import android.content.Intent;

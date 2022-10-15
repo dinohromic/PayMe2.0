@@ -1,3 +1,6 @@
+/* The responsibility of this class is handling the presentation and
+manipulation of data in the view of the member page.
+* */
 package com.example.payme20.views;
 
 import android.os.Bundle;

@@ -36,8 +36,8 @@ public class DebtCalculator implements Serializable {
 
     private int totalDebtToPay(Member member, DebtHandler dh){
         int totalDebt = 0;
-        if(dh.getIncomingDebtsMaps().containsKey(member.getUserName())) {
-            for(Debt d : dh.getIncomingDebtsMaps().get(member.getUserName())) {
+        if(dh.getOutgoingDebtsMap().containsKey(member.getUserName())) {
+            for(Debt d : dh.getOutgoingDebtsMap().get(member.getUserName())) {
                 totalDebt -= d.getDebtAmount();
             }
         }

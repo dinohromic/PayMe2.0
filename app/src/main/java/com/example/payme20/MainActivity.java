@@ -1,3 +1,5 @@
+/* The responsibility of this class is to be to first view when starting
+the application. */
 package com.example.payme20;
 
 import androidx.appcompat.app.AppCompatActivity;

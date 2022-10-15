@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class handles data about the group, it adds and removes members or events and handles data about the group
+ * This class holds data about the group and adds/removes members or events
  */
 public class Group implements Serializable {
     private String groupName;

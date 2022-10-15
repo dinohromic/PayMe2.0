@@ -1,9 +1,8 @@
+/* The responsibility of this class is displaying data about an event. */
 package com.example.payme20.views;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;

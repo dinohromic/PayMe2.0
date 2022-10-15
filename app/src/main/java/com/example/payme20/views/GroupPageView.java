@@ -1,3 +1,5 @@
+/* The responsibility of this class is presenting data of the group in the
+group page view  */
 package com.example.payme20.views;
 
 import android.content.Intent;

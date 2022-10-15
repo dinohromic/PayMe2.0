@@ -1,3 +1,6 @@
+/* The responsibility of this class is presenting events in a listed order
+inside a fragment contained in the GroupView.
+* */
 package com.example.payme20.views;
 
 import android.os.Bundle;

@@ -1,3 +1,6 @@
+/*The responsibility of this class is handling the process of creating new groups
+by presenting data on the view and taking in unprocessed data about group members
+*/
 package com.example.payme20.views;
 
 import android.os.Bundle;

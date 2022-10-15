@@ -1,3 +1,5 @@
+/* The responsibility of this class is to act as an view during the creation of events,
+thereby taking input from a user. */
 package com.example.payme20.views;
 
 import android.app.DatePickerDialog;

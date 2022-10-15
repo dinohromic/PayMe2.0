@@ -1,3 +1,6 @@
+/* The responsibility of this class is presenting data on the fragment of
+members in the the view of the group page.
+* */
 package com.example.payme20.views;
 
 import android.os.Bundle;
@@ -18,11 +21,6 @@ import com.example.payme20.model.Member;
 import com.example.payme20.view_models.GroupPageViewModel;
 import com.example.payme20.view_models.ViewModelFactory;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MemberFragmentGroupPage#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class MemberFragmentGroupPage extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match

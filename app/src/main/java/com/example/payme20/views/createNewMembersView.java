@@ -1,3 +1,6 @@
+/* The responsibility of this class is to receive input-data from a user in order to
+pass the data to a class which can create objects of the inpu-data
+*/
 package com.example.payme20.views;
 
 import android.os.Bundle;
