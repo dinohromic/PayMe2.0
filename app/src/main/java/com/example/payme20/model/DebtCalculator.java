@@ -1,3 +1,5 @@
+/* The responsibility of this class is to calculate different kinds of debt.
+*/
 package com.example.payme20.model;
 
 import java.io.Serializable;

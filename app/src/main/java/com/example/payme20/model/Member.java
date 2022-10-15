@@ -1,3 +1,6 @@
+/* The responsibility of this class is hold data about
+members, this being usernames and phone numbers.
+*/
 package com.example.payme20.model;
 
 

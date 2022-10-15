@@ -1,3 +1,6 @@
+/*The responsibility of this class is to process input-data
+in order to create debts and putting them in a list to return. */
+
 package com.example.payme20.model;
 
 import java.io.Serializable;

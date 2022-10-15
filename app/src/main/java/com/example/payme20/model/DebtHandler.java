@@ -1,3 +1,6 @@
+/*The responsibility of this class is to manage all existing debts
+within a group.
+*/
 package com.example.payme20.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;

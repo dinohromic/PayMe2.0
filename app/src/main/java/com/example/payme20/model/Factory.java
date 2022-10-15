@@ -1,3 +1,6 @@
+/* The responsibility of this class is to enable top-level modules to use the
+concrete constructors within the model without having top-level dependencies on low-level modules.
+* */
 package com.example.payme20.model;
 
 import java.util.List;

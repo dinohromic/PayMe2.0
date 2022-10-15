@@ -1,3 +1,6 @@
+/* The responsibility of this class is to hold data about a group and being able to
+modify that data, i.e adding or removing group members, adding or removing events.
+*/
 package com.example.payme20.model;
 
 import java.io.Serializable;

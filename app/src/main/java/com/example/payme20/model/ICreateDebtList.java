@@ -1,3 +1,6 @@
+/* The responsibility of this interface is to enable use of poly-morphism of
+classes that implement this interface.
+*/
 package com.example.payme20.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;

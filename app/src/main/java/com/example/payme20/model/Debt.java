@@ -1,3 +1,5 @@
+/* The Responsibility of this class is to hold data about debts.
+* */
 package com.example.payme20.model;
 
 import java.io.Serializable;

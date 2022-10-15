@@ -1,3 +1,5 @@
+/* The responsibility of this class is to hold and process data about events.
+* */
 package com.example.payme20.model;
 
 import androidx.annotation.NonNull;

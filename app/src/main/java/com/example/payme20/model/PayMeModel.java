@@ -1,3 +1,6 @@
+/*The responsibility of this class is to act as an facade when
+top-level modules needs to access the model.
+* */
 package com.example.payme20.model;
 
 import java.util.List;
