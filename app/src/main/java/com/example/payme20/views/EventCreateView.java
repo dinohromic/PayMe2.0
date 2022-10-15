@@ -63,8 +63,8 @@ public class EventCreateView extends AppCompatActivity {
         setCurrentDateOnView();
     }
 
-    private Group retrieveIntentGroup(){
-        return (Group) getIntent().getSerializableExtra("GROUP_KEY");
+    private String retrieveIntentGroup(){
+        return (String) getIntent().getSerializableExtra("GROUP_NAME_KEY");
     }
 
     private void createViewModel(){
@@ -120,7 +120,7 @@ public class EventCreateView extends AppCompatActivity {
                 }
                 else{
                     ecViewmodel.createEvent();
-                    OpenViewHelper.openViewPutExtra(GroupListView.class, EventCreateView.this);
+                    OpenViewHelper.openViewPutExtra(GroupPageView.class, EventCreateView.this, ecViewmodel.getGroup().getGroupName());
                 }
             }
         });

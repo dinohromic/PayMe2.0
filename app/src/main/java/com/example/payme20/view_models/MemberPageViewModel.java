@@ -16,7 +16,7 @@ public class MemberPageViewModel extends ViewModel {
     PayMeModel payMeModel = PayMeModel.INSTANCE;
 
     public MemberPageViewModel(Group group, Member member){
-        this.belongsToGroup = group;
+        this.belongsToGroup = payMeModel.getGroups().get(group.getGroupName());
         this.currentProfileMember = findCorrectMemberReferenceInGroup(group, member);
         this.currentGroupDebtsMap = getCurrentGroupDebtsMap();
     }
@@ -25,7 +25,7 @@ public class MemberPageViewModel extends ViewModel {
     //This method is sadly necessary because serializing changes reference of objects
     public Member findCorrectMemberReferenceInGroup(Group group, Member memberToFind){
         Member memberByReference = new Member("This doesn't feel like good code", "1337");
-        for (Member member : payMeModel.getGroups().get(group.getGroupName()).getGroupMembers()) {
+        for (Member member : belongsToGroup.getGroupMembers()) {
             if(Objects.equals(memberToFind, member)){
                 memberByReference = member;
             }
@@ -59,14 +59,22 @@ public class MemberPageViewModel extends ViewModel {
 
     public void setNewName(String newName){
         if(newName != null){
-            this.currentProfileMember.setUserName(newName);
+            for(Member m : belongsToGroup.getGroupMembers()) {
+                if(m.equals(this.currentProfileMember))
+                    m.setUserName(newName);
+            }
         }
+        payMeModel.serializeGroups();
     }
 
     public void setNewPhoneNumber(String newPhoneNumber){
         if(newPhoneNumber != null){
-            this.currentProfileMember.setPhoneNumber(newPhoneNumber);
+            for(Member m : belongsToGroup.getGroupMembers()) {
+                if(m.equals(this.currentProfileMember))
+                    m.setPhoneNumber(newPhoneNumber);
+            }
         }
+        payMeModel.serializeGroups();
     }
 
     public int getProfileMemberTotalDebt(){

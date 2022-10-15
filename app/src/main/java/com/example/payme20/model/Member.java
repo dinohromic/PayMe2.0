@@ -81,6 +81,11 @@ public class Member implements Serializable {
         return userName + " and " + phoneNumber;
     }
 
+    /**
+     * Validates if two objects have the same value
+     * @param o is of type Object
+     * @return returns true or false whether the objects are equal or not
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -47,4 +47,17 @@ public class Debt implements Serializable {
     public Member getDebtFrom() {
         return new Member(debtFrom.getUserName(), debtFrom.getPhoneNumber());
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Debt debt = (Debt) o;
+        return debtAmount == debt.debtAmount && Objects.equals(debtTo, debt.debtTo) && Objects.equals(debtFrom, debt.debtFrom);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(debtTo, debtFrom, debtAmount);
+    }
 }

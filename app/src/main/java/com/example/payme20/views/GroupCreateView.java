@@ -15,6 +15,8 @@ import com.example.payme20.view_models.CreateGroupViewModel;
 import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.R;
 
+import java.util.ArrayList;
+
 public class GroupCreateView extends AppCompatActivity{
 
     private static final String TAG = "MemberView";
@@ -29,7 +31,7 @@ public class GroupCreateView extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_group);
-        createGroupVM = new CreateGroupViewModel(this);
+        createGroupVM = new CreateGroupViewModel(this, new ArrayList());
         initWidget();
         setOnClickListenerFinish();
         setOnClickListenerAddMembers();
@@ -69,7 +71,7 @@ public class GroupCreateView extends AppCompatActivity{
             Toast.makeText(GroupCreateView.this,"Members phone needed", Toast.LENGTH_SHORT).show();
         }
         else{
-            addMemberCards(edtName.getText().toString(),edtPhoneNumber.getText().toString(), edtGroupName.getText().toString());
+            addMemberCards(edtName.getText().toString(),edtPhoneNumber.getText().toString());
         }
     }
 
@@ -91,17 +93,22 @@ public class GroupCreateView extends AppCompatActivity{
 
     private void openCurrentGroups() {
        createGroupVM.createGroup(edtGroupName.getText().toString());
-       OpenViewHelper.openViewPutExtra(GroupListView.class, GroupCreateView.this);
+       OpenViewHelper.openViewPutExtra(GroupPageView.class, GroupCreateView.this, edtGroupName.getText().toString());
     }
 
-    private void addMemberCards(String name, String number, String groupName) {
+    private void addMemberCards(String name, String number) {
         View view = getLayoutInflater().inflate(R.layout.members_card, null);
         initCardWidgets(view);
-        membersName.setText(name);
-        membersPhone.setText(number);
-        createGroupVM.addMembers(name, number);
-        membersContainer.addView(view);
-        edtName.getText().clear();
-        edtPhoneNumber.getText().clear();
+        if(createGroupVM.addMembers(name, number)) {
+            membersName.setText(name);
+            membersPhone.setText(number);
+            membersContainer.addView(view);
+            edtName.getText().clear();
+            edtPhoneNumber.getText().clear();
+        }
+        else {
+            Toast.makeText(GroupCreateView.this,"Cant have 2 user", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }
