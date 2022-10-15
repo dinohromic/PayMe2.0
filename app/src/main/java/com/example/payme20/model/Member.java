@@ -57,6 +57,14 @@ public class Member implements Serializable {
     }
 
     /**
+     * Get the id of a member
+     * @return returns the id of the member
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
      * Set the user name of a member
      * @param userName the new user name of the member
      */
