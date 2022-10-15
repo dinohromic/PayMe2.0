@@ -41,18 +41,18 @@ public class SplitDebtUpdaterTest {
     }
     @Test
     public void testPayerPositiveDebt(){
-        System.out.println(payMeModel.getTotalDebt(group, user1));
-        System.out.println(payMeModel.getTotalDebt(group, user2));
-        System.out.println(payMeModel.getTotalDebt(group, user3));
-        int user1TotalDebt = -(payMeModel.getTotalDebt(group, user2) + payMeModel.getTotalDebt(group, user2));
-        assertEquals(user1TotalDebt, payMeModel.getTotalDebt(group,user1), 1); // Hur testa detta?
+        System.out.println(payMeModel.getTotalDebt(group.getGroupName(), user1));
+        System.out.println(payMeModel.getTotalDebt(group.getGroupName(), user2));
+        System.out.println(payMeModel.getTotalDebt(group.getGroupName(), user3));
+        int user1TotalDebt = -(payMeModel.getTotalDebt(group.getGroupName(), user2) + payMeModel.getTotalDebt(group.getGroupName(), user2));
+        assertEquals(user1TotalDebt, payMeModel.getTotalDebt(group.getGroupName(),user1), 1); // Hur testa detta?
     }
     @Test
     public void testUser2NegativeDebt(){
-        assertEquals(-110, payMeModel.getTotalDebt(group, user2), 1);
+        assertEquals(-110, payMeModel.getTotalDebt(group.getGroupName(), user2), 1);
     }
     @Test
     public void testUser3NegativeDebt(){
-        assertEquals(-110, payMeModel.getTotalDebt(group, user3), 1);
+        assertEquals(-110, payMeModel.getTotalDebt(group.getGroupName(), user3), 1);
     }
 }

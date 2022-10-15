@@ -104,12 +104,12 @@ public class GroupTest {
         eventPaymentMap.put(user2, 30);
         eventPaymentMap.put(user3, 40);
 
-        payMeModel.createNewGroupEvent(group, eventPaymentMap, "event", user1, new SplitCreateDebtList(), "");
-        payMeModel.createNewGroupEvent(group, eventPaymentMap, "event", user2, new DetailedCreateDebtList(), "");
-        payMeModel.createNewGroupEvent(group, eventPaymentMap, "event", user3, new SplitCreateDebtList(), "");
+        payMeModel.createNewGroupEvent(group.getGroupName(), eventPaymentMap, "event", user1, new SplitCreateDebtList(), "");
+        payMeModel.createNewGroupEvent(group.getGroupName(), eventPaymentMap, "event", user2, new DetailedCreateDebtList(), "");
+        payMeModel.createNewGroupEvent(group.getGroupName(), eventPaymentMap, "event", user3, new SplitCreateDebtList(), "");
 
         payMeModel.inactivateEvent(group.getGroupEvents().get(0), group);
-        assertEquals(-50.0, payMeModel.getTotalDebt(group, user1), 1);
+        assertEquals(-50.0, payMeModel.getTotalDebt(group.getGroupName(), user1), 1);
 
     }
 
