@@ -22,16 +22,16 @@ public class Member implements Serializable {
 
     private String userName;
     private String phoneNumber;
+    private int id;
     /**
      * Create a new member
      * @param userName Create the member with the given user name
      * @param phoneNumber Create the member with the given phone number
      */
-    public Member(String userName, String phoneNumber){
-
+    public Member(String userName, String phoneNumber, int id){
         this.userName = userName;
         this.phoneNumber = phoneNumber;
-
+        this.id = id;
     }
     public Member(String str) {
         String[] keys = str.split("and");
@@ -94,12 +94,12 @@ public class Member implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Member member = (Member) o;
-        return Objects.equals(userName, member.userName) && Objects.equals(phoneNumber, member.phoneNumber);
+        return id == member.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userName, phoneNumber);
+        return Objects.hash(id);
     }
 }
 

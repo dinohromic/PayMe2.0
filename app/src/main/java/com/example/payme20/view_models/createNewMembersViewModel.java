@@ -11,12 +11,12 @@ public class createNewMembersViewModel {
     private PayMeModel payMeModel = PayMeModel.INSTANCE;
 
     public createNewMembersViewModel(Group group){
-        this.group = group;
+        this.group = payMeModel.getGroups().get(group.getGroupName());
     }
 
     public void addNewGroupMember (String name, String num){
-        Member newMember = Factory.createMember(name, num);
-        payMeModel.addMember(group, newMember);
+        Member newMember = Factory.createMember(name, num, id);
+        payMeModel.addNewMemberToGroup(group, newMember);
     }
 
     public Group getGroup() {

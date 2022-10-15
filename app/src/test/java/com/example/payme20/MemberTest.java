@@ -18,9 +18,9 @@ public class MemberTest {
     @Before
     public void init() {
         group = Factory.createGroup("gruppTest", new ArrayList<>());
-        user1 = Factory.createMember("user1", "07");
-        user2 = Factory.createMember("user2", "07");
-        user3 = Factory.createMember("user3", "07");
+        user1 = Factory.createMember("user1", "07", id);
+        user2 = Factory.createMember("user2", "07", id);
+        user3 = Factory.createMember("user3", "07", id);
         group.addNewGroupMember(user1);
         group.addNewGroupMember(user2);
         group.addNewGroupMember(user3);

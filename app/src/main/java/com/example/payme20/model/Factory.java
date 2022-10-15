@@ -25,10 +25,11 @@ public final class Factory {
      * Creates a member and returns the reference
      * @param memberName name of the member
      * @param phoneNumber phone number of the member
+     * @param id
      * @return returns the created member
      */
-    public static Member createMember(String memberName, String phoneNumber){
-        return new Member(memberName, phoneNumber);
+    public static Member createMember(String memberName, String phoneNumber, int id){
+        return new Member(memberName, phoneNumber, id);
     }
 
     /**

@@ -8,12 +8,16 @@ import java.util.Map;
 public enum DataHandler {
     INSTANCE;
     private Map<String,Group> groups = new HashMap<>();
+    private int id = 0;
 
     public void addGroup(Group g) {
         groups.put(g.getGroupName(), g);
     }
     public Map<String,Group> getGroups() {
         return groups;
+    }
+    public int getId() {
+        return id++;
     }
 
 

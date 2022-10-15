@@ -46,7 +46,7 @@ public enum PayMeModel {
         return group.removeGroupMember(member); //Vad ska den returna?
     }
 
-    public void addMember(Group group, Member member){
+    public void addNewMemberToGroup(Group group, Member member){
          group.addNewGroupMember(member);
     }
 
@@ -78,5 +78,10 @@ public enum PayMeModel {
     public Map<String,Group> getGroups() {
         deserializeGroups();
         return dataHandler.getGroups();
+    }
+
+    public void createNewMember(String memberName, String memberNumber) {
+        int id = dataHandler.getId();
+        Factory.createMember(memberName, memberNumber, id);
     }
 }
