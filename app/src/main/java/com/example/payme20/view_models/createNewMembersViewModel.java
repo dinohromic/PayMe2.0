@@ -15,8 +15,8 @@ public class createNewMembersViewModel {
     }
 
     public void addNewGroupMember (String name, String num){
-        Member newMember = Factory.createMember(name, num, id);
-        payMeModel.addNewMemberToGroup(group, newMember);
+        //Member newMember = Factory.createMember(name, num, id);
+        payMeModel.addNewMemberToGroup(group, name, num);
     }
 
     public Group getGroup() {

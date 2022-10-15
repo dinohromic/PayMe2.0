@@ -37,6 +37,7 @@ public class Member implements Serializable {
         String[] keys = str.split("and");
         this.userName = keys[0].trim();
         this.phoneNumber = keys[1].trim();
+        this.id = Integer.parseInt(keys[2].trim());
     }
     public Member() {}
 
@@ -89,7 +90,7 @@ public class Member implements Serializable {
     @Override
     @JsonValue
     public String toString() {
-        return userName + " and " + phoneNumber;
+        return userName + " and " + phoneNumber + " and " + id;
     }
 
     /**

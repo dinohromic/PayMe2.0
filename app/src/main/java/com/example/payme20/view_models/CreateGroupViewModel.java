@@ -24,17 +24,14 @@ public class CreateGroupViewModel {
         if(this.membersList.size() > 0){
             for (Member member: this.membersList) {
                 if (!Objects.equals(member.getUserName(), memberName)) {
-                    payMeModel.createNewMember(memberName, memberNumber);
-                    Member member1 = Factory.createMember(memberName, memberNumber, id);
-                    this.membersList.add(member1);
+                    this.membersList.add(payMeModel.createNewMember(memberName, memberNumber));
                     return true;
                 }
                 return false;
             }
         }
         else {
-            Member member = Factory.createMember(memberName, memberNumber, id);
-            this.membersList.add(member);
+            this.membersList.add(payMeModel.createNewMember(memberName, memberNumber));
             return true;
         }
         return false;

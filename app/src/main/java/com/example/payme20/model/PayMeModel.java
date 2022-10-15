@@ -17,7 +17,7 @@ public enum PayMeModel {
     public void createNewGroupEvent(String groupName, Map<Member, Integer> debtMap, String eventName, Member payer, ICreateDebtList iCreateDebtList, String date) {
         Event event = Factory.createEvent(eventName, debtMap, payer, iCreateDebtList, date);
         dataHandler.getGroups().get(groupName).addEvent(event);
-        serializeGroups();
+        serializeModel();
     }
 
     public int getTotalDebt(String groupName, Member member) {
@@ -32,7 +32,7 @@ public enum PayMeModel {
     public void inactivateEvent(Event event, Group group) {
         event.setEventInactive();
         dataHandler.getGroups().get(group.getGroupName()).removeEventDebts(event);
-        serializeGroups();
+        serializeModel();
     }
     public void inactivateAllEvents(Group group) {
         for(Event e : group.getGroupEvents()) {
@@ -46,8 +46,8 @@ public enum PayMeModel {
         return group.removeGroupMember(member); //Vad ska den returna?
     }
 
-    public void addNewMemberToGroup(Group group, Member member){
-         group.addNewGroupMember(member);
+    public void addNewMemberToGroup(Group group, String name, String num){
+         group.addNewGroupMember(createNewMember(name, num));
     }
 
     public int calcTotalExpenditureForGroup(Group group){
@@ -62,15 +62,15 @@ public enum PayMeModel {
     public void activateEvent(Event event, Group group) {
         event.setEventActive();
         group.addEventDebtToGroup(event.getDebtList());
-        serializeGroups();
+        serializeModel();
     }
 
     public void createNewGroup(String groupName, List<Member> membersList) {
         dataHandler.addGroup(Factory.createGroup(groupName, membersList));
-        serializeGroups();
+        serializeModel();
     }
-    public void serializeGroups() {
-        dataManager.writeGroups(dataHandler.getGroups());
+    public void serializeModel() {
+        dataManager.writeToJSON();
     }
     public void deserializeGroups() {
         dataHandler.refreshGroups(dataManager.readGroups());
@@ -80,8 +80,8 @@ public enum PayMeModel {
         return dataHandler.getGroups();
     }
 
-    public void createNewMember(String memberName, String memberNumber) {
+    public Member createNewMember(String memberName, String memberNumber) {
         int id = dataHandler.getId();
-        Factory.createMember(memberName, memberNumber, id);
+        return Factory.createMember(memberName, memberNumber, id);
     }
 }

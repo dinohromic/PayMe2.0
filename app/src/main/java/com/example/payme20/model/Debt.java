@@ -39,7 +39,7 @@ public class Debt implements Serializable {
      * @return return a Member
      */
     public Member getDebtTo() {
-        return new Member(debtTo.getUserName(), debtTo.getPhoneNumber());
+        return new Member(debtTo.getUserName(), debtTo.getPhoneNumber(), debtTo.getId());
     }
 
     /**
@@ -47,7 +47,7 @@ public class Debt implements Serializable {
      * @return return a Member
      */
     public Member getDebtFrom() {
-        return new Member(debtFrom.getUserName(), debtFrom.getPhoneNumber());
+        return new Member(debtFrom.getUserName(), debtFrom.getPhoneNumber(), debtFrom.getId());
     }
 
     @Override

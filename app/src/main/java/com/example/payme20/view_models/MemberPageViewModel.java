@@ -6,7 +6,6 @@ import com.example.payme20.model.Member;
 import com.example.payme20.model.PayMeModel;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class MemberPageViewModel extends ViewModel {
 
@@ -17,20 +16,16 @@ public class MemberPageViewModel extends ViewModel {
 
     public MemberPageViewModel(Group group, Member member){
         this.belongsToGroup = payMeModel.getGroups().get(group.getGroupName());
-        this.currentProfileMember = findCorrectMemberReferenceInGroup(group, member);
+        this.currentProfileMember = getMemberInActualGroup(member);
         this.currentGroupDebtsMap = getCurrentGroupDebtsMap();
     }
 
     //TODO Remove this and replace with finding the same ID when we got the functioning
     //This method is sadly necessary because serializing changes reference of objects
-    public Member findCorrectMemberReferenceInGroup(Group group, Member memberToFind){
-        Member memberByReference = new Member("This doesn't feel like good code", "1337");
-        for (Member member : belongsToGroup.getGroupMembers()) {
-            if(Objects.equals(memberToFind, member)){
-                memberByReference = member;
-            }
-        }
-        return memberByReference;
+    public Member getMemberInActualGroup(Member memberToFind){
+        if(belongsToGroup.getGroupMembers().contains(memberToFind))
+            return belongsToGroup.getGroupMembers().get(belongsToGroup.getGroupMembers().indexOf(memberToFind));
+        return null;
     }
 
     public Group getGroup(){
@@ -64,7 +59,7 @@ public class MemberPageViewModel extends ViewModel {
                     m.setUserName(newName);
             }
         }
-        payMeModel.serializeGroups();
+        payMeModel.serializeModel();
     }
 
     public void setNewPhoneNumber(String newPhoneNumber){
@@ -74,7 +69,7 @@ public class MemberPageViewModel extends ViewModel {
                     m.setPhoneNumber(newPhoneNumber);
             }
         }
-        payMeModel.serializeGroups();
+        payMeModel.serializeModel();
     }
 
     public int getProfileMemberTotalDebt(){
