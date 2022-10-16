@@ -25,7 +25,7 @@ public enum PayMeModel {
         return dc.calcMemberTotalDebt(member, dataHandler.getGroups().get(groupName).getDebtHandler());
     }
 
-    public Map<String, Integer> getSpecificDebts(Group group, Member member) {
+    public Map<Member, Integer> getSpecificDebts(Group group, Member member) {
         DebtCalculator dc = new DebtCalculator();
         return dc.calcMemberSpecificDebt(group.getGroupMembers(), member, group.getDebtHandler());
     }

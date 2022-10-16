@@ -14,17 +14,17 @@ import java.util.Map;
 public class DebtHandler implements Serializable {
     //@JsonSerialize(keyUsing = MemberSerializer.class)
 
-    private Map<String, List<Debt>> incomingDebtsMaps = new HashMap<>();
+    private Map<Member, List<Debt>> incomingDebtsMaps = new HashMap<>();
     //@JsonSerialize(keyUsing = MemberSerializer.class)
-    private Map<String, List<Debt>> outgoingDebtsMap = new HashMap<>();
+    private Map<Member, List<Debt>> outgoingDebtsMap = new HashMap<>();
 
     /**
      * Create new debt list if the current debt lists are empty, then adds the debt to both from and to debt maps.
      * @param debt the debt object to be added
      */
     public void addDebt(Debt debt) {
-        List<Debt> toDebts = incomingDebtsMaps.get(debt.getDebtTo().getUserName());
-        List<Debt> fromDebts = outgoingDebtsMap.get(debt.getDebtFrom().getUserName());
+        List<Debt> toDebts = incomingDebtsMaps.get(debt.getDebtTo());
+        List<Debt> fromDebts = outgoingDebtsMap.get(debt.getDebtFrom());
         if(toDebts == null) {
             toDebts = new ArrayList<>();
         }
@@ -33,15 +33,15 @@ public class DebtHandler implements Serializable {
         }
         toDebts.add(debt);
         fromDebts.add(debt);
-        incomingDebtsMaps.put(debt.getDebtTo().getUserName(), toDebts);
-        outgoingDebtsMap.put(debt.getDebtFrom().getUserName(), fromDebts);
+        incomingDebtsMaps.put(debt.getDebtTo(), toDebts);
+        outgoingDebtsMap.put(debt.getDebtFrom(), fromDebts);
     }
 
     /**
      * get a members incoming debts
      * @return a map with the member and a list of debts
      */
-    public Map<String, List<Debt>> getIncomingDebtsMaps() {
+    public Map<Member, List<Debt>> getIncomingDebtsMaps() {
         return incomingDebtsMaps;
     }
 
@@ -49,7 +49,7 @@ public class DebtHandler implements Serializable {
      * get a members outgoing debts
      * @return a map with the member and a list of debts
      */
-    public Map<String, List<Debt>> getOutgoingDebtsMap() {
+    public Map<Member, List<Debt>> getOutgoingDebtsMap() {
         return outgoingDebtsMap;
     }
 
@@ -58,8 +58,8 @@ public class DebtHandler implements Serializable {
      * @param debt the debt object to be removed
      */
     public void removeDebt(Debt debt) {
-        List<Debt> toDebts = incomingDebtsMaps.get(debt.getDebtTo().getUserName());
-        List<Debt> fromDebts = outgoingDebtsMap.get(debt.getDebtFrom().getUserName());
+        List<Debt> toDebts = incomingDebtsMaps.get(debt.getDebtTo());
+        List<Debt> fromDebts = outgoingDebtsMap.get(debt.getDebtFrom());
         if(toDebts == null) {
             toDebts = new ArrayList<>();
         }
@@ -68,7 +68,7 @@ public class DebtHandler implements Serializable {
         }
         toDebts.remove(debt);
         fromDebts.remove(debt);
-        incomingDebtsMaps.put(debt.getDebtTo().getUserName(), toDebts);
-        outgoingDebtsMap.put(debt.getDebtFrom().getUserName(), fromDebts);
+        incomingDebtsMaps.put(debt.getDebtTo(), toDebts);
+        outgoingDebtsMap.put(debt.getDebtFrom(), fromDebts);
     }
 }

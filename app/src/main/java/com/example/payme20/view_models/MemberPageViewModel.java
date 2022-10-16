@@ -11,7 +11,7 @@ public class MemberPageViewModel extends ViewModel {
 
     Member currentProfileMember;
     Group belongsToGroup;
-    Map<String, Integer> currentGroupDebtsMap;
+    Map<Member, Integer> currentGroupDebtsMap;
     PayMeModel payMeModel = PayMeModel.INSTANCE;
 
     public MemberPageViewModel(Group group, Member member){
@@ -76,13 +76,13 @@ public class MemberPageViewModel extends ViewModel {
         return payMeModel.getTotalDebt(this.belongsToGroup.getGroupName(), this.currentProfileMember);
     }
 
-    private Map<String, Integer> getCurrentGroupDebtsMap(){
+    private Map<Member, Integer> getCurrentGroupDebtsMap(){
         return payMeModel.getSpecificDebts(this.belongsToGroup, this.currentProfileMember);
     }
 
     public int debtToMember(Member memberDebt){
         int debt = 0;
-        try{return currentGroupDebtsMap.get(memberDebt.getUserName());}
+        try{return currentGroupDebtsMap.get(memberDebt);}
         catch (NullPointerException e){System.out.println("Debt for specific member missing [MemberPageViewModel]");}
        return debt;
     }
