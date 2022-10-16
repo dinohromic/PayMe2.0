@@ -20,38 +20,7 @@ public class GroupListViewModel {
     }
 
     public Map<String,Group> getGroupList(){
-        /*List<Group> test = new ArrayList<Group>();
-        List<Member> members = new ArrayList<>();
-        Member test1 = new Member("Arne", "112");
-        Member test2 = new Member("Anders", "114 14");
-        Member test3 = new Member("ahmed","231");
-        Member test4 = new Member("Jihad","231");
-        Member test5 = new Member("Ola", "2345");
-
-        Map<Member, Integer> costMap = new HashMap<>();
-        costMap.put(test1, 100);
-        costMap.put(test2, 120);
-        costMap.put(test3, 140);
-        costMap.put(test4, 160);
-        costMap.put(test5, 180);
-
-        members.add(test1);
-        members.add(test2);
-        members.add(test3);
-        members.add(test4);
-        members.add(test5);
-
-        Group grekland = new Group("Grekland", members);
-        PayMeModel model = PayMeModel.INSTANCE;
-        model.createNewGroupEvent(grekland, costMap,"Middag", test1, new DetailedCreateDebtList(), "2022-10-06");
-
-        test.add(grekland);
-        test.add(new Group("Middag", members));
-        DataManager dm = new DataManager();
-        dm.writeGroups(test);
-        List<Group > testGroups = dm.readGroups();
-        Member m = new Member("anton", "123");*/
-
+        payMeModel.deserializeModel();
         return payMeModel.getGroups();
     }
 

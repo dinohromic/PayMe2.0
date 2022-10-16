@@ -37,7 +37,6 @@ public class CreateGroupViewModel {
         return false;
     }
     public void createGroup(String groupName){
-        payMeModel.deserializeGroups();
         payMeModel.createNewGroup(groupName, membersList);
     }
 }

@@ -48,6 +48,7 @@ public enum PayMeModel {
 
     public void addNewMemberToGroup(Group group, String name, String num){
          group.addNewGroupMember(createNewMember(name, num));
+         serializeModel();
     }
 
     public int calcTotalExpenditureForGroup(Group group){
@@ -66,22 +67,32 @@ public enum PayMeModel {
     }
 
     public void createNewGroup(String groupName, List<Member> membersList) {
+        deserializeGroups();
         dataHandler.addGroup(Factory.createGroup(groupName, membersList));
         serializeModel();
     }
     public void serializeModel() {
         dataManager.writeToJSON();
     }
-    public void deserializeGroups() {
+    public void deserializeModel() {
+        deserializeGroups();
+        deserializeId();
+    }
+    private void deserializeGroups() {
         dataHandler.refreshGroups(dataManager.readGroups());
     }
     public Map<String,Group> getGroups() {
-        deserializeGroups();
         return dataHandler.getGroups();
     }
 
     public Member createNewMember(String memberName, String memberNumber) {
+        deserializeId();
         int id = dataHandler.getId();
+        serializeModel();
         return Factory.createMember(memberName, memberNumber, id);
+    }
+
+    private void deserializeId() {
+        dataHandler.refreshId(dataManager.readId());
     }
 }

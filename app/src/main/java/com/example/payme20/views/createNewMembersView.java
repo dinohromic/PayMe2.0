@@ -37,8 +37,8 @@ public class createNewMembersView extends AppCompatActivity {
     }
 
     private void initViewModel() {
-        Group belongsToGroup = (Group) getIntent().getSerializableExtra("GROUP_KEY");
-        this.viewModel = new createNewMembersViewModel(belongsToGroup);
+        String groupName = (String) getIntent().getSerializableExtra("GROUP_NAME_KEY");
+        this.viewModel = new createNewMembersViewModel(groupName);
     }
 
     private void setOnClickListener(Button createNewMemberButton) {
@@ -73,7 +73,7 @@ public class createNewMembersView extends AppCompatActivity {
     }
 
     private void returnToHome() {
-        OpenViewHelper.openViewPutExtra(GroupPageView.class, createNewMembersView.this, viewModel.getGroup());
+        OpenViewHelper.openViewPutExtra(GroupPageView.class, createNewMembersView.this, viewModel.getGroup().getGroupName());
     }
 
     private void initWidgets() {

@@ -25,4 +25,8 @@ public enum DataHandler {
         this.groups.clear();
         this.groups.putAll(map);
     }
+
+    public void refreshId(int readId) {
+        this.id = readId;
+    }
 }

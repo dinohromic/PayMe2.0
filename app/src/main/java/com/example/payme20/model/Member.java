@@ -39,7 +39,7 @@ public class Member implements Serializable {
         this.phoneNumber = keys[1].trim();
         this.id = Integer.parseInt(keys[2].trim());
     }
-    public Member() {}
+    //public Member() {}
 
     /**
      * Get the user name of a member
