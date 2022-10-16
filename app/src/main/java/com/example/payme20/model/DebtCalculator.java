@@ -20,24 +20,13 @@ public class DebtCalculator implements Serializable {
      */
     public int calcMemberTotalDebt(Member member, DebtHandler dh) {
         int totalDebt = 0;
-        totalDebt += totalDebtToReceive(member, dh);
-        totalDebt += totalDebtToPay(member, dh);
-        return totalDebt;
-    }
-
-    private int totalDebtToReceive(Member member, DebtHandler dh){
-        int totalDebt = 0;
-        if(dh.getIncomingDebtsMaps().containsKey(member.getUserName())) {
-            for(Debt d : dh.getIncomingDebtsMaps().get(member.getUserName())) {
-                totalDebt += d.getDebtAmount();}
+        if (dh.getIncomingDebtsMaps().containsKey(member.getUserName())) {
+            for (Debt d : dh.getIncomingDebtsMaps().get(member.getUserName())) {
+                totalDebt += d.getDebtAmount();
+            }
         }
-        return totalDebt;
-    }
-
-    private int totalDebtToPay(Member member, DebtHandler dh){
-        int totalDebt = 0;
-        if(dh.getOutgoingDebtsMap().containsKey(member.getUserName())) {
-            for(Debt d : dh.getOutgoingDebtsMap().get(member.getUserName())) {
+        if (dh.getOutgoingDebtsMap().containsKey(member.getUserName())) {
+            for (Debt d : dh.getOutgoingDebtsMap().get(member.getUserName())) {
                 totalDebt -= d.getDebtAmount();
             }
         }
