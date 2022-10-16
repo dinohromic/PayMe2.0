@@ -55,8 +55,8 @@ public class EventTest {
     @Test
     public void totalEventCost(){
         this.debtMap.put(new Member("u1", "3", -1), 39);
-        this.debtMap.put(new Member("u2", "2", -1), 41);
-        this.debtMap.put(new Member("u3", "1", -1), 20);
+        this.debtMap.put(new Member("u2", "2", -2), 41);
+        this.debtMap.put(new Member("u3", "1", -3), 20);
         System.out.println(this.testEvent.totalEventCost());
         assertEquals(100, this.testEvent.totalEventCost());
 

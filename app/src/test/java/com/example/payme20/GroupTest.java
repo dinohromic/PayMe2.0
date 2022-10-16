@@ -3,6 +3,7 @@ package com.example.payme20;
 import org.junit.*;
 import static org.junit.Assert.*;
 
+import com.example.payme20.model.DebtCalculator;
 import com.example.payme20.model.DetailedCreateDebtList;
 import com.example.payme20.model.Event;
 import com.example.payme20.model.Factory;
@@ -24,13 +25,12 @@ public class GroupTest {
     Event event;
     Event event1;
     Event event2;
-    PayMeModel payMeModel;
     @Before
     public void init() {
         group = Factory.createGroup("gruppTest",new ArrayList<>());
         user1 = Factory.createMember("user1", "07", -1);
-        user2 = Factory.createMember("user2", "07", -1);
-        user3 = Factory.createMember("user3", "07", -1);
+        user2 = Factory.createMember("user2", "07", -2);
+        user3 = Factory.createMember("user3", "07", -3);
 
         Map<Member, Integer> eventPaymentMap = new HashMap<>();
         eventPaymentMap.put(user1, 20);
@@ -44,7 +44,6 @@ public class GroupTest {
         group.addNewGroupMember(user1);
         group.addNewGroupMember(user2);
         group.addNewGroupMember(user3);
-        payMeModel = PayMeModel.INSTANCE;
     }
 
     @Test
@@ -53,12 +52,15 @@ public class GroupTest {
         assertFalse(group.getGroupMembers().contains(user1));
         assertEquals(2, group.getGroupMembers().size());
     }
+
+
     @Test
     public void testAddMember() {
-        //Member member = Factory.createMember("member", "07", -1);
-        //payMeModel.addNewMemberToGroup(this.group, member);
-        //assertTrue(group.getGroupMembers().contains(member));
+        Member member = Factory.createMember("member", "07", -4);
+        group.addNewGroupMember(member);
+        assertTrue(group.getGroupMembers().contains(member));
     }
+
     @Test
     public void testRemoveMemberWhoIsInActiveEvent() {
         Map<Member, Integer> eventPaymentMap = new HashMap<>();
@@ -67,9 +69,10 @@ public class GroupTest {
         eventPaymentMap.put(user3, 50);
         Event event = new Event("event", eventPaymentMap, user1, new SplitCreateDebtList(), "");
         group.addEvent(event);
-        payMeModel.removeMember(this.group, this.user2);
+        this.group.removeGroupMember(this.user2);
         assertTrue(group.getGroupMembers().contains(user2));
     }
+
     @Test
     public void testRemoveMemberWhoIsInInactiveEvent() {
         Map<Member, Integer> eventPaymentMap = new HashMap<>();
@@ -83,6 +86,7 @@ public class GroupTest {
         group.removeGroupMember(user2);
         assertFalse(group.getGroupMembers().contains(user2));
     }
+
     @Test
     public void testSetAllEventsInactive() {
         group.addEvent(event);
@@ -93,10 +97,12 @@ public class GroupTest {
         group.setAllEventsInactive();
         assertFalse(group.getGroupEvents().get(i).getActiveStatus());
     }
+
     @Test
     public void testGetGroupName() {
         assertEquals("gruppTest", group.getGroupName());
     }
+
     @Test
     public void testRemoveEventDebts() {
         Map<Member, Integer> eventPaymentMap = new HashMap<>();
@@ -104,12 +110,18 @@ public class GroupTest {
         eventPaymentMap.put(user2, 30);
         eventPaymentMap.put(user3, 40);
 
-        payMeModel.createNewGroupEvent(group.getGroupName(), eventPaymentMap, "event", user1, new SplitCreateDebtList(), "");
-        payMeModel.createNewGroupEvent(group.getGroupName(), eventPaymentMap, "event", user2, new DetailedCreateDebtList(), "");
-        payMeModel.createNewGroupEvent(group.getGroupName(), eventPaymentMap, "event", user3, new SplitCreateDebtList(), "");
+        Event event1 = new Event("Event1", eventPaymentMap, user1, new SplitCreateDebtList(), "");
+        Event event2 = new Event("Event2", eventPaymentMap, user2, new DetailedCreateDebtList(), "");
+        Event event3 = new Event("Event3", eventPaymentMap, user3, new SplitCreateDebtList(), "");
+        group.addEvent(event1);
+        group.addEvent(event2);
+        group.addEvent(event3);
 
-        payMeModel.inactivateEvent(group.getGroupEvents().get(0), group);
-        assertEquals(-50.0, payMeModel.getTotalDebt(group.getGroupName(), user1), 1);
+        event1.setEventInactive();
+        group.removeEventDebts(event1);
+
+        DebtCalculator debtCalculator = new DebtCalculator();
+        assertEquals(-50.0, debtCalculator.calcMemberTotalDebt(this.user1, group.getDebtHandler()), 1);
 
     }
 
@@ -118,8 +130,9 @@ public class GroupTest {
         group.addEvent(event);
         group.addEvent(event1);
         group.addEvent(event2);
-        payMeModel.inactivateAllEvents(this.group);
-
+        for (Event event :group.getGroupEvents()) {
+            event.setEventInactive();
+        }
         for (Event event :this.group.getGroupEvents()) {
             assertFalse(event.getActiveStatus());
         }
@@ -130,7 +143,14 @@ public class GroupTest {
         this.group.addEvent(this.event);
         this.group.addEvent(this.event1);
         this.group.addEvent(this.event2);
-        assertEquals(300, payMeModel.calcTotalExpenditureForGroup(this.group));
+
+        int total = 0;
+        for (Event eventInGroup: group.getGroupEvents()) {
+            if(eventInGroup.getActiveStatus())
+                total += eventInGroup.totalEventCost();
+        }
+
+        assertEquals(300, total);
 
     }
 }
