@@ -188,8 +188,7 @@ public class EventCreateView extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String memberName = memberSpinner.getSelectedItem().toString();
-                Member member = ecViewmodel.getGroupMembers().get(memberName);
-                ecViewmodel.setPayer(member);
+                ecViewmodel.setPayer(ecViewmodel.getGroupMembers().get(memberName));
             }
 
             @Override

@@ -3,6 +3,7 @@ manipulation of data in the view of the member page.
 * */
 package com.example.payme20.views;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -44,10 +45,14 @@ public class MemberPageView extends AppCompatActivity {
 
     private void populateView() {
         String userProfile = "User profile: " + memberPageViewModel.getCurrentUserProfileName();
-        String userTotalDebt = "Total debt: " + memberPageViewModel.getProfileMemberTotalDebt() + " kr";
+        String userTotalDebt = memberPageViewModel.getProfileMemberTotalDebt() + " kr";
         this.userName.setText(userProfile);
         this.phoneNumberEditText.setText(memberPageViewModel.getPhoneNumber());
         this.totalDebt.setText(userTotalDebt);
+        if(memberPageViewModel.getProfileMemberTotalDebt() > 0)
+            totalDebt.setTextColor(Color.GREEN);
+        else if(memberPageViewModel.getProfileMemberTotalDebt() < 0)
+            totalDebt.setTextColor(Color.RED);
         populateCardContainer();
     }
 
@@ -77,10 +82,14 @@ public class MemberPageView extends AppCompatActivity {
     private void setCardProperties(View card, Member member){
         TextView nameOfMemberTextView = card.findViewById(R.id.debtCardUser);
         TextView amountOfDebtTextView = card.findViewById(R.id.debtCardAmount);
-        String nameOfMemberMessage = memberPageViewModel.getMemberName(member) + " has a total debt to you of: ";
+        String nameOfMemberMessage = "Your balance to " +  memberPageViewModel.getMemberName(member) + ": ";
         nameOfMemberTextView.setText(nameOfMemberMessage);
         String amountOfDebtMessage = memberPageViewModel.debtToMember(member) + " Kr";
         amountOfDebtTextView.setText(amountOfDebtMessage);
+        if(memberPageViewModel.debtToMember(member) > 0)
+            amountOfDebtTextView.setTextColor(Color.GREEN);
+        else if(memberPageViewModel.debtToMember(member) < 0)
+            amountOfDebtTextView.setTextColor(Color.RED);
     }
 
     private void setListenerOnWidgets(){

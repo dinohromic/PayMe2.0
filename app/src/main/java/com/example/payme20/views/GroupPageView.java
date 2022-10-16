@@ -42,7 +42,11 @@ public class GroupPageView extends AppCompatActivity {
         createAdapterForFragments();
         setGroupFragment(groupPageViewModel.getGroup());
         setListenerReturnButton();
-        groupPageViewModel.getText().observe(this, new Observer<String>() {
+        initTotalExpenditureOberserver();
+    }
+
+    private void initTotalExpenditureOberserver() {
+        groupPageViewModel.getTotalExpenditureText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
                 totalExpenditureText.setText(s);
@@ -53,8 +57,6 @@ public class GroupPageView extends AppCompatActivity {
 
     private void initializeViewModel(){
         ViewModelFactory vmFactory = ViewModelFactory.INSTANCE;
-        //Group currentGroup = (Group) getIntent().getSerializableExtra("GROUP_KEY");
-        //vmFactory.add(new GroupPageViewModel(currentGroup));
         vmFactory.add(new GroupPageViewModel((String) getIntent().getSerializableExtra("GROUP_NAME_KEY")));
         this.groupPageViewModel = new ViewModelProvider(this, vmFactory).get(GroupPageViewModel.class);
     }
@@ -91,9 +93,9 @@ public class GroupPageView extends AppCompatActivity {
         this.returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // OpenViewHelper.openView(GroupListView.class, GroupPageView.this);
-                Intent myIntent = new Intent(GroupPageView.this, GroupListView.class);
-                GroupPageView.this.startActivity(myIntent);
+                OpenViewHelper.openView(GroupListView.class, GroupPageView.this);
+                //Intent myIntent = new Intent(GroupPageView.this, GroupListView.class);
+                //GroupPageView.this.startActivity(myIntent);
             }
         });
     }

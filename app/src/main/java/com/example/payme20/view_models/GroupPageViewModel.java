@@ -30,10 +30,10 @@ public class GroupPageViewModel extends ViewModel {
         int total = payMeModel.calcTotalExpenditureForGroup(this.group);
         return total;
     }
-    public void setText() {
+    public void setTotalExpenditureText() {
         totalExpenditure.setValue("Total expenditure: " + calculateTotalExpenditure() + " kr");
     }
-    public LiveData<String> getText() {
+    public LiveData<String> getTotalExpenditureText() {
         return totalExpenditure;
     }
 

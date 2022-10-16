@@ -12,14 +12,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.payme20.MainActivity;
 import com.example.payme20.R;
-import com.example.payme20.model.Debt;
-import com.example.payme20.model.Member;
 import com.example.payme20.view_models.GroupListViewModel;
 import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.model.Group;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Map;
 
 public class GroupListView extends AppCompatActivity {
@@ -35,7 +32,7 @@ public class GroupListView extends AppCompatActivity {
         setContentView(R.layout.list_of_groups);
         this.groupListViewModel = new GroupListViewModel();
         initWidgets();
-        populateGroupList(groupListViewModel.getGroupList());
+        populateGroupList(groupListViewModel.getGroups());
         setOpenViewListener(this.currentGroupsReturnButton, MainActivity.class);
         FABonClickListener(createGroupFAB);
     }
@@ -61,7 +58,7 @@ public class GroupListView extends AppCompatActivity {
     private View createCard(Group group){
         View cardView = getLayoutInflater().inflate(R.layout.group_card_view, null);
         TextView groupName = cardView.findViewById(R.id.activeGroupsName);
-        groupName.setText(groupListViewModel.getGroupName(group));
+        groupName.setText(group.getGroupName());
         setListenerOnGroupCard(cardView, group);
         return cardView;
     }

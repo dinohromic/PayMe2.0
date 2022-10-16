@@ -74,11 +74,11 @@ public class EventFragmentGroupPage extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if(isChecked) {
                     gpViewModel.setEventActive(event);
-                    gpViewModel.setText();
+                    gpViewModel.setTotalExpenditureText();
                 }
                 if(!isChecked) {
                     gpViewModel.setEventInactive(event);
-                    gpViewModel.setText();
+                    gpViewModel.setTotalExpenditureText();
                 }
             }
         });
