@@ -1,19 +1,16 @@
-package com.example.payme20.model;
+package fileservice;
 
 import android.content.Context;
 
 import com.example.payme20.GlobalApplication;
-import com.fasterxml.jackson.core.Version;
+import com.example.payme20.model.Group;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

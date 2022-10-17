@@ -6,6 +6,9 @@ package com.example.payme20.model;
 import java.util.List;
 import java.util.Map;
 
+import fileservice.DataHandler;
+import fileservice.DataManager;
+
 public enum PayMeModel {
     INSTANCE;
     DataHandler dataHandler = DataHandler.INSTANCE;
@@ -15,7 +18,8 @@ public enum PayMeModel {
     }
 
     public void createNewGroupEvent(String groupName, Map<Member, Integer> debtMap, String eventName, Member payer, ICreateDebtList iCreateDebtList, String date) {
-        Event event = Factory.createEvent(eventName, debtMap, payer, iCreateDebtList, date);
+        int id = dataHandler.getId();
+        Event event = Factory.createEvent(eventName, debtMap, payer, iCreateDebtList, date, id);
         dataHandler.getGroups().get(groupName).addEvent(event);
         serializeModel();
     }
@@ -67,8 +71,9 @@ public enum PayMeModel {
     }
 
     public void createNewGroup(String groupName, List<Member> membersList) {
-        deserializeGroups();
-        dataHandler.addGroup(Factory.createGroup(groupName, membersList));
+        deserializeModel();
+        int id = dataHandler.getId();
+        dataHandler.addGroup(Factory.createGroup(groupName, membersList, id));
         serializeModel();
     }
     public void serializeModel() {

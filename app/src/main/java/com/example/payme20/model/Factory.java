@@ -17,8 +17,8 @@ public final class Factory {
      * @param membersList list of all members that will belong to the group
      * @return returns the created group
      */
-    public static Group createGroup(String groupName, List<Member> membersList){
-        return new Group(groupName, membersList);
+    public static Group createGroup(String groupName, List<Member> membersList, int id){
+        return new Group(groupName, membersList, id);
     }
 
     /**
@@ -41,7 +41,7 @@ public final class Factory {
      * @param date the date the event took place
      * @return returns the created event
      */
-    public static Event createEvent(String eventName, Map<Member, Integer> memberAndAmount, Member payer, ICreateDebtList debtUpdater, String date){
-        return new Event(eventName, memberAndAmount, payer, debtUpdater, date);
+    public static Event createEvent(String eventName, Map<Member, Integer> memberAndAmount, Member payer, ICreateDebtList debtUpdater, String date, int id){
+        return new Event(eventName, memberAndAmount, payer, debtUpdater, date, id);
     }
 }

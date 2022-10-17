@@ -4,15 +4,14 @@ package com.example.payme20.model;
 
 import androidx.annotation.NonNull;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+
+import fileservice.MemberDeserializer;
 
 //TODO Is this really a good description?
 /**
@@ -39,7 +38,7 @@ public class Event implements Serializable {
      * @param date the date the event took place
      */
 
-    public Event(String eventName, Map<Member, Integer> eventPaymentDetails, Member payer, ICreateDebtList debtUpdater, String date){
+    public Event(String eventName, Map<Member, Integer> eventPaymentDetails, Member payer, ICreateDebtList debtUpdater, String date, int id){
         this.eventName=eventName;
         this.eventPaymentDetails = eventPaymentDetails;
         this.payer = payer;
@@ -47,7 +46,7 @@ public class Event implements Serializable {
         this.debtUpdater = debtUpdater;
         this.eventDate = date;
         this.eventDebtList = createEventDebts();
-        this.id = 1;
+        this.id = id;
     }
     public Event() {}
 

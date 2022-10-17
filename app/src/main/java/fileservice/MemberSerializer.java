@@ -1,5 +1,6 @@
-package com.example.payme20.model;
+package fileservice;
 
+import com.example.payme20.model.Member;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
