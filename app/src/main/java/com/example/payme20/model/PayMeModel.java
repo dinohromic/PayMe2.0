@@ -40,10 +40,7 @@ public enum PayMeModel {
     }
     public void inactivateAllEvents(Group group) {
         for(Event e : group.getGroupEvents()) {
-            if(e.getActiveStatus()) {
-                e.setEventInactive();
-                group.removeEventDebts(e);
-            }
+            inactivateEvent(e, group);
         }
     }
     public boolean removeMember(Group group, Member member) {
