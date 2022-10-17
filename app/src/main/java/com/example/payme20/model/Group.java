@@ -15,17 +15,19 @@ public class Group implements Serializable {
     private List<Member> groupMembers;
     private List<Event> groupEvents;
     private DebtHandler debtHandler;
+    private int id;
 
     /**
      * Create a new Group
      * @param groupName the name of the group
      * @param membersList a list of members to be in the group
      */
-    public Group(String groupName, List<Member> membersList) {
+    public Group(String groupName, List<Member> membersList, int id) {
         this.groupName = groupName;
         this.groupEvents = new ArrayList<>();
         this.groupMembers = membersList;
         this.debtHandler = new DebtHandler();
+        this.id = id;
     }
     public Group() {}
 
@@ -43,6 +45,10 @@ public class Group implements Serializable {
 
     public DebtHandler getDebtHandler() {
         return debtHandler;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void addNewGroupMember(Member member) {

@@ -70,8 +70,9 @@ public enum PayMeModel {
     }
 
     public void createNewGroup(String groupName, List<Member> membersList) {
-        deserializeGroups();
-        dataHandler.addGroup(Factory.createGroup(groupName, membersList));
+        deserializeModel();
+        int id = dataHandler.getId();
+        dataHandler.addGroup(Factory.createGroup(groupName, membersList, id));
         serializeModel();
     }
     public void serializeModel() {

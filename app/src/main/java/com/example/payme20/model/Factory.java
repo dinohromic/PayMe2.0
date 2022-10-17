@@ -17,8 +17,8 @@ public final class Factory {
      * @param membersList list of all members that will belong to the group
      * @return returns the created group
      */
-    public static Group createGroup(String groupName, List<Member> membersList){
-        return new Group(groupName, membersList);
+    public static Group createGroup(String groupName, List<Member> membersList, int id){
+        return new Group(groupName, membersList, id);
     }
 
     /**
