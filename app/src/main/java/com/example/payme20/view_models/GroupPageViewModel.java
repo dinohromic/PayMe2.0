@@ -48,4 +48,8 @@ public class GroupPageViewModel extends ViewModel {
     public void setEventInactive(Event event) {
         payMeModel.inactivateEvent(event, group);
     }
+
+    public void setAllEventsInactive(){
+        payMeModel.inactivateAllEvents(group);
+    }
 }

@@ -28,7 +28,7 @@ import java.util.List;
 
 
 public class EventFragmentGroupPage extends Fragment {
-    private Button createNewEventButton;
+    private Button createNewEventButton, inactivateAllEventsButton;
     private Group group;
     private LinearLayout eventContainer;
     private CheckBox eventActiveCheckBox;
@@ -43,6 +43,7 @@ public class EventFragmentGroupPage extends Fragment {
         View view = inflater.inflate(R.layout.fragment_event_group_page, null);
         initWidgetsEventFragment(view);
         setAddNewEventListener(createNewEventButton);
+        setInactivateAllEventsButton(inactivateAllEventsButton);
         initViewModel();
         populateEventContainer();
         return view;
@@ -86,6 +87,7 @@ public class EventFragmentGroupPage extends Fragment {
                 }
             }
         });
+
     }
 
     private void populateCard(View cardView, Event event) {
@@ -107,9 +109,22 @@ public class EventFragmentGroupPage extends Fragment {
         });
     }
 
+    private void setInactivateAllEventsButton(Button inactivateAllEvents){
+        inactivateAllEvents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gpViewModel.setAllEventsInactive();
+                gpViewModel.setTotalExpenditureText();
+                eventContainer.removeAllViews();
+                populateEventContainer();
+            }
+        });
+    }
+
     private void initWidgetsEventFragment(View view) {
         this.eventContainer = view.findViewById(R.id.eventFragmentContainer);
         this.createNewEventButton = (Button) view.findViewById(R.id.addEventButton);
+        this.inactivateAllEventsButton = view.findViewById(R.id.inactivateAllEventsButton);
     }
 
     public void setGroup(Group group) {
