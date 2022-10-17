@@ -4,15 +4,14 @@ package com.example.payme20.model;
 
 import androidx.annotation.NonNull;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+
+import fileservice.MemberDeserializer;
 
 //TODO Is this really a good description?
 /**

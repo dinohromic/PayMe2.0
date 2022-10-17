@@ -1,4 +1,6 @@
-package com.example.payme20.model;
+package fileservice;
+
+import com.example.payme20.model.Group;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,7 +9,7 @@ import java.util.Map;
 
 public enum DataHandler {
     INSTANCE;
-    private Map<String,Group> groups = new HashMap<>();
+    private Map<String, Group> groups = new HashMap<>();
     private int id = 0;
 
     public void addGroup(Group g) {

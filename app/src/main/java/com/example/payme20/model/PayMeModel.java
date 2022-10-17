@@ -6,6 +6,9 @@ package com.example.payme20.model;
 import java.util.List;
 import java.util.Map;
 
+import fileservice.DataHandler;
+import fileservice.DataManager;
+
 public enum PayMeModel {
     INSTANCE;
     DataHandler dataHandler = DataHandler.INSTANCE;
