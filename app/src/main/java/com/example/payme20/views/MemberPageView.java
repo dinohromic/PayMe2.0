@@ -3,16 +3,23 @@ manipulation of data in the view of the member page.
 * */
 package com.example.payme20.views;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.payme20.MainActivity;
 import com.example.payme20.R;
 import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.view_models.MemberPageViewModel;
@@ -26,6 +33,7 @@ public class MemberPageView extends AppCompatActivity {
     private MemberPageViewModel memberPageViewModel;
     private LinearLayout cardContainer;
     private ImageButton memberPageReturnButton;
+    private Button removeMemberButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -63,6 +71,7 @@ public class MemberPageView extends AppCompatActivity {
         this.totalDebt = findViewById(R.id.memberPageTotalDebt);
         this.cardContainer = findViewById(R.id.memberPageCardCointainer);
         this.memberPageReturnButton = findViewById(R.id.memberPageReturnButton);
+        this.removeMemberButton = findViewById(R.id.removeMemberButton);
     }
     private void populateCardContainer(){
         for (Member groupMember: memberPageViewModel.getGroupMemberList()) {
@@ -96,6 +105,31 @@ public class MemberPageView extends AppCompatActivity {
         userNameListener();
         phoneNumberListener();
         returnListener();
+        removeButtonListener();
+    }
+
+    private void removeButtonListener() {
+        removeMemberButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(MemberPageView.this).setTitle("Remove member").
+                        setMessage("Do you really want to remove " + memberPageViewModel.getProfileMember().getUserName() + " from this group?").
+                        setIcon(android.R.drawable.ic_dialog_alert).
+                        setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                if(!memberPageViewModel.removeCurrentMember()) {
+                                    Toast.makeText(MemberPageView.this, memberPageViewModel.getCurrentUserProfileName() + " is in active events", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        }).show();
+            }
+        });
     }
 
     private void userNameListener(){

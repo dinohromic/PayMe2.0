@@ -54,7 +54,8 @@ public class EventFragmentGroupPage extends Fragment {
     }
 
     private void populateEventContainer() {
-        for(Event event : (group.getGroupEvents())) {
+        for(int i = group.getGroupEvents().size() - 1; i >= 0; i--) {
+            Event event = group.getGroupEvents().get(i);
             View cardView = getLayoutInflater().inflate(R.layout.event_card, null);
             populateCard(cardView, event);
             setEventCardListener(cardView, event);
