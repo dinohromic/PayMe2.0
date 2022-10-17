@@ -23,6 +23,9 @@ import com.example.payme20.model.Group;
 import com.example.payme20.view_models.GroupPageViewModel;
 import com.example.payme20.view_models.ViewModelFactory;
 
+import java.util.Collections;
+import java.util.List;
+
 
 public class EventFragmentGroupPage extends Fragment {
     private Button createNewEventButton, inactivateAllEventsButton;
@@ -52,7 +55,7 @@ public class EventFragmentGroupPage extends Fragment {
     }
 
     private void populateEventContainer() {
-        for(Event event : group.getGroupEvents()) {
+        for(Event event : (group.getGroupEvents())) {
             View cardView = getLayoutInflater().inflate(R.layout.event_card, null);
             populateCard(cardView, event);
             setEventCardListener(cardView, event);

@@ -23,8 +23,8 @@ public class EventCreateViewmodel extends ViewModel {
     private ICreateDebtList debtUpdater;
     private Member payer;
     private Group group;
-    private final Map<String, Member> groupMembers = new HashMap<>();
-    private List<String> eventMembers = new ArrayList<>();
+    private final Map<Integer, Member> groupMembers = new HashMap<>();
+    private List<Member> eventMembers = new ArrayList<>();
     private String date;
     PayMeModel model = PayMeModel.INSTANCE;
 
@@ -37,9 +37,9 @@ public class EventCreateViewmodel extends ViewModel {
 
     private void initEventMemberList() {
         if(group.getGroupMembers().size() != 0) {
-            for (Map.Entry<String, Member> memberMap: groupMembers.entrySet()) {
-                String memberName = memberMap.getKey();
-                eventMembers.add(memberName);
+            for (Map.Entry<Integer, Member> memberMap: groupMembers.entrySet()) {
+                Member member = memberMap.getValue();
+                eventMembers.add(member);
             }
         }
     }
@@ -47,12 +47,12 @@ public class EventCreateViewmodel extends ViewModel {
     private void initMemberMap() {
         if(group.getGroupMembers().size() != 0) {
             for(Member m : group.getGroupMembers()) {
-                groupMembers.put(m.getUserName(), m);
+                groupMembers.put(m.getId(), m);
             }
         }
     }
 
-    public Map<String, Member> getGroupMembers() {
+    public Map<Integer, Member> getGroupMembers() {
         return groupMembers;
     }
 
@@ -69,20 +69,20 @@ public class EventCreateViewmodel extends ViewModel {
     public void setPayer(Member member) {
         payer = member;
     }
-    public void removeEventMember(String str) {
-        for(String s : eventMembers) {
-            if(s.equals(str)) {
-                eventMembers.remove(s);
-                memberAndAmount.remove(groupMembers.get(s));
+    public void removeEventMember(Member member) {
+        for(Member m : eventMembers) {
+            if(m.equals(member)) {
+                eventMembers.remove(m);
+                memberAndAmount.remove(groupMembers.get(m.getId()));
                 break;
             }
         }
     }
-    public void addEventMember(String str) {
-        eventMembers.add(str);
+    public void addEventMember(Member m) {
+        eventMembers.add(m);
     }
 
-    public List<String> getEventMembers() {
+    public List<Member> getEventMembers() {
         return eventMembers;
     }
 
@@ -94,10 +94,10 @@ public class EventCreateViewmodel extends ViewModel {
         this.eventName = eventName;
     }
 
-    public void setMemberPayment(int amount, String name) {
+    public void setMemberPayment(int amount, int id) {
         if(amount <= 0)
             return;
-        memberAndAmount.put(groupMembers.get(name), amount);
+        memberAndAmount.put(groupMembers.get(id), amount);
         System.out.println(memberAndAmount);
     }
 

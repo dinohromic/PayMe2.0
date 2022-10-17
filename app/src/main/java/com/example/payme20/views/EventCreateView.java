@@ -33,6 +33,7 @@ import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -133,7 +134,7 @@ public class EventCreateView extends AppCompatActivity {
     }
 
     private void populateList() {
-        for (Map.Entry<String, Member> memberMap: ecViewmodel.getGroupMembers().entrySet()) {
+        for (Map.Entry<Integer, Member> memberMap: ecViewmodel.getGroupMembers().entrySet()) {
             Member member = memberMap.getValue();
             addCard(member);
         }
@@ -142,23 +143,23 @@ public class EventCreateView extends AppCompatActivity {
     private void addCard(Member m) {
         View view = getLayoutInflater().inflate(R.layout.event_member_card, null);
         TextView name = view.findViewById(R.id.eventMemberName);
-        name.setText(m.getUserName());
-        setListenersOnEventMemberCard(view, name.getText());
+        name.setText(m.getUserName() + " (id: " + m.getId() + ")");
+        setListenersOnEventMemberCard(view, m);
         cardContainer.addView(view);
     }
 
-    private void setListenersOnEventMemberCard(View view, CharSequence name) {
+    private void setListenersOnEventMemberCard(View view, Member m) {
         CheckBox checkbox = view.findViewById(R.id.eventMemberIncluded);
         EditText amount = view.findViewById(R.id.eventMemberAmount);
         checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(!b) {
-                    ecViewmodel.removeEventMember((String) name);
+                    ecViewmodel.removeEventMember(m);
                     amount.setEnabled(false);
                 }
                 if(b) {
-                    ecViewmodel.addEventMember((String) name);
+                    ecViewmodel.addEventMember(m);
                     amount.setEnabled(true);
                 }
                 updateMemberSpinner();
@@ -175,9 +176,9 @@ public class EventCreateView extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 if(amount.getText().toString().equals(""))
-                    ecViewmodel.setMemberPayment(0, (String) name);
+                    ecViewmodel.setMemberPayment(0, m.getId());
                 else
-                    ecViewmodel.setMemberPayment(Integer.parseInt(amount.getText().toString()), (String) name);
+                    ecViewmodel.setMemberPayment(Integer.parseInt(amount.getText().toString()), m.getId());
             }
         });
     }
@@ -187,8 +188,10 @@ public class EventCreateView extends AppCompatActivity {
         memberSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String memberName = memberSpinner.getSelectedItem().toString();
-                ecViewmodel.setPayer(ecViewmodel.getGroupMembers().get(memberName));
+                for(Member m : ecViewmodel.getEventMembers()) {
+                    if(m.getUserName().equals(memberSpinner.getSelectedItem().toString()))
+                        ecViewmodel.setPayer(ecViewmodel.getGroupMembers().get(m.getId()));
+                }
             }
 
             @Override
@@ -199,7 +202,10 @@ public class EventCreateView extends AppCompatActivity {
     }
 
     private void updateMemberSpinner() {
-        List<String> memberUserNames = ecViewmodel.getEventMembers();
+        List<String> memberUserNames = new ArrayList<>();
+        for(Member m : ecViewmodel.getEventMembers()) {
+            memberUserNames.add(m.getUserName());
+        }
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, memberUserNames);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         memberSpinner.setAdapter(arrayAdapter);
