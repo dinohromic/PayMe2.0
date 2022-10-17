@@ -38,7 +38,7 @@ public class Event implements Serializable {
      * @param date the date the event took place
      */
 
-    public Event(String eventName, Map<Member, Integer> eventPaymentDetails, Member payer, ICreateDebtList debtUpdater, String date){
+    public Event(String eventName, Map<Member, Integer> eventPaymentDetails, Member payer, ICreateDebtList debtUpdater, String date, int id){
         this.eventName=eventName;
         this.eventPaymentDetails = eventPaymentDetails;
         this.payer = payer;
@@ -46,7 +46,7 @@ public class Event implements Serializable {
         this.debtUpdater = debtUpdater;
         this.eventDate = date;
         this.eventDebtList = createEventDebts();
-        this.id = 1;
+        this.id = id;
     }
     public Event() {}
 

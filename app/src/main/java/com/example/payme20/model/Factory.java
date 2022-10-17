@@ -41,7 +41,7 @@ public final class Factory {
      * @param date the date the event took place
      * @return returns the created event
      */
-    public static Event createEvent(String eventName, Map<Member, Integer> memberAndAmount, Member payer, ICreateDebtList debtUpdater, String date){
-        return new Event(eventName, memberAndAmount, payer, debtUpdater, date);
+    public static Event createEvent(String eventName, Map<Member, Integer> memberAndAmount, Member payer, ICreateDebtList debtUpdater, String date, int id){
+        return new Event(eventName, memberAndAmount, payer, debtUpdater, date, id);
     }
 }
