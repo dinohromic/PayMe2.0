@@ -21,7 +21,7 @@ public class EventPageView extends AppCompatActivity {
     private TextView eventName, eventDate, eventPayer, eventPayment, eventActiveStatus;
     private ImageButton returnButton;
     private LinearLayout memberContainer;
-    private EventPageViewModel eventPageViewModel;
+    private EventPageViewModel epViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -39,7 +39,7 @@ public class EventPageView extends AppCompatActivity {
     }
 
     private void populateList() {
-        for (Map.Entry<Member, Integer> memberMap: eventPageViewModel.getEventPaymentDetails().entrySet()) {
+        for (Map.Entry<Member, Integer> memberMap: epViewModel.getEventPaymentDetails().entrySet()) {
             Member member = memberMap.getKey();
             int amount = memberMap.getValue();
             addCard(member, amount);
@@ -49,7 +49,8 @@ public class EventPageView extends AppCompatActivity {
     private void addCard(Member member, int amount) {
         View view = getLayoutInflater().inflate(R.layout.event_page_member_card, null);
         TextView memberName = view.findViewById(R.id.eventPageMemberName);
-        memberName.setText(member.getUserName());
+        memberName.setText(epViewModel.getGroup().getGroupMembers().get(epViewModel.getGroup().
+                getGroupMembers().indexOf(member)).getUserName());
         TextView memberAmount = view.findViewById(R.id.eventPageMemberAmount);
         memberAmount.setText(String.format("%d kr", amount));
         memberContainer.addView(view);
@@ -59,18 +60,18 @@ public class EventPageView extends AppCompatActivity {
         this.returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                OpenViewHelper.openViewPutExtra(GroupPageView.class, EventPageView.this, eventPageViewModel.getGroup().getGroupName());
+                OpenViewHelper.openViewPutExtra(GroupPageView.class, EventPageView.this, epViewModel.getGroup().getGroupName());
             }
         });
     }
 
     private void populateView() {
-        String eventName = eventPageViewModel.getEventName();
-        String eventDate = "Date: " + eventPageViewModel.getEventDate();
-        int totalGroupAMount = eventPageViewModel.getEventTotalPrice();
-        String payer = String.format("%s paid a total of %d kr for this event", eventPageViewModel.getPayerName(), totalGroupAMount);
-        String paymentType = "Payment of this event was: " + eventPageViewModel.getEventPaymentType();
-        String activeStatus = eventPageViewModel.getEventActiveStatus() ? "active" : "inactive";
+        String eventName = epViewModel.getEventName();
+        String eventDate = "Date: " + epViewModel.getEventDate();
+        int totalGroupAMount = epViewModel.getEventTotalPrice();
+        String payer = String.format("%s paid a total of %d kr for this event", epViewModel.getPayerName(), totalGroupAMount);
+        String paymentType = "Payment of this event was: " + epViewModel.getEventPaymentType();
+        String activeStatus = epViewModel.getEventActiveStatus() ? "active" : "inactive";
         String eventActiveStatusText = "This event is " + activeStatus + ".";
         this.eventName.setText(eventName);
         this.eventDate.setText(eventDate);
@@ -83,7 +84,7 @@ public class EventPageView extends AppCompatActivity {
     private void initViewModel() {
         Group belongsToGroup = (Group) getIntent().getSerializableExtra("GROUP_KEY");
         Event event = (Event) getIntent().getSerializableExtra("EVENT_KEY");
-        this.eventPageViewModel = new EventPageViewModel(belongsToGroup.getGroupName(), event);
+        this.epViewModel = new EventPageViewModel(belongsToGroup.getGroupName(), event);
     }
 
     private void initWidgets() {

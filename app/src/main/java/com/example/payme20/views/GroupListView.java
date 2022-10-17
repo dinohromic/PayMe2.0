@@ -10,11 +10,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.payme20.MainActivity;
 import com.example.payme20.R;
 import com.example.payme20.view_models.GroupListViewModel;
 import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.model.Group;
+import com.example.payme20.view_models.GroupPageViewModel;
+import com.example.payme20.view_models.ViewModelFactory;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Map;
@@ -30,11 +34,17 @@ public class GroupListView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_of_groups);
-        this.groupListViewModel = new GroupListViewModel();
+        initViewModel();
         initWidgets();
         populateGroupList(groupListViewModel.getGroups());
         setOpenViewListener(this.currentGroupsReturnButton, MainActivity.class);
         FABonClickListener(createGroupFAB);
+    }
+
+    private void initViewModel() {
+        ViewModelFactory vmFactory = ViewModelFactory.INSTANCE;
+        vmFactory.add(new GroupListViewModel());
+        this.groupListViewModel = new ViewModelProvider(this, vmFactory).get(GroupListViewModel.class);
     }
 
     private void populateGroupList(Map<String,Group> groups) {

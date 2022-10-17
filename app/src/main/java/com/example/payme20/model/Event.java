@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 //TODO Is this really a good description?
 /**
@@ -26,6 +27,7 @@ public class Event implements Serializable {
     private  String eventName;
     private  Member payer;
     private  String eventDate;
+    private int id;
 
 
     /**
@@ -45,6 +47,7 @@ public class Event implements Serializable {
         this.debtUpdater = debtUpdater;
         this.eventDate = date;
         this.eventDebtList = createEventDebts();
+        this.id = 1;
     }
     public Event() {}
 
@@ -155,5 +158,18 @@ public class Event implements Serializable {
             total += eventPaymentDetail.getValue();
         }
         return total;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Event event = (Event) o;
+        return id == event.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

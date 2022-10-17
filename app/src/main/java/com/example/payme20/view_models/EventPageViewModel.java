@@ -12,8 +12,16 @@ public class EventPageViewModel {
     private final Event event;
     private final PayMeModel model = PayMeModel.INSTANCE;
     public EventPageViewModel(String belongsToGroup, Event event) {
-        this.event = event;
         this.group = model.getGroups().get(belongsToGroup);
+        this.event = findEvent(event);
+    }
+
+    private Event findEvent(Event event) {
+        for (Event e : group.getGroupEvents()) {
+            if(e.equals(event))
+                return e;
+        }
+        return null;
     }
 
     public String getEventName() {
@@ -25,7 +33,7 @@ public class EventPageViewModel {
     }
 
     public String getPayerName() {
-        return event.getPayer().getUserName();
+        return this.group.getGroupMembers().get(this.group.getGroupMembers().indexOf(event.getPayer())).getUserName();
     }
 
     public String getEventPaymentType() {
