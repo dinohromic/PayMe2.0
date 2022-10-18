@@ -69,6 +69,7 @@ public class GroupPageView extends AppCompatActivity {
         gpAdapter.addGroupPageFragments(memberFragmentGroupPage, "Members");
         this.groupPageTabs.setupWithViewPager(this.groupPageViewPager);
         this.groupPageViewPager.setAdapter(gpAdapter);
+        this.groupPageViewPager.setCurrentItem((int) getIntent().getSerializableExtra("FRAGMENT_ID"));
     }
 
     private void setGroupFragment(Group currentGroup){

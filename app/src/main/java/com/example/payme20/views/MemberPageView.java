@@ -174,7 +174,7 @@ public class MemberPageView extends AppCompatActivity {
         this.memberPageReturnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                OpenViewHelper.openViewPutExtra(GroupPageView.class, MemberPageView.this, memberPageViewModel.getGroup().getGroupName());
+                OpenViewHelper.openViewPutExtra(GroupPageView.class, MemberPageView.this, memberPageViewModel.getGroup().getGroupName(), 1);
             }
         });
     }

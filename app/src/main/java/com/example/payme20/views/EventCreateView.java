@@ -123,7 +123,7 @@ public class EventCreateView extends AppCompatActivity {
                 }
                 else{
                     ecViewmodel.createEvent();
-                    OpenViewHelper.openViewPutExtra(GroupPageView.class, EventCreateView.this, ecViewmodel.getGroup().getGroupName());
+                    OpenViewHelper.openViewPutExtra(GroupPageView.class, EventCreateView.this, ecViewmodel.getGroup().getGroupName(), 0);
                 }
             }
         });

@@ -77,7 +77,7 @@ public class GroupListView extends AppCompatActivity {
         viewToGetListener.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                OpenViewHelper.openViewPutExtra(GroupPageView.class, GroupListView.this, group.getGroupName());
+                OpenViewHelper.openViewPutExtra(GroupPageView.class, GroupListView.this, group.getGroupName(), 0);
             }
         });
     }

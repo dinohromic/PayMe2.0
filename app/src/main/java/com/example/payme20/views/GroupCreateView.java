@@ -93,7 +93,7 @@ public class GroupCreateView extends AppCompatActivity{
 
     private void openNewGroup() {
        createGroupVM.createGroup(edtGroupName.getText().toString());
-       OpenViewHelper.openViewPutExtra(GroupPageView.class, GroupCreateView.this, edtGroupName.getText().toString());
+       OpenViewHelper.openViewPutExtra(GroupPageView.class, GroupCreateView.this, edtGroupName.getText().toString(), 0);
     }
 
     private void addMemberCards(String name, String number) {
