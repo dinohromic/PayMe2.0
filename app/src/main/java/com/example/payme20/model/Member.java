@@ -6,7 +6,9 @@ package com.example.payme20.model;
 
 import androidx.annotation.NonNull;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonParser;
 import com.google.gson.annotations.SerializedName;
@@ -22,7 +24,7 @@ public class Member implements Serializable {
 
     private String userName;
     private String phoneNumber;
-    private int id;
+    private final int id;
     /**
      * Create a new member
      * @param userName Create the member with the given user name

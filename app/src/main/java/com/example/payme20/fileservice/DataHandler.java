@@ -1,10 +1,8 @@
-package fileservice;
+package com.example.payme20.fileservice;
 
 import com.example.payme20.model.Group;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public enum DataHandler {

@@ -6,8 +6,8 @@ package com.example.payme20.model;
 import java.util.List;
 import java.util.Map;
 
-import fileservice.DataHandler;
-import fileservice.DataManager;
+import com.example.payme20.fileservice.DataHandler;
+import com.example.payme20.fileservice.DataManager;
 
 public enum PayMeModel {
     INSTANCE;
@@ -18,6 +18,7 @@ public enum PayMeModel {
     }
 
     public void createNewGroupEvent(String groupName, Map<Member, Integer> debtMap, String eventName, Member payer, ICreateDebtList iCreateDebtList, String date) {
+        deserializeId();
         int id = dataHandler.getId();
         Event event = Factory.createEvent(eventName, debtMap, payer, iCreateDebtList, date, id);
         dataHandler.getGroups().get(groupName).addEvent(event);

@@ -1,4 +1,4 @@
-package fileservice;
+package com.example.payme20.fileservice;
 
 import com.example.payme20.model.Member;
 import com.fasterxml.jackson.databind.DeserializationContext;

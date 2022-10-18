@@ -6,7 +6,7 @@ import com.example.payme20.model.DetailedCreateDebtList;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.ICreateDebtList;
 import com.example.payme20.model.Member;
-import fileservice.MemberSerializer;
+import com.example.payme20.fileservice.MemberSerializer;
 import com.example.payme20.model.PayMeModel;
 import com.example.payme20.model.SplitCreateDebtList;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
