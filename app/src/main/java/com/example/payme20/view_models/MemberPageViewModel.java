@@ -87,7 +87,11 @@ public class MemberPageViewModel extends ViewModel {
        return debt;
     }
 
-    public boolean removeCurrentMember() {
-        return payMeModel.removeMember(belongsToGroup, currentProfileMember);
+    public boolean inactivateCurrentMember() {
+        return payMeModel.inactivateMember(belongsToGroup, currentProfileMember);
+    }
+
+    public void activateCurrentMember() {
+        payMeModel.activateMember(currentProfileMember);
     }
 }

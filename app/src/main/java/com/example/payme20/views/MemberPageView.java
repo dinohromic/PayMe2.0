@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.payme20.MainActivity;
 import com.example.payme20.R;
 import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.view_models.MemberPageViewModel;
@@ -33,7 +32,7 @@ public class MemberPageView extends AppCompatActivity {
     private MemberPageViewModel memberPageViewModel;
     private LinearLayout cardContainer;
     private ImageButton memberPageReturnButton;
-    private Button removeMemberButton;
+    private Button activateMemberToggleButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -71,11 +70,11 @@ public class MemberPageView extends AppCompatActivity {
         this.totalDebt = findViewById(R.id.memberPageTotalDebt);
         this.cardContainer = findViewById(R.id.memberPageCardCointainer);
         this.memberPageReturnButton = findViewById(R.id.memberPageReturnButton);
-        this.removeMemberButton = findViewById(R.id.removeMemberButton);
+        this.activateMemberToggleButton = findViewById(R.id.removeMemberButton);
     }
     private void populateCardContainer(){
         for (Member groupMember: memberPageViewModel.getGroupMemberList()) {
-            if(!(groupMember.equals(memberPageViewModel.getProfileMember()))){
+            if(!(groupMember.equals(memberPageViewModel.getProfileMember())) && groupMember.getActiveStatus()){
                 View card = createCard(groupMember);
                 this.cardContainer.addView(card);
             }
@@ -109,25 +108,33 @@ public class MemberPageView extends AppCompatActivity {
     }
 
     private void removeButtonListener() {
-        removeMemberButton.setOnClickListener(new View.OnClickListener() {
+        activateMemberToggleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new AlertDialog.Builder(MemberPageView.this).setTitle("Remove member").
-                        setMessage("Do you really want to remove " + memberPageViewModel.getProfileMember().getUserName() + " from this group?").
-                        setIcon(android.R.drawable.ic_dialog_alert).
-                        setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                if(!memberPageViewModel.removeCurrentMember()) {
-                                    Toast.makeText(MemberPageView.this, memberPageViewModel.getCurrentUserProfileName() + " is in active events", Toast.LENGTH_LONG).show();
+                if(memberPageViewModel.getProfileMember().getActiveStatus()) {
+                    new AlertDialog.Builder(MemberPageView.this).setTitle("Inactivate member").
+                            setMessage(memberPageViewModel.getProfileMember().getUserName() + " will be inactive and will not be available when creating new events. " +
+                                    "You can enable " + memberPageViewModel.getCurrentUserProfileName() + " whenever you want.").
+                            setIcon(android.R.drawable.ic_dialog_alert).
+                            setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    if (!memberPageViewModel.inactivateCurrentMember()) {
+                                        Toast.makeText(MemberPageView.this, memberPageViewModel.getCurrentUserProfileName() + " is in active events", Toast.LENGTH_LONG).show();
+                                    }
+                                    activateMemberToggleButton.setText("Activate Member");
                                 }
-                            }
-                        }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.cancel();
-                            }
-                        }).show();
+                            }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.cancel();
+                                }
+                            }).show();
+                }
+                else {
+                    memberPageViewModel.activateCurrentMember();
+                    activateMemberToggleButton.setText("Inactivate Member");
+                }
             }
         });
     }

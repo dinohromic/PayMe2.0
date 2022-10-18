@@ -25,6 +25,7 @@ public class Member implements Serializable {
     private String userName;
     private String phoneNumber;
     private final int id;
+    private boolean activeStatus;
     /**
      * Create a new member
      * @param userName Create the member with the given user name
@@ -34,12 +35,14 @@ public class Member implements Serializable {
         this.userName = userName;
         this.phoneNumber = phoneNumber;
         this.id = id;
+        this.activeStatus = true;
     }
     public Member(String str) {
         String[] keys = str.split("and");
         this.userName = keys[0].trim();
         this.phoneNumber = keys[1].trim();
         this.id = Integer.parseInt(keys[2].trim());
+        this.activeStatus = Boolean.parseBoolean(keys[3].trim());
     }
     //public Member() {}
 
@@ -83,6 +86,13 @@ public class Member implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
+    public boolean getActiveStatus() {
+        return activeStatus;
+    }
+
+    public void setActiveStatus(boolean activeStatus) {
+        this.activeStatus = activeStatus;
+    }
 
     /**
      * Set the toString of the Member object to userName and phoneNumber
@@ -92,7 +102,7 @@ public class Member implements Serializable {
     @Override
     @JsonValue
     public String toString() {
-        return userName + " and " + phoneNumber + " and " + id;
+        return userName + " and " + phoneNumber + " and " + id + " and " + activeStatus;
     }
 
     /**

@@ -20,13 +20,13 @@ import com.example.payme20.fileservice.MemberDeserializer;
  */
 public class Event implements Serializable {
     @JsonDeserialize(keyUsing = MemberDeserializer.class)
-    private  Map<Member, Integer> eventPaymentDetails;
-    private  ICreateDebtList debtUpdater;
+    private Map<Member, Integer> eventPaymentDetails;
+    private ICreateDebtList debtUpdater;
     private boolean activeStatus;
     private List<Debt> eventDebtList;
-    private  String eventName;
-    private  Member payer;
-    private  String eventDate;
+    private String eventName;
+    private Member payer;
+    private String eventDate;
     private int id;
 
 
@@ -50,7 +50,9 @@ public class Event implements Serializable {
         this.id = id;
     }
     public Event() {}
-
+    void setNewEventPaymentDetailsMap(Map <Member, Integer> map) {
+        this.eventPaymentDetails = map;
+    }
     /**
      * Return the map with payment-details from the event
      * @return returns a map containing members as a key and values as integers
