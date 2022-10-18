@@ -64,8 +64,9 @@ public class Group implements Serializable {
         boolean allEventsWithMemberInactive = true;
         List<Event> eventsWithThisMember = new ArrayList<>();
         for(Event e : groupEvents) {
-            if(e.getEventPaymentDetails().containsKey(member))
+            if(e.getEventPaymentDetails().containsKey(member)) {
                 eventsWithThisMember.add(e);
+            }
         }
         for(Event e : eventsWithThisMember) {
             if(e.getActiveStatus()) {
@@ -77,8 +78,9 @@ public class Group implements Serializable {
             this.groupMembers.remove(member);
             return true;
         }
-        else
+        else {
             return false;
+        }
     }
 
     /**
@@ -86,8 +88,9 @@ public class Group implements Serializable {
      * @param eventDebts a list of debts from a event
      */
     public void addEventDebtToGroup(List<Debt> eventDebts){
-        for(Debt d : eventDebts)
+        for(Debt d : eventDebts) {
             debtHandler.addDebt(d);
+        }
     }
 
     public void addEvent(Event event) {
@@ -102,7 +105,8 @@ public class Group implements Serializable {
     }
 
     public void removeEventDebts(Event event) {
-        for(Debt d : event.getDebtList())
+        for(Debt d : event.getDebtList()) {
             debtHandler.removeDebt(d);
+        }
     }
 }

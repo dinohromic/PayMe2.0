@@ -9,7 +9,6 @@ import com.example.payme20.model.Group;
 import com.example.payme20.model.PayMeModel;
 
 public class GroupPageViewModel extends ViewModel {
-    private String groupName;
     private Group group;
     private PayMeModel payMeModel = PayMeModel.INSTANCE;
     private MutableLiveData<String> totalExpenditure = new MutableLiveData<>();
@@ -27,8 +26,7 @@ public class GroupPageViewModel extends ViewModel {
         return "Total expenditure: " + calculateTotalExpenditure() + " kr";
     }
     private int calculateTotalExpenditure(){
-        int total = payMeModel.calcTotalExpenditureForGroup(this.group);
-        return total;
+        return payMeModel.calcTotalExpenditureForGroup(this.group);
     }
     public void setTotalExpenditureText() {
         totalExpenditure.setValue("Total expenditure: " + calculateTotalExpenditure() + " kr");

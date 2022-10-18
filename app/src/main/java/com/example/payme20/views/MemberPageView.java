@@ -57,10 +57,12 @@ public class MemberPageView extends AppCompatActivity {
         this.userName.setText(userProfile);
         this.phoneNumberEditText.setText(memberPageViewModel.getPhoneNumber());
         this.totalDebt.setText(userTotalDebt);
-        if(memberPageViewModel.getProfileMemberTotalDebt() > 0)
+        if(memberPageViewModel.getProfileMemberTotalDebt() > 0) {
             totalDebt.setTextColor(Color.GREEN);
-        else if(memberPageViewModel.getProfileMemberTotalDebt() < 0)
+        }
+        else if(memberPageViewModel.getProfileMemberTotalDebt() < 0) {
             totalDebt.setTextColor(Color.RED);
+        }
         populateCardContainer();
     }
 
@@ -95,10 +97,12 @@ public class MemberPageView extends AppCompatActivity {
         nameOfMemberTextView.setText(nameOfMemberMessage);
         String amountOfDebtMessage = memberPageViewModel.debtToMember(member) + " Kr";
         amountOfDebtTextView.setText(amountOfDebtMessage);
-        if(memberPageViewModel.debtToMember(member) > 0)
+        if(memberPageViewModel.debtToMember(member) > 0) {
             amountOfDebtTextView.setTextColor(Color.GREEN);
-        else if(memberPageViewModel.debtToMember(member) < 0)
+        }
+        else if(memberPageViewModel.debtToMember(member) < 0) {
             amountOfDebtTextView.setTextColor(Color.RED);
+        }
     }
 
     private void setListenerOnWidgets(){

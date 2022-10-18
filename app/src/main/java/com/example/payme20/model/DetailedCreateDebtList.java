@@ -12,7 +12,7 @@ import java.util.Map;
  * DetailedDebtUpdater returns a list of detailed debts
  */
 public class DetailedCreateDebtList implements ICreateDebtList, Serializable {
-    private final String name = "Detailed";
+    private static String name = "Detailed";
     public DetailedCreateDebtList () {}
 
     /**

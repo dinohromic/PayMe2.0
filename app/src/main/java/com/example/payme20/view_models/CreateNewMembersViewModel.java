@@ -3,12 +3,12 @@ package com.example.payme20.view_models;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.PayMeModel;
 
-public class createNewMembersViewModel {
+public class CreateNewMembersViewModel {
 
     private final Group group;
     private final PayMeModel payMeModel = PayMeModel.INSTANCE;
 
-    public createNewMembersViewModel(String group){
+    public CreateNewMembersViewModel(String group){
         this.group = payMeModel.getGroups().get(group);
     }
 

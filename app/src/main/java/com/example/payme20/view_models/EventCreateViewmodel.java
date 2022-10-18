@@ -95,10 +95,10 @@ public class EventCreateViewmodel extends ViewModel {
     }
 
     public void setMemberPayment(int amount, int id) {
-        if(amount <= 0)
+        if(amount <= 0) {
             return;
+        }
         memberAndAmount.put(groupMembers.get(id), amount);
-        System.out.println(memberAndAmount);
     }
 
     public void setDate(String date) {

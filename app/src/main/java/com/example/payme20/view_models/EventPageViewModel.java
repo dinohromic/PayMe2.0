@@ -18,8 +18,9 @@ public class EventPageViewModel {
 
     private Event findEvent(Event event) {
         for (Event e : group.getGroupEvents()) {
-            if(e.equals(event))
+            if(e.equals(event)) {
                 return e;
+            }
         }
         return null;
     }

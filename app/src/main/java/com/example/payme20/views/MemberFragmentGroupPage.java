@@ -76,7 +76,7 @@ public class MemberFragmentGroupPage extends Fragment {
         createNewMemberButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                OpenViewHelper.openViewPutExtra(createNewMembersView.class,getActivity(), group.getGroupName());
+                OpenViewHelper.openViewPutExtra(CreateNewMembersView.class,getActivity(), group.getGroupName());
             }
         });
     }

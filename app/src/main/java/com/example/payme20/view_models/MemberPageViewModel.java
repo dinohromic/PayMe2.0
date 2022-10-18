@@ -22,9 +22,10 @@ public class MemberPageViewModel extends ViewModel {
 
     //TODO Remove this and replace with finding the same ID when we got the functioning
     //This method is sadly necessary because serializing changes reference of objects
-    public Member getMemberInActualGroup(Member memberToFind){
-        if(belongsToGroup.getGroupMembers().contains(memberToFind))
+    public final Member getMemberInActualGroup(Member memberToFind){
+        if(belongsToGroup.getGroupMembers().contains(memberToFind)) {
             return belongsToGroup.getGroupMembers().get(belongsToGroup.getGroupMembers().indexOf(memberToFind));
+        }
         return null;
     }
 
@@ -55,8 +56,9 @@ public class MemberPageViewModel extends ViewModel {
     public void setNewName(String newName){
         if(newName != null){
             for(Member m : belongsToGroup.getGroupMembers()) {
-                if(m.equals(this.currentProfileMember))
+                if(m.equals(this.currentProfileMember)) {
                     m.setUserName(newName);
+                }
             }
         }
         payMeModel.serializeModel();
@@ -65,8 +67,9 @@ public class MemberPageViewModel extends ViewModel {
     public void setNewPhoneNumber(String newPhoneNumber){
         if(newPhoneNumber != null){
             for(Member m : belongsToGroup.getGroupMembers()) {
-                if(m.equals(this.currentProfileMember))
+                if(m.equals(this.currentProfileMember)) {
                     m.setPhoneNumber(newPhoneNumber);
+                }
             }
         }
         payMeModel.serializeModel();
@@ -81,10 +84,11 @@ public class MemberPageViewModel extends ViewModel {
     }
 
     public int debtToMember(Member memberDebt){
-        int debt = 0;
-        try{return currentGroupDebtsMap.get(memberDebt);}
-        catch (NullPointerException e){System.out.println("Debt for specific member missing [MemberPageViewModel]");}
-       return debt;
+        if(currentGroupDebtsMap.containsKey(memberDebt)) {
+            return currentGroupDebtsMap.get(memberDebt);
+        } else {
+            return 0;
+        }
     }
 
     public boolean removeCurrentMember() {

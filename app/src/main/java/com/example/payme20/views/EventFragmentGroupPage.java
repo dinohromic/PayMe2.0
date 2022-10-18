@@ -31,7 +31,6 @@ public class EventFragmentGroupPage extends Fragment {
     private Button createNewEventButton, inactivateAllEventsButton;
     private Group group;
     private LinearLayout eventContainer;
-    private CheckBox eventActiveCheckBox;
     private GroupPageViewModel gpViewModel;
 
     public EventFragmentGroupPage(){
@@ -71,9 +70,10 @@ public class EventFragmentGroupPage extends Fragment {
                 OpenViewHelper.openViewPutExtra(EventPageView.class, getActivity(), event, group);
             }
         });
-        eventActiveCheckBox = cardView.findViewById(R.id.checkBoxEventActive);
-        if(event.getActiveStatus())
+        CheckBox eventActiveCheckBox = cardView.findViewById(R.id.checkBoxEventActive);
+        if(event.getActiveStatus()) {
             eventActiveCheckBox.setChecked(true);
+        }
         eventActiveCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
@@ -96,8 +96,9 @@ public class EventFragmentGroupPage extends Fragment {
         TextView eventDate = cardView.findViewById(R.id.eventDate);
         eventDate.setText(event.getEventDate());
         CheckBox checkBox = cardView.findViewById(R.id.checkBoxEventActive);
-        if(!event.getActiveStatus())
+        if(!event.getActiveStatus()) {
             checkBox.setChecked(false);
+        }
     }
 
     private void setAddNewEventListener(Button createNewEvent) {

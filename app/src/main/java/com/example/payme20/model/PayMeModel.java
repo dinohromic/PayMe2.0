@@ -56,8 +56,9 @@ public enum PayMeModel {
     public int calcTotalExpenditureForGroup(Group group){
         int total = 0;
         for (Event eventInGroup: group.getGroupEvents()) {
-            if(eventInGroup.getActiveStatus())
+            if(eventInGroup.getActiveStatus()) {
                 total += eventInGroup.totalEventCost();
+            }
         }
         return total;
     }
