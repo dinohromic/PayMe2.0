@@ -60,7 +60,7 @@ public class EventPageView extends AppCompatActivity {
         this.returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                OpenViewHelper.openViewPutExtra(GroupPageView.class, EventPageView.this, epViewModel.getGroup().getGroupName());
+                OpenViewHelper.openViewPutExtra(GroupPageView.class, EventPageView.this, epViewModel.getGroup().getGroupName(), 0);
             }
         });
     }

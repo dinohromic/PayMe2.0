@@ -74,7 +74,7 @@ public class CreateNewMembersView extends AppCompatActivity {
     }
 
     private void returnToHome() {
-        OpenViewHelper.openViewPutExtra(GroupPageView.class, CreateNewMembersView.this, viewModel.getGroup().getGroupName());
+        OpenViewHelper.openViewPutExtra(GroupPageView.class, CreateNewMembersView.this, viewModel.getGroup().getGroupName(), 1);
     }
 
     private void initWidgets() {
