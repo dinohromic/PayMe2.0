@@ -83,12 +83,12 @@ public class EventCreateView extends AppCompatActivity {
     }
 
     private DatePickerDialog.OnDateSetListener listenerForDateButton(){
-        DatePickerDialog.OnDateSetListener dataSetListener = (datePicker, year, month, day) -> {
+        return (datePicker, year, month, day) -> {
             month = month + 1;
             this.dateButton.setText(datePickerDialogHelper.makeDateString(day, month, year));
             this.ecViewmodel.setDate(datePickerDialogHelper.makeDateString(day, month, year));
         };
-        return dataSetListener;
+
     }
 
     private void setCurrentDateOnView(){
@@ -177,11 +177,12 @@ public class EventCreateView extends AppCompatActivity {
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                if(amount.getText().toString().equals(""))
+                if(amount.getText().toString().equals("")) {
                     ecViewmodel.setMemberPayment(0, m.getId());
-                else
+                }
+                else {
                     ecViewmodel.setMemberPayment(Integer.parseInt(amount.getText().toString()), m.getId());
-            }
+                }}
         });
     }
 
@@ -191,8 +192,9 @@ public class EventCreateView extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 for(Member m : ecViewmodel.getEventMembers()) {
-                    if(m.getUserName().equals(memberSpinner.getSelectedItem().toString()))
+                    if(m.getUserName().equals(memberSpinner.getSelectedItem().toString())) {
                         ecViewmodel.setPayer(ecViewmodel.getGroupMembers().get(m.getId()));
+                    }
                 }
             }
 

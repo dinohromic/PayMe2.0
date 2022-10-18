@@ -15,16 +15,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.payme20.R;
 import com.example.payme20.helpers.OpenViewHelper;
-import com.example.payme20.model.Group;
-import com.example.payme20.view_models.createNewMembersViewModel;
+import com.example.payme20.view_models.CreateNewMembersViewModel;
 
-public class createNewMembersView extends AppCompatActivity {
+public class CreateNewMembersView extends AppCompatActivity {
 
     private EditText newMemberName;
     private EditText newMemberPhone;
     private Button createNewMemberButton;
     private ImageButton returnButton;
-    private createNewMembersViewModel viewModel;
+    private CreateNewMembersViewModel viewModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -38,7 +37,7 @@ public class createNewMembersView extends AppCompatActivity {
 
     private void initViewModel() {
         String groupName = (String) getIntent().getSerializableExtra("GROUP_NAME_KEY");
-        this.viewModel = new createNewMembersViewModel(groupName);
+        this.viewModel = new CreateNewMembersViewModel(groupName);
     }
 
     private void setOnClickListener(Button createNewMemberButton) {
@@ -46,12 +45,14 @@ public class createNewMembersView extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(TextUtils.isEmpty(newMemberName.getText().toString())){
-                    Toast.makeText(createNewMembersView.this,"Member name needed!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateNewMembersView.this,"Member name needed!", Toast.LENGTH_SHORT).show();
                 }
                 else if(TextUtils.isEmpty(newMemberPhone.getText().toString())){
-                    Toast.makeText(createNewMembersView.this, "Phone number needed!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateNewMembersView.this, "Phone number needed!", Toast.LENGTH_SHORT).show();
                 }
-                else createNewMember(newMemberName, newMemberPhone);
+                else {
+                    createNewMember(newMemberName, newMemberPhone);
+                }
             }
         });
     }
@@ -73,7 +74,7 @@ public class createNewMembersView extends AppCompatActivity {
     }
 
     private void returnToHome() {
-        OpenViewHelper.openViewPutExtra(GroupPageView.class, createNewMembersView.this, viewModel.getGroup().getGroupName());
+        OpenViewHelper.openViewPutExtra(GroupPageView.class, CreateNewMembersView.this, viewModel.getGroup().getGroupName());
     }
 
     private void initWidgets() {

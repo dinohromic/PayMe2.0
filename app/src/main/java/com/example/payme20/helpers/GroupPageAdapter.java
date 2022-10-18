@@ -7,13 +7,14 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class GroupPageAdapter extends FragmentPagerAdapter {
 
 
-    private final ArrayList<Fragment> groupPageFragment = new ArrayList<>();
-    private final ArrayList<String> fragmentTitle = new ArrayList<>();
+    private final List<Fragment> groupPageFragment = new ArrayList<>();
+    private final List<String> fragmentTitle = new ArrayList<>();
 
 
     public GroupPageAdapter(@NonNull FragmentManager fm, int behavior) {

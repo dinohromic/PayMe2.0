@@ -52,8 +52,12 @@ public class Debt implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Debt debt = (Debt) o;
         return debtAmount == debt.debtAmount && Objects.equals(debtTo, debt.debtTo) && Objects.equals(debtFrom, debt.debtFrom);
     }

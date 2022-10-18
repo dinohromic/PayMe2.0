@@ -14,7 +14,7 @@ import java.util.Random;
  * SplitCreateDebtList splits the events expenditures evenly and returns them in a list
  */
 public class SplitCreateDebtList implements ICreateDebtList, Serializable {
-    private final String name = "Split";
+    private static String name = "Split";
     public SplitCreateDebtList() {}
     @Override
     public List<Debt> createDebtList(Map<Member, Integer> eventMemberPaidAmount, Member payer) {
@@ -78,8 +78,9 @@ public class SplitCreateDebtList implements ICreateDebtList, Serializable {
         }
         while(indexList.size() < rest) {
             int index = r.nextInt(memberSize);
-            if(!indexList.contains(index))
+            if(!indexList.contains(index)) {
                 indexList.add(index);
+            }
         }
         for(Integer i : indexList) {
             updatedMap.put(membersList.get(i), dividedcost + 1);
