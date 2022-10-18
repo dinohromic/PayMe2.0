@@ -62,6 +62,7 @@ public class MemberPageView extends AppCompatActivity {
         else if(memberPageViewModel.getProfileMemberTotalDebt() < 0) {
             totalDebt.setTextColor(Color.RED);
         }
+        this.activateMemberToggleButton.setText(memberPageViewModel.getProfileMember().getActiveStatus() ? "Inactivate member" : "Activate member");
         populateCardContainer();
     }
 
@@ -116,24 +117,28 @@ public class MemberPageView extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(memberPageViewModel.getProfileMember().getActiveStatus()) {
-                    new AlertDialog.Builder(MemberPageView.this).setTitle("Inactivate member").
-                            setMessage(memberPageViewModel.getProfileMember().getUserName() + " will be inactive and will not be available when creating new events. " +
-                                    "You can enable " + memberPageViewModel.getCurrentUserProfileName() + " whenever you want.").
-                            setIcon(android.R.drawable.ic_dialog_alert).
-                            setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    if (!memberPageViewModel.inactivateCurrentMember()) {
-                                        Toast.makeText(MemberPageView.this, memberPageViewModel.getCurrentUserProfileName() + " is in active events", Toast.LENGTH_LONG).show();
+                    if(memberPageViewModel.isMemberInactivatable()) {
+                        new AlertDialog.Builder(MemberPageView.this).setTitle("Inactivate member").
+                                setMessage(memberPageViewModel.getProfileMember().getUserName() + " will be inactive and will not be available when creating new events. " +
+                                        "You can enable " + memberPageViewModel.getCurrentUserProfileName() + " whenever you want.").
+                                setIcon(android.R.drawable.ic_dialog_alert).
+                                setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        memberPageViewModel.inactivateCurrentMember();
+
+                                        activateMemberToggleButton.setText("Activate Member");
                                     }
-                                    activateMemberToggleButton.setText("Activate Member");
-                                }
-                            }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    dialogInterface.cancel();
-                                }
-                            }).show();
+                                }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.cancel();
+                                    }
+                                }).show();
+                    }
+                    else {
+                        Toast.makeText(MemberPageView.this, memberPageViewModel.getCurrentUserProfileName() + " is in active events", Toast.LENGTH_LONG).show();
+                    }
                 }
                 else {
                     memberPageViewModel.activateCurrentMember();

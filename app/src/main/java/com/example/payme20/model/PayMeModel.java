@@ -45,8 +45,8 @@ public enum PayMeModel {
             inactivateEvent(e, group);
         }
     }
-    public boolean inactivateMember(Group group, Member member) {
-        return group.inactivateGroupMember(member); //Vad ska den returna?
+    public void inactivateMember(Member member) {
+        member.setActiveStatus(false);
     }
 
     public void addNewMemberToGroup(Group group, String name, String num){
@@ -113,5 +113,9 @@ public enum PayMeModel {
 
     public void activateMember(Member member) {
         member.setActiveStatus(true);
+    }
+
+    public boolean isMemberInactivatable(Group group, Member member) {
+        return !group.isMemberInActiveEvents(member);
     }
 }
