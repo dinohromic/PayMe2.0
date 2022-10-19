@@ -9,7 +9,6 @@ import com.example.payme20.model.Event;
 import com.example.payme20.model.Factory;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
-import com.example.payme20.model.PayMeModel;
 import com.example.payme20.model.SplitCreateDebtList;
 
 import java.util.ArrayList;
@@ -48,7 +47,7 @@ public class GroupTest {
 
     @Test
     public void testRemoveMember() {
-        group.removeGroupMember(user1);
+        group.isMemberInActiveEvents(user1);
         assertFalse(group.getGroupMembers().contains(user1));
         assertEquals(2, group.getGroupMembers().size());
     }
@@ -69,7 +68,7 @@ public class GroupTest {
         eventPaymentMap.put(user3, 50);
         Event event = new Event("event", eventPaymentMap, user1, new SplitCreateDebtList(), "");
         group.addEvent(event);
-        this.group.removeGroupMember(this.user2);
+        this.group.isMemberInActiveEvents(this.user2);
         assertTrue(group.getGroupMembers().contains(user2));
     }
 
@@ -83,7 +82,7 @@ public class GroupTest {
         Event event = new Event("event", eventPaymentMap, user1, new SplitCreateDebtList(), "");
         group.addEvent(event);
         event.setEventInactive();
-        group.removeGroupMember(user2);
+        group.isMemberInActiveEvents(user2);
         assertFalse(group.getGroupMembers().contains(user2));
     }
 

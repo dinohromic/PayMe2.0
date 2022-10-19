@@ -3,6 +3,9 @@ in order to create debts and putting them in a list to return. */
 
 package com.example.payme20.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import android.util.Log;
 
 import java.io.Serializable;
@@ -16,7 +19,8 @@ import java.util.Random;
  * SplitCreateDebtList splits the events expenditures evenly and returns them in a list
  */
 public class SplitCreateDebtList implements ICreateDebtList, Serializable {
-    private static String name = "Split";
+
+    private final String name = "Split";
     public SplitCreateDebtList() {}
     @Override
     public List<Debt> createDebtList(Map<Member, Integer> eventMemberPaidAmount, Member payer) {
@@ -32,7 +36,7 @@ public class SplitCreateDebtList implements ICreateDebtList, Serializable {
 
     @Override
     public String getName() {
-        return this.name;
+        return name;
     }
 
     /**

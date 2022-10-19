@@ -8,6 +8,7 @@ import java.util.Map;
 
 import com.example.payme20.fileservice.DataHandler;
 import com.example.payme20.fileservice.DataManager;
+import com.example.payme20.helpers.ReMapper;
 
 public enum PayMeModel {
     INSTANCE;
@@ -44,8 +45,8 @@ public enum PayMeModel {
             inactivateEvent(e, group);
         }
     }
-    public boolean removeMember(Group group, Member member) {
-        return group.removeGroupMember(member); //Vad ska den returna?
+    public void inactivateMember(Member member) {
+        member.setActiveStatus(false);
     }
 
     public void addNewMemberToGroup(Group group, String name, String num){
@@ -74,9 +75,13 @@ public enum PayMeModel {
         int id = dataHandler.getId();
         dataHandler.addGroup(Factory.createGroup(groupName, membersList, id));
         serializeModel();
+
     }
     public void serializeModel() {
         dataManager.writeToJSON();
+        for(Map.Entry<String, Group> groupMaps : dataHandler.getGroups().entrySet()) {
+            System.out.println(groupMaps.getValue());
+        }
     }
     public void deserializeModel() {
         deserializeGroups();
@@ -84,6 +89,12 @@ public enum PayMeModel {
     }
     private void deserializeGroups() {
         dataHandler.refreshGroups(dataManager.readGroups());
+        for(Map.Entry<String, Group> groupMaps : dataHandler.getGroups().entrySet()) {
+            Group g = groupMaps.getValue();
+            for(Event e : g.getGroupEvents()) {
+                e.setNewEventPaymentDetailsMap(ReMapper.INSTANCE.remapKeys(e.getEventPaymentDetails(), g.getGroupMembers()));
+            }
+        }
     }
     public Map<String,Group> getGroups() {
         return dataHandler.getGroups();
@@ -98,5 +109,13 @@ public enum PayMeModel {
 
     private void deserializeId() {
         dataHandler.refreshId(dataManager.readId());
+    }
+
+    public void activateMember(Member member) {
+        member.setActiveStatus(true);
+    }
+
+    public boolean isMemberInactivatable(Group group, Member member) {
+        return !group.isMemberInActiveEvents(member);
     }
 }

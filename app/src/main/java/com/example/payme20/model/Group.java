@@ -60,27 +60,13 @@ public class Group implements Serializable {
      * @param member the member to remove from the group
      * @return returns true if the member was removed (not in any active events) and false if member was not remove (in active event)
      */
-    public boolean removeGroupMember(Member member){
-        boolean allEventsWithMemberInactive = true;
-        List<Event> eventsWithThisMember = new ArrayList<>();
+    public boolean isMemberInActiveEvents(Member member){
         for(Event e : groupEvents) {
-            if(e.getEventPaymentDetails().containsKey(member)) {
-                eventsWithThisMember.add(e);
+            if(e.getEventPaymentDetails().containsKey(member) && e.getActiveStatus()) {
+                return true;
             }
         }
-        for(Event e : eventsWithThisMember) {
-            if(e.getActiveStatus()) {
-                allEventsWithMemberInactive = false;
-                break;
-            }
-        }
-        if(allEventsWithMemberInactive) {
-            this.groupMembers.remove(member);
-            return true;
-        }
-        else {
-            return false;
-        }
+        return false;
     }
 
     /**

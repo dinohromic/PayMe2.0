@@ -123,7 +123,7 @@ public class EventCreateView extends AppCompatActivity {
                 }
                 else{
                     ecViewmodel.createEvent();
-                    OpenViewHelper.openViewPutExtra(GroupPageView.class, EventCreateView.this, ecViewmodel.getGroup().getGroupName());
+                    OpenViewHelper.openViewPutExtra(GroupPageView.class, EventCreateView.this, ecViewmodel.getGroup().getGroupName(), 0);
                 }
             }
         });
@@ -136,7 +136,9 @@ public class EventCreateView extends AppCompatActivity {
     private void populateList() {
         for (Map.Entry<Integer, Member> memberMap: ecViewmodel.getGroupMembers().entrySet()) {
             Member member = memberMap.getValue();
-            addCard(member);
+            if(member.getActiveStatus()) {
+                addCard(member);
+            }
         }
     }
 
@@ -206,7 +208,9 @@ public class EventCreateView extends AppCompatActivity {
     private void updateMemberSpinner() {
         List<String> memberUserNames = new ArrayList<>();
         for(Member m : ecViewmodel.getEventMembers()) {
-            memberUserNames.add(m.getUserName());
+            if(m.getActiveStatus()) {
+                memberUserNames.add(m.getUserName());
+            }
         }
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, memberUserNames);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

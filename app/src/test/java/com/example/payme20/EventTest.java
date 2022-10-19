@@ -25,10 +25,10 @@ public class EventTest {
 
     @Before
     public void init(){
-        this.testGroup = new Group("TestGroup", new ArrayList<>());
+        this.testGroup = new Group("TestGroup", new ArrayList<>(), 0);
         this.debtMap = new HashMap<>();
         this.debtUpdater = new DetailedCreateDebtList();
-        this.testEvent = Factory.createEvent("TestEvent", this.debtMap, this.payer, this.debtUpdater, "");
+        this.testEvent = Factory.createEvent("TestEvent", this.debtMap, this.payer, this.debtUpdater, "", 0);
         this.testGroup.addEvent(testEvent);
     }
 

@@ -91,7 +91,14 @@ public class MemberPageViewModel extends ViewModel {
         }
     }
 
-    public boolean removeCurrentMember() {
-        return payMeModel.removeMember(belongsToGroup, currentProfileMember);
+    public void inactivateCurrentMember() {
+        payMeModel.inactivateMember(currentProfileMember);
+    }
+
+    public void activateCurrentMember() {
+        payMeModel.activateMember(currentProfileMember);
+    }
+    public boolean isMemberInactivatable() {
+        return payMeModel.isMemberInactivatable(belongsToGroup, currentProfileMember);
     }
 }
