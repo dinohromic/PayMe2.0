@@ -8,12 +8,14 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.payme20.MainActivity;
 import com.example.payme20.view_models.CreateGroupViewModel;
 import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.R;
@@ -26,6 +28,7 @@ public class GroupCreateView extends AppCompatActivity{
     private LinearLayout membersContainer;
     private EditText edtGroupName;
     private CreateGroupViewModel createGroupVM;
+    private ImageButton returnButton;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,16 @@ public class GroupCreateView extends AppCompatActivity{
         initWidget();
         setOnClickListenerFinish();
         setOnClickListenerAddMembers();
+        setOnClickListenerReturnButton();
+    }
+
+    private void setOnClickListenerReturnButton() {
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OpenViewHelper.openView(MainActivity.class, GroupCreateView.this);
+            }
+        });
     }
 
     private void setOnClickListenerFinish() {
@@ -84,6 +97,7 @@ public class GroupCreateView extends AppCompatActivity{
 
         addMemberButton = findViewById(R.id.mainActCreateGroupButton);
         finishButton = findViewById(R.id.addMembersFinishButton);
+        returnButton = findViewById(R.id.returnButtonCreateGroup);
     }
 
     private void initCardWidgets(View view){

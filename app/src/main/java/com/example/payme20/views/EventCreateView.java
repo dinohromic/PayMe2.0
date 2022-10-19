@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -49,6 +50,7 @@ public class EventCreateView extends AppCompatActivity {
     private Button dateButton;
     private DatePickerDialog datePickerDialog;
     private EventCreateViewmodel ecViewmodel;
+    private ImageButton returnButton;
     private final DatePickerDialogHelper datePickerDialogHelper = new DatePickerDialogHelper();
 
     @Override
@@ -62,8 +64,18 @@ public class EventCreateView extends AppCompatActivity {
         initEventMembersCards();
         initCreateButton();
         initEventName();
+        initReturnButton();
         initDatePickerDialog();
         setCurrentDateOnView();
+    }
+
+    private void initReturnButton() {
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OpenViewHelper.openViewPutExtra(GroupPageView.class, EventCreateView.this, ecViewmodel.getGroup().getGroupName(), 0);
+            }
+        });
     }
 
     private String retrieveIntentGroup(){
@@ -238,5 +250,6 @@ public class EventCreateView extends AppCompatActivity {
         this.memberSpinner = findViewById(R.id.chooseMemberSpinner);
         this.cardContainer = findViewById(R.id.eventMembersContainer);
         this.createEventButton = findViewById(R.id.buttonCreateEvent);
+        this.returnButton = findViewById(R.id.eventReturnButton);
     }
 }
