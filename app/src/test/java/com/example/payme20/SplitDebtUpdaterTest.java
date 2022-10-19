@@ -27,17 +27,17 @@ public class SplitDebtUpdaterTest {
 
     @Before
     public void init(){
-        this.user1 = new Member("User1", "100", -1);
-        this.user2 = new Member("User2", "200", -2);
-        this.user3 = new Member("User3", "300", -3);
-        this.group = new Group("TestGroup", new ArrayList<>());
+        this.user1 = new Member("User1", "100", 22);
+        this.user2 = new Member("User2", "200", 23);
+        this.user3 = new Member("User3", "300", 24);
+        this.group = new Group("TestGroup", new ArrayList<>(), 25);
         this.group.addNewGroupMember(user1);
         this.group.addNewGroupMember(user2);
         this.group.addNewGroupMember(user3);
         this.debtMap.put(user1, 332);
         this.debtMap.put(user2, 0);
         this.debtMap.put(user3, 0);
-        this.testEvent= new Event("TestEvent", debtMap, user1, new SplitCreateDebtList(), "");
+        this.testEvent= new Event("TestEvent", debtMap, user1, new SplitCreateDebtList(), "", 26);
         this.group.addEvent(testEvent);
     }
 

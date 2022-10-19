@@ -120,7 +120,7 @@ public class MemberPageView extends AppCompatActivity {
                     if(memberPageViewModel.isMemberInactivatable()) {
                         new AlertDialog.Builder(MemberPageView.this).setTitle("Inactivate member").
                                 setMessage(memberPageViewModel.getProfileMember().getUserName() + " will be inactive and will not be available when creating new events. " +
-                                        "You can enable " + memberPageViewModel.getCurrentUserProfileName() + " whenever you want.").
+                                        "You can activate " + memberPageViewModel.getCurrentUserProfileName() + " whenever you want.").
                                 setIcon(android.R.drawable.ic_dialog_alert).
                                 setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                     @Override

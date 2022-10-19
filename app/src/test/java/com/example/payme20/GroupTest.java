@@ -26,19 +26,19 @@ public class GroupTest {
     Event event2;
     @Before
     public void init() {
-        group = Factory.createGroup("gruppTest",new ArrayList<>());
-        user1 = Factory.createMember("user1", "07", -1);
-        user2 = Factory.createMember("user2", "07", -2);
-        user3 = Factory.createMember("user3", "07", -3);
+        group = Factory.createGroup("gruppTest",new ArrayList<>(), 99);
+        user1 = Factory.createMember("user1", "07", 98);
+        user2 = Factory.createMember("user2", "07", 97);
+        user3 = Factory.createMember("user3", "07", 96);
 
         Map<Member, Integer> eventPaymentMap = new HashMap<>();
         eventPaymentMap.put(user1, 20);
         eventPaymentMap.put(user2, 30);
         eventPaymentMap.put(user3, 50);
 
-        event = new Event("event", eventPaymentMap, user1, new SplitCreateDebtList(), "");
-        event1 = new Event("event", eventPaymentMap, user2, new DetailedCreateDebtList(), "");
-        event2 = new Event("event", eventPaymentMap, user3, new SplitCreateDebtList(), "");
+        event = new Event("event", eventPaymentMap, user1, new SplitCreateDebtList(), "", 0);
+        event1 = new Event("event", eventPaymentMap, user2, new DetailedCreateDebtList(), "", 1);
+        event2 = new Event("event", eventPaymentMap, user3, new SplitCreateDebtList(), "", 2);
 
         group.addNewGroupMember(user1);
         group.addNewGroupMember(user2);
@@ -46,44 +46,34 @@ public class GroupTest {
     }
 
     @Test
-    public void testRemoveMember() {
-        group.isMemberInActiveEvents(user1);
-        assertFalse(group.getGroupMembers().contains(user1));
-        assertEquals(2, group.getGroupMembers().size());
-    }
-
-
-    @Test
     public void testAddMember() {
-        Member member = Factory.createMember("member", "07", -4);
+        Member member = Factory.createMember("member", "07", 95);
         group.addNewGroupMember(member);
         assertTrue(group.getGroupMembers().contains(member));
     }
 
     @Test
-    public void testRemoveMemberWhoIsInActiveEvent() {
+    public void testIsMemberInActiveEvent() {
         Map<Member, Integer> eventPaymentMap = new HashMap<>();
         eventPaymentMap.put(user1, 20);
         eventPaymentMap.put(user2, 30);
         eventPaymentMap.put(user3, 50);
-        Event event = new Event("event", eventPaymentMap, user1, new SplitCreateDebtList(), "");
+        Event event = new Event("event", eventPaymentMap, user1, new SplitCreateDebtList(), "", 3);
         group.addEvent(event);
-        this.group.isMemberInActiveEvents(this.user2);
-        assertTrue(group.getGroupMembers().contains(user2));
+        assertTrue(group.isMemberInActiveEvents(this.user2));
     }
 
     @Test
-    public void testRemoveMemberWhoIsInInactiveEvent() {
+    public void testIsMemberInInactiveEvent() {
         Map<Member, Integer> eventPaymentMap = new HashMap<>();
         eventPaymentMap.put(user1, 20);
         eventPaymentMap.put(user2, 30);
         eventPaymentMap.put(user3, 50);
 
-        Event event = new Event("event", eventPaymentMap, user1, new SplitCreateDebtList(), "");
+        Event event = new Event("event", eventPaymentMap, user1, new SplitCreateDebtList(), "", 4);
         group.addEvent(event);
         event.setEventInactive();
-        group.isMemberInActiveEvents(user2);
-        assertFalse(group.getGroupMembers().contains(user2));
+        assertFalse(group.isMemberInActiveEvents(user2));
     }
 
     @Test
@@ -109,9 +99,9 @@ public class GroupTest {
         eventPaymentMap.put(user2, 30);
         eventPaymentMap.put(user3, 40);
 
-        Event event1 = new Event("Event1", eventPaymentMap, user1, new SplitCreateDebtList(), "");
-        Event event2 = new Event("Event2", eventPaymentMap, user2, new DetailedCreateDebtList(), "");
-        Event event3 = new Event("Event3", eventPaymentMap, user3, new SplitCreateDebtList(), "");
+        Event event1 = new Event("Event1", eventPaymentMap, user1, new SplitCreateDebtList(), "", 5);
+        Event event2 = new Event("Event2", eventPaymentMap, user2, new DetailedCreateDebtList(), "", 6);
+        Event event3 = new Event("Event3", eventPaymentMap, user3, new SplitCreateDebtList(), "", 7);
         group.addEvent(event1);
         group.addEvent(event2);
         group.addEvent(event3);

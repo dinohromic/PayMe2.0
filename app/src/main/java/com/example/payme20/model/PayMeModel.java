@@ -3,9 +3,12 @@ top-level modules needs to access the model.
 * */
 package com.example.payme20.model;
 
+import android.content.Context;
+
 import java.util.List;
 import java.util.Map;
 
+import com.example.payme20.GlobalApplication;
 import com.example.payme20.fileservice.DataHandler;
 import com.example.payme20.fileservice.DataManager;
 import com.example.payme20.helpers.ReMapper;
@@ -13,11 +16,10 @@ import com.example.payme20.helpers.ReMapper;
 public enum PayMeModel {
     INSTANCE;
     DataHandler dataHandler = DataHandler.INSTANCE;
-    DataManager dataManager = new DataManager();
+    DataManager dataManager = new DataManager(GlobalApplication.getAppContext());
 
     PayMeModel(){
     }
-
     public void createNewGroupEvent(String groupName, Map<Member, Integer> debtMap, String eventName, Member payer, ICreateDebtList iCreateDebtList, String date) {
         deserializeId();
         int id = dataHandler.getId();
@@ -25,12 +27,10 @@ public enum PayMeModel {
         dataHandler.getGroups().get(groupName).addEvent(event);
         serializeModel();
     }
-
     public int getTotalDebt(String groupName, Member member) {
         DebtCalculator dc = new DebtCalculator();
         return dc.calcMemberTotalDebt(member, dataHandler.getGroups().get(groupName).getDebtHandler());
     }
-
     public Map<Member, Integer> getSpecificDebts(Group group, Member member) {
         DebtCalculator dc = new DebtCalculator();
         return dc.calcMemberSpecificDebt(group.getGroupMembers(), member, group.getDebtHandler());
@@ -45,6 +45,7 @@ public enum PayMeModel {
             inactivateEvent(e, group);
         }
     }
+    //TODO
     public void inactivateMember(Member member) {
         member.setActiveStatus(false);
     }
@@ -53,7 +54,6 @@ public enum PayMeModel {
          group.addNewGroupMember(createNewMember(name, num));
          serializeModel();
     }
-
     public int calcTotalExpenditureForGroup(Group group){
         int total = 0;
         for (Event eventInGroup: group.getGroupEvents()) {
@@ -63,13 +63,12 @@ public enum PayMeModel {
         }
         return total;
     }
-
+    //TODO
     public void activateEvent(Event event, Group group) {
         event.setEventActive();
         group.addEventDebtToGroup(event.getDebtList());
         serializeModel();
     }
-
     public void createNewGroup(String groupName, List<Member> membersList) {
         deserializeModel();
         int id = dataHandler.getId();
@@ -77,12 +76,14 @@ public enum PayMeModel {
         serializeModel();
 
     }
+    //TODO
     public void serializeModel() {
         dataManager.writeToJSON();
         for(Map.Entry<String, Group> groupMaps : dataHandler.getGroups().entrySet()) {
             System.out.println(groupMaps.getValue());
         }
     }
+    //TODO
     public void deserializeModel() {
         deserializeGroups();
         deserializeId();
@@ -96,10 +97,10 @@ public enum PayMeModel {
             }
         }
     }
+    //TODO
     public Map<String,Group> getGroups() {
         return dataHandler.getGroups();
     }
-
     public Member createNewMember(String memberName, String memberNumber) {
         deserializeId();
         int id = dataHandler.getId();
@@ -110,12 +111,15 @@ public enum PayMeModel {
     private void deserializeId() {
         dataHandler.refreshId(dataManager.readId());
     }
-
+    //TODO
     public void activateMember(Member member) {
         member.setActiveStatus(true);
     }
-
+    //TODO
     public boolean isMemberInactivatable(Group group, Member member) {
         return !group.isMemberInActiveEvents(member);
+    }
+    public void setContext(Context context) {
+        this.dataManager = new DataManager(context);
     }
 }

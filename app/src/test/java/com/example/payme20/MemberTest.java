@@ -17,10 +17,10 @@ public class MemberTest {
     Member user3;
     @Before
     public void init() {
-        group = Factory.createGroup("gruppTest", new ArrayList<>());
-        user1 = Factory.createMember("user1", "07", -1);
-        user2 = Factory.createMember("user2", "07", -1);
-        user3 = Factory.createMember("user3", "07", -1);
+        group = Factory.createGroup("gruppTest", new ArrayList<>(), 13);
+        user1 = Factory.createMember("user1", "07", 15);
+        user2 = Factory.createMember("user2", "07", 17);
+        user3 = Factory.createMember("user3", "07", 19);
         group.addNewGroupMember(user1);
         group.addNewGroupMember(user2);
         group.addNewGroupMember(user3);

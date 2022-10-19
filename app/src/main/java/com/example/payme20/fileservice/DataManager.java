@@ -22,12 +22,14 @@ public class DataManager {
     private final File groupFile;
     private final File idFile;
     private final DataHandler dh = DataHandler.INSTANCE;
+    Context context;
 
     /**
      * Creates a Datamanager
      */
-    public DataManager(){
-        Context context = GlobalApplication.getAppContext();
+    public DataManager(Context context){
+        //this.context = GlobalApplication.getAppContext();
+        this.context = context;
         String GROUPS_FILE = context.getFilesDir().getPath() + "/groups.json";
         String ID_FILE = context.getFilesDir().getPath() + "/id.json";
         groupFile = new File(GROUPS_FILE);
