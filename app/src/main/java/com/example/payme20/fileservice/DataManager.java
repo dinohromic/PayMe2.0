@@ -1,6 +1,7 @@
 package com.example.payme20.fileservice;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.payme20.GlobalApplication;
 import com.example.payme20.model.Group;
@@ -45,7 +46,7 @@ public class DataManager {
         try {
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(idFile, id);
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.w("id not writable ",e);
         }
     }
     public int readId() {
@@ -53,7 +54,7 @@ public class DataManager {
         try {
             id = objectMapper.readValue(idFile, new TypeReference<Integer>() {});
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.w("id not readable ",e);
         }
         return id;
     }
@@ -66,7 +67,7 @@ public class DataManager {
         try {
             groups = objectMapper.readValue(groupFile, new TypeReference<Map<String, Group>>() {});
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.w("group not readable ",e);
         }
         return groups;
     }
@@ -79,7 +80,7 @@ public class DataManager {
         try {
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(groupFile, groups);
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.w("group not readable ",e);
         }
     }
 }
