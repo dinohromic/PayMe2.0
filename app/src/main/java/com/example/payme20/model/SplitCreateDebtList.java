@@ -3,6 +3,8 @@ in order to create debts and putting them in a list to return. */
 
 package com.example.payme20.model;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,7 +57,9 @@ public class SplitCreateDebtList implements ICreateDebtList, Serializable {
     private int calcDividedCost(int totalGroupCost, int memberSize){
         int dividedCost = 0;
         try{dividedCost = totalGroupCost / memberSize;}
-        catch (ArithmeticException e){System.out.println("Division by zero in SplitDebtUpdater.Class");}
+        catch (ArithmeticException e) {
+            Log.w("Division by zero ",e);
+        }
         return dividedCost;
     }
 
