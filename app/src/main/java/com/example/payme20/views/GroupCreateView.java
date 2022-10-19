@@ -58,7 +58,7 @@ public class GroupCreateView extends AppCompatActivity{
                     Toast.makeText(GroupCreateView.this,"Group name needed", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    openNewGroup();
+                    createAndOpenNewGroup();
                 }
             }
         });
@@ -105,7 +105,7 @@ public class GroupCreateView extends AppCompatActivity{
         this.membersPhone = view.findViewById(R.id.addMembersPhoneText);
     }
 
-    private void openNewGroup() {
+    private void createAndOpenNewGroup() {
        createGroupVM.createGroup(edtGroupName.getText().toString());
        OpenViewHelper.openViewPutExtra(GroupPageView.class, GroupCreateView.this, edtGroupName.getText().toString(), 0);
     }
