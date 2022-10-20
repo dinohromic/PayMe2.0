@@ -57,6 +57,9 @@ public class GroupCreateView extends AppCompatActivity{
                 if(TextUtils.isEmpty(edtGroupName.getText().toString())){
                     Toast.makeText(GroupCreateView.this,"Group name needed", Toast.LENGTH_SHORT).show();
                 }
+                else if(createGroupVM.isGroupNameAlreadyUsed(edtGroupName.getText().toString())) {
+                    Toast.makeText(GroupCreateView.this,"Group name is already taken", Toast.LENGTH_SHORT).show();
+                }
                 else {
                     createAndOpenNewGroup();
                 }

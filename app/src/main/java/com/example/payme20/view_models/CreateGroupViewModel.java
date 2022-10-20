@@ -21,4 +21,8 @@ public class CreateGroupViewModel {
     public void createGroup(String groupName){
         payMeModel.createNewGroup(groupName, membersList);
     }
+
+    public boolean isGroupNameAlreadyUsed(String s) {
+        return payMeModel.getGroups().containsKey(s);
+    }
 }
