@@ -2,7 +2,7 @@
 We were not able to find out how to run this program in the CMD, sorry :( Please run it through Android Studio until we find out.
 
 Step 1:
-Download an Android SDK, preferably Android Studio. 
+Download Android Studio.
 
 Step 2:
 Create a new project in Android Studio from Version Control and use the URL from this Git.
