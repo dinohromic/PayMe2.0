@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class used to update the reference of the Key in a map
+ */
 public enum ReMapper {
     INSTANCE;
     public <K, V> Map<K, V> remapKeys(Map<K, V> fromMap, List<K> list) {
