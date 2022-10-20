@@ -29,28 +29,52 @@ public class Group implements Serializable {
         this.debtHandler = new DebtHandler();
         this.id = id;
     }
-    public Group() {}
+    private Group() {}
 
+    /**
+     * Gets the name of the group
+     * @return the groupname
+     */
     public String getGroupName() {
         return groupName;
     }
 
+    /**
+     * Gets the members in the group
+     * @return the groupmembers as a list
+     */
     public List<Member> getGroupMembers() {
         return groupMembers;
     }
 
+    /**
+     * Gets the events in the group
+     * @return the groupevents as a list
+     */
     public List<Event> getGroupEvents() {
         return groupEvents;
     }
 
+    /**
+     * Get the Debthandler of the group
+     * @return the group's debthandler
+     */
     public DebtHandler getDebtHandler() {
         return debtHandler;
     }
 
+    /**
+     * Get the id of the group
+     * @return the group's id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Adds a Member to the groups list of members
+     * @param member the member to be added
+     */
     public void addNewGroupMember(Member member) {
         groupMembers.add(member);
     }
@@ -79,17 +103,28 @@ public class Group implements Serializable {
         }
     }
 
+    /**
+     * Adds an event to the groups list of events. It also adds the debts of that event to the groups total debts
+     * @param event teh event to be added
+     */
     public void addEvent(Event event) {
         groupEvents.add(event);
         addEventDebtToGroup(event.getDebtList());
     }
 
+    /**
+     * Inactivates all events in the group
+     */
     public void setAllEventsInactive(){
         for (Event event: this.groupEvents) {
             event.setEventInactive();
         }
     }
 
+    /**
+     * Removes the debts for a specific event from the groups total debts
+     * @param event the event which debts is to be removed
+     */
     public void removeEventDebts(Event event) {
         for(Debt d : event.getDebtList()) {
             debtHandler.removeDebt(d);

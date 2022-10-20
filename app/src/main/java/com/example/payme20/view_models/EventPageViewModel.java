@@ -38,7 +38,7 @@ public class EventPageViewModel {
     }
 
     public String getEventPaymentType() {
-        return event.getdebtUpdater().getName();
+        return event.getCreateDebtList().getName();
     }
 
     public Group getGroup() {

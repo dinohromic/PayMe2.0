@@ -24,7 +24,7 @@ public class Debt implements Serializable {
         this.debtFrom = Objects.requireNonNull(debtFrom);
         this.debtAmount = debtAmount;
     }
-    public Debt() {}
+    private Debt() {}
 
     /**
      * Get the amount of debt between the Members

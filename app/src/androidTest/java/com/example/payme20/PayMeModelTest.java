@@ -1,7 +1,5 @@
 package com.example.payme20;
 
-import android.app.Instrumentation;
-
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
@@ -15,8 +13,6 @@ import com.example.payme20.model.SplitCreateDebtList;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
 
 import junit.framework.TestCase;
 
@@ -46,7 +42,7 @@ public class PayMeModelTest extends TestCase {
         paymentMap.put(member, 10);
         paymentMap.put(member2, 12);
         paymentMap.put(member1, 14);
-        payMeModel.createNewGroupEvent("testgroup", paymentMap, "event", payMeModel.getGroups().get("testgroup").getGroupMembers().get(1),new DetailedCreateDebtList(), "");
+        payMeModel.addNewGroupEvent("testgroup", paymentMap, "event", payMeModel.getGroups().get("testgroup").getGroupMembers().get(1),new DetailedCreateDebtList(), "");
     }
 
     private List<Member> createMembers() {
@@ -71,7 +67,7 @@ public class PayMeModelTest extends TestCase {
         paymentMap.put(member, 10);
         paymentMap.put(member2, 12);
         paymentMap.put(member1, 14);
-        payMeModel.createNewGroupEvent("testgroup", paymentMap, "testevent", payMeModel.getGroups().get("testgroup").getGroupMembers().get(1),new SplitCreateDebtList(), "");
+        payMeModel.addNewGroupEvent("testgroup", paymentMap, "testevent", payMeModel.getGroups().get("testgroup").getGroupMembers().get(1),new SplitCreateDebtList(), "");
         assertEquals(2, payMeModel.getGroups().get("testgroup").getGroupEvents().size());
     }
     @Test

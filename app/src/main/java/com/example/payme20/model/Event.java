@@ -4,7 +4,6 @@ package com.example.payme20.model;
 
 import androidx.annotation.NonNull;
 
-import com.fasterxml.jackson.annotation.JsonKey;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.io.Serializable;
@@ -21,7 +20,7 @@ import com.example.payme20.fileservice.MemberDeserializer;
 public class Event implements Serializable {
     @JsonDeserialize(keyUsing = MemberDeserializer.class)
     private Map<Member, Integer> eventPaymentDetails;
-    private ICreateDebtList debtUpdater;
+    private ICreateDebtList createDebtList;
     private boolean activeStatus;
     private List<Debt> eventDebtList;
     private String eventName;
@@ -35,21 +34,26 @@ public class Event implements Serializable {
      * @param eventName is the name of the event
      * @param eventPaymentDetails is a map containing a member as a key and an integer as the value
      * @param payer the member who paid for the event
-     * @param debtUpdater the method of paying for the event
+     * @param createDebtList the method of paying for the event
      * @param date the date the event took place
      */
 
-    public Event(String eventName, Map<Member, Integer> eventPaymentDetails, Member payer, ICreateDebtList debtUpdater, String date, int id){
+    public Event(String eventName, Map<Member, Integer> eventPaymentDetails, Member payer, ICreateDebtList createDebtList, String date, int id){
         this.eventName=eventName;
         this.eventPaymentDetails = eventPaymentDetails;
         this.payer = payer;
         this.activeStatus = true;
-        this.debtUpdater = debtUpdater;
+        this.createDebtList = createDebtList;
         this.eventDate = date;
         this.eventDebtList = createEventDebts();
         this.id = id;
     }
-    public Event() {}
+    private Event() {}
+
+    /**
+     * This method is used to update the eventPaymentDetails map after deserialization
+     * @param map is the new map for the details of teh event payments
+     */
     void setNewEventPaymentDetailsMap(Map <Member, Integer> map) {
         this.eventPaymentDetails = map;
     }
@@ -98,8 +102,13 @@ public class Event implements Serializable {
     public List<Debt> getDebtList(){
         return this.eventDebtList;
     }
-    private void setDebtList(List<Debt> l) {
-        this.eventDebtList = l;
+
+    /**
+     * Unfortunately necessary for JSON, but is private and not used in any of our code.
+     * @param list is the debtList from JSON deserialization.
+     */
+    private void setDebtList(List<Debt> list) {
+        this.eventDebtList = list;
     }
 
     /**
@@ -107,7 +116,7 @@ public class Event implements Serializable {
      * @return returns a created list of Debt-objects
      */
     private List<Debt> createEventDebts() {
-        return debtUpdater.createDebtList(eventPaymentDetails, payer);
+        return createDebtList.createDebtList(eventPaymentDetails, payer);
 
     }
 
@@ -116,7 +125,7 @@ public class Event implements Serializable {
     public String toString() {
         return "Event{" +
                 "eventPaymentDetails=" + eventPaymentDetails +
-                ", debtUpdater=" + debtUpdater +
+                ", debtUpdater=" + createDebtList +
                 ", activeStatus=" + activeStatus +
                 ", eventDebtList=" + eventDebtList +
                 ", eventName='" + eventName + '\'' +
@@ -143,11 +152,11 @@ public class Event implements Serializable {
     }
 
     /**
-     * Get the debtUpdater this class used
+     * Get the debtlist creater this class used
      * @return returns an object that implements IDebtUpdater
      */
-    public ICreateDebtList getdebtUpdater() {
-        return this.debtUpdater;
+    public ICreateDebtList getCreateDebtList() {
+        return this.createDebtList;
     }
 
     /**

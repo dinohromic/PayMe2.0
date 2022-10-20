@@ -87,7 +87,7 @@ public class EventCreateViewmodel extends ViewModel {
     }
 
     public void createEvent() {
-        model.createNewGroupEvent(group.getGroupName(), memberAndAmount, eventName, payer, debtUpdater, date);
+        model.addNewGroupEvent(group.getGroupName(), memberAndAmount, eventName, payer, debtUpdater, date);
     }
 
     public void setEventName(String eventName) {

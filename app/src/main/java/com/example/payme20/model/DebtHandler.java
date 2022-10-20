@@ -14,10 +14,8 @@ import java.util.Map;
 import com.example.payme20.fileservice.MemberDeserializer;
 
 public class DebtHandler implements Serializable {
-    //@JsonDeserialize(keyUsing = MemberDeserializer.class)
 
     private Map<Member, List<Debt>> incomingDebtsMaps = new HashMap<>();
-    //@JsonDeserialize(keyUsing = MemberDeserializer.class)
     private Map<Member, List<Debt>> outgoingDebtsMap = new HashMap<>();
 
     /**
@@ -56,7 +54,7 @@ public class DebtHandler implements Serializable {
     }
 
     /**
-     * if the current debt lists are empty, then remove the debt from both from and to debt maps.
+     * Create new debt list if the current debt lists are empty, then remove the debt from both from and to debt maps.
      * @param debt the debt object to be removed
      */
     public void removeDebt(Debt debt) {

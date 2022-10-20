@@ -37,6 +37,11 @@ public class Member implements Serializable {
         this.id = id;
         this.activeStatus = true;
     }
+
+    /**
+     * Used when deserializing a Member
+     * @param str the toString of the member, from JSON file
+     */
     public Member(String str) {
         String[] keys = str.split("and");
         this.userName = keys[0].trim();
@@ -44,7 +49,6 @@ public class Member implements Serializable {
         this.id = Integer.parseInt(keys[2].trim());
         this.activeStatus = Boolean.parseBoolean(keys[3].trim());
     }
-    //public Member() {}
 
     /**
      * Get the user name of a member
@@ -86,10 +90,18 @@ public class Member implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
+    /**
+     * Gets the active status of the member
+     * @return returns true if the member is active, else false
+     */
     public boolean getActiveStatus() {
         return activeStatus;
     }
 
+    /**
+     * Sets the activestatus for a member
+     * @param activeStatus true if member is to be set active, and false if member is to be set inactive
+     */
     public void setActiveStatus(boolean activeStatus) {
         this.activeStatus = activeStatus;
     }
@@ -106,7 +118,7 @@ public class Member implements Serializable {
     }
 
     /**
-     * Validates if two objects have the same value
+     * Validates if two objects have the same id
      * @param o is of type Object
      * @return returns true or false whether the objects are equal or not
      */

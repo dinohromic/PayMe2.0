@@ -99,6 +99,6 @@ public class MemberPageViewModel extends ViewModel {
         payMeModel.activateMember(currentProfileMember);
     }
     public boolean isMemberInactivatable() {
-        return payMeModel.isMemberInactivatable(belongsToGroup, currentProfileMember);
+        return payMeModel.canMemberBeInactivated(belongsToGroup, currentProfileMember);
     }
 }

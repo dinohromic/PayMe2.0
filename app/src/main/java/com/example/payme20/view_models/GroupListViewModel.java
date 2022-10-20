@@ -11,7 +11,6 @@ public class GroupListViewModel extends ViewModel {
     PayMeModel payMeModel = PayMeModel.INSTANCE;
 
     public Map<String,Group> getGroups(){
-        payMeModel.deserializeModel();
-        return payMeModel.getGroups();
+        return payMeModel.getDeserializedGroups();
     }
 }

@@ -12,11 +12,11 @@ import java.util.Map;
  * DetailedDebtUpdater returns a list of detailed debts
  */
 public class DetailedCreateDebtList implements ICreateDebtList, Serializable {
-    private static String name = "Detailed";
+    private final String name = "Detailed";
     public DetailedCreateDebtList () {}
 
     /**
-     * Takes in data from the event and returns a list with debts in a list
+     * Takes in data from the event and returns a list with all the debts for the specific event
      * @param eventMemberPaidAmount Map with Members as keys and Integers as values
      * @param memberToGetPaid The Member to receive payment
      * @return returns list containing Debt-objects
@@ -37,7 +37,7 @@ public class DetailedCreateDebtList implements ICreateDebtList, Serializable {
 
     @Override
     public String getName() {
-        return this.name;
+        return name;
     }
 
 }
