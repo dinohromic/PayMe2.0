@@ -77,7 +77,6 @@ public enum PayMeModel {
             inactivateEvent(e, group);
         }
     }
-    //TODO
 
     /**
      * Inactivates a specific member
@@ -112,7 +111,6 @@ public enum PayMeModel {
         }
         return total;
     }
-    //TODO
 
     /**
      * Activates an event
@@ -137,7 +135,6 @@ public enum PayMeModel {
         serializeModel();
 
     }
-    //TODO
 
     /**
      * Serializes the model
@@ -145,7 +142,6 @@ public enum PayMeModel {
     public void serializeModel() {
         dataManager.writeToJSON();
     }
-    //TODO
 
     /**
      * Deserializes the model
@@ -163,7 +159,6 @@ public enum PayMeModel {
             }
         }
     }
-    //TODO
 
     /**
      * Gets the groups available
@@ -189,7 +184,6 @@ public enum PayMeModel {
     private void deserializeId() {
         dataHandler.refreshId(dataManager.readId());
     }
-    //TODO
 
     /**
      * Activates a member
@@ -198,7 +192,6 @@ public enum PayMeModel {
     public void activateMember(Member member) {
         member.setActiveStatus(true);
     }
-    //TODO
 
     /**
      * Checks if a member can be inactivated in a group

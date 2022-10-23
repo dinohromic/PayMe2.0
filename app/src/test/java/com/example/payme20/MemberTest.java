@@ -1,7 +1,10 @@
 package com.example.payme20;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
+import com.example.payme20.model.Debt;
 import com.example.payme20.model.Factory;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
@@ -36,5 +39,23 @@ public class MemberTest {
     public void sadTestOfTestingSetter2(){
         user1.setPhoneNumber("112");
         assertEquals("112", user1.getPhoneNumber() );
+    }
+    @Test
+    public void testToString() {
+        assertTrue(user1.toString().contains(user1.getUserName() + " and"));
+    }
+    @Test
+    public void testMemberIsNotEqualToObjectOfOtherClass() {
+        assertFalse(user2.equals(new Debt(user1, user3, 10)));
+    }
+    @Test
+    public void testMemberActiveStatus() {
+        user1.setActiveStatus(false);
+        assertFalse(user1.getActiveStatus());
+    }
+    @Test
+    public void testDeserializingConstructor() {
+        Member member = new Member("test and 123 and 0 and true");
+        assertEquals("test", member.getUserName());
     }
 }

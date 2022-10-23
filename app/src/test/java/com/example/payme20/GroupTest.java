@@ -140,6 +140,9 @@ public class GroupTest {
         }
 
         assertEquals(300, total);
-
+    }
+    @Test
+    public void testGetGroupId() {
+        assertEquals(99, group.getId());
     }
 }

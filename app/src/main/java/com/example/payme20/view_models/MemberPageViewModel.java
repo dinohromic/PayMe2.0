@@ -20,13 +20,8 @@ public class MemberPageViewModel extends ViewModel {
         this.currentGroupDebtsMap = getCurrentGroupDebtsMap();
     }
 
-    //TODO Remove this and replace with finding the same ID when we got the functioning
-    //This method is sadly necessary because serializing changes reference of objects
     public final Member getMemberInActualGroup(Member memberToFind){
-        if(belongsToGroup.getGroupMembers().contains(memberToFind)) {
-            return belongsToGroup.getGroupMembers().get(belongsToGroup.getGroupMembers().indexOf(memberToFind));
-        }
-        return null;
+        return belongsToGroup.getGroupMembers().get(belongsToGroup.getGroupMembers().indexOf(memberToFind));
     }
 
     public Group getGroup(){
