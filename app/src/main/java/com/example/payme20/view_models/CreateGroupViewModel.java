@@ -5,7 +5,9 @@ import com.example.payme20.model.PayMeModel;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * This class is responsible for the communication between GroupCreateView and the model
+ */
 public class CreateGroupViewModel {
 
     PayMeModel payMeModel = PayMeModel.INSTANCE;

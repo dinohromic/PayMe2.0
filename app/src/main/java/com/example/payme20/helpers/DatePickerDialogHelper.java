@@ -5,6 +5,9 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import java.util.Calendar;
 
+/**
+ * Responsible for functionality used with a DatePickerDialog
+ */
 public class DatePickerDialogHelper {
 
     private final int year;

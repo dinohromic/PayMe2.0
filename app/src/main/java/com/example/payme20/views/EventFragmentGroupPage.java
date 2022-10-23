@@ -26,7 +26,9 @@ import com.example.payme20.view_models.ViewModelFactory;
 import java.util.Collections;
 import java.util.List;
 
-
+/**
+ * This class is responsible for the fragment of events in the group page view
+ */
 public class EventFragmentGroupPage extends Fragment {
     private Button createNewEventButton, inactivateAllEventsButton;
     private Group group;

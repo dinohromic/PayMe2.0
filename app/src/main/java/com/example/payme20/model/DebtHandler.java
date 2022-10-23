@@ -3,7 +3,6 @@ within a group.
 */
 package com.example.payme20.model;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,8 +10,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.example.payme20.fileservice.MemberDeserializer;
 
+/**
+ * The DebtHandler manages all the existing debts within a group
+ */
 public class DebtHandler implements Serializable {
 
     private Map<Member, List<Debt>> incomingDebtsMaps = new HashMap<>();

@@ -15,7 +15,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * This class is responsible for the communication between EventCreateView and the model
+ */
 public class EventCreateViewmodel extends ViewModel {
     @JsonSerialize(keyUsing = MemberSerializer.class)
     private Map<Member, Integer> memberAndAmount = new HashMap<>();

@@ -13,9 +13,8 @@ import java.util.Objects;
 
 import com.example.payme20.fileservice.MemberDeserializer;
 
-//TODO Is this really a good description?
 /**
- *  An event holds data and makes calculations with data about the event
+ *  An event holds information about a specific event
  */
 public class Event implements Serializable {
     @JsonDeserialize(keyUsing = MemberDeserializer.class)

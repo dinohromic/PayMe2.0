@@ -7,7 +7,9 @@ import androidx.lifecycle.ViewModel;
 import com.example.payme20.model.Event;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.PayMeModel;
-
+/**
+ * This class is responsible for the communication between GroupPageView (including its fragments) and the model
+ */
 public class GroupPageViewModel extends ViewModel {
     private Group group;
     private PayMeModel payMeModel = PayMeModel.INSTANCE;

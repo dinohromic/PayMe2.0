@@ -13,6 +13,9 @@ import com.example.payme20.fileservice.DataHandler;
 import com.example.payme20.fileservice.DataManager;
 import com.example.payme20.helpers.ReMapper;
 
+/**
+ * PayMeModel acts as a facade of the model
+ */
 public enum PayMeModel {
     INSTANCE;
     DataHandler dataHandler = DataHandler.INSTANCE;

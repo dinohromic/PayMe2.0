@@ -39,7 +39,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-
+/**
+ * This class is responsible for the view of the page where the user can create a new event
+ */
 public class EventCreateView extends AppCompatActivity {
 
     private TextInputEditText eventNameInput;

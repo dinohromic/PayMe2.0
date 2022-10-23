@@ -9,6 +9,9 @@ import com.example.payme20.model.Member;
 import com.example.payme20.views.GroupCreateView;
 import com.example.payme20.views.GroupListView;
 
+/**
+ * This class is used to reuse code for opening a new view in the application
+ */
 public class OpenViewHelper  {
 
     public static void openView(Class<?> newView, Context currentView){

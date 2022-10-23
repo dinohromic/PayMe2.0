@@ -6,7 +6,9 @@ import com.example.payme20.model.Member;
 import com.example.payme20.model.PayMeModel;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * This class is responsible for the communication between MemberPageView and the model
+ */
 public class MemberPageViewModel extends ViewModel {
 
     Member currentProfileMember;

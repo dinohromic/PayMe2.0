@@ -15,7 +15,9 @@ import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
 
 import java.util.Map;
-
+/**
+ * This class is responsible for the view of an old event
+ */
 public class EventPageView extends AppCompatActivity {
 
     private TextView eventName, eventDate, eventPayer, eventPayment, eventActiveStatus;

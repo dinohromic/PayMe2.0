@@ -17,6 +17,9 @@ import com.example.payme20.R;
 import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.view_models.CreateNewMembersViewModel;
 
+/**
+ * This is the view where the user creates a new member in an existing group
+ */
 public class CreateNewMembersView extends AppCompatActivity {
 
     private EditText newMemberName;

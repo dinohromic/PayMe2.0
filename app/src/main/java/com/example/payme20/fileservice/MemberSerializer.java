@@ -9,6 +9,9 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import java.io.IOException;
 import java.io.StringWriter;
 
+/**
+ * Custom serializer of the class Member.
+ */
 public class MemberSerializer extends JsonSerializer<Member> {
 
     private ObjectMapper mapper = new ObjectMapper();

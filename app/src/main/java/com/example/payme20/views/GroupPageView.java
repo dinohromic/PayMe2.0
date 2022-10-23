@@ -2,7 +2,6 @@
 group page view  */
 package com.example.payme20.views;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -20,7 +19,9 @@ import com.example.payme20.view_models.GroupPageViewModel;
 import com.example.payme20.view_models.ViewModelFactory;
 import com.google.android.material.tabs.TabLayout;
 
-
+/**
+ * This class is responsible for the view of the page for a specific group
+ */
 public class GroupPageView extends AppCompatActivity {
 
     private TabLayout groupPageTabs;

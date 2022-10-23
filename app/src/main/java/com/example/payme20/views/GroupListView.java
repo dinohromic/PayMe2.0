@@ -22,7 +22,9 @@ import com.example.payme20.view_models.ViewModelFactory;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Map;
-
+/**
+ * This class is responsible for the view of the page where the user can see all current groups
+ */
 public class GroupListView extends AppCompatActivity {
 
     private GroupListViewModel groupListViewModel;
