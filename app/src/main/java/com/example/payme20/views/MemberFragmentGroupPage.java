@@ -20,7 +20,9 @@ import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
 import com.example.payme20.view_models.GroupPageViewModel;
 import com.example.payme20.view_models.ViewModelFactory;
-
+/**
+ * This class is responsible for the fragment of members in the group page view
+ */
 public class MemberFragmentGroupPage extends Fragment {
 
     private Group group;

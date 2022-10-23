@@ -15,7 +15,9 @@ import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
 
 import java.util.Map;
-
+/**
+ * This class is responsible for the view of an old event
+ */
 public class EventPageView extends AppCompatActivity {
 
     private TextView eventName, eventDate, eventPayer, eventPayment, eventActiveStatus;
@@ -49,7 +51,6 @@ public class EventPageView extends AppCompatActivity {
     private void addCard(Member member, int amount) {
         View view = getLayoutInflater().inflate(R.layout.event_page_member_card, null);
         TextView memberName = view.findViewById(R.id.eventPageMemberName);
-        //memberName.setText(epViewModel.getGroup().getGroupMembers().get(epViewModel.getGroup().getGroupMembers().indexOf(member)).getUserName());
         memberName.setText(member.getUserName());
         TextView memberAmount = view.findViewById(R.id.eventPageMemberAmount);
         memberAmount.setText(String.format("%d kr", amount));

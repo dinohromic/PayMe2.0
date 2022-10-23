@@ -6,6 +6,7 @@ import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.example.payme20.model.DetailedCreateDebtList;
 import com.example.payme20.model.Event;
+import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
 import com.example.payme20.model.PayMeModel;
 import com.example.payme20.model.SplitCreateDebtList;
@@ -107,8 +108,34 @@ public class PayMeModelTest extends TestCase {
         assertTrue(e.getActiveStatus());
     }
     @Test
-    public void testSerializeandDeserializeGroups() {
-
+    public void testCanMemberBeInactivated() {
+        Group group = payMeModel.getGroups().get("testgroup");
+        Member member = payMeModel.getGroups().get("testgroup").getGroupMembers().get(0);
+        assertFalse(payMeModel.canMemberBeInactivated(group, member));
+    }
+    @Test
+    public void testGetGroups() {
+        assertEquals(1, payMeModel.getGroups().size());
+    }
+    @Test
+    public void testInactivateMember() {
+        Member member = payMeModel.getGroups().get("testgroup").getGroupMembers().get(0);
+        payMeModel.inactivateMember(member);
+        assertFalse(member.getActiveStatus());
+    }
+    @Test
+    public void testActivateMember() {
+        Member member = payMeModel.getGroups().get("testgroup").getGroupMembers().get(0);
+        payMeModel.activateMember(member);
+        assertTrue(member.getActiveStatus());
+    }
+    @Test
+    public void testSerializeAndDeserializeGroups() {
+        Map<String, Group> mapBeforeSerialization = payMeModel.getGroups();
+        payMeModel.serializeModel();
+        payMeModel.deserializeModel();
+        Map<String, Group> mapAfterSerialization = payMeModel.getGroups();
+        assertEquals(mapAfterSerialization, mapBeforeSerialization);
     }
 
 }

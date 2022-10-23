@@ -13,7 +13,9 @@ import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.views.GroupListView;
 import com.example.payme20.views.GroupCreateView;
 
-
+/**
+ * This class is responsible for the view of the start page
+ */
 public class MainActivity extends AppCompatActivity {
     
     private Button openGroupListButton;

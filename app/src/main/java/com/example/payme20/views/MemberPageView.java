@@ -24,7 +24,9 @@ import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.view_models.MemberPageViewModel;
 import com.example.payme20.model.Group;
 import com.example.payme20.model.Member;
-
+/**
+ * This class is responsible for the view of a specific member's page
+ */
 public class MemberPageView extends AppCompatActivity {
 
     private EditText phoneNumberEditText, userNameEditText;
@@ -118,23 +120,7 @@ public class MemberPageView extends AppCompatActivity {
             public void onClick(View view) {
                 if(memberPageViewModel.getProfileMember().getActiveStatus()) {
                     if(memberPageViewModel.isMemberInactivatable()) {
-                        new AlertDialog.Builder(MemberPageView.this).setTitle("Inactivate member").
-                                setMessage(memberPageViewModel.getProfileMember().getUserName() + " will be inactive and will not be available when creating new events. " +
-                                        "You can activate " + memberPageViewModel.getCurrentUserProfileName() + " whenever you want.").
-                                setIcon(android.R.drawable.ic_dialog_alert).
-                                setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        memberPageViewModel.inactivateCurrentMember();
-
-                                        activateMemberToggleButton.setText("Activate Member");
-                                    }
-                                }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        dialogInterface.cancel();
-                                    }
-                                }).show();
+                        initAlertDialog();
                     }
                     else {
                         Toast.makeText(MemberPageView.this, memberPageViewModel.getCurrentUserProfileName() + " is in active events", Toast.LENGTH_LONG).show();
@@ -146,6 +132,26 @@ public class MemberPageView extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void initAlertDialog() {
+        new AlertDialog.Builder(MemberPageView.this).setTitle("Inactivate member").
+                setMessage(memberPageViewModel.getProfileMember().getUserName() + " will be inactive and will not be available when creating new events. " +
+                        "You can activate " + memberPageViewModel.getCurrentUserProfileName() + " whenever you want.").
+                setIcon(android.R.drawable.ic_dialog_alert).
+                setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        memberPageViewModel.inactivateCurrentMember();
+
+                        activateMemberToggleButton.setText("Activate Member");
+                    }
+                }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                }).show();
     }
 
     private void userNameListener(){

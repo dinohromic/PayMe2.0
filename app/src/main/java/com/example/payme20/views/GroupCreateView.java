@@ -19,7 +19,9 @@ import com.example.payme20.MainActivity;
 import com.example.payme20.view_models.CreateGroupViewModel;
 import com.example.payme20.helpers.OpenViewHelper;
 import com.example.payme20.R;
-
+/**
+ * This class is responsible for the view of the page where the user can create a new group
+ */
 public class GroupCreateView extends AppCompatActivity{
 
     private EditText edtName, edtPhoneNumber;

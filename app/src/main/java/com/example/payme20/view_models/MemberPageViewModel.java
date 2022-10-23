@@ -6,7 +6,9 @@ import com.example.payme20.model.Member;
 import com.example.payme20.model.PayMeModel;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * This class is responsible for the communication between MemberPageView and the model
+ */
 public class MemberPageViewModel extends ViewModel {
 
     Member currentProfileMember;
@@ -20,13 +22,8 @@ public class MemberPageViewModel extends ViewModel {
         this.currentGroupDebtsMap = getCurrentGroupDebtsMap();
     }
 
-    //TODO Remove this and replace with finding the same ID when we got the functioning
-    //This method is sadly necessary because serializing changes reference of objects
     public final Member getMemberInActualGroup(Member memberToFind){
-        if(belongsToGroup.getGroupMembers().contains(memberToFind)) {
-            return belongsToGroup.getGroupMembers().get(belongsToGroup.getGroupMembers().indexOf(memberToFind));
-        }
-        return null;
+        return belongsToGroup.getGroupMembers().get(belongsToGroup.getGroupMembers().indexOf(memberToFind));
     }
 
     public Group getGroup(){

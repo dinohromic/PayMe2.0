@@ -5,6 +5,9 @@ import com.example.payme20.model.Group;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Holds the map of the groups and the id number.
+ */
 public enum DataHandler {
     INSTANCE;
     private Map<String, Group> groups = new HashMap<>();

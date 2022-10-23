@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Debt holds data about a Member who owes another Member and how much that debt is of
+ * Debt holds data about which two Members a debt is between and how much that debt is of
  */
 public class Debt implements Serializable {
     private Member debtTo;

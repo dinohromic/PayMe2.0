@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * DataManager manages the reading and writing of a groups data and stores it in a JSON file
+ * DataManager manages the reading and writing of the program's data and stores it in multiple JSON files
  */
 public class DataManager {
 

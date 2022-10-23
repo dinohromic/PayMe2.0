@@ -13,6 +13,9 @@ import com.example.payme20.fileservice.DataHandler;
 import com.example.payme20.fileservice.DataManager;
 import com.example.payme20.helpers.ReMapper;
 
+/**
+ * PayMeModel acts as a facade of the model
+ */
 public enum PayMeModel {
     INSTANCE;
     DataHandler dataHandler = DataHandler.INSTANCE;
@@ -77,7 +80,6 @@ public enum PayMeModel {
             inactivateEvent(e, group);
         }
     }
-    //TODO
 
     /**
      * Inactivates a specific member
@@ -112,7 +114,6 @@ public enum PayMeModel {
         }
         return total;
     }
-    //TODO
 
     /**
      * Activates an event
@@ -137,7 +138,6 @@ public enum PayMeModel {
         serializeModel();
 
     }
-    //TODO
 
     /**
      * Serializes the model
@@ -145,7 +145,6 @@ public enum PayMeModel {
     public void serializeModel() {
         dataManager.writeToJSON();
     }
-    //TODO
 
     /**
      * Deserializes the model
@@ -163,7 +162,6 @@ public enum PayMeModel {
             }
         }
     }
-    //TODO
 
     /**
      * Gets the groups available
@@ -189,7 +187,6 @@ public enum PayMeModel {
     private void deserializeId() {
         dataHandler.refreshId(dataManager.readId());
     }
-    //TODO
 
     /**
      * Activates a member
@@ -198,7 +195,6 @@ public enum PayMeModel {
     public void activateMember(Member member) {
         member.setActiveStatus(true);
     }
-    //TODO
 
     /**
      * Checks if a member can be inactivated in a group

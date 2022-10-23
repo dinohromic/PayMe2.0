@@ -9,7 +9,9 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * This class is used to have two fragments to switch between in the GroupPageView
+ */
 public class GroupPageAdapter extends FragmentPagerAdapter {
 
 

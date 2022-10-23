@@ -6,7 +6,9 @@ import com.example.payme20.model.Member;
 import com.example.payme20.model.PayMeModel;
 
 import java.util.Map;
-
+/**
+ * This class is responsible for the communication between EventPageView and the model
+ */
 public class EventPageViewModel {
     private final Group group;
     private final Event event;

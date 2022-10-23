@@ -13,9 +13,8 @@ import java.util.Objects;
 
 import com.example.payme20.fileservice.MemberDeserializer;
 
-//TODO Is this really a good description?
 /**
- *  An event holds data and makes calculations with data about the event
+ *  An event holds information about a specific event
  */
 public class Event implements Serializable {
     @JsonDeserialize(keyUsing = MemberDeserializer.class)
@@ -54,7 +53,7 @@ public class Event implements Serializable {
      * This method is used to update the eventPaymentDetails map after deserialization
      * @param map is the new map for the details of teh event payments
      */
-    void setNewEventPaymentDetailsMap(Map <Member, Integer> map) {
+    public void setNewEventPaymentDetailsMap(Map <Member, Integer> map) {
         this.eventPaymentDetails = map;
     }
     /**
@@ -118,6 +117,14 @@ public class Event implements Serializable {
     private List<Debt> createEventDebts() {
         return createDebtList.createDebtList(eventPaymentDetails, payer);
 
+    }
+
+    /**
+     * Gets the id of the event
+     * @return returns the id of the event
+     */
+    public int getId() {
+        return this.id;
     }
 
     @NonNull
