@@ -7,7 +7,8 @@ import androidx.lifecycle.ViewModelProvider;
 import java.util.HashMap;
 import java.util.Map;
 /**
- * This class is used to enable use of ViewmodelProvider together with a custom constructor of a view model
+ * This class is used to enable use of ViewmodelProvider together with a
+ * custom constructor of a view model
  */
 public enum ViewModelFactory implements ViewModelProvider.Factory {
     INSTANCE;

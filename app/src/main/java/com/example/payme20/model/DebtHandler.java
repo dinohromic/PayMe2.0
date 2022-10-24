@@ -16,8 +16,8 @@ import java.util.Map;
  */
 public class DebtHandler implements Serializable {
 
-    private Map<Member, List<Debt>> incomingDebtsMaps = new HashMap<>();
-    private Map<Member, List<Debt>> outgoingDebtsMap = new HashMap<>();
+    private final Map<Member, List<Debt>> incomingDebtsMaps = new HashMap<>();
+    private final Map<Member, List<Debt>> outgoingDebtsMap = new HashMap<>();
 
     /**
      * Create new debt list if the current debt lists are empty, then adds the debt to both from and to debt maps.
@@ -61,12 +61,6 @@ public class DebtHandler implements Serializable {
     public void removeDebt(Debt debt) {
         List<Debt> toDebts = incomingDebtsMaps.get(debt.getDebtTo());
         List<Debt> fromDebts = outgoingDebtsMap.get(debt.getDebtFrom());
-        if(toDebts == null) {
-            toDebts = new ArrayList<>();
-        }
-        if(fromDebts == null) {
-            fromDebts = new ArrayList<>();
-        }
         toDebts.remove(debt);
         fromDebts.remove(debt);
         incomingDebtsMaps.put(debt.getDebtTo(), toDebts);

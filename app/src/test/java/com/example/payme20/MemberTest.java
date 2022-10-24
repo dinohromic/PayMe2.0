@@ -30,13 +30,13 @@ public class MemberTest {
     }
 
     @Test
-    public void sadTestOfTestingSetter(){
+    public void testSetMemberUserName(){
         user1.setUserName("user_xyz");
         assertEquals("user_xyz", user1.getUserName());
     }
 
     @Test
-    public void sadTestOfTestingSetter2(){
+    public void testSetMemberPhoneNumber(){
         user1.setPhoneNumber("112");
         assertEquals("112", user1.getPhoneNumber() );
     }
@@ -47,6 +47,10 @@ public class MemberTest {
     @Test
     public void testMemberIsNotEqualToObjectOfOtherClass() {
         assertFalse(user2.equals(new Debt(user1, user3, 10)));
+    }
+    @Test
+    public void testMemberNotEqualToNull() {
+        assertFalse(user1.equals(null));
     }
     @Test
     public void testMemberActiveStatus() {
