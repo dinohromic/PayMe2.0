@@ -5,6 +5,10 @@ Step 1:
 Download this project and extract it.
 
 Step 2:
+Create a local.properties file in the root directory, and add "sdk.dir={Your path to your android SDK}". For example:
+"sdk.dir=C\:\\Users\\anton\\AppData\\Local\\Android\\Sdk". Every " \ " after "C:" should actually be two " \ ".
+
+Step 2:
 In Windows Powershell, rund the command "./gradlew build" from the root directory of the project.
 
 The program will now build.
